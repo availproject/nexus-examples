@@ -1,0 +1,12 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.4"
+  },
+  "dependencies": {
+    "@ethereumjs/rlp": "^5.0.2",
+    "buffer": "^6.0.3",
+    "merkle-patricia-tree": "^4.2.4"
+  }
+}
