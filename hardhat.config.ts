@@ -7,8 +7,11 @@ const config: HardhatUserConfig = {
     hardhat: {
       forking: {
         url: "https://eth-sepolia.g.alchemy.com/v2/6mKLTOXCzi7zCWyre7bJnFzancfVY-9C",
-        blockNumber: 600, // Replace with the block number you want to fork from
+        blockNumber: 5966344,
       },
+    },
+    sepolia: {
+      url: "https://eth-sepolia.g.alchemy.com/v2/6mKLTOXCzi7zCWyre7bJnFzancfVY-9C",
     },
   },
 };

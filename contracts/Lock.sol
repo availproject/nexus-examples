@@ -96,41 +96,13 @@ contract StorageProof {
         return bytes32(items[3].readUint256()); // The state root is the 4th item in a block header
     }
 
-    // get origin chain's receipt root on destination chain
-    function getReceiptsRoot(
-        uint256 blockNumber,
-        bytes memory blockHeader
-    ) public view returns (bytes32) {
-        bool is_valid_header = getBlockHeader(blockNumber, blockHeader);
-        require(is_valid_header, "Invalid block header");
-
-        Lib_RLPReader.RLPItem[] memory items = blockHeader
-            .toRLPItem()
-            .readList();
-        return bytes32(items[5].readUint256()); // The receipts root is the 6th item
-    }
-
-    // get origin chain's transaction root on destination chain
-    function getTransactionRoot(
-        uint256 blockNumber,
-        bytes memory blockHeader
-    ) public view returns (bytes32) {
-        bool is_valid_header = getBlockHeader(blockNumber, blockHeader);
-        require(is_valid_header, "Invalid block header");
-
-        Lib_RLPReader.RLPItem[] memory items = blockHeader
-            .toRLPItem()
-            .readList();
-        return bytes32(items[4].readUint256()); // The transactions root is the 5th item
-    }
 
     // =================================
     // 4. Verifying Data Against the Chosen Root (Account)
     // =================================
 
     function verifyAccount(
-        uint256 blockNumber,
-        bytes memory blockHeader,
+        bytes32 stateRoot,
         bytes memory accountTrieProof,
         address account
     )
@@ -143,9 +115,6 @@ contract StorageProof {
             bytes32 storageRoot
         )
     {
-        // Retrieve the root based on the specified type (valid)
-        bytes32 stateRoot = getStateRoot(blockNumber, blockHeader);
-
         // Retrieve the key from the account
         bytes memory accountKey = abi.encodePacked(account);
 
