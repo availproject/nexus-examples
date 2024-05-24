@@ -131,6 +131,20 @@ async fn get_storage_proof(
     Ok(())
 }
 
+// async fn store_crosschain(rpc_provider_destination: &Provider<Http>, rpc_provider_target: &Provider<Http>) -> Result<()> {
+//   // assuming deployment of StorageProof contract is already done
+//   let block = rpc_provider_destination.get_block(BlockNumber::Latest).await?.unwrap();
+//   let block2 = rpc
+//   Ok(())
+// }
+
+// async fn crosschain_wrapper() -> Result<()> {
+//     let rpc_provider1 = Provider::<Http>::try_from("http://127.0.0.1:8545").unwrap();
+//     let rpc_provider2 = Provider::<Http>::try_from("http://127.0.0.1:8546").unwrap();
+
+  
+//     Ok(())
+// }
 #[tokio::main]
 async fn main() {
     let rpc_provider =

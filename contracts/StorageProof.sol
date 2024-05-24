@@ -9,11 +9,11 @@ contract StorageProof {
     using Lib_RLPReader for Lib_RLPReader.RLPItem;
     using Lib_RLPReader for bytes;
 
-    uint256 immutable selfChainId;
-    uint256 immutable targetChainID;
-    bytes32 latestState;
-    uint256 destinationBlockNumberLatest;
-    mapping(uint256 => bytes32) blockNumberToState;
+    uint256 immutable public selfChainId;
+    uint256 immutable public targetChainID;
+    bytes32 public latestState;
+    uint256 public destinationBlockNumberLatest;
+    mapping(uint256 => bytes32) public blockNumberToState;
 
     uint8 private constant ACCOUNT_NONCE_INDEX = 0;
     uint8 private constant ACCOUNT_BALANCE_INDEX = 1;
@@ -66,7 +66,7 @@ contract StorageProof {
         );
     }
 
-        function _decodeAccountFields(
+    function _decodeAccountFields(
         bool doesAccountExist,
         bytes memory accountRLP
     )

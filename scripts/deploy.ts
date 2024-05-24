@@ -5,7 +5,7 @@ async function main() {
   console.log("Deploying contracts with the account:", deployer.address);
 
   const StorageVerifier = await ethers.getContractFactory("StorageProof");
-  const storageVerifier = await StorageVerifier.deploy(1, 1337);
+  const storageVerifier = await StorageVerifier.deploy(1337, 1338);
 
   console.log(
     "StorageVerifier deployed to:",
