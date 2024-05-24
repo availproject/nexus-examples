@@ -9,6 +9,13 @@ There are mock hardcoded entries inside `test` folder that you can try out.
 Alternatively, there are scripts in `off-chain` folder to fetch new proofs and state roots on a given rpc chain. Simply change the target inside `main` like contract address etc. and get the new storage proof.
 A good read around storage proof is [here](https://coinsbench.com/solidity-layout-and-access-of-storage-variables-simply-explained-1ce964d7c738)
 
+Spin up local nodes:
+
+```
+ anvil --chain-id 1337 --port 8545
+ anvil --chain-id 1338 --port 8546
+```
+
 Contract Deployment:
 
 ```
