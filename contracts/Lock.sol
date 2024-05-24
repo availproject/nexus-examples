@@ -39,68 +39,6 @@ contract StorageProof {
         destinationBlockNumberLatest = destinationChainBlockNumber;
     }
 
-    // =================================
-    // Step 1. Accessing the block hash
-    // =================================
-
-    // get origin chain's block hash on destination chain
-    function getBlockHash(uint256 blockNumber) public view returns (bytes32) {
-        // Ensure the block number is within the last 256 blocks
-        require(blockNumber < block.number, "Block number is too high");
-        require(
-            blockNumber >= block.number - 256,
-            "Block number is too old, use accumulator"
-        );
-
-        return blockhash(blockNumber);
-    }
-
-    // =================================
-    // 2. Accessing the block header
-    // =================================
-
-    // verify origin chain's block header on destination chain
-    function getBlockHeader(
-        uint256 blockNumber,
-        bytes memory blockHeader
-    ) public view returns (bool) {
-        // Step 1. Retrieve the block hash
-        bytes32 retrievedBlockHash = getBlockHash(blockNumber);
-
-        // Step 2. Hash the provided block header and compare
-        bytes32 providedBlockHeaderHash = keccak256(blockHeader);
-
-        // Step 3. Verify it
-        if (providedBlockHeaderHash == retrievedBlockHash) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // =================================
-    // 3. Determining the Desired Root
-    // =================================
-
-    // get origin chain's state root on destination chain
-    function getStateRoot(
-        uint256 blockNumber,
-        bytes memory blockHeader
-    ) public view returns (bytes32) {
-        bool is_valid_header = getBlockHeader(blockNumber, blockHeader);
-        require(is_valid_header, "Invalid block header");
-
-        Lib_RLPReader.RLPItem[] memory items = blockHeader
-            .toRLPItem()
-            .readList();
-        return bytes32(items[3].readUint256()); // The state root is the 4th item in a block header
-    }
-
-
-    // =================================
-    // 4. Verifying Data Against the Chosen Root (Account)
-    // =================================
-
     function verifyAccount(
         bytes32 stateRoot,
         bytes memory accountTrieProof,
@@ -115,22 +53,21 @@ contract StorageProof {
             bytes32 storageRoot
         )
     {
-        // Retrieve the key from the account
+
         bytes memory accountKey = abi.encodePacked(account);
 
-        // Verify the account
+ 
         (bool doesAccountExist, bytes memory accountRLP) = Lib_SecureMerkleTrie
             .get(accountKey, accountTrieProof, stateRoot);
 
-        // Decode the [`accountRLP`] into a struct
+    
         (nonce, accountBalance, storageRoot, codeHash) = _decodeAccountFields(
             doesAccountExist,
             accountRLP
         );
     }
 
-    // Helper function to rlp decode the account fields ( referenced from Herodotus [FactRegistry.sol](https://github.com/HerodotusDev/herodotus-evm/blob/553a49b1f85d44ef378de13fbbf58e4e944fc289/src/core/FactsRegistry.sol#L134C67-L134C67) )
-    function _decodeAccountFields(
+        function _decodeAccountFields(
         bool doesAccountExist,
         bytes memory accountRLP
     )
@@ -157,27 +94,22 @@ contract StorageProof {
         storageRoot = accountFields[ACCOUNT_STORAGE_ROOT_INDEX].readBytes32();
     }
 
-    // =================================
-    // 5. Verifying Data Against the Chosen Root (Storage)
-    // =================================
+
     function verifyStorage(
         bytes32 storageRoot,
         bytes32 slot,
         bytes calldata storageSlotTrieProof
     ) public view returns (bytes32 slotValue) {
-        // Get valid storage root from account ( Step 4 )
-
-        // Retrieve the key from the storage slot
+      
         bytes memory storageKey = abi.encodePacked(slot);
 
-        // Verify the account
+       
         (, bytes memory slotValueRLP) = Lib_SecureMerkleTrie.get(
             storageKey,
             storageSlotTrieProof,
             storageRoot
         );
 
-        // Decode the [`slotValueRLP`] into a value
         slotValue = slotValueRLP.toRLPItem().readBytes32();
     }
 }
