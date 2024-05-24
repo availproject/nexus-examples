@@ -1,1 +1,0 @@
-/Volumes/Personal/Avail/mini-storage-proofs/off-chain/target/debug/off-chain: /Volumes/Personal/Avail/mini-storage-proofs/off-chain/src/blockheader.rs /Volumes/Personal/Avail/mini-storage-proofs/off-chain/src/main.rs
