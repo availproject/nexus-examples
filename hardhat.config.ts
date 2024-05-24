@@ -9,9 +9,6 @@ const config: HardhatUserConfig = {
     hardhat: {
       chainId: 1337,
     },
-    node2: {
-      chainId: 1338,
-    },
   },
 };
 

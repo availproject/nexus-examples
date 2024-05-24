@@ -40,7 +40,6 @@ contract StorageProof {
     }
 
     function verifyAccount(
-        bytes32 stateRoot,
         bytes memory accountTrieProof,
         address account
     )
@@ -58,7 +57,7 @@ contract StorageProof {
 
  
         (bool doesAccountExist, bytes memory accountRLP) = Lib_SecureMerkleTrie
-            .get(accountKey, accountTrieProof, stateRoot);
+            .get(accountKey, accountTrieProof, latestState);
 
     
         (nonce, accountBalance, storageRoot, codeHash) = _decodeAccountFields(
