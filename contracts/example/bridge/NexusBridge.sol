@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity ^0.8.25;
+pragma solidity ^0.8.20;
 
-import {Initializable} from "@openzeppelin/contracts-upgradeable/contracts/proxy/utils/Initializable.sol";
+import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {ReentrancyGuardUpgradeable} from
-    "@openzeppelin/contracts-upgradeable/contracts/utils/ReentrancyGuardUpgradeable.sol";
-import {PausableUpgradeable} from "@openzeppelin/contracts-upgradeable/contracts/utils/PausableUpgradeable.sol";
+    "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import {PausableUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import {AccessControlDefaultAdminRulesUpgradeable} from
-    "@openzeppelin/contracts-upgradeable/contracts/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol";
-import {SafeERC20} from "@openzeppelin/contracts/contracts/token/ERC20/utils/SafeERC20.sol";
-import {IERC20} from "@openzeppelin/contracts/contracts/token/ERC20/IERC20.sol";
+    "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-// TODO: Add these interfaces below
-import {Merkle} from "src/lib/Merkle.sol";
-import {IMessageReceiver} from "src/interfaces/IMessageReceiver.sol";
-import {IAvailBridge} from "src/interfaces/IAvailBridge.sol";
-import {StorageProof} from "./StorageProof.sol";
+import {IAvail} from "./interfaces/IAvail.sol";
+import {Merkle} from "./lib/Merkle.sol";
+import {IMessageReceiver} from "./interfaces/IMessageReceiver.sol";
+import {INexusBridge} from "./interfaces/INexusBridge.sol";
+import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
 
 
 contract NexusBridge is
@@ -22,11 +22,24 @@ contract NexusBridge is
     ReentrancyGuardUpgradeable,
     PausableUpgradeable,
     AccessControlDefaultAdminRulesUpgradeable,
-    IAvailBridge,
-    StorageProof
+    INexusBridge
 {
     using Merkle for bytes32[];
     using SafeERC20 for IERC20;
+
+    // map store spent message hashes, used for Avail -> Ethereum messages
+    mapping(bytes32 => bool) public isBridged;
+    // map message hashes to their message ID, used for Ethereum -> Avail messages
+    mapping(uint256 => bytes32) public isSent;
+    // map Avail asset IDs to an Ethereum address
+    mapping(bytes32 => address) public tokens;
+
+    IAvail public avail;
+    INexusProofManager public nexus;
+    address public feeRecipient;
+    uint256 public fees; // total fees accumulated by bridge
+    uint256 public feePerByte; // in wei
+    uint256 public messageId; // next nonce
 
     bytes1 private constant MESSAGE_TX_PREFIX = 0x01;
     bytes1 private constant TOKEN_TX_PREFIX = 0x02;
@@ -73,6 +86,7 @@ contract NexusBridge is
         IAvail newAvail,
         address governance,
         address pauser,
+        INexusProofManager nexusStateManager
       
     ) external initializer {
         feePerByte = newFeePerByte;
@@ -80,6 +94,7 @@ contract NexusBridge is
         feeRecipient = newFeeRecipient;
       
         avail = newAvail;
+        nexus = nexusStateManager;
         __AccessControlDefaultAdminRules_init(0, governance);
         _grantRole(PAUSER_ROLE, pauser);
         __Pausable_init();
@@ -170,7 +185,7 @@ contract NexusBridge is
             revert InvalidMessage();
         }
 
-        _checkStorageProofInclusion(message, input);
+        _checkInclusionAgainstStateRoot(message, input);
 
         // downcast SCALE-encoded bytes to an Ethereum address
         address dest = address(bytes20(message.to));
@@ -196,7 +211,7 @@ contract NexusBridge is
             revert InvalidAssetId();
         }
 
-        _checkStorageProofInclusion(message, input);
+        _checkInclusionAgainstStateRoot(message, input);
 
         // downcast SCALE-encoded bytes to an Ethereum address
         address dest = address(bytes20(message.to));
@@ -224,7 +239,7 @@ contract NexusBridge is
             revert InvalidAssetId();
         }
 
-        _checkStorageProofInclusion(message, input);
+        _checkInclusionAgainstStateRoot(message, input);
 
         // downcast SCALE-encoded bytes to an Ethereum address
         address dest = address(bytes20(message.to));
@@ -257,7 +272,7 @@ contract NexusBridge is
             revert InvalidAssetId();
         }
 
-        _checkStorageProofInclusion(message, input);
+        _checkInclusionAgainstStateRoot(message, input);
 
         // downcast SCALE-encoded bytes to an Ethereum address
         address dest = address(bytes20(message.to));
@@ -395,6 +410,8 @@ contract NexusBridge is
         return length * feePerByte;
     }
 
-    function _checkStorageProofInclusion() private {} 
+    function _checkInclusionAgainstStateRoot(Message calldata message, MerkleProofInput calldata proof) private {
+        
+    } 
 
 }
