@@ -4,16 +4,11 @@ pragma solidity ^0.8.19;
 
 import "./lib/external/trie/Lib_SecureMerkleTrie.sol";
 import "./lib/external/rlp/Lib_RLPReader.sol";
+import {Storage} from "./Storage.sol";
 
-contract StorageProof {
+contract StorageProof is Storage {
     using Lib_RLPReader for Lib_RLPReader.RLPItem;
     using Lib_RLPReader for bytes;
-
-    uint256 immutable public selfChainId;
-    uint256 immutable public targetChainID;
-    bytes32 public latestState;
-    uint256 public destinationBlockNumberLatest;
-    mapping(uint256 => bytes32) public blockNumberToState;
 
     uint8 private constant ACCOUNT_NONCE_INDEX = 0;
     uint8 private constant ACCOUNT_BALANCE_INDEX = 1;
@@ -28,18 +23,11 @@ contract StorageProof {
 
     constructor(uint256 _selfChainId, uint256 _targetChainID) {
         selfChainId = _selfChainId;
-        targetChainID = _targetChainID;
     }
 
-    // TODO: make only owner 
-    function updateState(uint256 destinationChainBlockNumber, bytes32 newState) external {
-        require(destinationBlockNumberLatest < destinationChainBlockNumber, "destination chain number not greater than previous one");
-        blockNumberToState[destinationBlockNumberLatest] = latestState;
-        latestState = newState;
-        destinationBlockNumberLatest = destinationChainBlockNumber;
-    }
 
     function verifyAccount(
+        bytes32 latestState,
         bytes memory accountTrieProof,
         address account
     )
