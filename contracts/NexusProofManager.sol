@@ -35,7 +35,7 @@ contract NexusStorageProofManager is INexusProofManager, StorageProof {
         chainIdToState[chainId][chainBlockNumber] = stateRoot;
     }
 
-    function getRollupStateRoot(uint256 nexusBlockNumber, bytes calldata accountInclusionProof, address account) public returns (bytes32 storageRoot) {
+    function getRollupStateRoot(uint256 nexusBlockNumber, bytes calldata accountInclusionProof, address account) view public returns (bytes32 storageRoot) {
         // assuming for now this storage data is our state root instead for a rollup
        (,,,storageRoot) = verifyAccount(nexusBlock[nexusBlockNumber].stateRoot, accountInclusionProof, account);
     }
@@ -47,7 +47,7 @@ contract NexusStorageProofManager is INexusProofManager, StorageProof {
         return storageRoot;
     }
 
-    function getChainState(uint256 blockNumber, uint256 chainId) external returns(bytes32) {
+    function getChainState(uint256 blockNumber, uint256 chainId) external view returns(bytes32) {
         if (blockNumber == 0 ){ 
             return chainIdToState[chainId][chainIdToLatestBlockNumber[chainId]];
         }
