@@ -183,7 +183,7 @@ async fn main() {
         Provider::<Http>::try_from("https://ethereum-sepolia-rpc.publicnode.com").unwrap();
     let blocknumber = get_encoded_block_header(&rpc_provider).await.unwrap();
     // Random account
-    let account = "0x3073F6Cd5799d754Ea93FcF54c53afd802477983";
+    let account = "0x2C032Aa43D119D7bf4Adc42583F1f94f3bf3023a";
     let _ = get_account_proof(blocknumber, &rpc_provider, account).await;
 
     // Goerli USDC contract address

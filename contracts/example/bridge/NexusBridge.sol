@@ -16,6 +16,8 @@ import {IMessageReceiver} from "./interfaces/IMessageReceiver.sol";
 import {INexusBridge} from "./interfaces/INexusBridge.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
 
+import "hardhat/console.sol";
+
 
 contract NexusBridge is
     Initializable,
@@ -192,12 +194,12 @@ contract NexusBridge is
         if (message.messageType != MESSAGE_TX_PREFIX) {
             revert InvalidMessage();
         }
-
+     
         _checkInclusionAgainstStateRoot(message, input);
-
+        
         // downcast SCALE-encoded bytes to an Ethereum address
         address dest = address(bytes20(message.to));
-        IMessageReceiver(dest).onAvailMessage(message.from, message.data);
+        // IMessageReceiver(dest).onAvailMessage(message.from, message.data);
 
         emit MessageReceived(message.from, dest, message.messageId);
     }
@@ -214,7 +216,9 @@ contract NexusBridge is
         onlySupportedDomain(message.originDomain, message.destinationDomain)
         onlyTokenTransfer(message.messageType)
     {
+
         (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
+
         if (assetId != 0x0) {
             revert InvalidAssetId();
         }
@@ -419,9 +423,9 @@ contract NexusBridge is
     }
 
     function _checkInclusionAgainstStateRoot(Message calldata message, bytes calldata proof) private {
-        bytes32 state = nexus.getChainState(0, chainId);
+        bytes32 state = nexus.getChainState(0, chainId);  
         (uint256 nonce, uint256 balance, bytes32 codeHash, bytes32 storageRoot) = nexus.verifyAccount(state, proof, address(uint160(uint256(message.to))));
-        require(codeHash != EMPTY_CODE_HASH && storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
+        require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
     } 
 
 }

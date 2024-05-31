@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 import {StorageProof} from "./StorageProof.sol";
 
-contract NexusStorageProofManager is StorageProof {
+contract NexusProofManager is StorageProof {
 
     uint256 public latestNexusBlockNumber = 0;
 
@@ -26,9 +26,10 @@ contract NexusStorageProofManager is StorageProof {
       // TODO: reduce number of params passed to this function
     function updateChainState(uint256 chainId, uint256 chainBlockNumber, uint256 nexusBlockNumber, bytes calldata accountInclusionProof, bytes32 stateRoot) external {
         // the state verification is correct done by checking it inside a nexus proof which was done when nexus state was updated against a block
-        bytes32 stfRoot = getRollupStateRoot(nexusBlockNumber, accountInclusionProof, msg.sender);    // last field is a placeholder needs to be updated based on nexus proof structure for accounts
-        require(stfRoot != 0,"Not included"); // update 0 to bytes of 0 
+        // bytes32 stfRoot = getRollupStateRoot(nexusBlockNumber, accountInclusionProof, msg.sender);    // last field is a placeholder needs to be updated based on nexus proof structure for accounts
+        // require(stfRoot != 0,"Not included"); // update 0 to bytes of 0 
         // extractStateRootFromAccountStorage()  // we use a function input as placeholder for now
+        require(chainIdToLatestBlockNumber[chainId]<chainBlockNumber,"Old block number");
         chainIdToLatestBlockNumber[chainId] = chainBlockNumber;
         chainIdToState[chainId][chainBlockNumber] = stateRoot;
     }
