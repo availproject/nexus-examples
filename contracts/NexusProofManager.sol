@@ -2,10 +2,8 @@ pragma solidity ^0.8.20;
 
 import {StorageProof} from "./StorageProof.sol";
 
-import {INexusProofManager} from "./interfaces/INexusProofManager.sol";
+contract NexusStorageProofManager is StorageProof {
 
-contract NexusStorageProofManager is INexusProofManager, StorageProof {
- 
     uint256 public latestNexusBlockNumber = 0;
 
     struct NexusBlock {

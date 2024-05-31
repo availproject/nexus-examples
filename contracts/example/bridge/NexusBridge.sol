@@ -40,6 +40,7 @@ contract NexusBridge is
     uint256 public fees; // total fees accumulated by bridge
     uint256 public feePerByte; // in wei
     uint256 public messageId; // next nonce
+    uint256 public chainId;
 
     bytes1 private constant MESSAGE_TX_PREFIX = 0x01;
     bytes1 private constant TOKEN_TX_PREFIX = 0x02;
@@ -50,6 +51,11 @@ contract NexusBridge is
     // slither-disable-next-line too-many-digits
     bytes32 private constant ETH_ASSET_ID = 0x4554480000000000000000000000000000000000000000000000000000000000;
     bytes32 private constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+     bytes32 private constant EMPTY_TRIE_ROOT_HASH =
+        0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
+    bytes32 private constant EMPTY_CODE_HASH =
+        0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
+
 
     modifier onlySupportedDomain(uint32 originDomain, uint32 destinationDomain) {
         if (originDomain != AVAIL_DOMAIN || destinationDomain != ETH_DOMAIN) {
@@ -86,7 +92,8 @@ contract NexusBridge is
         IAvail newAvail,
         address governance,
         address pauser,
-        INexusProofManager nexusStateManager
+        INexusProofManager nexusStateManager,
+        uint256 currentChainId
       
     ) external initializer {
         feePerByte = newFeePerByte;
@@ -95,6 +102,7 @@ contract NexusBridge is
       
         avail = newAvail;
         nexus = nexusStateManager;
+        chainId = currentChainId;
         __AccessControlDefaultAdminRules_init(0, governance);
         _grantRole(PAUSER_ROLE, pauser);
         __Pausable_init();
@@ -175,7 +183,7 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveMessage(Message calldata message, MerkleProofInput calldata input)
+    function receiveMessage(Message calldata message, bytes calldata input)
         external
         whenNotPaused
         onlySupportedDomain(message.originDomain, message.destinationDomain)
@@ -200,7 +208,7 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveAVAIL(Message calldata message, MerkleProofInput calldata input)
+    function receiveAVAIL(Message calldata message, bytes calldata input)
         external
         whenNotPaused
         onlySupportedDomain(message.originDomain, message.destinationDomain)
@@ -227,7 +235,7 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveETH(Message calldata message, MerkleProofInput calldata input)
+    function receiveETH(Message calldata message, bytes calldata input)
         external
         whenNotPaused
         onlySupportedDomain(message.originDomain, message.destinationDomain)
@@ -259,7 +267,7 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveERC20(Message calldata message, MerkleProofInput calldata input)
+    function receiveERC20(Message calldata message, bytes calldata input)
         external
         whenNotPaused
         onlySupportedDomain(message.originDomain, message.destinationDomain)
@@ -410,8 +418,10 @@ contract NexusBridge is
         return length * feePerByte;
     }
 
-    function _checkInclusionAgainstStateRoot(Message calldata message, MerkleProofInput calldata proof) private {
-        
+    function _checkInclusionAgainstStateRoot(Message calldata message, bytes calldata proof) private {
+        bytes32 state = nexus.getChainState(0, chainId);
+        (uint256 nonce, uint256 balance, bytes32 codeHash, bytes32 storageRoot) = nexus.verifyAccount(state, proof, address(uint160(uint256(message.to))));
+        require(codeHash != EMPTY_CODE_HASH && storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
     } 
 
 }
