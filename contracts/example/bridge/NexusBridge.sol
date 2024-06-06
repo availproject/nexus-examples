@@ -29,10 +29,10 @@ contract NexusBridge is
     using Merkle for bytes32[];
     using SafeERC20 for IERC20;
 
-    // map store spent message hashes, used for Avail -> Ethereum messages
-    mapping(bytes32 => bool) public isBridged;
     // map message hashes to their message ID, used for Ethereum -> Avail messages
     mapping(uint256 => bytes32) public isSent;
+    // map store spent message hashes, used for Avail -> Ethereum messages
+    mapping(bytes32 => bool) public isBridged;
     // map Avail asset IDs to an Ethereum address
     mapping(bytes32 => address) public tokens;
 

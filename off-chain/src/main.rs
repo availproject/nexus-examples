@@ -10,6 +10,7 @@ use rlp::{Encodable, RlpStream};
 use crate::blockheader::{EvmBlockHeader, EvmBlockHeaderFromRpc};
 
 mod blockheader;
+mod bridge;
 
 fn encode_block_header(header: &EvmBlockHeader) -> Vec<u8> {
     let mut stream = RlpStream::new();
