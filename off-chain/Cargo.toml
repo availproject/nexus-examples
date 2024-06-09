@@ -14,3 +14,7 @@ serde = "1.0.193"
 serde_json = "1.0.108"
 sha3 = "0.10.8"
 tokio = { version = "1", features = ["full"] }
+
+[[bin]]
+name = "bridge"
+path = "src/main.rs"

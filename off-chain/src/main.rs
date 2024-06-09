@@ -8,6 +8,7 @@ use ethers::{prelude::*, utils::keccak256};
 use rlp::{Encodable, RlpStream};
 
 use crate::blockheader::{EvmBlockHeader, EvmBlockHeaderFromRpc};
+use crate::bridge::crosschain_wrapper;
 
 mod blockheader;
 mod bridge;
@@ -146,51 +147,53 @@ fn read_abi_from_file(file_path: &str) -> Result<Abi, Box<dyn std::error::Error>
     Ok(abi)
 }
 
-const ADDRESS_1337: &str = "0x";
-const ADDRESS_1338: &str = "0x";
+// const ADDRESS_1337: &str = "0x";
+// const ADDRESS_1338: &str = "0x";
 
-async fn crosschain_wrapper() -> Result<()> {
-    let rpc_provider1 = Provider::<Http>::try_from("http://127.0.0.1:8545").unwrap();
-    let rpc_provider2 = Provider::<Http>::try_from("http://127.0.0.1:8546").unwrap();
+// async fn crosschain_wrapper() -> Result<()> {
+//     let rpc_provider1 = Provider::<Http>::try_from("http://127.0.0.1:8545").unwrap();
+//     let rpc_provider2 = Provider::<Http>::try_from("http://127.0.0.1:8546").unwrap();
 
-    let _ = store_crosschain(rpc_provider1, rpc_provider2, ADDRESS_1337).await;
-    Ok(())
-}
+//     let _ = store_crosschain(rpc_provider1, rpc_provider2, ADDRESS_1337).await;
+//     Ok(())
+// }
 
-async fn store_crosschain(
-    rpc_provider_destination: Provider<Http>,
-    rpc_provider_target: Provider<Http>,
-    address: &str,
-) -> Result<()> {
-    // assuming deployment of StorageProof contract is already done
-    let block = rpc_provider_destination
-        .get_block(BlockNumber::Latest)
-        .await?
-        .unwrap();
-    let state_root = block.state_root;
-    let address = address.parse::<Address>()?;
-    let abi = read_abi_from_file("./abi.json").unwrap();
-    let contract = Contract::new(address, abi, Arc::new(rpc_provider_target.clone()));
-    let call = contract.method::<_, H256>("updateState", (1337, state_root))?;
-    let pending_tx = call.send().await?;
+// async fn store_crosschain(
+//     rpc_provider_destination: Provider<Http>,
+//     rpc_provider_target: Provider<Http>,
+//     address: &str,
+// ) -> Result<()> {
+//     // assuming deployment of StorageProof contract is already done
+//     let block = rpc_provider_destination
+//         .get_block(BlockNumber::Latest)
+//         .await?
+//         .unwrap();
+//     let state_root = block.state_root;
+//     let address = address.parse::<Address>()?;
+//     let abi = read_abi_from_file("./abi.json").unwrap();
+//     let contract = Contract::new(address, abi, Arc::new(rpc_provider_target.clone()));
+//     let call = contract.method::<_, H256>("updateState", (1337, state_root))?;
+//     let pending_tx = call.send().await?;
 
-    let receipt = pending_tx.confirmations(6).await?;
-    println!("{:?}", receipt);
-    Ok(())
-}
+//     let receipt = pending_tx.confirmations(6).await?;
+//     println!("{:?}", receipt);
+//     Ok(())
+// }
 #[tokio::main]
 async fn main() {
-    let rpc_provider =
-        Provider::<Http>::try_from("https://ethereum-sepolia-rpc.publicnode.com").unwrap();
-    let blocknumber = get_encoded_block_header(&rpc_provider).await.unwrap();
-    // Random account
-    let account = "0x2C032Aa43D119D7bf4Adc42583F1f94f3bf3023a";
-    let _ = get_account_proof(blocknumber, &rpc_provider, account).await;
+    // let rpc_provider =
+    //     Provider::<Http>::try_from("https://ethereum-sepolia-rpc.publicnode.com").unwrap();
+    // let blocknumber = get_encoded_block_header(&rpc_provider).await.unwrap();
+    // // Random account
+    // let account = "0x2C032Aa43D119D7bf4Adc42583F1f94f3bf3023a";
+    // let _ = get_account_proof(blocknumber, &rpc_provider, account).await;
 
-    // Goerli USDC contract address
-    let account = "0x2C032Aa43D119D7bf4Adc42583F1f94f3bf3023a";
-    let storage_slot_str = "0x0000000000000000000000000000000000000000000000000000000000000002";
-    let storage_slot = storage_slot_str.parse::<H256>().unwrap();
+    // // Goerli USDC contract address
+    // let account = "0x2C032Aa43D119D7bf4Adc42583F1f94f3bf3023a";
+    // let storage_slot_str = "0x0000000000000000000000000000000000000000000000000000000000000002";
+    // let storage_slot = storage_slot_str.parse::<H256>().unwrap();
 
-    let _ = get_storage_proof(blocknumber, &rpc_provider, account, storage_slot).await;
+    // let _ = get_storage_proof(blocknumber, &rpc_provider, account, storage_slot).await;
+    println!("starting");
+    let _ = crosschain_wrapper().await;
 }

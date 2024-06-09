@@ -426,6 +426,7 @@ contract NexusBridge is
         bytes32 state = nexus.getChainState(0, chainId);  
         (uint256 nonce, uint256 balance, bytes32 codeHash, bytes32 storageRoot) = nexus.verifyAccount(state, proof, address(uint160(uint256(message.to))));
         require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
+        // TODO: check if two merkle checks ( against the storage proof ) will work
     } 
 
 }

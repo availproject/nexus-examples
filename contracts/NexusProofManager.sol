@@ -16,6 +16,9 @@ contract NexusProofManager is StorageProof {
     mapping(uint256 => mapping(uint256 => bytes32)) chainIdToState;
 
     constructor(uint256 chainId) StorageProof(chainId) {}
+
+    // nexus state root
+    // updated when we verify the zk proof and then st block updated
     function updateNexusBlock(uint256 blockNumber, NexusBlock calldata latestNexusBlock) external  {
         require(blockNumber > latestNexusBlockNumber, "Block already updated");
         // TODO: verify a zk proof from nexus
@@ -34,6 +37,7 @@ contract NexusProofManager is StorageProof {
         chainIdToState[chainId][chainBlockNumber] = stateRoot;
     }
 
+    // this implementation will be update to sparse merkle tree
     function getRollupStateRoot(uint256 nexusBlockNumber, bytes calldata accountInclusionProof, address account) view public returns (bytes32 storageRoot) {
         // assuming for now this storage data is our state root instead for a rollup
        (,,,storageRoot) = verifyAccount(nexusBlock[nexusBlockNumber].stateRoot, accountInclusionProof, account);

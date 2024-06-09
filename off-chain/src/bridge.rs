@@ -8,8 +8,9 @@ use std::fs::File;
 use std::io::Read;
 use std::{sync::Arc, vec};
 
-const ADDRESS_1337: &str = "0x";
-const ADDRESS_1338: &str = "0x";
+// fill these after deployment
+const ADDRESS_1337: &str = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const ADDRESS_1338: &str = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
 
 #[derive(Debug)]
 pub struct Proof {
@@ -36,7 +37,6 @@ pub async fn crosschain_wrapper() -> Result<()> {
     Ok(())
 }
 
-const recipient: &str = "0x";
 async fn crosschain(
     rpc_provider_destination: Provider<Http>,
     rpc_provider_target: Provider<Http>,
@@ -52,7 +52,6 @@ async fn crosschain(
         abi.clone(),
         Arc::new(rpc_provider_destination.clone()),
     );
-
     match send_eth_and_receive_proof(rpc_provider_destination, bridge_contract_destination).await {
         Ok(storage_proof) => {
             println!("Storage proof: {:?}", storage_proof);
@@ -63,6 +62,7 @@ async fn crosschain(
                 state_manager_abi,
                 Arc::new(rpc_provider_target.clone()),
             );
+
             let result = state_manager_target
                 .method::<(i32, U256, Vec<ethers::types::Bytes>, H256), ()>(
                     "updateChainState",
@@ -154,10 +154,20 @@ pub async fn send_eth_and_receive_proof(
     provider: Provider<Http>,
     contract: Contract<Provider<Http>>,
 ) -> Result<Proof> {
+    let address_str = "1234567890abcdef1234567890abcdef12345678";
+    let address_bytes = hex::decode(address_str).expect("Decoding failed");
+    let address_array: [u8; 20] = address_bytes.as_slice().try_into().expect("Invalid length");
+    let mut padded_address = [0u8; 32];
+    padded_address[12..].copy_from_slice(&address_array);
+
+    let recipient: H256 = H256::from(padded_address);
+
     let amount_to_send = U256::from(1_000_000_000_000_000_000u64);
+
     let method_call = contract
-        .method::<String, ()>("sendETH", recipient.to_string())?
+        .method::<(H256,), ()>("sendETH", (recipient,))?
         .value(amount_to_send);
+
     let tx = method_call.send().await?;
     let receipt = tx.confirmations(1).await?;
     if let Some(receipt) = receipt {
