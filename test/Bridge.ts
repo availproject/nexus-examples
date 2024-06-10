@@ -72,6 +72,38 @@ describe("NexusBridge", function () {
       )
     ).to.not.reverted;
   });
+
+  it("Pass: receiveETH()", async () => {
+    // mock transaction to send eth to contract
+
+    await expect(
+      nexusBridge.sendETH(ethers.zeroPadValue(address, 32), {
+        value: ethers.parseEther("1"),
+      })
+    );
+
+    await expect(
+      nexusBridge.receiveETH(
+        {
+          messageType: "0x02",
+          from: ethers.zeroPadValue(address, 32),
+          to: ethers.zeroPadValue(address, 32),
+          originDomain: 1,
+          destinationDomain: 2,
+          data: ethers.AbiCoder.defaultAbiCoder().encode(
+            ["bytes32", "uint256"],
+            [
+              "0x4554480000000000000000000000000000000000000000000000000000000000",
+              1000,
+            ]
+          ),
+          messageId: "2",
+        },
+        accountTrieProof
+      )
+    ).to.not.reverted;
+  });
+
   it("Pass: receiveAVAIL()", async () => {
     await expect(
       nexusBridge.receiveAVAIL(

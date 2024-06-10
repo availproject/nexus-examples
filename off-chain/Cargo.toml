@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.75"
 ethers = "2.0"
+hex-literal = "0.3"
 hex = "0.4.3"
 rlp = "0.5.2"
 serde = "1.0.193"

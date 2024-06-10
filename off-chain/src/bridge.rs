@@ -7,6 +7,8 @@ use ethers::{
     signers::{LocalWallet, MnemonicBuilder},
     utils::*,
 };
+use hex_literal::hex;
+
 use rlp::RlpStream;
 use sha3::digest::consts::U25;
 use std::fs::File;
@@ -18,6 +20,8 @@ use std::{sync::Arc, vec};
 const ADDRESS_1337: &str = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
 const ADDRESS_1338: &str = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
 const STATE_MANAGER_ADDR: &str = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
+
+abigen!(BridgeContract, "bridge.json");
 #[derive(Debug)]
 pub struct Proof {
     proof: EIP1186ProofResponse,
@@ -25,16 +29,16 @@ pub struct Proof {
     state_hash: H256,
 }
 
-#[derive(Clone, Debug, Default, EthAbiType)]
-pub struct Message {
-    pub message_type: [u8; 1],
-    pub from: [u8; 32],
-    pub to: [u8; 32],
-    pub origin_domain: u32,
-    pub destination_domain: u32,
-    pub data: Vec<u8>,
-    pub message_id: u64,
-}
+// #[derive(Clone, Debug, Default, EthAbiType)]
+// pub struct Message {
+//     pub message_type: [u8; 1],
+//     pub from: [u8; 32],
+//     pub to: [u8; 32],
+//     pub origin_domain: u32,
+//     pub destination_domain: u32,
+//     pub data: Vec<u8>,
+//     pub message_id: u64,
+// }
 pub async fn crosschain_wrapper() -> Result<()> {
     let private_key = "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
     let wallet = private_key.parse::<LocalWallet>()?;
@@ -123,8 +127,27 @@ async fn crosschain(
                         Some(_) => {
                             println!("updateChainState() tx send and included");
                             println!("minting tokens aka receive against the updated state root");
+
+                            /************************************* */
+                            // mock a send transaction on target contract to fund it with eth
+                            let address_str = "0x90F79bf6EB2c4f870365E785982E1f101E93b906";
+                            let address_bytes = hex::decode(address_str).expect("Decoding failed");
+                            let address_array: [u8; 20] =
+                                address_bytes.as_slice().try_into().expect("Invalid length");
+                            let mut padded_address = [0u8; 32];
+                            padded_address[12..].copy_from_slice(&address_array);
+                            let amount_to_send = U256::from(1_000_000_000_000u64);
+                            let send_tx = bridge_contract_target
+                                .send_eth(padded_address)
+                                .value(amount_to_send);
+                            let receipt = send_tx.send().await;
+
+                            println!("{:?}", receipt);
+
+                            //******************************** */
+
                             let bridge_contract_target =
-                                Contract::new(address, abi, Arc::new(rpc_provider_target.clone()));
+                                BridgeContract::new(address, rpc_provider_target.clone());
 
                             let encoded_proof = encode_proof(storage_proof.proof.account_proof);
 
@@ -135,22 +158,30 @@ async fn crosschain(
                             let value2 = abi::Token::Uint(1000.into());
                             let encoded = encode(&[value1, value2]);
 
-                            // let message = Message {
-                            //     message_type: [0x02],
-                            //     from: [0x00; 32], // Replace with actual sender address
-                            //     to: [0x00; 32],   // Replace with actual receiver address
-                            //     origin_domain: 1,
-                            //     destination_domain: 2,
-                            //     data: encoded,
-                            //     message_id: 1_u64,
-                            // };
+                            let message = Message {
+                                message_type: [0x02],
+                                from: hex::decode("00000000000000000000000070997970C51812dc3A010C7d01b50e0d17dc79C8")?.try_into().unwrap(),
+                                to: hex::decode("00000000000000000000000070997970C51812dc3A010C7d01b50e0d17dc79C8")?.try_into().unwrap(),
+                                origin_domain: 1,
+                                destination_domain: 2,
+                                data: Bytes::from(encoded),
+                                message_id: 2_u64,
+                            };
 
-                            // let tx = bridge_contract_target.method::<(Message, Bytes), ()>(
-                            //     "receiveETH",
-                            //     (message, encoded_proof.as_bytes()),
-                            // )?;
+                            let tx = bridge_contract_target.receive_eth(
+                                message,
+                                Bytes::from(encoded_proof.as_bytes().to_vec()),
+                            );
+                            println!("{:?}", tx);
 
-                            // let pending_tx = tx.send().await?;
+                            let receipt = tx.send().await;
+                            println!("working");
+                            if let Ok(rec) = receipt {
+                                println!("{:?} {}", rec, "sfsdf");
+                            } else {
+                                print!("{:?} {}", receipt, "f312fr23");
+                            }
+
                             // let receipt = pending_tx.confirmations(1).await?;
 
                             // if let Some(tx_receipt) = receipt {
