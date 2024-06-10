@@ -2,16 +2,22 @@ use abi::AbiEncode;
 use anyhow::Result;
 use ethers::abi::encode;
 use ethers::core::abi::Abi;
-use ethers::{prelude::*, utils::*};
+use ethers::{
+    prelude::*,
+    signers::{LocalWallet, MnemonicBuilder},
+    utils::*,
+};
 use rlp::RlpStream;
+use sha3::digest::consts::U25;
 use std::fs::File;
 use std::io::Read;
+use std::str::FromStr;
 use std::{sync::Arc, vec};
 
 // fill these after deployment
-const ADDRESS_1337: &str = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const ADDRESS_1338: &str = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
-
+const ADDRESS_1337: &str = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
+const ADDRESS_1338: &str = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
+const STATE_MANAGER_ADDR: &str = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
 #[derive(Debug)]
 pub struct Proof {
     proof: EIP1186ProofResponse,
@@ -30,28 +36,54 @@ pub struct Message {
     pub message_id: u64,
 }
 pub async fn crosschain_wrapper() -> Result<()> {
-    let rpc_provider1 = Provider::<Http>::try_from("http://127.0.0.1:8545").unwrap();
-    let rpc_provider2 = Provider::<Http>::try_from("http://127.0.0.1:8546").unwrap();
+    let private_key = "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
+    let wallet = private_key.parse::<LocalWallet>()?;
 
-    let _ = crosschain(rpc_provider1, rpc_provider2, ADDRESS_1337, ADDRESS_1338).await;
+    let rpc_provider1 = Arc::new({
+        let provider = Provider::<Http>::try_from("http://127.0.0.1:8545")?;
+        let chain_id = provider.get_chainid().await?;
+        let wallet = private_key
+            .parse::<LocalWallet>()?
+            .with_chain_id(chain_id.as_u64());
+        SignerMiddleware::new(provider, wallet)
+    });
+
+    let rpc_provider2 = Arc::new({
+        let provider = Provider::<Http>::try_from("http://127.0.0.1:8546")?;
+        let chain_id = provider.get_chainid().await?;
+        let wallet = private_key
+            .parse::<LocalWallet>()?
+            .with_chain_id(chain_id.as_u64());
+        SignerMiddleware::new(provider, wallet)
+    });
+
+    let _ = crosschain(
+        rpc_provider1,
+        rpc_provider2,
+        ADDRESS_1337,
+        STATE_MANAGER_ADDR,
+    )
+    .await;
     Ok(())
 }
 
 async fn crosschain(
-    rpc_provider_destination: Provider<Http>,
-    rpc_provider_target: Provider<Http>,
+    rpc_provider_destination: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
+    rpc_provider_target: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
     bridge_address: &str,
     state_manager_address: &str,
 ) -> Result<()> {
     // assuming deployment of StorageProof contract is already done
 
     let address = bridge_address.parse::<Address>()?;
+
     let abi = read_abi_from_file("./bridge.json").unwrap();
     let bridge_contract_destination = Contract::new(
         address,
         abi.clone(),
         Arc::new(rpc_provider_destination.clone()),
     );
+
     match send_eth_and_receive_proof(rpc_provider_destination, bridge_contract_destination).await {
         Ok(storage_proof) => {
             println!("Storage proof: {:?}", storage_proof);
@@ -63,58 +95,78 @@ async fn crosschain(
                 Arc::new(rpc_provider_target.clone()),
             );
 
-            let result = state_manager_target
-                .method::<(i32, U256, Vec<ethers::types::Bytes>, H256), ()>(
-                    "updateChainState",
-                    (
-                        1337,
-                        U256::from(storage_proof.block_number.as_u64()),
-                        storage_proof.proof.account_proof.clone(),
-                        storage_proof.state_hash,
-                    ),
-                );
+            let account_proof: Vec<u8> = storage_proof
+                .proof
+                .account_proof
+                .iter()
+                .flat_map(|bytes| bytes.as_ref().to_vec())
+                .collect();
+
+            let method_call = state_manager_target.method::<(U256, U256, U256, Bytes, H256), ()>(
+                "updateChainState",
+                (
+                    U256::from(1337),
+                    U256::from(storage_proof.block_number.as_u64()),
+                    U256::from(1),
+                    account_proof.into(),
+                    storage_proof.state_hash,
+                ),
+            )?;
+
+            let result = method_call.send().await;
 
             match result {
-                Ok(_) => {
-                    // mint tokens aka receive against the updated state root
-                    let bridge_contract_target =
-                        Contract::new(address, abi, Arc::new(rpc_provider_target.clone()));
+                Ok(tx) => {
+                    println!("Transaction sent successfully: {:?} and included", tx);
+                    let finalisation = tx.confirmations(1).await?;
+                    match finalisation {
+                        Some(_) => {
+                            println!("updateChainState() tx send and included");
+                            println!("minting tokens aka receive against the updated state root");
+                            let bridge_contract_target =
+                                Contract::new(address, abi, Arc::new(rpc_provider_target.clone()));
 
-                    let encoded_proof = encode_proof(storage_proof.proof.account_proof);
+                            let encoded_proof = encode_proof(storage_proof.proof.account_proof);
 
-                    let value1 = abi::Token::String(
-                        "4554480000000000000000000000000000000000000000000000000000000000"
-                            .to_string(),
-                    );
-                    let value2 = abi::Token::Uint(1000.into());
-                    let encoded = encode(&[value1, value2]);
+                            let value1 = abi::Token::String(
+                                "4554480000000000000000000000000000000000000000000000000000000000"
+                                    .to_string(),
+                            );
+                            let value2 = abi::Token::Uint(1000.into());
+                            let encoded = encode(&[value1, value2]);
 
-                    let message = Message {
-                        message_type: [0x02],
-                        from: [0x00; 32], // Replace with actual sender address
-                        to: [0x00; 32],   // Replace with actual receiver address
-                        origin_domain: 1,
-                        destination_domain: 2,
-                        data: encoded,
-                        message_id: 1_u64,
-                    };
+                            // let message = Message {
+                            //     message_type: [0x02],
+                            //     from: [0x00; 32], // Replace with actual sender address
+                            //     to: [0x00; 32],   // Replace with actual receiver address
+                            //     origin_domain: 1,
+                            //     destination_domain: 2,
+                            //     data: encoded,
+                            //     message_id: 1_u64,
+                            // };
 
-                    let tx = bridge_contract_target.method::<(Message, std::string::String), ()>(
-                        "receiveETH",
-                        (message, encoded_proof),
-                    )?;
+                            // let tx = bridge_contract_target.method::<(Message, Bytes), ()>(
+                            //     "receiveETH",
+                            //     (message, encoded_proof.as_bytes()),
+                            // )?;
 
-                    let pending_tx = tx.send().await?;
-                    let receipt = pending_tx.confirmations(1).await?;
+                            // let pending_tx = tx.send().await?;
+                            // let receipt = pending_tx.confirmations(1).await?;
 
-                    if let Some(tx_receipt) = receipt {
-                        println!("Receipt {:?}", tx_receipt);
-                    } else {
-                        eprint!("Transaction failed");
+                            // if let Some(tx_receipt) = receipt {
+                            //     println!("Receipt {:?}", tx_receipt);
+                            // } else {
+                            //     eprint!("Transaction failed");
+                            // }
+                        }
+                        None => {
+                            eprint!("Error - invalid tx");
+                        }
                     }
                 }
                 Err(e) => {
-                    eprint!("Error {:?}", e);
+                    println!("nothing here ???");
+                    eprintln!("Error sending transaction: {:?}", e);
                 }
             }
         }
@@ -151,10 +203,10 @@ fn encode_rlp(proofs: Vec<Vec<u8>>) -> Vec<u8> {
 }
 
 pub async fn send_eth_and_receive_proof(
-    provider: Provider<Http>,
-    contract: Contract<Provider<Http>>,
+    provider: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
+    contract: Contract<Arc<SignerMiddleware<Provider<Http>, LocalWallet>>>,
 ) -> Result<Proof> {
-    let address_str = "1234567890abcdef1234567890abcdef12345678";
+    let address_str = "0x90F79bf6EB2c4f870365E785982E1f101E93b906";
     let address_bytes = hex::decode(address_str).expect("Decoding failed");
     let address_array: [u8; 20] = address_bytes.as_slice().try_into().expect("Invalid length");
     let mut padded_address = [0u8; 32];
@@ -162,13 +214,14 @@ pub async fn send_eth_and_receive_proof(
 
     let recipient: H256 = H256::from(padded_address);
 
-    let amount_to_send = U256::from(1_000_000_000_000_000_000u64);
+    let amount_to_send = U256::from(1_000_000_000u64);
 
     let method_call = contract
         .method::<(H256,), ()>("sendETH", (recipient,))?
         .value(amount_to_send);
 
     let tx = method_call.send().await?;
+
     let receipt = tx.confirmations(1).await?;
     if let Some(receipt) = receipt {
         let block_number = receipt.block_number.unwrap();
@@ -187,20 +240,17 @@ pub async fn send_eth_and_receive_proof(
 
         return Ok(proof_extended);
     }
-    Err(anyhow::anyhow!("Transacction receipt not found"))
+    Err(anyhow::anyhow!("Transaction receipt not found"))
 }
 
 async fn get_storage_slot(
-    provider: Provider<Http>,
-    contract: Contract<Provider<Http>>,
+    provider: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
+    contract: Contract<Arc<SignerMiddleware<Provider<Http>, LocalWallet>>>,
     block_number: BlockId,
 ) -> Result<EIP1186ProofResponse> {
-    let key = contract
-        .method::<_, U256>("messageId()", ())?
-        .call()
-        .await?;
+    let key = contract.method::<_, U256>("messageId", ())?.call().await?;
     let slot = U256::zero();
-    let mut encoded = [0u8; 60];
+    let mut encoded = [0u8; 64];
     key.to_big_endian(&mut encoded[0..32]);
     slot.to_big_endian(&mut encoded[32..64]);
 
