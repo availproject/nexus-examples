@@ -128,6 +128,9 @@ async fn crosschain(
                             println!("updateChainState() tx send and included");
                             println!("minting tokens aka receive against the updated state root");
 
+                            let bridge_contract_target =
+                                BridgeContract::new(address, rpc_provider_target.clone());
+
                             /************************************* */
                             // mock a send transaction on target contract to fund it with eth
                             let address_str = "0x90F79bf6EB2c4f870365E785982E1f101E93b906";
@@ -145,9 +148,6 @@ async fn crosschain(
                             println!("{:?}", receipt);
 
                             //******************************** */
-
-                            let bridge_contract_target =
-                                BridgeContract::new(address, rpc_provider_target.clone());
 
                             let encoded_proof = encode_proof(storage_proof.proof.account_proof);
 
