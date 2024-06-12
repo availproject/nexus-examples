@@ -17,11 +17,12 @@ use std::str::FromStr;
 use std::{sync::Arc, vec};
 
 // fill these after deployment
-const ADDRESS_1337: &str = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
-const ADDRESS_1338: &str = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
-const STATE_MANAGER_ADDR: &str = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
+const ADDRESS_1337: &str = "0xdbC43Ba45381e02825b14322cDdd15eC4B3164E6";
+const ADDRESS_1338: &str = "0xDC11f7E700A4c898AE5CAddB1082cFfa76512aDD";
+const STATE_MANAGER_ADDR: &str = "0xD8a5a9b31c3C0232E196d518E89Fd8bF83AcAd43";
 
 abigen!(BridgeContract, "bridge.json");
+abigen!(StateContract, "nexusStateManager.json");
 #[derive(Debug)]
 pub struct Proof {
     proof: EIP1186ProofResponse,
@@ -92,19 +93,13 @@ async fn crosschain(
         Ok(storage_proof) => {
             println!("Storage proof: {:?}", storage_proof);
             // call and update nexus state manager for this block
-            let state_manager_abi = read_abi_from_file("./nexusStateManager.json").unwrap();
-            let state_manager_target = Contract::new(
+
+            let state_manager_target = StateContract::new(
                 state_manager_address.parse::<Address>()?,
-                state_manager_abi,
                 Arc::new(rpc_provider_target.clone()),
             );
 
-            let account_proof: Vec<u8> = storage_proof
-                .proof
-                .account_proof
-                .iter()
-                .flat_map(|bytes| bytes.as_ref().to_vec())
-                .collect();
+            let encoded_proof = format!("0x{}", encode_proof(storage_proof.proof.account_proof));
 
             let method_call = state_manager_target.method::<(U256, U256, U256, Bytes, H256), ()>(
                 "updateChainState",
@@ -112,10 +107,17 @@ async fn crosschain(
                     U256::from(1337),
                     U256::from(storage_proof.block_number.as_u64()),
                     U256::from(1),
-                    account_proof.into(),
+                    hex_to_bytes(&encoded_proof.as_str())?,
                     storage_proof.state_hash,
                 ),
             )?;
+
+            // Note: the below works
+            // let method_call = state_manager_target.verify_account(
+            //     storage_proof.state_hash.into(),
+            //     hex_to_bytes(&proof_hex.as_str())?,
+            //     ADDRESS_1337.parse::<Address>()?,
+            // );
 
             let result = method_call.send().await;
 
@@ -143,14 +145,9 @@ async fn crosschain(
                             let send_tx = bridge_contract_target
                                 .send_eth(padded_address)
                                 .value(amount_to_send);
-                            let receipt = send_tx.send().await;
-
-                            println!("{:?}", receipt);
+                            let _ = send_tx.send().await;
 
                             //******************************** */
-
-                            let encoded_proof = encode_proof(storage_proof.proof.account_proof);
-
                             let value1 = abi::Token::String(
                                 "4554480000000000000000000000000000000000000000000000000000000000"
                                     .to_string(),
@@ -161,7 +158,7 @@ async fn crosschain(
                             let message = Message {
                                 message_type: [0x02],
                                 from: hex::decode("00000000000000000000000070997970C51812dc3A010C7d01b50e0d17dc79C8")?.try_into().unwrap(),
-                                to: hex::decode("00000000000000000000000070997970C51812dc3A010C7d01b50e0d17dc79C8")?.try_into().unwrap(),
+                                to: hex::decode("0000000000000000000000005FC8d32690cc91D4c39d9d3abcBD16989F875707")?.try_into().unwrap(),
                                 origin_domain: 1,
                                 destination_domain: 2,
                                 data: Bytes::from(encoded),
@@ -172,16 +169,25 @@ async fn crosschain(
                                 message,
                                 Bytes::from(encoded_proof.as_bytes().to_vec()),
                             );
-                            println!("{:?}", tx);
 
                             let receipt = tx.send().await;
-                            println!("working");
-                            if let Ok(rec) = receipt {
-                                println!("{:?} {}", rec, "sfsdf");
-                            } else {
-                                print!("{:?} {}", receipt, "f312fr23");
-                            }
 
+                            match receipt {
+                                Ok(rec) => {
+                                    println!("Transaction successful: {:?}", rec);
+                                }
+                                Err(err) => {
+                                    // Convert the error to a string or get the debug representation
+                                    let error_string = format!("{:?}", err);
+
+                                    // Check if the error string contains "Revert"
+                                    if error_string.contains("Revert") {
+                                        println!("Transaction reverted with data: {:?}", err);
+                                    } else {
+                                        println!("Transaction failed: {:?}", err);
+                                    }
+                                }
+                            }
                             // let receipt = pending_tx.confirmations(1).await?;
 
                             // if let Some(tx_receipt) = receipt {
@@ -196,7 +202,6 @@ async fn crosschain(
                     }
                 }
                 Err(e) => {
-                    println!("nothing here ???");
                     eprintln!("Error sending transaction: {:?}", e);
                 }
             }
@@ -303,4 +308,14 @@ fn read_abi_from_file(file_path: &str) -> Result<Abi, Box<dyn std::error::Error>
     let abi: Abi = serde_json::from_str(&abi_json)?;
 
     Ok(abi)
+}
+
+use ::hex::FromHex;
+fn hex_to_bytes(hex: &str) -> Result<Bytes, hex::FromHexError> {
+    // Remove the "0x" prefix if it exists
+    let hex_trimmed = hex.trim_start_matches("0x");
+    // Decode the hex string to a byte vector
+    let bytes = Vec::from_hex(hex_trimmed)?;
+    // Convert the byte vector to Bytes
+    Ok(Bytes::from(bytes))
 }

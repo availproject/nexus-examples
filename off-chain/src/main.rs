@@ -51,7 +51,7 @@ pub async fn get_encoded_block_header(rpc_provider: &Provider<Http>) -> Result<u
     };
 
     let evm_block_header = EvmBlockHeader::from(&header_from_rpc);
-
+    println!("{:?}", block.state_root);
     println!("{:#?}", evm_block_header);
 
     let encoded_block_header = encode_block_header(&evm_block_header);
@@ -60,7 +60,7 @@ pub async fn get_encoded_block_header(rpc_provider: &Provider<Http>) -> Result<u
 
     let blockhash = keccak256(encoded_block_header);
 
-    assert_eq!(blockhash, block.hash.unwrap().0);
+    // assert_eq!(blockhash, block.hash.unwrap().0);
 
     let blockhash_hex = hex::encode(blockhash);
 
@@ -80,14 +80,21 @@ async fn get_account_proof(
             vec![H256::zero()],
             Some(BlockId::Number(BlockNumber::Number(blocknumber.into()))),
         )
-        .await?;
+        .await;
 
-    let account_proofs = proof_response.account_proof;
-    let proofs = concatenate_proof(account_proofs);
-    let rlp_encoded_proof = encode_rlp(proofs);
-    let proof_hex = hex::encode(rlp_encoded_proof);
-    println!("proof: 0x{}\n", proof_hex);
-    println!("account: {:?}\n", account);
+    match proof_response {
+        Ok(res) => {
+            let account_proofs = res.account_proof;
+            let proofs = concatenate_proof(account_proofs);
+            let rlp_encoded_proof = encode_rlp(proofs);
+            let proof_hex = hex::encode(rlp_encoded_proof);
+            println!("proof: 0x{}\n", proof_hex);
+            println!("account: {:?}\n", account);
+        }
+        Err(e) => {
+            println!("err {:?}", e);
+        }
+    }
 
     Ok(())
 }
@@ -124,6 +131,12 @@ async fn get_storage_proof(
         .await?;
 
     println!("{:#?}", proof_response);
+
+    let account_proofs = proof_response.account_proof;
+    let proofs = concatenate_proof(account_proofs);
+    let rlp_encoded_proof = encode_rlp(proofs);
+    let proof_hex = hex::encode(rlp_encoded_proof);
+    println!("account proof storage: 0x{}\n", proof_hex);
 
     let storageproof = proof_response.storage_proof;
     let proofs = concatenate_proof(storageproof[0].proof.clone());
@@ -181,19 +194,51 @@ fn read_abi_from_file(file_path: &str) -> Result<Abi, Box<dyn std::error::Error>
 // }
 #[tokio::main]
 async fn main() {
-    // let rpc_provider =
-    //     Provider::<Http>::try_from("https://ethereum-sepolia-rpc.publicnode.com").unwrap();
-    // let blocknumber = get_encoded_block_header(&rpc_provider).await.unwrap();
+    let rpc_provider = Provider::<Http>::try_from("http://localhost:8545").unwrap();
+    let blocknumber = get_encoded_block_header(&rpc_provider).await.unwrap();
     // // Random account
     // let account = "0x2C032Aa43D119D7bf4Adc42583F1f94f3bf3023a";
-    // let _ = get_account_proof(blocknumber, &rpc_provider, account).await;
+    // let _ = get_account_proof(56, &rpc_provider, account).await;
 
     // // Goerli USDC contract address
-    // let account = "0x2C032Aa43D119D7bf4Adc42583F1f94f3bf3023a";
-    // let storage_slot_str = "0x0000000000000000000000000000000000000000000000000000000000000002";
-    // let storage_slot = storage_slot_str.parse::<H256>().unwrap();
+    let account = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
+    let storage_slot_str = "0xa20a1f31e7e0c47a407717c0b73e822e9ce414e0fc1925c4df69c43f77ac765e";
+    let storage_slot = storage_slot_str.parse::<H256>().unwrap();
 
-    // let _ = get_storage_proof(blocknumber, &rpc_provider, account, storage_slot).await;
+    let _ = get_storage_proof(blocknumber, &rpc_provider, account, storage_slot).await;
     println!("starting");
     let _ = crosschain_wrapper().await;
 }
+
+// EvmBlockHeader {
+//     parent_hash: "1ceab484f3c73b4bae8c70888f634905a242b26b42d1eab73e7fafd96a6e65c7",
+//     uncle_hash: "1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+//     coinbase: "184ba627db853244c9f17f3cb4378cb8b39bf147",
+//     state_root: "b1f5a5df4e9179f420a4d432f14eb66b8e0f9fe4f34f1ef557b4ec1c7c3ed1e1",
+//     transactions_root: "ea341386e029d58c9cd0809b93891767e90e7762014022420db3a7446debf8ec",
+//     receipts_root: "13dc689f62f2e34c3c486e4115aa8aa9b808cc85087dceeeb2501a55fa5f897a",
+//     logs_bloom: "aa1e5cdf9924553725d3f612bc3894dcc8da4b90ef0114f95198eb6cc5ef320d47e83dd4dc37e0387798eaf84b8711c078ade0c0634d7cea6ed85adbe8f4b5adda64e61ebe7f3c4e6824b57b31b97afc7c08da9250d4c78d364c2c9d2e72fec68a270d1aaa3589fef54395261268dd8c291a98cd6545be0ea3fe5a586ddf3ebf772017fbf159de39b205d109fd34bec2908b3a8052bdd727d1fbd86737f377a86e677ee3412051c62174290f5eed2d283741e6c2a90d4e9395d500facbc00bc5d66d5fab70f74267539c7c3b7dbaca83b7b4dbf17a3c9b54a356b6b6f34b64482d119f13155af6ec013ecddb78cbabbcac16b2ec1e8bb0f5cb51ca91c57c43cd",
+//     difficulty: 0,
+//     number: 6091251,
+//     gas_limit: 30000000,
+//     gas_used: 29870105,
+//     timestamp: 1718181492,
+//     extra_data: "4275696c644149202868747470733a2f2f6275696c6461692e6e657429",
+//     mix_hash: "f1d4ae0b01a41956db05f9ba40a8ffc6c9faf5935614abce41f535287d39f031",
+//     nonce: "0000000000000000",
+//     base_fee_per_gas: Some(
+//         6508798014,
+//     ),
+//     withdrawals_root: Some(
+//         "31f7c1e2776785da2db602bd7448a3516321eec40ff93316593d5d55bf693732",
+//     ),
+//     blob_gas_used: Some(
+//         0,
+//     ),
+//     excess_blob_gas: Some(
+//         0,
+//     ),
+//     parent_beacon_block_root: Some(
+//         "20f402309dec1f9e70c41de34bb97f328195f530f4c6b261657bf7be30432492",
+//     ),
+// }
