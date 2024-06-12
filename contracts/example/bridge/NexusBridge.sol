@@ -254,7 +254,8 @@ contract NexusBridge is
         _checkInclusionAgainstStateRoot(message, input);
 
         // downcast SCALE-encoded bytes to an Ethereum address
-        address dest = address(bytes20(message.to));
+        // revert to message.to later
+        address dest = address(bytes20(message.from));
 
         emit MessageReceived(message.from, dest, message.messageId);
 

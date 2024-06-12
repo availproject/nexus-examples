@@ -194,18 +194,18 @@ fn read_abi_from_file(file_path: &str) -> Result<Abi, Box<dyn std::error::Error>
 // }
 #[tokio::main]
 async fn main() {
-    let rpc_provider = Provider::<Http>::try_from("http://localhost:8545").unwrap();
-    let blocknumber = get_encoded_block_header(&rpc_provider).await.unwrap();
-    // // Random account
+    // let rpc_provider = Provider::<Http>::try_from("http://localhost:8545").unwrap();
+    // let blocknumber = get_encoded_block_header(&rpc_provider).await.unwrap();
+    // // // Random account
     // let account = "0x2C032Aa43D119D7bf4Adc42583F1f94f3bf3023a";
     // let _ = get_account_proof(56, &rpc_provider, account).await;
 
-    // // Goerli USDC contract address
-    let account = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
-    let storage_slot_str = "0xa20a1f31e7e0c47a407717c0b73e822e9ce414e0fc1925c4df69c43f77ac765e";
-    let storage_slot = storage_slot_str.parse::<H256>().unwrap();
+    // // // Goerli USDC contract address
+    // let account = "0xDC11f7E700A4c898AE5CAddB1082cFfa76512aDD";
+    // let storage_slot_str = "0xa20a1f31e7e0c47a407717c0b73e822e9ce414e0fc1925c4df69c43f77ac765e";
+    // let storage_slot = storage_slot_str.parse::<H256>().unwrap();
 
-    let _ = get_storage_proof(blocknumber, &rpc_provider, account, storage_slot).await;
+    // let _ = get_storage_proof(blocknumber, &rpc_provider, account, storage_slot).await;
     println!("starting");
     let _ = crosschain_wrapper().await;
 }

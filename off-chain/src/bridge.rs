@@ -9,17 +9,20 @@ use ethers::{
 };
 use hex_literal::hex;
 
+use macros::ethers_core_crate;
 use rlp::RlpStream;
 use sha3::digest::consts::U25;
+use std::fmt::Pointer;
 use std::fs::File;
 use std::io::Read;
+use std::ops::Deref;
 use std::str::FromStr;
 use std::{sync::Arc, vec};
 
 // fill these after deployment
-const ADDRESS_1337: &str = "0xdbC43Ba45381e02825b14322cDdd15eC4B3164E6";
-const ADDRESS_1338: &str = "0xDC11f7E700A4c898AE5CAddB1082cFfa76512aDD";
-const STATE_MANAGER_ADDR: &str = "0xD8a5a9b31c3C0232E196d518E89Fd8bF83AcAd43";
+const BRIDGE_ADDRESS_1337: &str = "0x3347B4d90ebe72BeFb30444C9966B2B990aE9FcB";
+const BRIDGE_ADDRESS_1338: &str = "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e";
+const STATE_MANAGER_ADDR: &str = "0x610178dA211FEF7D417bC0e6FeD39F05609AD788";
 
 abigen!(BridgeContract, "bridge.json");
 abigen!(StateContract, "nexusStateManager.json");
@@ -28,6 +31,7 @@ pub struct Proof {
     proof: EIP1186ProofResponse,
     block_number: U64,
     state_hash: H256,
+    address: H160,
 }
 
 // #[derive(Clone, Debug, Default, EthAbiType)]
@@ -65,7 +69,7 @@ pub async fn crosschain_wrapper() -> Result<()> {
     let _ = crosschain(
         rpc_provider1,
         rpc_provider2,
-        ADDRESS_1337,
+        BRIDGE_ADDRESS_1337,
         STATE_MANAGER_ADDR,
     )
     .await;
@@ -101,10 +105,16 @@ async fn crosschain(
 
             let encoded_proof = format!("0x{}", encode_proof(storage_proof.proof.account_proof));
 
+            println!(
+                "Encoded proof: {:?}   from address {:?}",
+                encoded_proof,
+                storage_proof.address.clone()
+            );
+
             let method_call = state_manager_target.method::<(U256, U256, U256, Bytes, H256), ()>(
                 "updateChainState",
                 (
-                    U256::from(1337),
+                    U256::from(137),
                     U256::from(storage_proof.block_number.as_u64()),
                     U256::from(1),
                     hex_to_bytes(&encoded_proof.as_str())?,
@@ -116,7 +126,7 @@ async fn crosschain(
             // let method_call = state_manager_target.verify_account(
             //     storage_proof.state_hash.into(),
             //     hex_to_bytes(&proof_hex.as_str())?,
-            //     ADDRESS_1337.parse::<Address>()?,
+            //     BRIDGE_ADDRESS_1337.parse::<Address>()?,
             // );
 
             let result = method_call.send().await;
@@ -130,8 +140,10 @@ async fn crosschain(
                             println!("updateChainState() tx send and included");
                             println!("minting tokens aka receive against the updated state root");
 
-                            let bridge_contract_target =
-                                BridgeContract::new(address, rpc_provider_target.clone());
+                            let bridge_contract_target = BridgeContract::new(
+                                BRIDGE_ADDRESS_1338.parse::<Address>()?,
+                                rpc_provider_target.clone(),
+                            );
 
                             /************************************* */
                             // mock a send transaction on target contract to fund it with eth
@@ -140,27 +152,56 @@ async fn crosschain(
                             let address_array: [u8; 20] =
                                 address_bytes.as_slice().try_into().expect("Invalid length");
                             let mut padded_address = [0u8; 32];
+
                             padded_address[12..].copy_from_slice(&address_array);
-                            let amount_to_send = U256::from(1_000_000_000_000u64);
+                            let amount_to_send: U256 = U256::from(1_000_000_000_000_000_000_u64);
+
+                            let provider = Provider::<Http>::try_from("http://localhost:8546")?;
+                            let block_n = provider.get_block_number().await?;
+
+                            let initial_balance = provider
+                                .get_balance(BRIDGE_ADDRESS_1338, Some(BlockId::from(block_n)))
+                                .await;
                             let send_tx = bridge_contract_target
                                 .send_eth(padded_address)
                                 .value(amount_to_send);
-                            let _ = send_tx.send().await;
+                            let r = send_tx.send().await;
+                            match r {
+                                Ok(r) => {
+                                    let final_balance = provider
+                                        .get_balance(
+                                            BRIDGE_ADDRESS_1338,
+                                            Some(BlockId::from(block_n)),
+                                        )
+                                        .await;
+
+                                    println!(
+                                        "Transferred mock eth to the contract from {:?} to {:?}",
+                                        initial_balance.unwrap(),
+                                        final_balance.unwrap()
+                                    );
+                                }
+                                Err(e) => {
+                                    println!("{:?}", e)
+                                }
+                            }
 
                             //******************************** */
                             let value1 = abi::Token::String(
                                 "4554480000000000000000000000000000000000000000000000000000000000"
                                     .to_string(),
                             );
-                            let value2 = abi::Token::Uint(1000.into());
+                            let value2 = abi::Token::Uint(1.into());
                             let encoded = encode(&[value1, value2]);
+
+                            // Check if state root is updated correctly - done
 
                             let message = Message {
                                 message_type: [0x02],
                                 from: hex::decode("00000000000000000000000070997970C51812dc3A010C7d01b50e0d17dc79C8")?.try_into().unwrap(),
-                                to: hex::decode("0000000000000000000000005FC8d32690cc91D4c39d9d3abcBD16989F875707")?.try_into().unwrap(),
-                                origin_domain: 1,
-                                destination_domain: 2,
+                                to: hex::decode("0000000000000000000000003347B4d90ebe72BeFb30444C9966B2B990aE9FcB")?.try_into().unwrap(),
+                                origin_domain: 1_u32,
+                                destination_domain: 2_u32,
                                 data: Bytes::from(encoded),
                                 message_id: 2_u64,
                             };
@@ -175,12 +216,17 @@ async fn crosschain(
                             match receipt {
                                 Ok(rec) => {
                                     println!("Transaction successful: {:?}", rec);
+
+                                    let tx_hash = rec.tx_hash();
+
+                                    let _ = rec.await;
+                                    let filter = bridge_contract_target.events();
+
+                                    println!("{:?}", filter);
                                 }
                                 Err(err) => {
-                                    // Convert the error to a string or get the debug representation
                                     let error_string = format!("{:?}", err);
 
-                                    // Check if the error string contains "Revert"
                                     if error_string.contains("Revert") {
                                         println!("Transaction reverted with data: {:?}", err);
                                     } else {
@@ -188,13 +234,6 @@ async fn crosschain(
                                     }
                                 }
                             }
-                            // let receipt = pending_tx.confirmations(1).await?;
-
-                            // if let Some(tx_receipt) = receipt {
-                            //     println!("Receipt {:?}", tx_receipt);
-                            // } else {
-                            //     eprint!("Transaction failed");
-                            // }
                         }
                         None => {
                             eprint!("Error - invalid tx");
@@ -266,12 +305,13 @@ pub async fn send_eth_and_receive_proof(
         let state_root = block.state_root;
 
         let proof: EIP1186ProofResponse =
-            get_storage_slot(provider, contract, BlockId::from(block_number)).await?;
+            get_storage_slot(provider, contract.clone(), BlockId::from(block_number)).await?;
 
         let proof_extended = Proof {
             proof: proof,
             block_number: block_number,
             state_hash: state_root,
+            address: contract.address(),
         };
 
         return Ok(proof_extended);
