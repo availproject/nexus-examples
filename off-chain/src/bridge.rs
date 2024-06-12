@@ -20,9 +20,9 @@ use std::str::FromStr;
 use std::{sync::Arc, vec};
 
 // fill these after deployment
-const BRIDGE_ADDRESS_1337: &str = "0x3347B4d90ebe72BeFb30444C9966B2B990aE9FcB";
-const BRIDGE_ADDRESS_1338: &str = "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e";
-const STATE_MANAGER_ADDR: &str = "0x610178dA211FEF7D417bC0e6FeD39F05609AD788";
+const BRIDGE_ADDRESS_137: &str = "0x2a810409872AfC346F9B5b26571Fd6eC42EA4849";
+const BRIDGE_ADDRESS_138: &str = "0x9A676e781A523b5d0C0e43731313A708CB607508";
+const STATE_MANAGER_ADDR: &str = "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82";
 
 abigen!(BridgeContract, "bridge.json");
 abigen!(StateContract, "nexusStateManager.json");
@@ -69,7 +69,7 @@ pub async fn crosschain_wrapper() -> Result<()> {
     let _ = crosschain(
         rpc_provider1,
         rpc_provider2,
-        BRIDGE_ADDRESS_1337,
+        BRIDGE_ADDRESS_137,
         STATE_MANAGER_ADDR,
     )
     .await;
@@ -77,8 +77,8 @@ pub async fn crosschain_wrapper() -> Result<()> {
 }
 
 async fn crosschain(
+    rpc_provider_origin: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
     rpc_provider_destination: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
-    rpc_provider_target: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
     bridge_address: &str,
     state_manager_address: &str,
 ) -> Result<()> {
@@ -87,20 +87,17 @@ async fn crosschain(
     let address = bridge_address.parse::<Address>()?;
 
     let abi = read_abi_from_file("./bridge.json").unwrap();
-    let bridge_contract_destination = Contract::new(
-        address,
-        abi.clone(),
-        Arc::new(rpc_provider_destination.clone()),
-    );
+    let bridge_contract_origin =
+        Contract::new(address, abi.clone(), Arc::new(rpc_provider_origin.clone()));
 
-    match send_eth_and_receive_proof(rpc_provider_destination, bridge_contract_destination).await {
+    match send_eth_and_receive_proof(rpc_provider_origin, bridge_contract_origin).await {
         Ok(storage_proof) => {
             println!("Storage proof: {:?}", storage_proof);
             // call and update nexus state manager for this block
 
-            let state_manager_target = StateContract::new(
+            let state_manager_destination = StateContract::new(
                 state_manager_address.parse::<Address>()?,
-                Arc::new(rpc_provider_target.clone()),
+                Arc::new(rpc_provider_destination.clone()),
             );
 
             let encoded_proof = format!("0x{}", encode_proof(storage_proof.proof.account_proof));
@@ -111,22 +108,23 @@ async fn crosschain(
                 storage_proof.address.clone()
             );
 
-            let method_call = state_manager_target.method::<(U256, U256, U256, Bytes, H256), ()>(
-                "updateChainState",
-                (
-                    U256::from(137),
-                    U256::from(storage_proof.block_number.as_u64()),
-                    U256::from(1),
-                    hex_to_bytes(&encoded_proof.as_str())?,
-                    storage_proof.state_hash,
-                ),
-            )?;
+            let method_call = state_manager_destination
+                .method::<(U256, U256, U256, Bytes, H256), ()>(
+                    "updateChainState",
+                    (
+                        U256::from(137),
+                        U256::from(storage_proof.block_number.as_u64()),
+                        U256::from(1),
+                        hex_to_bytes(&encoded_proof.as_str())?,
+                        storage_proof.state_hash,
+                    ),
+                )?;
 
             // Note: the below works
-            // let method_call = state_manager_target.verify_account(
+            // let method_call = state_manager_destination.verify_account(
             //     storage_proof.state_hash.into(),
             //     hex_to_bytes(&proof_hex.as_str())?,
-            //     BRIDGE_ADDRESS_1337.parse::<Address>()?,
+            //     BRIDGE_ADDRESS_137.parse::<Address>()?,
             // );
 
             let result = method_call.send().await;
@@ -140,13 +138,13 @@ async fn crosschain(
                             println!("updateChainState() tx send and included");
                             println!("minting tokens aka receive against the updated state root");
 
-                            let bridge_contract_target = BridgeContract::new(
-                                BRIDGE_ADDRESS_1338.parse::<Address>()?,
-                                rpc_provider_target.clone(),
+                            let bridge_contract_destination = BridgeContract::new(
+                                BRIDGE_ADDRESS_138.parse::<Address>()?,
+                                rpc_provider_destination.clone(),
                             );
 
                             /************************************* */
-                            // mock a send transaction on target contract to fund it with eth
+                            // mock a send transaction on destination contract to fund it with eth
                             let address_str = "0x90F79bf6EB2c4f870365E785982E1f101E93b906";
                             let address_bytes = hex::decode(address_str).expect("Decoding failed");
                             let address_array: [u8; 20] =
@@ -160,9 +158,9 @@ async fn crosschain(
                             let block_n = provider.get_block_number().await?;
 
                             let initial_balance = provider
-                                .get_balance(BRIDGE_ADDRESS_1338, Some(BlockId::from(block_n)))
+                                .get_balance(BRIDGE_ADDRESS_138, Some(BlockId::from(block_n)))
                                 .await;
-                            let send_tx = bridge_contract_target
+                            let send_tx = bridge_contract_destination
                                 .send_eth(padded_address)
                                 .value(amount_to_send);
                             let r = send_tx.send().await;
@@ -170,7 +168,7 @@ async fn crosschain(
                                 Ok(r) => {
                                     let final_balance = provider
                                         .get_balance(
-                                            BRIDGE_ADDRESS_1338,
+                                            BRIDGE_ADDRESS_138,
                                             Some(BlockId::from(block_n)),
                                         )
                                         .await;
@@ -206,7 +204,7 @@ async fn crosschain(
                                 message_id: 2_u64,
                             };
 
-                            let tx = bridge_contract_target.receive_eth(
+                            let tx = bridge_contract_destination.receive_eth(
                                 message,
                                 Bytes::from(encoded_proof.as_bytes().to_vec()),
                             );
@@ -216,13 +214,8 @@ async fn crosschain(
                             match receipt {
                                 Ok(rec) => {
                                     println!("Transaction successful: {:?}", rec);
-
-                                    let tx_hash = rec.tx_hash();
-
-                                    let _ = rec.await;
-                                    let filter = bridge_contract_target.events();
-
-                                    println!("{:?}", filter);
+                                    let rr = rec.await;
+                                    println!("{:?}", rr);
                                 }
                                 Err(err) => {
                                     let error_string = format!("{:?}", err);

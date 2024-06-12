@@ -1,5 +1,5 @@
 import { ethers } from "hardhat";
-
+import { ethers as eth } from "ethers";
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with the account:", deployer.address);
@@ -7,7 +7,7 @@ async function main() {
   const NexusProofManager = await ethers.getContractFactory(
     "NexusProofManager"
   );
-  const nexusManager = await NexusProofManager.deploy(1337);
+  const nexusManager = await NexusProofManager.deploy(137);
 
   console.log(
     "NexusProofManager deployed to:",
