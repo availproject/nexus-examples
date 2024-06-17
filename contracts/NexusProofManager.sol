@@ -1,9 +1,9 @@
 pragma solidity ^0.8.20;
 
 import {StorageProof} from "./StorageProof.sol";
+import {JellyfishMerkleTreeVerifier} from "./lib/SparseMerkleTree.sol";
 
 contract NexusProofManager is StorageProof {
-
     uint256 public latestNexusBlockNumber = 0;
 
     struct NexusBlock {
@@ -14,6 +14,14 @@ contract NexusProofManager is StorageProof {
     mapping(uint256 => NexusBlock) public nexusBlock;
     mapping(uint256=>uint256) public chainIdToLatestBlockNumber;
     mapping(uint256 => mapping(uint256 => bytes32)) chainIdToState;
+
+    struct AccountState { 
+        bytes32 statementDigest;
+        bytes32 stateRoot;
+        bytes32 startNexusHash;
+        uint128 lastProofHeight;
+        uint128 height;
+    }
 
     constructor(uint256 chainId) StorageProof(chainId) {}
 
@@ -26,21 +34,30 @@ contract NexusProofManager is StorageProof {
         latestNexusBlockNumber = blockNumber;
     }
 
-      // TODO: reduce number of params passed to this function
-    function updateChainState(uint256 chainId, uint256 chainBlockNumber, uint256 nexusBlockNumber, bytes calldata accountInclusionProof, bytes32 stateRoot) external {
-        // the state verification is correct done by checking it inside a nexus proof which was done when nexus state was updated against a block
-        // bytes32 stfRoot = getRollupStateRoot(nexusBlockNumber, accountInclusionProof, msg.sender);    // last field is a placeholder needs to be updated based on nexus proof structure for accounts
-        // require(stfRoot != 0,"Not included"); // update 0 to bytes of 0 
-        // extractStateRootFromAccountStorage()  // we use a function input as placeholder for now
+
+    function updateChainState(uint256 chainId, uint256 chainBlockNumber, uint256 nexusBlockNumber, bytes32[] calldata  siblings, bytes32 key,  AccountState calldata accountState) external {
+        bytes32 valueHash = sha256(abi.encode(accountState.statementDigest, accountState.stateRoot, accountState.startNexusHash, accountState.lastProofHeight,accountState.height));
+        JellyfishMerkleTreeVerifier.Leaf memory leaf = JellyfishMerkleTreeVerifier.Leaf({
+        addr: key,
+        valueHash: valueHash
+        });
+
+        JellyfishMerkleTreeVerifier.Proof memory proof = JellyfishMerkleTreeVerifier.Proof({
+            leaf: leaf,
+            siblings: siblings
+        });
+
+        verifyRollupState(nexusBlock[nexusBlockNumber].stateRoot , proof, leaf);   
+        
         require(chainIdToLatestBlockNumber[chainId]<chainBlockNumber,"Old block number");
         chainIdToLatestBlockNumber[chainId] = chainBlockNumber;
-        chainIdToState[chainId][chainBlockNumber] = stateRoot;
+        chainIdToState[chainId][chainBlockNumber] = accountState.stateRoot;
     }
 
-    // this implementation will be update to sparse merkle tree
-    function getRollupStateRoot(uint256 nexusBlockNumber, bytes calldata accountInclusionProof, address account) view public returns (bytes32 storageRoot) {
-        // assuming for now this storage data is our state root instead for a rollup
-       (,,,storageRoot) = verifyAccount(nexusBlock[nexusBlockNumber].stateRoot, accountInclusionProof, account);
+
+    function verifyRollupState(bytes32 root, JellyfishMerkleTreeVerifier.Proof memory proof, JellyfishMerkleTreeVerifier.Leaf memory leaf) pure public {
+        bool verify = JellyfishMerkleTreeVerifier.verifyProof(root, leaf, proof);
+        require(verify,"Invalid leaf against nexus state root");
     }
 
     function getStorageRoot(uint256 chainId, uint256 chainBlockNumber, address account, bytes calldata accountTrieProof) external view returns(bytes32) {
