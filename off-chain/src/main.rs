@@ -206,8 +206,10 @@ async fn main() {
     // let storage_slot = storage_slot_str.parse::<H256>().unwrap();
 
     // let _ = get_storage_proof(blocknumber, &rpc_provider, account, storage_slot).await;
-    println!("starting");
-    let _ = crosschain_wrapper().await;
+
+    if let Err(e) = crosschain_wrapper().await {
+        println!("Error in crosschain_wrapper: {:?}", e);
+    }
 }
 
 // EvmBlockHeader {
