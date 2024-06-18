@@ -483,9 +483,9 @@
     "name": "chainId",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "bytes32",
         "name": "",
-        "type": "uint256"
+        "type": "bytes32"
       }
     ],
     "stateMutability": "view",
@@ -695,9 +695,9 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
+        "internalType": "bytes32",
         "name": "currentChainId",
-        "type": "uint256"
+        "type": "bytes32"
       }
     ],
     "name": "initialize",
@@ -869,9 +869,19 @@
             "internalType": "uint64",
             "name": "messageId",
             "type": "uint64"
+          },
+          {
+            "internalType": "bytes",
+            "name": "storageProof",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "storageSlot",
+            "type": "bytes32"
           }
         ],
-        "internalType": "struct INexusBridge.Message",
+        "internalType": "struct INexusBridge.MessageReceieve",
         "name": "message",
         "type": "tuple"
       },
@@ -924,9 +934,19 @@
             "internalType": "uint64",
             "name": "messageId",
             "type": "uint64"
+          },
+          {
+            "internalType": "bytes",
+            "name": "storageProof",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "storageSlot",
+            "type": "bytes32"
           }
         ],
-        "internalType": "struct INexusBridge.Message",
+        "internalType": "struct INexusBridge.MessageReceieve",
         "name": "message",
         "type": "tuple"
       },
@@ -979,9 +999,19 @@
             "internalType": "uint64",
             "name": "messageId",
             "type": "uint64"
+          },
+          {
+            "internalType": "bytes",
+            "name": "storageProof",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "storageSlot",
+            "type": "bytes32"
           }
         ],
-        "internalType": "struct INexusBridge.Message",
+        "internalType": "struct INexusBridge.MessageReceieve",
         "name": "message",
         "type": "tuple"
       },
@@ -1034,9 +1064,19 @@
             "internalType": "uint64",
             "name": "messageId",
             "type": "uint64"
+          },
+          {
+            "internalType": "bytes",
+            "name": "storageProof",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "storageSlot",
+            "type": "bytes32"
           }
         ],
-        "internalType": "struct INexusBridge.Message",
+        "internalType": "struct INexusBridge.MessageReceieve",
         "name": "message",
         "type": "tuple"
       },
