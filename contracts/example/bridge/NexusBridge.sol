@@ -42,7 +42,7 @@ contract NexusBridge is
     uint256 public fees; // total fees accumulated by bridge
     uint256 public feePerByte; // in wei
     uint256 public messageId; // next nonce
-    uint256 public chainId;
+    bytes32 public chainId;
 
     bytes1 private constant MESSAGE_TX_PREFIX = 0x01;
     bytes1 private constant TOKEN_TX_PREFIX = 0x02;
@@ -95,7 +95,7 @@ contract NexusBridge is
         address governance,
         address pauser,
         INexusProofManager nexusStateManager,
-        uint256 currentChainId
+        bytes32 currentChainId
       
     ) external initializer {
         feePerByte = newFeePerByte;
@@ -185,7 +185,7 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveMessage(Message calldata message, bytes calldata input)
+    function receiveMessage(MessageReceieve calldata message, bytes calldata input)
         external
         whenNotPaused
         onlySupportedDomain(message.originDomain, message.destinationDomain)
@@ -210,7 +210,7 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveAVAIL(Message calldata message, bytes calldata input)
+    function receiveAVAIL(MessageReceieve calldata message, bytes calldata input)
         external
         whenNotPaused
         onlySupportedDomain(message.originDomain, message.destinationDomain)
@@ -239,7 +239,7 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveETH(Message calldata message, bytes calldata input)
+    function receiveETH(MessageReceieve calldata message, bytes calldata input)
         external
         whenNotPaused
         onlySupportedDomain(message.originDomain, message.destinationDomain)
@@ -272,7 +272,7 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveERC20(Message calldata message, bytes calldata input)
+    function receiveERC20(MessageReceieve calldata message, bytes calldata input)
         external
         whenNotPaused
         onlySupportedDomain(message.originDomain, message.destinationDomain)
@@ -423,14 +423,10 @@ contract NexusBridge is
         return length * feePerByte;
     }
 
-    function _checkInclusionAgainstStateRoot(Message calldata message, bytes calldata proof) private {
+    function _checkInclusionAgainstStateRoot(MessageReceieve calldata message, bytes calldata proof) private {
         bytes32 state = nexus.getChainState(0, chainId); 
-        console.logBytes32(state); 
-        console.logBytes(proof);
-        console.log(address(uint160(uint256(message.to))));
-        (uint256 nonce, uint256 balance, bytes32 codeHash, bytes32 storageRoot) = nexus.verifyAccount(state, proof, address(uint160(uint256(message.to))));
+        (, , , bytes32 storageRoot) = nexus.verifyAccount(state, proof, address(uint160(uint256(message.to))));
         require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
-        // TODO: check if two merkle checks ( against the storage proof ) will work
+        nexus.verifyStorage(storageRoot, message.storageSlot, message.storageProof);
     } 
-
 }

@@ -26,8 +26,15 @@ describe("NexusBridge", function () {
     "0x0000000000000000000000000000000000000000000000000000000000000002";
 
   before(async function () {
+    const JMT = await ethers.getContractFactory("JellyfishMerkleTreeVerifier");
+    const jmt = await JMT.deploy();
     const EVMStorageproof = await ethers.getContractFactory(
-      "NexusProofManager"
+      "NexusProofManager",
+      {
+        libraries: {
+          JellyfishMerkleTreeVerifier: await jmt.getAddress(),
+        },
+      }
     );
     nexusProofManager = await EVMStorageproof.deploy(chainId);
     const AvailToken = await ethers.getContractFactory("AvailToken");

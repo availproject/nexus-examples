@@ -1,9 +1,10 @@
 pragma solidity ^0.8.20;
 
 import {StorageProof} from "./StorageProof.sol";
-import {JellyfishMerkleTreeVerifier} from "./lib/SparseMerkleTree.sol";
+import {JellyfishMerkleTreeVerifier} from "./lib/JellyfishMerkleTreeVerifier.sol";
 
 contract NexusProofManager is StorageProof {
+
     uint256 public latestNexusBlockNumber = 0;
 
     struct NexusBlock {
@@ -12,8 +13,8 @@ contract NexusProofManager is StorageProof {
     }
 
     mapping(uint256 => NexusBlock) public nexusBlock;
-    mapping(uint256=>uint256) public chainIdToLatestBlockNumber;
-    mapping(uint256 => mapping(uint256 => bytes32)) chainIdToState;
+    mapping(bytes32=>uint256) public chainIdToLatestBlockNumber;
+    mapping(bytes32 => mapping(uint256 => bytes32)) chainIdToState;
 
     struct AccountState { 
         bytes32 statementDigest;
@@ -35,23 +36,23 @@ contract NexusProofManager is StorageProof {
     }
 
 
-    function updateChainState(uint256 chainId, uint256 chainBlockNumber, uint256 nexusBlockNumber, bytes32[] calldata  siblings, bytes32 key,  AccountState calldata accountState) external {
-        bytes32 valueHash = sha256(abi.encode(accountState.statementDigest, accountState.stateRoot, accountState.startNexusHash, accountState.lastProofHeight,accountState.height));
-        JellyfishMerkleTreeVerifier.Leaf memory leaf = JellyfishMerkleTreeVerifier.Leaf({
-        addr: key,
-        valueHash: valueHash
-        });
+    function updateChainState(uint256 nexusBlockNumber, bytes32[] calldata  siblings, bytes32 key,  AccountState calldata accountState) external {
+        // bytes32 valueHash = sha256(abi.encode(accountState.statementDigest, accountState.stateRoot, accountState.startNexusHash, accountState.lastProofHeight,accountState.height));
+        // JellyfishMerkleTreeVerifier.Leaf memory leaf = JellyfishMerkleTreeVerifier.Leaf({
+        // addr: key,
+        // valueHash: valueHash
+        // });
 
-        JellyfishMerkleTreeVerifier.Proof memory proof = JellyfishMerkleTreeVerifier.Proof({
-            leaf: leaf,
-            siblings: siblings
-        });
+        // JellyfishMerkleTreeVerifier.Proof memory proof = JellyfishMerkleTreeVerifier.Proof({
+        //     leaf: leaf,
+        //     siblings: siblings
+        // });
 
-        verifyRollupState(nexusBlock[nexusBlockNumber].stateRoot , proof, leaf);   
+        // verifyRollupState(nexusBlock[nexusBlockNumber].stateRoot , proof, leaf);   
         
-        require(chainIdToLatestBlockNumber[chainId]<chainBlockNumber,"Old block number");
-        chainIdToLatestBlockNumber[chainId] = chainBlockNumber;
-        chainIdToState[chainId][chainBlockNumber] = accountState.stateRoot;
+        require(chainIdToLatestBlockNumber[key]<accountState.height,"Old block number");
+        chainIdToLatestBlockNumber[key] = accountState.height;
+        chainIdToState[key][accountState.height] = accountState.stateRoot;
     }
 
 
@@ -60,14 +61,14 @@ contract NexusProofManager is StorageProof {
         require(verify,"Invalid leaf against nexus state root");
     }
 
-    function getStorageRoot(uint256 chainId, uint256 chainBlockNumber, address account, bytes calldata accountTrieProof) external view returns(bytes32) {
+    function getStorageRoot(bytes32 chainId, uint256 chainBlockNumber, address account, bytes calldata accountTrieProof) external view returns(bytes32) {
         require(chainBlockNumber <= chainIdToLatestBlockNumber[chainId], "Invalid block number");
         bytes32 stateRoot = chainIdToState[chainId][chainBlockNumber];
         (,,,bytes32 storageRoot) = verifyAccount(stateRoot, accountTrieProof, account);
         return storageRoot;
     }
 
-    function getChainState(uint256 blockNumber, uint256 chainId) external view returns(bytes32) {
+    function getChainState(uint256 blockNumber, bytes32 chainId) external view returns(bytes32) {
         if (blockNumber == 0 ){ 
             return chainIdToState[chainId][chainIdToLatestBlockNumber[chainId]];
         }

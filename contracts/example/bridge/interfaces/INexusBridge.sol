@@ -20,6 +20,26 @@ interface INexusBridge {
         // nonce
         uint64 messageId;
     }
+    struct MessageReceieve {
+        // single-byte prefix representing the message type
+        bytes1 messageType;
+        // address of message sender
+        bytes32 from;
+        // address of message receiver
+        bytes32 to;
+        // origin chain code
+        uint32 originDomain;
+        // destination chain code
+        uint32 destinationDomain;
+        // data being sent
+        bytes data;
+        // nonce
+        uint64 messageId;
+
+        bytes storageProof;
+
+        bytes32 storageSlot;
+    }
 
     event MessageReceived(bytes32 indexed from, address indexed to, uint256 messageId);
     event MessageSent(address indexed from, bytes32 indexed to, uint256 messageId);
@@ -47,10 +67,10 @@ interface INexusBridge {
     function updateFeePerByte(uint256 newFeePerByte) external;
     function updateFeeRecipient(address newFeeRecipient) external;
     function withdrawFees() external;
-    function receiveMessage(Message calldata message, bytes calldata input) external;
-    function receiveAVAIL(Message calldata message, bytes calldata input) external;
-    function receiveETH(Message calldata message, bytes calldata input) external;
-    function receiveERC20(Message calldata message, bytes calldata input) external;
+    function receiveMessage(MessageReceieve calldata message, bytes calldata input) external;
+    function receiveAVAIL(MessageReceieve calldata message, bytes calldata input) external;
+    function receiveETH(MessageReceieve calldata message, bytes calldata input) external;
+    function receiveERC20(MessageReceieve calldata message, bytes calldata input) external;
     function sendMessage(bytes32 recipient, bytes calldata data) external payable;
     function sendAVAIL(bytes32 recipient, uint256 amount) external;
     function sendETH(bytes32 recipient) external payable;

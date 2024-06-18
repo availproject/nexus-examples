@@ -17,8 +17,16 @@ describe("EVMStorageproof", function () {
   let address = "0x3073F6Cd5799d754Ea93FcF54c53afd802477983";
 
   before(async function () {
+    const JMT = await ethers.getContractFactory("JellyfishMerkleTreeVerifier");
+    const jmt = await JMT.deploy();
+
     const EVMStorageproof = await ethers.getContractFactory(
-      "NexusProofManager"
+      "NexusProofManager",
+      {
+        libraries: {
+          JellyfishMerkleTreeVerifier: await jmt.getAddress(),
+        },
+      }
     );
     nexusProofManager = await EVMStorageproof.deploy(chainId);
   });
@@ -46,25 +54,35 @@ describe("EVMStorageproof", function () {
   });
 
   it("Pass: updateNexusBlock()", async () => {
-    await nexusProofManager.updateNexusBlock(2, { stateRoot, blockHash });
-    expect(await nexusProofManager.latestNexusBlockNumber()).to.equal(2);
-    const nexusBlockStored = await nexusProofManager.nexusBlock(2);
+    await nexusProofManager.updateNexusBlock(11, { stateRoot, blockHash });
+    expect(await nexusProofManager.latestNexusBlockNumber()).to.equal(11);
+    const nexusBlockStored = await nexusProofManager.nexusBlock(11);
     expect(nexusBlockStored[0]).to.equal(stateRoot);
     expect(nexusBlockStored[1]).to.equal(blockHash);
   });
   it("Pass: updateChainState()", async () => {
     await nexusProofManager.updateChainState(
-      137,
-      15000,
-      2,
-      concatenatedProof,
-      stateRoot
+      11,
+      [],
+      ethers.zeroPadValue("0x1011", 32),
+      {
+        statementDigest: ethers.ZeroHash,
+        stateRoot: stateRoot,
+        startNexusHash: ethers.ZeroHash,
+        lastProofHeight: 11,
+        height: 111,
+      }
     );
-    expect(await nexusProofManager.chainIdToLatestBlockNumber(137)).to.equal(
-      15000
-    );
-
-    expect(await nexusProofManager.getChainState(0, 137)).to.equal(stateRoot);
+    expect(
+      await nexusProofManager.chainIdToLatestBlockNumber(
+        ethers.zeroPadValue("0x1011", 32)
+      )
+    ).to.equal(111);
+    expect(
+      await nexusProofManager.getChainState(
+        0,
+        ethers.zeroPadValue("0x1011", 32)
+      )
+    ).to.equal(stateRoot);
   });
-  // it("Pass: getRollupStateRoot()", async () => {});
 });
