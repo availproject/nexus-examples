@@ -4,10 +4,20 @@ async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with the account:", deployer.address);
 
+  const JMT = await ethers.getContractFactory("JellyfishMerkleTreeVerifier");
+  const jmt = await JMT.deploy();
+
   const NexusProofManager = await ethers.getContractFactory(
-    "NexusProofManager"
+    "NexusProofManager",
+    {
+      libraries: {
+        JellyfishMerkleTreeVerifier: await jmt.getAddress(),
+      },
+    }
   );
-  const nexusManager = await NexusProofManager.deploy(137);
+  const nexusManager = await NexusProofManager.deploy(
+    ethers.zeroPadValue("0x1011", 32)
+  );
 
   console.log(
     "NexusProofManager deployed to:",
@@ -31,7 +41,7 @@ async function main() {
     address[0],
     address[0],
     await nexusManager.getAddress(),
-    137
+    ethers.zeroPadValue("0x1011", 32)
   );
 }
 

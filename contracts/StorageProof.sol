@@ -11,7 +11,7 @@ abstract contract StorageProof is  INexusProofManager
     using Lib_RLPReader for Lib_RLPReader.RLPItem;
     using Lib_RLPReader for bytes;
 
-    uint256 immutable public selfChainId;
+    bytes32 immutable public selfChainId;
 
     uint8 private constant ACCOUNT_NONCE_INDEX = 0;
     uint8 private constant ACCOUNT_BALANCE_INDEX = 1;
@@ -24,7 +24,7 @@ abstract contract StorageProof is  INexusProofManager
         0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
 
 
-    constructor(uint256 _selfChainId) {
+    constructor(bytes32 _selfChainId) {
         selfChainId = _selfChainId;
     }
 

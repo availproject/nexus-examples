@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 import {StorageProof} from "./StorageProof.sol";
 import {JellyfishMerkleTreeVerifier} from "./lib/JellyfishMerkleTreeVerifier.sol";
-
+import "hardhat/console.sol";
 contract NexusProofManager is StorageProof {
 
     uint256 public latestNexusBlockNumber = 0;
@@ -24,7 +24,7 @@ contract NexusProofManager is StorageProof {
         uint128 height;
     }
 
-    constructor(uint256 chainId) StorageProof(chainId) {}
+    constructor(bytes32 chainId) StorageProof(chainId) {}
 
     // nexus state root
     // updated when we verify the zk proof and then st block updated
@@ -37,18 +37,19 @@ contract NexusProofManager is StorageProof {
 
 
     function updateChainState(uint256 nexusBlockNumber, bytes32[] calldata  siblings, bytes32 key,  AccountState calldata accountState) external {
-        // bytes32 valueHash = sha256(abi.encode(accountState.statementDigest, accountState.stateRoot, accountState.startNexusHash, accountState.lastProofHeight,accountState.height));
-        // JellyfishMerkleTreeVerifier.Leaf memory leaf = JellyfishMerkleTreeVerifier.Leaf({
-        // addr: key,
-        // valueHash: valueHash
-        // });
+        bytes32 valueHash = sha256(abi.encode(accountState.statementDigest, accountState.stateRoot, accountState.startNexusHash, accountState.lastProofHeight,accountState.height));
+        JellyfishMerkleTreeVerifier.Leaf memory leaf = JellyfishMerkleTreeVerifier.Leaf({
+        addr: key,
+        valueHash: valueHash
+        });
 
-        // JellyfishMerkleTreeVerifier.Proof memory proof = JellyfishMerkleTreeVerifier.Proof({
-        //     leaf: leaf,
-        //     siblings: siblings
-        // });
+        JellyfishMerkleTreeVerifier.Proof memory proof = JellyfishMerkleTreeVerifier.Proof({
+            leaf: leaf,
+            siblings: siblings
+        });
 
-        // verifyRollupState(nexusBlock[nexusBlockNumber].stateRoot , proof, leaf);   
+        console.logBytes32(nexusBlock[nexusBlockNumber].stateRoot);
+        verifyRollupState(nexusBlock[nexusBlockNumber].stateRoot , proof, leaf);   
         
         require(chainIdToLatestBlockNumber[key]<accountState.height,"Old block number");
         chainIdToLatestBlockNumber[key] = accountState.height;

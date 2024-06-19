@@ -8,6 +8,7 @@
   "dependencies": {
     "@ethereumjs/rlp": "^5.0.2",
     "@openzeppelin/contracts-upgradeable": "^5.0.2",
+    "axios": "^1.7.2",
     "buffer": "^6.0.3",
     "dotenv": "^16.4.5",
     "merkle-patricia-tree": "^4.2.4",
