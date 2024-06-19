@@ -1,3 +1,4 @@
+use anyhow::anyhow;
 use anyhow::Result;
 use console::{style, StyledObject};
 use ethers::abi::encode;
@@ -7,7 +8,7 @@ use ethers::{
     signers::{LocalWallet, MnemonicBuilder},
     utils::*,
 };
-use reqwest::blocking::Client;
+use reqwest::Client;
 use rlp::RlpStream;
 use serde::{Deserialize, Serialize};
 use std::fs::File;
@@ -15,37 +16,46 @@ use std::io::Read;
 use std::{sync::Arc, vec};
 
 // fill these after deployment
-const BRIDGE_ADDRESS_137: &str = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
-const BRIDGE_ADDRESS_138: &str = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
-const STATE_MANAGER_ADDR: &str = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const BRIDGE_ADDRESS_137: &str = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
+const BRIDGE_ADDRESS_138: &str = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
+const STATE_MANAGER_ADDR: &str = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+const ACCOUNT_APP_ID: &str = "688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26"; // Replace <hash> with the actual hash value
 
 abigen!(BridgeContract, "bridge.json");
 abigen!(StateContract, "nexusStateManager.json");
+
 #[derive(Debug)]
 pub struct Proof {
     proof: EIP1186ProofResponse,
-    block_number: U64,
-    state_hash: H256,
     address: H160,
     storage_slot: [u8; 32],
-}
-
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-pub struct StatementDigest(pub [u32; 8]);
-
-#[derive(Clone, Serialize, Deserialize, Debug, PartialEq, Eq)]
-pub struct AccountState {
-    pub statement: StatementDigest,
-    pub state_root: [u8; 32],
-    pub start_nexus_hash: [u8; 32],
-    pub last_proof_height: u32,
-    pub height: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 struct ProofResponse {
     leaves_bitmap: Vec<Vec<u8>>,
     merkle_path: Vec<String>, // Assuming merkle_path is an array of strings, adjust type if needed
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct AccountState {
+    pub statement: [u32; 8],
+    pub state_root: [u8; 32],
+    pub start_nexus_hash: [u8; 32],
+    pub last_proof_height: u128,
+    pub height: u128,
+}
+
+impl From<AccountState> for state_contract::AccountState {
+    fn from(wrapper: AccountState) -> Self {
+        state_contract::AccountState {
+            statement_digest: wrapper.statement,
+            state_root: wrapper.state_root,
+            start_nexus_hash: wrapper.start_nexus_hash,
+            last_proof_height: wrapper.last_proof_height,
+            height: wrapper.height,
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -56,9 +66,6 @@ struct RpcResponse {
 
 const TICK_MARK_SYMBOL: &str = "✓";
 const CROSS_MARK_SYMBOL: &str = "x";
-
-static TICK_MARK: StyledObject<&str> = style(TICK_MARK_SYMBOL).green().bold();
-static CROSS_MARK: StyledObject<&str> = style(CROSS_MARK_SYMBOL).red().bold();
 
 pub async fn crosschain_wrapper() -> Result<()> {
     let private_key = "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
@@ -99,6 +106,8 @@ async fn crosschain(
     state_manager_address: &str,
 ) -> Result<()> {
     // assuming deployment of StorageProof contract is already done
+    let TICK_MARK: StyledObject<&str> = style(TICK_MARK_SYMBOL).green().bold();
+    let CROSS_MARK: StyledObject<&str> = style(CROSS_MARK_SYMBOL).red().bold();
 
     let address = bridge_address.parse::<Address>()?;
 
@@ -116,56 +125,88 @@ async fn crosschain(
                 Arc::new(rpc_provider_destination.clone()),
             );
 
-            let encoded_proof = format!("0x{}", encode_proof(storage_proof.proof.account_proof));
-
-            let base_url = "http://localhost:7000/accounts";
-            let account_app_id = "<hash>"; // Replace <hash> with the actual hash value
+            let base_url = "http://127.0.0.1:7000/account";
 
             let client = Client::new();
 
             let response = client
                 .get(base_url)
-                .query(&[("account_app_id", account_app_id)])
-                .send()?;
-            let json_response = response.text()?;
+                .query(&[("app_account_id", ACCOUNT_APP_ID)])
+                .send()
+                .await?;
 
-            let rpc_response: RpcResponse = serde_json::from_str(json_response.as_str())?;
-            // fetch account proof from nexus
-            let method_call = state_manager_destination.update_chain_state(
-                U256::from(11),
-                rpc_response.proof.merkle_path.clone(),
-                account_app_id,
-                rpc_response.account.clone(),
-            );
-
-            let result = method_call.send().await;
-
-            match result {
-                Ok(tx) => {
-                    println!("{} {}", TICK_MARK,style("Successfully updated the origin chain state on destination chain using nexus proof").green().italic());
-                    let finalisation = tx.confirmations(1).await?;
-                    match finalisation {
-                        Some(_) => {
-                            update_nexus_state_root_and_bridge(
-                                rpc_provider_destination,
-                                encoded_proof,
-                                storage_proof,
-                            );
-                        }
-                        None => {
-                            eprint!("{} {}", CROSS_MARK, style("Error - invalid tx").red());
-                        }
-                    }
-                }
+            let text_response = response.text().await?;
+            println!("{:?}", text_response);
+            let rpc_response = serde_json::from_str::<RpcResponse>(text_response.as_str());
+            match rpc_response {
+                Ok(r) => println!("fwefwe"),
                 Err(e) => {
-                    eprintln!(
-                        "{} {} {:?}",
-                        CROSS_MARK,
-                        style("Error sending transaction: ").red(),
-                        e
-                    );
+                    println!("err : {:?}", e)
                 }
             }
+
+            println!("sfklsdmfkls");
+            //     let account_state: state_contract::AccountState = AccountState {
+            //         statement_digest: rpc_response.account.statement_digest,
+            //         state_root: rpc_response.account.state_root,
+            //         start_nexus_hash: rpc_response.account.start_nexus_hash,
+            //         last_proof_height: rpc_response.account.last_proof_height,
+            //         height: rpc_response.account.height,
+            //     }
+            //     .into();
+            //     println!("sfklsd32r3314mfkls");
+            //     let account_app_id: [u8; 32] = ACCOUNT_APP_ID
+            //         .as_bytes()
+            //         .try_into()
+            //         .map_err(|_| anyhow!("Slice must be exactly 32 bytes long"))?;
+
+            //     let mut merkle_array: Vec<[u8; 32]> = Vec::new();
+
+            //     for s in rpc_response.proof.merkle_path {
+            //         let mut array = [0u8; 32];
+            //         let bytes = s.as_bytes();
+            //         if bytes.len() > 32 {
+            //             println!("String '{}' is too long to fit into [u8; 32]", s);
+            //         }
+            //         array[..bytes.len()].copy_from_slice(bytes);
+            //         merkle_array.push(array);
+            //     }
+            //     // fetch account proof from nexus
+            //     let method_call = state_manager_destination.update_chain_state(
+            //         U256::from(11),
+            //         merkle_array,
+            //         account_app_id,
+            //         account_state,
+            //     );
+
+            //     let result = method_call.send().await;
+
+            //     match result {
+            //         Ok(tx) => {
+            //             println!("{} {}", TICK_MARK,style("Successfully updated the origin chain state on destination chain using nexus proof").green().italic());
+            //             let finalisation = tx.confirmations(1).await?;
+            //             match finalisation {
+            //                 Some(_) => {
+            //                     update_nexus_state_root_and_bridge(
+            //                         rpc_provider_destination,
+            //                         storage_proof,
+            //                     )
+            //                     .await?;
+            //                 }
+            //                 None => {
+            //                     eprint!("{} {}", CROSS_MARK, style("Error - invalid tx").red());
+            //                 }
+            //             }
+            //         }
+            //         Err(e) => {
+            //             eprintln!(
+            //                 "{} {} {:?}",
+            //                 CROSS_MARK,
+            //                 style("Error sending transaction: ").red(),
+            //                 e
+            //             );
+            //         }
+            //     }
         }
         Err(e) => {
             eprint!("{} {} {:?}", CROSS_MARK, style("error: ").red(), e);
@@ -177,9 +218,11 @@ async fn crosschain(
 
 async fn update_nexus_state_root_and_bridge(
     rpc_provider_destination: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
-    encoded_proof: String,
     proof: Proof,
 ) -> Result<()> {
+    let TICK_MARK: StyledObject<&str> = style(TICK_MARK_SYMBOL).green().bold();
+    let CROSS_MARK: StyledObject<&str> = style(CROSS_MARK_SYMBOL).red().bold();
+
     println!(
         "{}",
         style("Now minting by calling receiveEth on destination chain").green()
@@ -190,7 +233,14 @@ async fn update_nexus_state_root_and_bridge(
         rpc_provider_destination.clone(),
     );
 
-    mock_send_transaction_on_destination_to_fund_contract(bridge_contract_destination);
+    mock_send_transaction_on_destination_to_fund_contract(bridge_contract_destination.clone())
+        .await?;
+
+    let encoded_storage_proof = format!(
+        "0x{}",
+        encode_proof(proof.proof.storage_proof[0].proof.clone())
+    );
+    let encoded_account_proof = format!("0x{}", encode_proof(proof.proof.account_proof));
 
     let value1 = abi::Token::String(
         "4554480000000000000000000000000000000000000000000000000000000000".to_string(),
@@ -211,12 +261,14 @@ async fn update_nexus_state_root_and_bridge(
         destination_domain: 2_u32,
         data: Bytes::from(encoded),
         message_id: 2_u64,
-        storage_proof: proof.proof.storage_proof,
+        storage_proof: Bytes::from(encoded_storage_proof.as_bytes().to_vec()),
         storage_slot: proof.storage_slot,
     };
 
-    let tx = bridge_contract_destination
-        .receive_eth(message, Bytes::from(encoded_proof.as_bytes().to_vec()));
+    let tx = bridge_contract_destination.receive_eth(
+        message,
+        Bytes::from(encoded_account_proof.as_bytes().to_vec()),
+    );
 
     let receipt = tx.send().await;
 
@@ -305,6 +357,9 @@ pub async fn send_eth_and_receive_proof(
     provider: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
     contract: Contract<Arc<SignerMiddleware<Provider<Http>, LocalWallet>>>,
 ) -> Result<Proof> {
+    let TICK_MARK: StyledObject<&str> = style(TICK_MARK_SYMBOL).green().bold();
+    let CROSS_MARK: StyledObject<&str> = style(CROSS_MARK_SYMBOL).red().bold();
+
     let address_str = "0x90F79bf6EB2c4f870365E785982E1f101E93b906";
     let address_bytes = hex::decode(address_str).expect("Decoding failed");
     let address_array: [u8; 20] = address_bytes.as_slice().try_into().expect("Invalid length");
@@ -356,8 +411,6 @@ pub async fn send_eth_and_receive_proof(
 
         let proof_extended = Proof {
             proof: proof,
-            block_number: block_number,
-            state_hash: state_root,
             address: contract.address(),
             storage_slot: storage_slot,
         };
