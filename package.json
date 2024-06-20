@@ -2,6 +2,7 @@
   "name": "hardhat-project",
   "devDependencies": {
     "@foundry-rs/hardhat-anvil": "^0.1.7",
+    "@nomicfoundation/hardhat-foundry": "^1.1.2",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@nomicfoundation/hardhat-verify": "^2.0.8",
     "hardhat": "^2.22.5"

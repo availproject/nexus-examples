@@ -4,6 +4,7 @@ import "@foundry-rs/hardhat-anvil";
 import dotenv from "dotenv";
 import { vars } from "hardhat/config";
 import "@nomicfoundation/hardhat-verify";
+import "@nomicfoundation/hardhat-foundry";
 dotenv.config();
 
 const ETHERSCAN_API_KEY = vars.get("ETHERSCAN_API_KEY");
