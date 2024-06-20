@@ -20,3 +20,6 @@ off-chain/target
 .env
 
 off-chain/.env
+
+.DS_STORE
+.vscode
