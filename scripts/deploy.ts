@@ -29,8 +29,8 @@ async function main() {
   const bridge = await Bridge.deploy();
   const address = await ethers.getSigners();
 
-  const AvailToken = await ethers.getContractFactory("AvailToken");
-  const availToken = await AvailToken.deploy();
+  const AvailToken = await ethers.getContractFactory("ERC20Token");
+  const availToken = await AvailToken.deploy("Avail", "AVAIL");
 
   console.log("Bridge deployed to:", await bridge.getAddress());
   console.log("Avail Token:", await availToken.getAddress());
@@ -44,6 +44,25 @@ async function main() {
     await nexusManager.getAddress(),
     app_id
   );
+
+  // required only for destination chain
+  const WETHToken = await ethers.getContractFactory("ERC20Token");
+  const wethToken = await WETHToken.deploy("WETH", "WETH");
+  console.log("WETH address: ", await wethToken.getAddress());
+
+  const wethBytes32 = stringToBytes32("weth");
+  console.log("Asset Id", wethBytes32);
+
+  const eth = ethers.parseEther("100");
+  await bridge.updateTokens([wethBytes32], [await wethToken.getAddress()]);
+  await wethToken.mint(await bridge.getAddress(), eth);
+  await wethToken.mint(address[0], eth);
+}
+
+function stringToBytes32(str: string): string {
+  const hex = Buffer.from(str, "utf8").toString("hex");
+  const paddedHex = hex.padEnd(64, "0");
+  return `0x${paddedHex}`;
 }
 
 main()

@@ -15,6 +15,7 @@ use std::{sync::Arc, vec};
 
 abigen!(BridgeContract, "bridge.json");
 abigen!(StateContract, "nexusStateManager.json");
+abigen!(ERC20, "erc20.json");
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct NexusH256([u8; 32]);
@@ -82,10 +83,8 @@ struct RpcResponse {
     pub nexus_state_root_hex: String,
 }
 
-const TICK_MARK_SYMBOL: &str = "✓";
-const CROSS_MARK_SYMBOL: &str = "x";
-
 pub async fn crosschain_wrapper() -> Result<()> {
+    println!("{} {}", style("What is Nexus").bold().bright(), style("Avail Nexus is a permissionless framework to unify the web3 ecosystem. It connects multiple blockchains both within and outside the Avail ecosystem, leveraging Avail DA as the root of trust."));
     let private_key = env::var("PRIVATE_KEY").expect("Require PRIVATE Key to send transactions");
     let wallet = private_key.parse::<LocalWallet>()?;
 
@@ -132,6 +131,12 @@ async fn crosschain(
         Arc::new(rpc_provider_origin.clone()),
     );
 
+    println!(
+        "{} {}",
+        exclamation_mark(),
+        style("Sending ETH to bridge on origin chain ....")
+    );
+
     match send_eth_origin(rpc_provider_origin.clone(), bridge_contract_origin).await {
         Ok(_) => {
             let state_manager_destination = StateContract::new(
@@ -142,6 +147,8 @@ async fn crosschain(
             let base_url = env::var("NEXUS_BASE_URL").expect("NEXUS base url missing");
 
             let client = Client::new();
+
+            println!("{} {}", exclamation_mark(), style("Calling nexus for the latest nexus state and corresponding rollup account state ...."));
 
             let response = client
                 .get(base_url)
@@ -154,6 +161,18 @@ async fn crosschain(
             let rpc_response = serde_json::from_str::<RpcResponse>(text_response.as_str());
 
             let rpc_response = rpc_response.unwrap();
+
+            println!(
+                "{} {}",
+                tick_mark(),
+                style("Successfully fetched data from nexus")
+            );
+
+            println!(
+                "{} {}",
+                exclamation_mark(),
+                style("Updating new nexus block info on the destination chain ....")
+            );
 
             let nexus_update = state_manager_destination
                 .update_nexus_block(
@@ -173,6 +192,8 @@ async fn crosschain(
 
             match result {
                 Ok(_) => {
+                    println!("{} {}", tick_mark(), style("Successfully updated nexus state on destination chain. This state contains the changes done on origin chain secured by Nexus."));
+
                     update_chain_state_and_bridge(
                         state_manager_destination,
                         rpc_provider_destination,
@@ -211,24 +232,19 @@ async fn update_chain_state_and_bridge(
 ) -> Result<()> {
     let account_state = state_contract::AccountState::from(rpc_response_account);
     let address = bridge_address.parse::<Address>()?;
-    println!(
-        "{} {}",
-        tick_mark(),
-        style("Successfully updated nexus state on origin chain")
-            .green()
-            .italic()
-    );
 
-    println!(
-        "{} updating chain state to {}",
-        style("Info: ").dim(),
-        hex::encode(account_state.state_root)
-    );
+    // println!(
+    //     "{} updating chain state to {}",
+    //     style("Info: ").dim(),
+    //     hex::encode(account_state.state_root)
+    // );
     let block_number = account_state.height as u64;
     let bytes_app_id = hex::decode(get_account_id().as_str()).expect("Failed to decode hex string");
     let account_app_id: [u8; 32] = bytes_app_id
         .try_into()
         .expect("Hex string is not 32 bytes long");
+
+    println!("{} {}", exclamation_mark(), style("Updating the state root for origin, on destination by extracting it from nexus state root on-chain."));
 
     // fetch account proof from nexus
     let method_call = state_manager_destination
@@ -243,13 +259,13 @@ async fn update_chain_state_and_bridge(
     let result = method_call
         .send()
         .await?
-        .log_msg("Pending transfer hash")
+        .log_msg("Pending transfer hash for updating chain state on destination")
         .await;
 
     match result {
         Ok(tx) => {
-            println!("{} {}", tick_mark(),style("Successfully updated the origin chain state on destination chain using nexus proof").green().italic());
-
+            println!("{} {}", tick_mark(),style("Successfully updated the origin chain state on destination chain using nexus proof"));
+            println!("{} {}", exclamation_mark(), style("Fetching storage proof from origin chain for a given storage slot for bridge contract"));
             let proof = get_storage_proof(
                 rpc_provider_origin.clone(),
                 BridgeContract::new(
@@ -259,7 +275,7 @@ async fn update_chain_state_and_bridge(
                 BlockId::from(block_number),
             )
             .await?;
-
+            println!("{} {}", exclamation_mark(), style("Now calling the bridge on the other side, to unlock funds thanks to the security of the state update of origin done using Nexus."));
             bridge_eth_on_receiver(rpc_provider_destination, proof).await?;
         }
         Err(e) => {
@@ -278,46 +294,31 @@ async fn bridge_eth_on_receiver(
     rpc_provider_destination: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
     proof: Proof,
 ) -> Result<()> {
-    // println!("Proof : {:?}", proof);
-
-    let bridge_contract_destination = BridgeContract::new(
-        get_destination_bridge_addr().as_str().parse::<Address>()?,
-        rpc_provider_destination.clone(),
-    );
-
-    mock_send_transaction_on_destination_to_fund_contract(bridge_contract_destination.clone())
-        .await?;
+    let bridge_address = get_destination_bridge_addr().as_str().parse::<Address>()?;
+    let bridge_contract_destination =
+        BridgeContract::new(bridge_address, rpc_provider_destination.clone());
 
     let encoded_storage_proof = encode_proof(proof.proof.storage_proof[0].proof.clone());
     let encoded_account_proof = encode_proof(proof.proof.account_proof);
 
-    // println!(
-    //     " Encoded_account_proof: {:?}",
-    //     hex::encode(encoded_account_proof.clone())
-    // );
-
-    // println!(
-    //     " Encoded_storage_proof: {:?}",
-    //     hex::encode(encoded_storage_proof.clone())
-    // );
-
-    let value1 = abi::Token::String(
-        "4554480000000000000000000000000000000000000000000000000000000000".to_string(),
-    );
-    let value2 = abi::Token::Uint(1.into());
+    let weth_asset_id = env::var("WETH_ASSET_ID").expect("WETH ASSET ID not given");
+    let mut asset_id_bytes = hex::decode(weth_asset_id.trim_start_matches("0x"))
+        .expect("Failed to decode WETH_ASSET_ID as hexadecimal");
+    asset_id_bytes.resize(32, 0);
+    let value1 = abi::Token::FixedBytes(asset_id_bytes);
+    let value2 = abi::Token::Uint(get_transfer_amount());
     let encoded = encode(&[value1, value2]);
+
     println!(
-        "{}",
-        style("Calling receive function on destination chain").yellow()
+        "{} {}",
+        exclamation_mark(),
+        style("Calling receive function on destination chain")
     );
 
     let address = env::var("FROM_ADDRESS").expect("Destination address not availaible");
     let to_address = proof.address.to_fixed_bytes();
     let mut output = [0; 32];
     output[12..32].copy_from_slice(&to_address);
-
-    // println!("Storage slot {:?}", hex::encode(proof.storage_slot));
-    // println!("to address {:?}", hex::encode(output));
 
     let message = MessageReceieve {
         message_type: [0x02],
@@ -335,12 +336,14 @@ async fn bridge_eth_on_receiver(
     };
 
     let tx = bridge_contract_destination
-        .receive_eth(message, Bytes::from(encoded_account_proof))
+        .receive_erc20(message, Bytes::from(encoded_account_proof))
         .legacy();
 
     let receipt = tx.send().await;
-
-    let receipt2 = receipt?.log_msg("Pending transfer hash").await;
+    // println!("{:?}", receipt);
+    let receipt2 = receipt?
+        .log_msg("Pending transfer hash for receiving WETH on destination chain")
+        .await;
 
     match receipt2 {
         Ok(rec) => {
@@ -348,7 +351,6 @@ async fn bridge_eth_on_receiver(
                 "{} {}",
                 tick_mark(),
                 style("Successfully called recieve eth function to unlock funds on target chain")
-                    .green()
                     .bold()
             );
         }
@@ -365,30 +367,6 @@ async fn bridge_eth_on_receiver(
     Ok(())
 }
 
-async fn mock_send_transaction_on_destination_to_fund_contract(
-    bridge_contract_destination: BridgeContract<SignerMiddleware<Provider<Http>, LocalWallet>>,
-) -> Result<()> {
-    let address_bytes =
-        hex::decode(get_destination_bridge_addr().as_str()).expect("Decoding failed");
-    let address_array: [u8; 20] = address_bytes.as_slice().try_into().expect("Invalid length");
-    let mut padded_address = [0u8; 32];
-
-    padded_address[12..].copy_from_slice(&address_array);
-    let amount_to_send: U256 = U256::from(1_000_000_000_u64);
-
-    let provider = Provider::<Http>::try_from("http://localhost:8546")?;
-
-    let send_tx = bridge_contract_destination
-        .send_eth(padded_address)
-        .value(amount_to_send)
-        .legacy();
-    let _ = send_tx
-        .send()
-        .await?
-        .log_msg("Pending transfer hash")
-        .await?;
-    Ok(())
-}
 fn encode_proof(account_proofs: Vec<Bytes>) -> Vec<u8> {
     let proofs = concatenate_proof(account_proofs);
     let rlp_encoded_proof = encode_rlp(proofs);
@@ -424,11 +402,9 @@ pub async fn send_eth_origin(
 
     let recipient: H256 = H256::from(padded_address);
 
-    let amount_to_send = U256::from(1_u64);
-
     let mut method_call = contract
         .send_eth(recipient.to_fixed_bytes())
-        .value(amount_to_send)
+        .value(get_transfer_amount())
         .legacy();
 
     let gas = method_call.estimate_gas().await.unwrap();
@@ -444,21 +420,20 @@ pub async fn send_eth_origin(
             println!(
                 "{} {} ",
                 tick_mark(),
-                style("Successfully called Send Eth on origin chain")
-                    .green()
-                    .italic()
+                style("Successfully locked ETH on origin chain")
             );
         }
         None => print!(
             "{} {}",
             cross_mark(),
-            style("Cannot send eth to bridge on origin chain").red()
+            style("Cannot lock eth on bridge on origin chain").red()
         ),
     }
 
     println!(
-        "{}",
-        style("Sleeping for 10 sec to let nexus update state....").dim()
+        "{} {} ",
+        style("Info: ").dim(),
+        "Sleeping for 10 sec to let nexus update state...."
     );
     tokio::time::sleep(Duration::from_secs(10)).await;
 
@@ -485,9 +460,7 @@ async fn get_storage_proof(
     println!(
         "{} {}",
         tick_mark(),
-        style("Successfully fetched the storage proof from origin chain")
-            .green()
-            .italic(),
+        style("Successfully fetched the storage proof from origin chain"),
     );
 
     println!(
@@ -509,6 +482,9 @@ async fn get_storage_proof(
     return Ok(proof_extended);
 }
 
+fn get_transfer_amount() -> U256 {
+    U256::from(1_000_000_000_000_000_u64)
+}
 fn get_origin_bridge_addr() -> String {
     env::var("ORIGIN_BRIDGE_ADDRESS").expect("Origin Bridge Address required")
 }
@@ -525,11 +501,18 @@ fn get_account_id() -> String {
     env::var("NEXUS_APP_ID").expect("Nexus app id must be set")
 }
 fn tick_mark() -> StyledObject<&'static str> {
-    style(TICK_MARK_SYMBOL).green().bold()
+    let tick_mark_symbol: &str = "✓";
+    style(tick_mark_symbol).bold()
 }
 
 fn cross_mark() -> StyledObject<&'static str> {
-    style(CROSS_MARK_SYMBOL).red().bold()
+    let cross_mark_symbol: &str = "x";
+    style(cross_mark_symbol).red().bold()
+}
+
+fn exclamation_mark() -> StyledObject<&'static str> {
+    let cross_mark_symbol: &str = "!";
+    style(cross_mark_symbol).blue().bold()
 }
 async fn get_storage_slot(
     contract: BridgeContract<Arc<SignerMiddleware<Provider<Http>, LocalWallet>>>,
@@ -560,6 +543,16 @@ async fn get_storage(
     Ok((proof))
 }
 
+fn str_to_fixed_bytes(input: &str) -> Result<[u8; 32], hex::FromHexError> {
+    let bytes = hex::decode(input)?;
+    let mut result = [0u8; 32];
+    result.copy_from_slice(&bytes);
+    Ok(result)
+}
+
+/// ********************
+/// EXTRA UTIL FUNCTIONS
+/// ********************
 use ::hex::FromHex;
 fn hex_to_bytes(hex: &str) -> Result<Bytes, hex::FromHexError> {
     let hex_trimmed = hex.trim_start_matches("0x");
@@ -569,9 +562,41 @@ fn hex_to_bytes(hex: &str) -> Result<Bytes, hex::FromHexError> {
     Ok(Bytes::from(bytes))
 }
 
-fn str_to_fixed_bytes(input: &str) -> Result<[u8; 32], hex::FromHexError> {
-    let bytes = hex::decode(input)?;
-    let mut result = [0u8; 32];
-    result.copy_from_slice(&bytes);
-    Ok(result)
+async fn fund_bridge(
+    rpc_provider_destination: Arc<SignerMiddleware<Provider<Http>, LocalWallet>>,
+    bridge_address: H160,
+) -> Result<()> {
+    let weth_address = env::var("WETH_ADDRESS")
+        .expect("WETH ADDRESS not found")
+        .parse::<Address>()?;
+    let weth = ERC20::new(weth_address, rpc_provider_destination.clone());
+    if let Err(err) = weth.mint(bridge_address, get_transfer_amount()).await {
+        eprintln!("Error while minting WETH: {}", err);
+    }
+    Ok(())
+}
+
+async fn mock_send_transaction_on_destination_to_fund_contract(
+    bridge_contract_destination: BridgeContract<SignerMiddleware<Provider<Http>, LocalWallet>>,
+) -> Result<()> {
+    let address_bytes =
+        hex::decode(get_destination_bridge_addr().as_str()).expect("Decoding failed");
+    let address_array: [u8; 20] = address_bytes.as_slice().try_into().expect("Invalid length");
+    let mut padded_address = [0u8; 32];
+
+    padded_address[12..].copy_from_slice(&address_array);
+    let amount_to_send: U256 = U256::from(1_000_000_000_u64);
+
+    let provider = Provider::<Http>::try_from("http://localhost:8546")?;
+
+    let send_tx = bridge_contract_destination
+        .send_eth(padded_address)
+        .value(amount_to_send)
+        .legacy();
+    let _ = send_tx
+        .send()
+        .await?
+        .log_msg("Pending transfer hash")
+        .await?;
+    Ok(())
 }

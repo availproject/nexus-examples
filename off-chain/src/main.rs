@@ -4,8 +4,10 @@ use std::fs::File;
 use std::io::Read;
 use std::{sync::Arc, vec};
 
+use abi::{ParamType, Token};
 use anyhow::Result;
 use dotenv::dotenv;
+use ethers::abi::{decode, encode};
 use ethers::core::abi::Abi;
 use ethers::{prelude::*, utils::keccak256};
 use rlp::{Encodable, RlpStream};
@@ -25,7 +27,7 @@ fn encode_block_header(header: &EvmBlockHeader) -> Vec<u8> {
 
 pub async fn get_encoded_block_header(rpc_provider: &Provider<Http>) -> Result<u64> {
     let block = rpc_provider
-        .get_block(BlockNumber::from(56589890))
+        .get_block(BlockNumber::from(56698129))
         .await?
         .unwrap();
 
@@ -191,36 +193,3 @@ async fn main() {
         println!("Error in crosschain_wrapper: {:?}", e);
     }
 }
-
-// EvmBlockHeader {
-//     parent_hash: "1ceab484f3c73b4bae8c70888f634905a242b26b42d1eab73e7fafd96a6e65c7",
-//     uncle_hash: "1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
-//     coinbase: "184ba627db853244c9f17f3cb4378cb8b39bf147",
-//     state_root: "b1f5a5df4e9179f420a4d432f14eb66b8e0f9fe4f34f1ef557b4ec1c7c3ed1e1",
-//     transactions_root: "ea341386e029d58c9cd0809b93891767e90e7762014022420db3a7446debf8ec",
-//     receipts_root: "13dc689f62f2e34c3c486e4115aa8aa9b808cc85087dceeeb2501a55fa5f897a",
-//     logs_bloom: "aa1e5cdf9924553725d3f612bc3894dcc8da4b90ef0114f95198eb6cc5ef320d47e83dd4dc37e0387798eaf84b8711c078ade0c0634d7cea6ed85adbe8f4b5adda64e61ebe7f3c4e6824b57b31b97afc7c08da9250d4c78d364c2c9d2e72fec68a270d1aaa3589fef54395261268dd8c291a98cd6545be0ea3fe5a586ddf3ebf772017fbf159de39b205d109fd34bec2908b3a8052bdd727d1fbd86737f377a86e677ee3412051c62174290f5eed2d283741e6c2a90d4e9395d500facbc00bc5d66d5fab70f74267539c7c3b7dbaca83b7b4dbf17a3c9b54a356b6b6f34b64482d119f13155af6ec013ecddb78cbabbcac16b2ec1e8bb0f5cb51ca91c57c43cd",
-//     difficulty: 0,
-//     number: 6091251,
-//     gas_limit: 30000000,
-//     gas_used: 29870105,
-//     timestamp: 1718181492,
-//     extra_data: "4275696c644149202868747470733a2f2f6275696c6461692e6e657429",
-//     mix_hash: "f1d4ae0b01a41956db05f9ba40a8ffc6c9faf5935614abce41f535287d39f031",
-//     nonce: "0000000000000000",
-//     base_fee_per_gas: Some(
-//         6508798014,
-//     ),
-//     withdrawals_root: Some(
-//         "31f7c1e2776785da2db602bd7448a3516321eec40ff93316593d5d55bf693732",
-//     ),
-//     blob_gas_used: Some(
-//         0,
-//     ),
-//     excess_blob_gas: Some(
-//         0,
-//     ),
-//     parent_beacon_block_root: Some(
-//         "20f402309dec1f9e70c41de34bb97f328195f530f4c6b261657bf7be30432492",
-//     ),
-// }

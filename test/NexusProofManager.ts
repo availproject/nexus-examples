@@ -34,6 +34,19 @@ describe("EVMStorageproof", function () {
   });
 
   it("verify account", async () => {
+    let input = ethers.AbiCoder.defaultAbiCoder().encode(
+      ["bytes32", "uint256"],
+      [
+        "0x7765746800000000000000000000000000000000000000000000000000000000",
+        1_000_000_000_000_000,
+      ]
+    );
+    console.log(input);
+    let output = ethers.AbiCoder.defaultAbiCoder().decode(
+      ["bytes32", "uint256"],
+      "0x000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000038d7ea4c68000000000000000000000000000000000000000000000000000000000000000004037373635373436383030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030"
+    );
+    console.log(output);
     await expect(
       nexusProofManager.verifyAccount(stateRoot, concatenatedProof, address)
     ).to.revertedWith("sfnslf");
