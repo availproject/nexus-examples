@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 import {StorageProof} from "./StorageProof.sol";
 import {JellyfishMerkleTreeVerifier} from "./lib/JellyfishMerkleTreeVerifier.sol";
-import "hardhat/console.sol";
+
 contract NexusProofManager is StorageProof {
 
     uint256 public latestNexusBlockNumber = 0;

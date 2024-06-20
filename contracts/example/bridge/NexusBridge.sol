@@ -16,8 +16,6 @@ import {IMessageReceiver} from "./interfaces/IMessageReceiver.sol";
 import {INexusBridge} from "./interfaces/INexusBridge.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
 
-import "hardhat/console.sol";
-
 
 contract NexusBridge is
     Initializable,
