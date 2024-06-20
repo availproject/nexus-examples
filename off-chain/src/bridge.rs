@@ -244,7 +244,7 @@ async fn update_chain_state_and_bridge(
         .try_into()
         .expect("Hex string is not 32 bytes long");
 
-    println!("{} {}", exclamation_mark(), style("Updating the state root for origin, on destination by extracting it from nexus state root on-chain."));
+    println!("{} {}", exclamation_mark(), style("Updating the state root for origin, on destination by extracting it from nexus state root on-chain ...."));
 
     // fetch account proof from nexus
     let method_call = state_manager_destination
@@ -265,7 +265,7 @@ async fn update_chain_state_and_bridge(
     match result {
         Ok(tx) => {
             println!("{} {}", tick_mark(),style("Successfully updated the origin chain state on destination chain using nexus proof"));
-            println!("{} {}", exclamation_mark(), style("Fetching storage proof from origin chain for a given storage slot for bridge contract"));
+            println!("{} {}", exclamation_mark(), style("Fetching storage proof from origin chain for a given storage slot for bridge contract ...."));
             let proof = get_storage_proof(
                 rpc_provider_origin.clone(),
                 BridgeContract::new(
@@ -275,7 +275,7 @@ async fn update_chain_state_and_bridge(
                 BlockId::from(block_number),
             )
             .await?;
-            println!("{} {}", exclamation_mark(), style("Now calling the bridge on the other side, to unlock funds thanks to the security of the state update of origin done using Nexus."));
+            println!("{} {}", exclamation_mark(), style("Now calling the bridge on the other side, to unlock funds thanks to the security of the state update of origin done using Nexus ...."));
             bridge_eth_on_receiver(rpc_provider_destination, proof).await?;
         }
         Err(e) => {
@@ -312,7 +312,7 @@ async fn bridge_eth_on_receiver(
     println!(
         "{} {}",
         exclamation_mark(),
-        style("Calling receive function on destination chain")
+        style("Calling receive function on destination chain ....")
     );
 
     let address = env::var("FROM_ADDRESS").expect("Destination address not availaible");
@@ -502,7 +502,7 @@ fn get_account_id() -> String {
 }
 fn tick_mark() -> StyledObject<&'static str> {
     let tick_mark_symbol: &str = "✓";
-    style(tick_mark_symbol).bold()
+    style(tick_mark_symbol).green().bold()
 }
 
 fn cross_mark() -> StyledObject<&'static str> {
