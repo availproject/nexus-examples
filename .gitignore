@@ -18,3 +18,5 @@ ignition/deployments/chain-31337
 
 off-chain/target
 .env
+
+off-chain/.env

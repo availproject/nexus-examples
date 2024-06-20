@@ -3,7 +3,8 @@
   "devDependencies": {
     "@foundry-rs/hardhat-anvil": "^0.1.7",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "hardhat": "^2.22.4"
+    "@nomicfoundation/hardhat-verify": "^2.0.8",
+    "hardhat": "^2.22.5"
   },
   "dependencies": {
     "@ethereumjs/rlp": "^5.0.2",

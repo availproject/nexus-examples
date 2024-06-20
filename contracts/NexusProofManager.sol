@@ -13,8 +13,8 @@ contract NexusProofManager is StorageProof {
     }
 
     mapping(uint256 => NexusBlock) public nexusBlock;
-    mapping(bytes32=>uint256) public chainIdToLatestBlockNumber;
-    mapping(bytes32 => mapping(uint256 => bytes32)) chainIdToState;
+    mapping(bytes32=>uint256) public nexusAppIDToLatestBlockNumber;
+    mapping(bytes32 => mapping(uint256 => bytes32)) nexusAppIDToState;
 
     struct AccountState { 
         bytes32 statementDigest;
@@ -24,7 +24,7 @@ contract NexusProofManager is StorageProof {
         uint128 height;
     }
 
-    constructor(bytes32 chainId) StorageProof(chainId) {}
+    constructor(bytes32 nexusAppID) StorageProof(nexusAppID) {}
 
     // nexus state root
     // updated when we verify the zk proof and then st block updated
@@ -48,12 +48,11 @@ contract NexusProofManager is StorageProof {
             siblings: siblings
         });
 
-        console.logBytes32(nexusBlock[nexusBlockNumber].stateRoot);
         verifyRollupState(nexusBlock[nexusBlockNumber].stateRoot , proof, leaf);   
         
-        require(chainIdToLatestBlockNumber[key]<accountState.height,"Old block number");
-        chainIdToLatestBlockNumber[key] = accountState.height;
-        chainIdToState[key][accountState.height] = accountState.stateRoot;
+        require(nexusAppIDToLatestBlockNumber[key]<accountState.height,"Old block number");
+        nexusAppIDToLatestBlockNumber[key] = accountState.height;
+        nexusAppIDToState[key][accountState.height] = accountState.stateRoot;
     }
 
 
@@ -62,20 +61,20 @@ contract NexusProofManager is StorageProof {
         require(verify,"Invalid leaf against nexus state root");
     }
 
-    function getStorageRoot(bytes32 chainId, uint256 chainBlockNumber, address account, bytes calldata accountTrieProof) external view returns(bytes32) {
-        require(chainBlockNumber <= chainIdToLatestBlockNumber[chainId], "Invalid block number");
-        bytes32 stateRoot = chainIdToState[chainId][chainBlockNumber];
+    function getStorageRoot(bytes32 nexusAppID, uint256 chainBlockNumber, address account, bytes calldata accountTrieProof) external view returns(bytes32) {
+        require(chainBlockNumber <= nexusAppIDToLatestBlockNumber[nexusAppID], "Invalid block number");
+        bytes32 stateRoot = nexusAppIDToState[nexusAppID][chainBlockNumber];
         (,,,bytes32 storageRoot) = verifyAccount(stateRoot, accountTrieProof, account);
         return storageRoot;
     }
 
-    function getChainState(uint256 blockNumber, bytes32 chainId) external view returns(bytes32) {
+    function getChainState(uint256 blockNumber, bytes32 nexusAppID) external view returns(bytes32) {
         if (blockNumber == 0 ){ 
-            return chainIdToState[chainId][chainIdToLatestBlockNumber[chainId]];
+            return nexusAppIDToState[nexusAppID][nexusAppIDToLatestBlockNumber[nexusAppID]];
         }
         else {
-              require(blockNumber <= chainIdToLatestBlockNumber[chainId]);
-              return chainIdToState[chainId][blockNumber];
+              require(blockNumber <= nexusAppIDToLatestBlockNumber[nexusAppID]);
+              return nexusAppIDToState[nexusAppID][blockNumber];
         }
     }
 }

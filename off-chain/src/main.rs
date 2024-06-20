@@ -1,11 +1,15 @@
+#![allow(warnings)]
+
 use std::fs::File;
 use std::io::Read;
 use std::{sync::Arc, vec};
 
 use anyhow::Result;
+use dotenv::dotenv;
 use ethers::core::abi::Abi;
 use ethers::{prelude::*, utils::keccak256};
 use rlp::{Encodable, RlpStream};
+use std::env;
 
 use crate::blockheader::{EvmBlockHeader, EvmBlockHeaderFromRpc};
 use crate::bridge::crosschain_wrapper;
@@ -20,7 +24,10 @@ fn encode_block_header(header: &EvmBlockHeader) -> Vec<u8> {
 }
 
 pub async fn get_encoded_block_header(rpc_provider: &Provider<Http>) -> Result<u64> {
-    let block = rpc_provider.get_block(BlockNumber::Latest).await?.unwrap();
+    let block = rpc_provider
+        .get_block(BlockNumber::from(56589890))
+        .await?
+        .unwrap();
 
     println!("block number: {:?}\n", block.number);
 
@@ -160,49 +167,22 @@ fn read_abi_from_file(file_path: &str) -> Result<Abi, Box<dyn std::error::Error>
     Ok(abi)
 }
 
-// const ADDRESS_1337: &str = "0x";
-// const ADDRESS_1338: &str = "0x";
-
-// async fn crosschain_wrapper() -> Result<()> {
-//     let rpc_provider1 = Provider::<Http>::try_from("http://127.0.0.1:8545").unwrap();
-//     let rpc_provider2 = Provider::<Http>::try_from("http://127.0.0.1:8546").unwrap();
-
-//     let _ = store_crosschain(rpc_provider1, rpc_provider2, ADDRESS_1337).await;
-//     Ok(())
-// }
-
-// async fn store_crosschain(
-//     rpc_provider_destination: Provider<Http>,
-//     rpc_provider_target: Provider<Http>,
-//     address: &str,
-// ) -> Result<()> {
-//     // assuming deployment of StorageProof contract is already done
-//     let block = rpc_provider_destination
-//         .get_block(BlockNumber::Latest)
-//         .await?
-//         .unwrap();
-//     let state_root = block.state_root;
-//     let address = address.parse::<Address>()?;
-//     let abi = read_abi_from_file("./abi.json").unwrap();
-//     let contract = Contract::new(address, abi, Arc::new(rpc_provider_target.clone()));
-//     let call = contract.method::<_, H256>("updateState", (1337, state_root))?;
-//     let pending_tx = call.send().await?;
-
-//     let receipt = pending_tx.confirmations(6).await?;
-//     println!("{:?}", receipt);
-//     Ok(())
-// }
 #[tokio::main]
 async fn main() {
-    // let rpc_provider = Provider::<Http>::try_from("http://localhost:8545").unwrap();
+    dotenv().ok();
+
+    // let rpc_provider = Provider::<Http>::try_from(
+    //     "https://arbitrum-sepolia.infura.io/v3/405e261a9beb469595d838b68061ea2f",
+    // )
+    // .unwrap();
     // let blocknumber = get_encoded_block_header(&rpc_provider).await.unwrap();
-    // // // Random account
-    // let account = "0x2C032Aa43D119D7bf4Adc42583F1f94f3bf3023a";
-    // let _ = get_account_proof(56, &rpc_provider, account).await;
+    // // // // Random account
+    // // let account = "0x34e45Fc2f0BaDB03a680Ec37d5F69eD1a7835aDa";
+    // // let _ = get_account_proof(56, &rpc_provider, account).await;
 
     // // // Goerli USDC contract address
-    // let account = "0xDC11f7E700A4c898AE5CAddB1082cFfa76512aDD";
-    // let storage_slot_str = "0xa20a1f31e7e0c47a407717c0b73e822e9ce414e0fc1925c4df69c43f77ac765e";
+    // let account = "0x34e45Fc2f0BaDB03a680Ec37d5F69eD1a7835aDa";
+    // let storage_slot_str = "0xfb34942ebc6f77e2a4779d58cebad9f418cb83cee5ae5135ce8e901b843c3496";
     // let storage_slot = storage_slot_str.parse::<H256>().unwrap();
 
     // let _ = get_storage_proof(blocknumber, &rpc_provider, account, storage_slot).await;

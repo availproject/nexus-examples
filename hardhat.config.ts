@@ -2,7 +2,11 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@foundry-rs/hardhat-anvil";
 import dotenv from "dotenv";
+import { vars } from "hardhat/config";
+import "@nomicfoundation/hardhat-verify";
 dotenv.config();
+
+const ETHERSCAN_API_KEY = vars.get("ETHERSCAN_API_KEY");
 
 const config: HardhatUserConfig = {
   solidity: "0.8.20",
@@ -18,6 +22,24 @@ const config: HardhatUserConfig = {
       chainId: 1338,
       url: "http://127.0.0.1:8546",
     },
+    arbitrum: {
+      chainId: 421614,
+      url: "https://arbitrum-sepolia.infura.io/v3/405e261a9beb469595d838b68061ea2f",
+      accounts: [process.env.ARB_PRIVATE_KEY || ""],
+    },
+    polygonZKEvm: {
+      url: "https://rpc.cardona.zkevm-rpc.com",
+      chainId: 2442,
+      accounts: [process.env.POLYGON_ZKEVM_CARDONA || ""],
+    },
+  },
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
+  sourcify: {
+    // Disabled by default
+    // Doesn't need an API key
+    enabled: true,
   },
 };
 

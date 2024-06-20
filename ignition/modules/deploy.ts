@@ -1,4 +1,4 @@
-import { ethers } from "hardhat";
+import hre, { ethers } from "hardhat";
 import { ethers as eth } from "ethers";
 
 let app_id =
@@ -18,6 +18,7 @@ async function main() {
       },
     }
   );
+
   const nexusManager = await NexusProofManager.deploy(app_id);
 
   console.log(

@@ -242,20 +242,15 @@ contract NexusBridge is
     function receiveETH(MessageReceieve calldata message, bytes calldata input)
         external
         whenNotPaused
-        onlySupportedDomain(message.originDomain, message.destinationDomain)
-        onlyTokenTransfer(message.messageType)
         nonReentrant
     {
         (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
-        if (assetId != ETH_ASSET_ID) {
-            revert InvalidAssetId();
-        }
-
+ 
         _checkInclusionAgainstStateRoot(message, input);
 
         // downcast SCALE-encoded bytes to an Ethereum address
         // revert to message.to later
-        address dest = address(bytes20(message.from));
+        address dest = address(uint160(uint256(message.from)));
 
         emit MessageReceived(message.from, dest, message.messageId);
 
