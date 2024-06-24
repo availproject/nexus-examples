@@ -31,8 +31,10 @@ contract NexusBridge is
     mapping(uint256 => bytes32) public isSent;
     // map store spent message hashes, used for Avail -> Ethereum messages
     mapping(bytes32 => bool) public isBridged;
-    // map Avail asset IDs to an Ethereum address
+    // map asset IDs to an Respective chain's address
     mapping(bytes32 => address) public tokens;
+    // map asset IDs to nexus asset addresses on given chain
+    mapping(bytes32 => address) public nexusTokens; 
 
     IAvail public avail;
     INexusProofManager public nexus;
@@ -44,6 +46,7 @@ contract NexusBridge is
 
     bytes1 private constant MESSAGE_TX_PREFIX = 0x01;
     bytes1 private constant TOKEN_TX_PREFIX = 0x02;
+    bytes1 private constant MINT_BURN_TX_PREFIX = 0x03;
     uint32 private constant AVAIL_DOMAIN = 1;
     uint32 private constant ETH_DOMAIN = 2;
     uint256 private constant MAX_DATA_LENGTH = 102_400;
@@ -66,6 +69,13 @@ contract NexusBridge is
 
     modifier onlyTokenTransfer(bytes1 messageType) {
         if (messageType != TOKEN_TX_PREFIX) {
+            revert InvalidFungibleTokenTransfer();
+        }
+        _;
+    }
+
+    modifier onlyMintBurn(bytes1 messageType) {
+        if (messageType != MINT_BURN_TX_PREFIX) {
             revert InvalidFungibleTokenTransfer();
         }
         _;
@@ -138,6 +148,28 @@ contract NexusBridge is
         }
         for (uint256 i = 0; i < length;) {
             tokens[assetIds[i]] = tokenAddresses[i];
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    /**
+     * @notice  Function to update asset ID -> token address mapping for nexus tokens
+     * @dev     Only callable by governance
+     * @param   assetIds  Asset IDs to update
+     * @param   tokenAddresses  Token addresses to update
+     */
+    function updateNexusTokens(bytes32[] calldata assetIds, address[] calldata tokenAddresses)
+        external
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        uint256 length = assetIds.length;
+        if (length != tokenAddresses.length) {
+            revert ArrayLengthMismatch();
+        }
+        for (uint256 i = 0; i < length;) {
+            nexusTokens[assetIds[i]] = tokenAddresses[i];
             unchecked {
                 ++i;
             }
@@ -282,12 +314,36 @@ contract NexusBridge is
 
         _checkInclusionAgainstStateRoot(message, input);
 
-      // revert to message.to later
+        // revert to message.to later
         address dest = address(uint160(uint256(message.from)));
 
         emit MessageReceived(message.from, dest, message.messageId);
 
+        
         IERC20(token).safeTransfer(dest, value);
+    }
+
+    function mintERC20(MessageReceieve calldata message, bytes calldata input)
+        external
+        whenNotPaused
+        onlySupportedDomain(message.originDomain, message.destinationDomain)
+        onlyMintBurn(message.messageType)
+        nonReentrant
+    {
+        (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
+        address token = nexusTokens[assetId];
+        if (token == address(0)) {
+            revert InvalidAssetId();
+        }
+
+        _checkInclusionAgainstStateRoot(message, input);
+
+        // revert to message.to later
+        address dest = address(uint160(uint256(message.from)));
+
+        emit MessageReceived(message.from, dest, message.messageId);
+     
+        IAvail(token).mint(dest, value);
     }
 
     /**
@@ -394,6 +450,37 @@ contract NexusBridge is
         }
         Message memory message = Message(
             TOKEN_TX_PREFIX,
+            bytes32(bytes20(msg.sender)),
+            recipient,
+            ETH_DOMAIN,
+            AVAIL_DOMAIN,
+            abi.encode(assetId, amount),
+            uint64(id)
+        );
+        // store message hash to be retrieved later by our light client
+        isSent[id] = keccak256(abi.encode(message));
+
+        emit MessageSent(msg.sender, recipient, id);
+
+        IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
+    }
+
+
+ function burnERC20(bytes32 assetId, bytes32 recipient, uint256 amount)
+        external
+        whenNotPaused
+        checkDestAmt(recipient, amount)
+    {
+        address token = nexusTokens[assetId];
+        if (token == address(0)) {
+            revert InvalidAssetId();
+        }
+        uint256 id;
+        unchecked {
+            id = messageId++;
+        }
+        Message memory message = Message(
+            MINT_BURN_TX_PREFIX,
             bytes32(bytes20(msg.sender)),
             recipient,
             ETH_DOMAIN,

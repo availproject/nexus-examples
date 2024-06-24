@@ -33,7 +33,7 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: ETHERSCAN_API_KEY,
+    apiKey: "IIRQ3N1AQXTTTJW9K7HFSA6WAZV25CKCSP",
   },
   sourcify: {
     // Disabled by default
