@@ -11,10 +11,6 @@ interface INexusBridge {
         bytes32 from;
         // address of message receiver
         bytes32 to;
-        // origin chain code
-        uint32 originDomain;
-        // destination chain code
-        uint32 destinationDomain;
         // data being sent
         bytes data;
         // nonce
@@ -27,10 +23,6 @@ interface INexusBridge {
         bytes32 from;
         // address of message receiver
         bytes32 to;
-        // origin chain code
-        uint32 originDomain;
-        // destination chain code
-        uint32 destinationDomain;
         // data being sent
         bytes data;
         // nonce
@@ -68,11 +60,9 @@ interface INexusBridge {
     function updateFeeRecipient(address newFeeRecipient) external;
     function withdrawFees() external;
     function receiveMessage(MessageReceieve calldata message, bytes calldata input) external;
-    function receiveAVAIL(MessageReceieve calldata message, bytes calldata input) external;
     function receiveETH(MessageReceieve calldata message, bytes calldata input) external;
     function receiveERC20(MessageReceieve calldata message, bytes calldata input) external;
     function sendMessage(bytes32 recipient, bytes calldata data) external payable;
-    function sendAVAIL(bytes32 recipient, uint256 amount) external;
     function sendETH(bytes32 recipient) external payable;
     function sendERC20(bytes32 assetId, bytes32 recipient, uint256 amount) external;
 }

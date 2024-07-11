@@ -16,7 +16,6 @@ import {IMessageReceiver} from "./interfaces/IMessageReceiver.sol";
 import {INexusBridge} from "./interfaces/INexusBridge.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
 
-
 contract NexusBridge is
     Initializable,
     ReentrancyGuardUpgradeable,
@@ -46,9 +45,7 @@ contract NexusBridge is
 
     bytes1 private constant MESSAGE_TX_PREFIX = 0x01;
     bytes1 private constant TOKEN_TX_PREFIX = 0x02;
-    bytes1 private constant MINT_BURN_TX_PREFIX = 0x03;
-    uint32 private constant AVAIL_DOMAIN = 1;
-    uint32 private constant ETH_DOMAIN = 2;
+
     uint256 private constant MAX_DATA_LENGTH = 102_400;
     // Derived from abi.encodePacked("ETH")
     // slither-disable-next-line too-many-digits
@@ -60,22 +57,8 @@ contract NexusBridge is
         0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
 
 
-    modifier onlySupportedDomain(uint32 originDomain, uint32 destinationDomain) {
-        if (originDomain != AVAIL_DOMAIN || destinationDomain != ETH_DOMAIN) {
-            revert InvalidDomain();
-        }
-        _;
-    }
-
     modifier onlyTokenTransfer(bytes1 messageType) {
         if (messageType != TOKEN_TX_PREFIX) {
-            revert InvalidFungibleTokenTransfer();
-        }
-        _;
-    }
-
-    modifier onlyMintBurn(bytes1 messageType) {
-        if (messageType != MINT_BURN_TX_PREFIX) {
             revert InvalidFungibleTokenTransfer();
         }
         _;
@@ -147,6 +130,7 @@ contract NexusBridge is
             revert ArrayLengthMismatch();
         }
         for (uint256 i = 0; i < length;) {
+            require(nexusTokens[assetIds[i]] == address(0), "asset id used by nexus tokens");
             tokens[assetIds[i]] = tokenAddresses[i];
             unchecked {
                 ++i;
@@ -169,6 +153,7 @@ contract NexusBridge is
             revert ArrayLengthMismatch();
         }
         for (uint256 i = 0; i < length;) {
+            require(tokens[assetIds[i]] == address(0), "asset id used by standard tokens");
             nexusTokens[assetIds[i]] = tokenAddresses[i];
             unchecked {
                 ++i;
@@ -218,7 +203,6 @@ contract NexusBridge is
     function receiveMessage(MessageReceieve calldata message, bytes calldata input)
         external
         whenNotPaused
-        onlySupportedDomain(message.originDomain, message.destinationDomain)
         nonReentrant
     {
         if (message.messageType != MESSAGE_TX_PREFIX) {
@@ -235,35 +219,6 @@ contract NexusBridge is
     }
 
     /**
-     * @notice  Takes an AVAIL transfer message and its proof of inclusion, verifies and executes it (if valid)
-     * @dev     This function is used for AVAIL transfers from Avail to Ethereum
-     * @param   message  Message that is used to reconstruct the bridge leaf
-     * @param   input  Merkle tree proof of inclusion for the bridge leaf
-     */
-    function receiveAVAIL(MessageReceieve calldata message, bytes calldata input)
-        external
-        whenNotPaused
-        onlySupportedDomain(message.originDomain, message.destinationDomain)
-        onlyTokenTransfer(message.messageType)
-    {
-
-        (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
-
-        if (assetId != 0x0) {
-            revert InvalidAssetId();
-        }
-
-        _checkInclusionAgainstStateRoot(message, input);
-
-        // downcast SCALE-encoded bytes to an Ethereum address
-        address dest = address(bytes20(message.to));
-
-        emit MessageReceived(message.from, dest, message.messageId);
-
-        avail.mint(dest, value);
-    }
-
-    /**
      * @notice  Takes an ETH transfer message and its proof of inclusion, verifies and executes it (if valid)
      * @dev     This function is used for ETH transfers from Avail to Ethereum
      * @param   message  Message that is used to reconstruct the bridge leaf
@@ -272,7 +227,6 @@ contract NexusBridge is
     function receiveETH(MessageReceieve calldata message, bytes calldata input)
         external
         whenNotPaused
-        onlySupportedDomain(message.originDomain, message.destinationDomain)
         onlyTokenTransfer(message.messageType)
         nonReentrant
     {
@@ -286,6 +240,11 @@ contract NexusBridge is
 
         emit MessageReceived(message.from, dest, message.messageId);
 
+        if(nexusTokens[assetId] != address(0)) {
+            IAvail(nexusTokens[assetId]).mint(dest, value);
+            return;
+        }
+        
         // slither-disable-next-line arbitrary-send-eth,missing-zero-check,low-level-calls
         (bool success,) = dest.call{value: value}("");
         if (!success) {
@@ -302,48 +261,36 @@ contract NexusBridge is
     function receiveERC20(MessageReceieve calldata message, bytes calldata input)
         external
         whenNotPaused
-        onlySupportedDomain(message.originDomain, message.destinationDomain)
         onlyTokenTransfer(message.messageType)
         nonReentrant
     {
         (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
         address token = tokens[assetId];
-        if (token == address(0)) {
-            revert InvalidAssetId();
+        if (token != address(0)) {
+             _checkInclusionAgainstStateRoot(message, input);
+
+            // revert to message.to later
+            address dest = address(uint160(uint256(message.from)));
+
+            emit MessageReceived(message.from, dest, message.messageId);
+
+            
+            IERC20(token).safeTransfer(dest, value);
+            return;
         }
+        token = nexusTokens[assetId];
+        if(token != address(0)) {
+              _checkInclusionAgainstStateRoot(message, input);
 
-        _checkInclusionAgainstStateRoot(message, input);
+            // revert to message.to later
+            address dest = address(uint160(uint256(message.from)));
 
-        // revert to message.to later
-        address dest = address(uint160(uint256(message.from)));
+            emit MessageReceived(message.from, dest, message.messageId);
 
-        emit MessageReceived(message.from, dest, message.messageId);
-
-        
-        IERC20(token).safeTransfer(dest, value);
-    }
-
-    function mintERC20(MessageReceieve calldata message, bytes calldata input)
-        external
-        whenNotPaused
-        onlySupportedDomain(message.originDomain, message.destinationDomain)
-        onlyMintBurn(message.messageType)
-        nonReentrant
-    {
-        (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
-        address token = nexusTokens[assetId];
-        if (token == address(0)) {
-            revert InvalidAssetId();
-        }
-
-        _checkInclusionAgainstStateRoot(message, input);
-
-        // revert to message.to later
-        address dest = address(uint160(uint256(message.from)));
-
-        emit MessageReceived(message.from, dest, message.messageId);
-     
-        IAvail(token).mint(dest, value);
+            IAvail(token).mint(dest, value);
+            return;
+        }             
+        revert InvalidAssetId();  
     }
 
     /**
@@ -367,40 +314,12 @@ contract NexusBridge is
         }
         fees += msg.value;
         Message memory message = Message(
-            MESSAGE_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, ETH_DOMAIN, AVAIL_DOMAIN, data, uint64(id)
+            MESSAGE_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, data, uint64(id)
         );
         // store message hash to be retrieved later by our light client
         isSent[id] = keccak256(abi.encode(message));
 
         emit MessageSent(msg.sender, recipient, id);
-    }
-
-    /**
-     * @notice  Burns amount worth of AVAIL tokens and bridges it to the specified recipient on Avail
-     * @dev     This function is used for AVAIL transfers from Ethereum to Avail
-     * @param   recipient  Recipient of the AVAIL tokens on Avail
-     * @param   amount  Amount of AVAIL tokens to bridge
-     */
-    function sendAVAIL(bytes32 recipient, uint256 amount) external whenNotPaused checkDestAmt(recipient, amount) {
-        uint256 id;
-        unchecked {
-            id = messageId++;
-        }
-        Message memory message = Message(
-            TOKEN_TX_PREFIX,
-            bytes32(bytes20(msg.sender)),
-            recipient,
-            ETH_DOMAIN,
-            AVAIL_DOMAIN,
-            abi.encode(bytes32(0), amount),
-            uint64(id)
-        );
-        // store message hash to be retrieved later by our light client
-        isSent[id] = keccak256(abi.encode(message));
-
-        emit MessageSent(msg.sender, recipient, id);
-
-        avail.burn(msg.sender, amount);
     }
 
     /**
@@ -417,8 +336,6 @@ contract NexusBridge is
             TOKEN_TX_PREFIX,
             bytes32(bytes20(msg.sender)),
             recipient,
-            ETH_DOMAIN,
-            AVAIL_DOMAIN,
             abi.encode(ETH_ASSET_ID, msg.value),
             uint64(id)
         );
@@ -442,59 +359,52 @@ contract NexusBridge is
     {
         address token = tokens[assetId];
         if (token == address(0)) {
-            revert InvalidAssetId();
-        }
-        uint256 id;
-        unchecked {
-            id = messageId++;
-        }
-        Message memory message = Message(
-            TOKEN_TX_PREFIX,
-            bytes32(bytes20(msg.sender)),
-            recipient,
-            ETH_DOMAIN,
-            AVAIL_DOMAIN,
-            abi.encode(assetId, amount),
-            uint64(id)
-        );
-        // store message hash to be retrieved later by our light client
-        isSent[id] = keccak256(abi.encode(message));
+            uint256 id;
+            unchecked {
+                id = messageId++;
+            }
+            Message memory message = Message(
+                TOKEN_TX_PREFIX,
+                bytes32(bytes20(msg.sender)),
+                recipient,
+                abi.encode(assetId, amount),
+                uint64(id)
+            );
+            // store message hash to be retrieved later by our light client
+            isSent[id] = keccak256(abi.encode(message));
 
-        emit MessageSent(msg.sender, recipient, id);
+            emit MessageSent(msg.sender, recipient, id);
 
-        IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
+            IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
+            return;
+           
+        }
+        
+        token = nexusTokens[assetId];
+        if(token == address(0)){
+                uint256 id;
+            unchecked {
+                id = messageId++;
+            }
+            Message memory message = Message(
+                TOKEN_TX_PREFIX,
+                bytes32(bytes20(msg.sender)),
+                recipient,
+                abi.encode(assetId, amount),
+                uint64(id)
+            );
+            // store message hash to be retrieved later by our light client
+            isSent[id] = keccak256(abi.encode(message));
+
+            emit MessageSent(msg.sender, recipient, id);
+
+            IAvail(token).burn(msg.sender, amount);
+            return;
+        }
+
+        revert InvalidAssetId();
     }
 
-
- function burnERC20(bytes32 assetId, bytes32 recipient, uint256 amount)
-        external
-        whenNotPaused
-        checkDestAmt(recipient, amount)
-    {
-        address token = nexusTokens[assetId];
-        if (token == address(0)) {
-            revert InvalidAssetId();
-        }
-        uint256 id;
-        unchecked {
-            id = messageId++;
-        }
-        Message memory message = Message(
-            MINT_BURN_TX_PREFIX,
-            bytes32(bytes20(msg.sender)),
-            recipient,
-            ETH_DOMAIN,
-            AVAIL_DOMAIN,
-            abi.encode(assetId, amount),
-            uint64(id)
-        );
-        // store message hash to be retrieved later by our light client
-        isSent[id] = keccak256(abi.encode(message));
-
-        emit MessageSent(msg.sender, recipient, id);
-
-        IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
-    }
 
     /**
      * @notice  Returns the minimum fee for a given message length
