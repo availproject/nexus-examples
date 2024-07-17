@@ -16,6 +16,8 @@ import {IMessageReceiver} from "./interfaces/IMessageReceiver.sol";
 import {INexusBridge} from "./interfaces/INexusBridge.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
 
+import "forge-std/console.sol";
+
 contract NexusBridge is
     Initializable,
     ReentrancyGuardUpgradeable,
@@ -280,7 +282,7 @@ contract NexusBridge is
         }
         token = nexusTokens[assetId];
         if(token != address(0)) {
-              _checkInclusionAgainstStateRoot(message, input);
+            _checkInclusionAgainstStateRoot(message, input);
 
             // revert to message.to later
             address dest = address(uint160(uint256(message.from)));
@@ -358,7 +360,8 @@ contract NexusBridge is
         checkDestAmt(recipient, amount)
     {
         address token = tokens[assetId];
-        if (token == address(0)) {
+        if (token != address(0)) {
+           
             uint256 id;
             unchecked {
                 id = messageId++;
@@ -381,8 +384,8 @@ contract NexusBridge is
         }
         
         token = nexusTokens[assetId];
-        if(token == address(0)){
-                uint256 id;
+        if(token != address(0)){ 
+            uint256 id;
             unchecked {
                 id = messageId++;
             }
