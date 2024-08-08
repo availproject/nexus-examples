@@ -1,27 +1,42 @@
-// SPDX-License-Identifier: Apache-2.0
+// SPDX-Licences-Identifier: Apacher-2.0
 pragma solidity ^0.8.20;
 
-import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
+abstract contract Payment { 
 
-contract Payment {
-    INexusProofManager public nexus;
-    mapping(uint256=>mapping(address=> bool)) nftIDToUser;
+    bytes1 private constant MESSAGE_TX_PREFIX = 0x01;
+    bytes1 private constant TOKEN_TX_PREFIX = 0x02;
+    bytes1 private constant LOCK_MINT_PREFIX = 0x03;
 
-    uint256 constant nftPrice = 0.001 ether;
+    mapping(uint256 => bytes32)  public idToHash;
 
-    constructor(INexusProofManager nexusManager) {
-        nexus = nexusManager;
-    }
-    
-    // todo: include asset address on deployment. For now assuming it as usdc.
-    function buyNft(address asset, uint256 nftId) external {
-        _checkPurchaseStatus(nftId, msg.sender);
-        IERC20(asset).transferFrom(msg.sender, address(this), nftPrice);
-        nftIDToUser[nftId][msg.sender] = true;
+    struct Message {
+        bytes1 messageType;
+        bytes32 from;
+        bytes data;
+        uint64 messageId;
+        uint256 chainId;
     }
 
-    function _checkPurchaseStatus(uint256 nftId, address userAddress) view private {
-        require(nftIDToUser[nftId][userAddress] == false, "NFT already purchased");
-    }
+    event NewEntry(
+        uint256 key,
+        bytes32 hash_value
+    );
+
+    event PreImage(
+        bytes1 messageType,
+        bytes32 from,
+        bytes data,
+        uint64 messageId,
+        uint256 chainId
+    );
+
+     function store(uint256 key, bytes32 value) public virtual{
+        _beforeStoring();
+        idToHash[key] = value;
+        emit NewEntry(key, value);
+        _afterStoring();
+     }
+
+     function _beforeStoring() internal virtual {}
+     function _afterStoring() internal virtual {}
 }
