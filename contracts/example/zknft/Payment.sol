@@ -6,6 +6,7 @@ abstract contract Payment {
     bytes1 private constant MESSAGE_TX_PREFIX = 0x01;
     bytes1 private constant TOKEN_TX_PREFIX = 0x02;
     bytes1 private constant LOCK_MINT_PREFIX = 0x03;
+    bytes1 private constant PAYMENT = 0x04;
 
     mapping(uint256 => bytes32)  public idToHash;
 
@@ -13,7 +14,7 @@ abstract contract Payment {
         bytes1 messageType;
         bytes32 from;
         bytes data;
-        uint64 messageId;
+        uint256 messageId;
         uint256 chainId;
     }
 
@@ -26,11 +27,11 @@ abstract contract Payment {
         bytes1 messageType,
         bytes32 from,
         bytes data,
-        uint64 messageId,
+        uint256 messageId,
         uint256 chainId
     );
 
-     function store(uint256 key, bytes32 value) public virtual{
+     function _store(uint256 key, bytes32 value) internal virtual{
         _beforeStoring();
         idToHash[key] = value;
         emit NewEntry(key, value);
