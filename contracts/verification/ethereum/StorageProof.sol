@@ -2,11 +2,10 @@
 pragma solidity ^0.8.20;
 
 
-import "./lib/external/trie/Lib_SecureMerkleTrie.sol";
-import "./lib/external/rlp/Lib_RLPReader.sol";
-import {INexusProofManager} from "./interfaces/INexusProofManager.sol";
+import "../../lib/external/trie/Lib_SecureMerkleTrie.sol";
+import "../../lib/external/rlp/Lib_RLPReader.sol";
 
-abstract contract StorageProof is  INexusProofManager
+contract StorageProof 
  {
     using Lib_RLPReader for Lib_RLPReader.RLPItem;
     using Lib_RLPReader for bytes;
