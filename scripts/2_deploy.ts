@@ -43,7 +43,7 @@ async function main() {
   const Payment = await ethers.getContractFactory("NFTPayment");
   const paymentContract = await Payment.deploy(
     await nexusManager.getAddress(),
-    await signers[3].getAddress(),
+    deployer.address,
     await nftContract.getAddress()
   );
 
@@ -51,7 +51,6 @@ async function main() {
 
   console.log("Payment contract: ", await paymentContract.getAddress());
   console.log("NFT Contract: ", await nftContract.getAddress());
-  console.log("ERC 20", await availToken.getAddress());
 }
 
 function stringToBytes32(str: string): string {

@@ -1,0 +1,50 @@
+{
+  "_format": "hh-zksolc-artifact-1",
+  "contractName": "IVectorx",
+  "sourceName": "contracts/example/bridge/interfaces/IVectorx.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rangeHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "dataRootCommitments",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "dataRoot",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rangeHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "rangeStartBlocks",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "startBlock",
+          "type": "uint32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "factoryDeps": {}
+}

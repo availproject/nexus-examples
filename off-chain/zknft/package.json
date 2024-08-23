@@ -1,0 +1,21 @@
+{
+  "name": "zknft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --outDir ./dist",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "axios": "^1.7.4",
+    "ethers": "^6.13.2",
+    "zksync-ethers": "^6.11.2"
+  }
+}

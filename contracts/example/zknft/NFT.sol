@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
+import {StorageProofVerifier, StorageProof} from "../../verification/zksync/StorageProof.sol";
 
 contract MyNFT is ERC721 {
     mapping(uint256 => bytes32) confirmationReceipts;
@@ -10,6 +11,7 @@ contract MyNFT is ERC721 {
 
     uint256 private _tokenIds;
     INexusProofManager public nexus;
+    StorageProofVerifier public storageProof;
     bytes32 immutable selfChainId;
     bytes32 immutable paymentChainID;
     address TARGET_CONTRACT_ADDRESS;
@@ -30,16 +32,17 @@ contract MyNFT is ERC721 {
     }
 
     event Confirmation(uint256 id);
-    constructor(bytes32 _selfChainId, bytes32 _paymentChainID, INexusProofManager nexusManager, address targetContract) ERC721("MyNFT", "MNFT") {
+    constructor(bytes32 _selfChainId, bytes32 _paymentChainID, INexusProofManager nexusManager, address targetContract, StorageProofVerifier _storageProof) ERC721("MyNFT", "MNFT") {
         nexus = nexusManager;
         selfChainId = _selfChainId;
         paymentChainID = _paymentChainID;
         TARGET_CONTRACT_ADDRESS = targetContract;
+        storageProof = _storageProof;
     }
 
-    function mintNFT(address recipient, Message calldata message, bytes32 paymentChainBlockNumber,bytes calldata accountTrieProof,bytes32 slot,bytes calldata storageSlotTrieProof) public returns (uint256) {
+    function mintNFT(address recipient, Message calldata message, StorageProof calldata storageSlotTrieProof) public returns (uint256) {
         require(usedMessageid[message.messageId], "Message id already digested");
-        verifyPayment(keccak256(abi.encode(message)), paymentChainBlockNumber, accountTrieProof, slot, storageSlotTrieProof);
+        verifyPayment(storageSlotTrieProof);
         (address to,,) = abi.decode(message.data, (address, uint256, uint256));
         _tokenIds += 1;
         uint256 newItemId = _tokenIds;
@@ -53,12 +56,9 @@ contract MyNFT is ERC721 {
     }
 
 
-    function verifyPayment(bytes32 leaf, bytes32 paymentChainBlockNumber,bytes calldata accountTrieProof, bytes32 slot,bytes calldata storageSlotTrieProof) public { 
-        bytes32 state = nexus.getChainState(0, paymentChainBlockNumber); 
-        (, , , bytes32 storageRoot) = nexus.verifyAccount(state, accountTrieProof, TARGET_CONTRACT_ADDRESS);
-        require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
-        bytes32 slotValue = nexus.verifyStorage(storageRoot, slot, storageSlotTrieProof); 
-        require(slotValue == leaf, "leaf value not the same");
+    function verifyPayment(StorageProof calldata storageSlotTrieProof) public { 
+        bool valid = storageProof.verify(storageSlotTrieProof);
+        require(valid, "invalid storage proof");
     }
     
     // TODO: make only owner
