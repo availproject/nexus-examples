@@ -14,8 +14,9 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@getclave/zksync-storage-proofs": "^1.2.0-ethers5",
     "axios": "^1.7.4",
     "ethers": "^6.13.2",
-    "zksync-ethers": "^6.11.2"
+    "zksync-ethers": "^6.1.0"
   }
 }

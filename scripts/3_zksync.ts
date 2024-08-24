@@ -41,34 +41,20 @@ async function main() {
   ]);
   console.log(`Avail Token deployed to ${await availToken.getAddress()}`);
 
-  // Deploy MyNFT contract
-  const myNFTArtifact = await deployer.loadArtifact("MyNFT");
-  const nftContract = await deployer.deploy(myNFTArtifact, [
-    stringToBytes32("137"),
-    stringToBytes32("1337"),
-    await nexusManager.getAddress(),
-    ethers.ZeroAddress,
-  ]);
-  console.log(`NFT Contract deployed to ${await nftContract.getAddress()}`);
-
   // Deploy NFTPayment contract
   const paymentArtifact = await deployer.loadArtifact("NFTPayment");
   console.log(deployer.ethWallet.address);
   const paymentContract = await deployer.deploy(paymentArtifact, [
     await nexusManager.getAddress(),
     deployer.ethWallet.address,
-    await nftContract.getAddress(),
+    ethers.ZeroAddress,
   ]);
   console.log(
     `Payment contract deployed to ${await paymentContract.getAddress()}`
   );
 
-  // Update target contract for the NFT contract
-  await nftContract.updateTargetContract(await paymentContract.getAddress());
-
   // Log all contract addresses
   console.log("Payment contract:", await paymentContract.getAddress());
-  console.log("NFT Contract:", await nftContract.getAddress());
   console.log("Avail Token:", await availToken.getAddress());
 }
 

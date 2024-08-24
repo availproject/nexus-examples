@@ -3950,8 +3950,8 @@
       ]
     },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/zknft/NFT.sol": {
-      "lastModificationDate": 1724413939324,
-      "contentHash": "2062e0a9885b48cfd408f22f542776a5",
+      "lastModificationDate": 1724422757187,
+      "contentHash": "37ca3f42cff7f63bd84db37b286e7472",
       "sourceName": "contracts/example/zknft/NFT.sol",
       "solcConfig": {
         "version": "0.8.20",
@@ -4008,10 +4008,11 @@
       },
       "imports": [
         "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        "../../interfaces/INexusProofManager.sol"
+        "../../interfaces/INexusProofManager.sol",
+        "../../verification/zksync/StorageProof.sol"
       ],
       "versionPragmas": [
-        "^0.8.20"
+        "^0.8.13"
       ],
       "artifacts": [
         "MyNFT"
@@ -4085,8 +4086,8 @@
       ]
     },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/zknft/NftPayment.sol": {
-      "lastModificationDate": 1724179982649,
-      "contentHash": "2ff07ff45893e9ea5a611b0fd9dfa423",
+      "lastModificationDate": 1724422397935,
+      "contentHash": "e2f0058cda37063b972f866158e7522b",
       "sourceName": "contracts/example/zknft/NftPayment.sol",
       "solcConfig": {
         "version": "0.8.20",
@@ -4147,7 +4148,7 @@
         "./Payment.sol"
       ],
       "versionPragmas": [
-        "^0.8.20"
+        "^0.8.13"
       ],
       "artifacts": [
         "NFTPayment"

@@ -30,6 +30,25 @@ async function main() {
 
   console.log("Avail Token:", await availToken.getAddress());
 
+  const ZKSyncDiamond = await ethers.getContractFactory("ZKSyncDiamond");
+  const zksyncdiamond = await ZKSyncDiamond.deploy(
+    await nexusManager.getAddress(),
+    stringToBytes32("1337")
+  );
+  const SparseMerkleTree = await ethers.getContractFactory("SparseMerkleTree");
+  const sparseMerkleTree = await SparseMerkleTree.deploy();
+
+  const StorageProofVerifier = await ethers.getContractFactory(
+    "StorageProofVerifier"
+  );
+  const storageProofVerifier = await StorageProofVerifier.deploy(
+    await zksyncdiamond.getAddress(),
+    await sparseMerkleTree.getAddress()
+  );
+
+  console.log("Sparse Merkle Tree: ", await sparseMerkleTree.getAddress());
+  console.log("ZKSync Diamond Contract: ", await zksyncdiamond.getAddress());
+
   const MyNFT = await ethers.getContractFactory("MyNFT");
   const nftContract = await MyNFT.deploy(
     stringToBytes32("137"),
@@ -38,18 +57,6 @@ async function main() {
     ethers.ZeroAddress
   );
 
-  let signers = await ethers.getSigners();
-
-  const Payment = await ethers.getContractFactory("NFTPayment");
-  const paymentContract = await Payment.deploy(
-    await nexusManager.getAddress(),
-    deployer.address,
-    await nftContract.getAddress()
-  );
-
-  await nftContract.updateTargetContract(await paymentContract.getAddress());
-
-  console.log("Payment contract: ", await paymentContract.getAddress());
   console.log("NFT Contract: ", await nftContract.getAddress());
 }
 

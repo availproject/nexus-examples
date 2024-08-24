@@ -21,28 +21,19 @@ const erc20_json_1 = __importDefault(require("./erc20.json"));
 const zksyncDiamond_json_1 = __importDefault(require("./zksyncDiamond.json"));
 const storageManager_1 = require("./storageManager");
 const axios_1 = __importDefault(require("axios"));
-let nftAddress = "";
-let storageNFTChainAddress = "";
-let paymentTokenAddr = "";
-let paymentContractAddress = "";
-let diamondAddress = "";
-let paymentZKSyncProviderURL = "";
-let nftMintProviderURL = "";
-let nexusRPCUrl = "";
-let nexusAppID = "688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
-let amount = 1000000000000000000;
+const config_1 = require("./config");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         // 1. setup contracts across two chains
-        let providerPayment = new zksync_ethers_1.Provider(paymentZKSyncProviderURL);
-        let providerNFT = new ethers_1.default.JsonRpcProvider(nftMintProviderURL);
+        let providerPayment = new zksync_ethers_1.Provider(config_1.paymentZKSyncProviderURL);
+        let providerNFT = new ethers_1.default.JsonRpcProvider(config_1.nftMintProviderURL);
         let signerPayment = yield providerPayment.getSigner();
         let signerNFT = yield providerNFT.getSigner();
-        const stateManagerNFTChain = new ethers_1.default.Contract(nftAddress, nexusStateManager_json_1.default, providerNFT);
-        const storageNFTChain = new ethers_1.default.Contract(storageNFTChainAddress, nft_json_1.default, providerNFT);
-        const paymentContract = new ethers_1.default.Contract(paymentContractAddress, payment_json_1.default, providerPayment);
-        const paymentToken = new ethers_1.default.Contract(paymentTokenAddr, erc20_json_1.default, providerPayment);
-        const zkSyncDiamond = new ethers_1.default.Contract(diamondAddress, zksyncDiamond_json_1.default, providerPayment);
+        const stateManagerNFTChain = new ethers_1.default.Contract(config_1.stateManagerNFTChainAddr, nexusStateManager_json_1.default, providerNFT);
+        const storageNFTChain = new ethers_1.default.Contract(config_1.storageNFTChainAddress, nft_json_1.default, providerNFT);
+        const paymentContract = new ethers_1.default.Contract(config_1.paymentContractAddress, payment_json_1.default, providerPayment);
+        const paymentToken = new ethers_1.default.Contract(config_1.paymentTokenAddr, erc20_json_1.default, providerPayment);
+        const zkSyncDiamond = new ethers_1.default.Contract(config_1.diamondAddress, zksyncDiamond_json_1.default, providerPayment);
         // 2. send payment on one chain ( payment chain )
         yield sendPayment(paymentContract, paymentToken, signerPayment);
         let batchNumber = yield fetchUpdatesFromNexus();
@@ -56,9 +47,9 @@ function main() {
 }
 function fetchUpdatesFromNexus() {
     return __awaiter(this, void 0, void 0, function* () {
-        let response = yield axios_1.default.get(nexusRPCUrl, {
+        let response = yield axios_1.default.get(config_1.nexusRPCUrl, {
             params: {
-                app_account_id: nexusAppID,
+                app_account_id: config_1.nexusAppID,
             },
         });
         console.log(response.data);
@@ -67,9 +58,9 @@ function fetchUpdatesFromNexus() {
 }
 function sendPayment(paymentContract, paymentToken, signer) {
     return __awaiter(this, void 0, void 0, function* () {
-        paymentToken.mint(yield signer.getAddress(), 2 * amount);
-        paymentToken.approve(yield paymentContract.getAddress(), 2 * amount);
-        yield paymentContract.paymentWithoutFallback("0x01", 137, amount, yield paymentToken.getAddress());
+        paymentToken.mint(yield signer.getAddress(), 2 * config_1.amount);
+        paymentToken.approve(yield paymentContract.getAddress(), 2 * config_1.amount);
+        yield paymentContract.paymentWithoutFallback("0x01", 137, config_1.amount, yield paymentToken.getAddress());
     });
 }
 function getStorageProof(l1Provider, l2Provider, paymentContract, diamondContract, batchNumber) {

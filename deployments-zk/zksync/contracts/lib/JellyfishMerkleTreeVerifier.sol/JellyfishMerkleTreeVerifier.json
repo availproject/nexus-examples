@@ -75,8 +75,8 @@
       "salt": "0x0000000000000000000000000000000000000000000000000000000000000000",
       "deploymentType": "create",
       "factoryDeps": [],
-      "address": "0xe800C2a994D66C6D7D10D4D3eE73B1970B592c1B",
-      "txHash": "0x0a394c75b9ba22d8427bd14bbfd00d3aa9261a449f1d09c9306f62b5ea54c508"
+      "address": "0x0B0E86d6242201B163412F0239a18A0ea02b60CB",
+      "txHash": "0x29c172513b4c58a0006ba23555dd1a1e753362f10f1e0b7c5eb00f233cfd4d7a"
     }
   ]
 }

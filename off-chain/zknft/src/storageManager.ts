@@ -82,6 +82,7 @@ export class StorageProofProvider {
 
     try {
       // Account proofs don't exist in zkSync, so we're only using storage proofs
+
       const { storageProof: storageProofs } = await this.l2Provider.send(
         "zks_getProof",
         [account, storageKeys, batchNumber]
@@ -102,6 +103,7 @@ export class StorageProofProvider {
     batchNumber: number
   ): Promise<{ commitBatchInfo: CommitBatchInfo; commitment: string }> {
     const transactionData = await this.l1Provider.getTransaction(txHash);
+
     const [, , newBatch] = ZKSYNC_DIAMOND_INTERFACE.decodeFunctionData(
       "commitBatchesSharedBridge",
       transactionData!.data
@@ -170,7 +172,7 @@ export class StorageProofProvider {
     } else if (proveTxHash == undefined) {
       throw new Error(`Batch ${batchNumber} is not proved`);
     }
-
+    console.log("commit hash", commitTxHash);
     // Parse commit calldata from commit transaction
     const { commitBatchInfo, commitment } = await this.parseCommitTransaction(
       commitTxHash,
@@ -224,7 +226,7 @@ export class StorageProofProvider {
     address: string,
     storageKeys: Array<string>,
     batchNumber?: number
-  ): Promise<StorageProofBatch> {
+  ): Promise<RpcProof[]> {
     // If batch number is not provided, get the latest batch number
     if (batchNumber == undefined) {
       const latestBatchNumber = await this.l2Provider.getL1BatchNumber();
@@ -232,11 +234,11 @@ export class StorageProofProvider {
     }
     const proofs = await this.getL2Proof(address, storageKeys, batchNumber);
 
-    const metadata = await this.getStoredBatchInfo(batchNumber).then(
-      formatStoredBatchInfo
-    );
+    // const metadata = await this.getStoredBatchInfo(batchNumber).then(
+    //   formatStoredBatchInfo
+    // );
 
-    return { metadata, proofs };
+    return proofs;
   }
 
   /**
@@ -250,13 +252,10 @@ export class StorageProofProvider {
     address: string,
     storageKey: string,
     batchNumber?: number
-  ): Promise<StorageProof> {
-    const { metadata, proofs } = await this.getProofs(
-      address,
-      [storageKey],
-      batchNumber
-    );
-    return { metadata, ...proofs[0] };
+  ): Promise<RpcProof> {
+    const proofs = await this.getProofs(address, [storageKey], batchNumber);
+
+    return { ...proofs[0] };
   }
 }
 

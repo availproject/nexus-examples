@@ -14,9 +14,6 @@ contract MyNFT is ERC721 {
     StorageProofVerifier public storageProof;
     bytes32 immutable selfChainId;
     bytes32 immutable paymentChainID;
-    address TARGET_CONTRACT_ADDRESS;
-    bytes32 private constant EMPTY_TRIE_ROOT_HASH =
-        0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
 
     struct Message {
         bytes1 messageType;
@@ -32,11 +29,10 @@ contract MyNFT is ERC721 {
     }
 
     event Confirmation(uint256 id);
-    constructor(bytes32 _selfChainId, bytes32 _paymentChainID, INexusProofManager nexusManager, address targetContract, StorageProofVerifier _storageProof) ERC721("MyNFT", "MNFT") {
+    constructor(bytes32 _selfChainId, bytes32 _paymentChainID, INexusProofManager nexusManager,StorageProofVerifier _storageProof) ERC721("MyNFT", "MNFT") {
         nexus = nexusManager;
         selfChainId = _selfChainId;
         paymentChainID = _paymentChainID;
-        TARGET_CONTRACT_ADDRESS = targetContract;
         storageProof = _storageProof;
     }
 
@@ -56,13 +52,10 @@ contract MyNFT is ERC721 {
     }
 
 
-    function verifyPayment(StorageProof calldata storageSlotTrieProof) public { 
+    function verifyPayment(StorageProof calldata storageSlotTrieProof) view  public { 
         bool valid = storageProof.verify(storageSlotTrieProof);
         require(valid, "invalid storage proof");
     }
     
-    // TODO: make only owner
-    function updateTargetContract(address addr) public {
-        TARGET_CONTRACT_ADDRESS = addr;
-    }
+
 }

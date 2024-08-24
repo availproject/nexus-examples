@@ -8,6 +8,10 @@ import "../contracts/example/zknft/NftPayment.sol";
 import "../contracts/NexusProofManager.sol";
 import "../contracts/interfaces/INexusProofManager.sol";
 import "../contracts/example/mock/ERC20.sol";
+import "../contracts/verification/zksync/StorageProof.sol";
+
+import "../contracts/verification/zksync/SparseMerkleTree.sol";
+import "../contracts/verification/zksync/ZKSyncDiamond.sol";
 import "../contracts/example/mock/ERC721.sol";
 
 contract ZKNFTTest is Test  { 
@@ -25,9 +29,11 @@ contract ZKNFTTest is Test  {
         address bob = vm.addr(2);
         erc20 = new ERC20Token("Avail","Avail");
         proofManager = new NexusProofManager(bytes32(uint256(27)));
-        nftContract = new MyNFT(bytes32(uint256(uint160(137))), bytes32(uint256(uint160(1337))), INexusProofManager(address(proofManager)), address(0));
+        SparseMerkleTree smt = new SparseMerkleTree();
+        ZKSyncDiamond zksyncDiamond = new ZKSyncDiamond(INexusProofManager(address(proofManager)), bytes32(uint256(uint160(1337))));
+        StorageProofVerifier verifier = new StorageProofVerifier(IZkSyncDiamond(address(zksyncDiamond)), smt);
+        nftContract = new MyNFT(bytes32(uint256(uint160(137))), bytes32(uint256(uint160(1337))), INexusProofManager(address(proofManager)),verifier);
         paymentContract = new NFTPayment(INexusProofManager(address(proofManager)), bob, address(nftContract));
-        nftContract.updateTargetContract(address(paymentContract));
         paymentContract.updatePrice(address(erc20), mintAmount);
     }
 
