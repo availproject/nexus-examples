@@ -21,6 +21,7 @@ import {
   privateKeyGeth,
   privateKeyZkSync,
 } from "./config";
+import blake2 from "blakejs";
 
 async function main() {
   // 1. setup contracts across two chains
@@ -110,7 +111,6 @@ async function sendPayment(
     await paymentToken.getAddress()
   );
 
-  console.log("320fj203fi");
   setTimeout(() => {
     console.log("waiting");
   }, 100 * 60);
@@ -137,14 +137,13 @@ async function getStorageProof(
   // Concatenate key and slot
   const concatenated = ethers.concat([keyBytes32, slotBytes32]);
 
-  // Calculate keccak256 hash
-  const position = ethers.keccak256(concatenated);
+  const position = blake2.blake2sHex(concatenated);
 
   try {
     let proof = await storageProofProvider.getProof(
       await paymentContract.getAddress(),
       position,
-      7
+      14
     );
     console.log(proof);
     return proof;
