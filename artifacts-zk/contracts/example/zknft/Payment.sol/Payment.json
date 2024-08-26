@@ -75,9 +75,9 @@
     {
       "inputs": [
         {
-          "internalType": "bytes",
+          "internalType": "uint256",
           "name": "_key",
-          "type": "bytes"
+          "type": "uint256"
         }
       ],
       "name": "getStorageLocationForKey",

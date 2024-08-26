@@ -5,7 +5,7 @@ import nftContractAbi from "./nft.json";
 import paymentAbi from "./payment.json";
 import erc20Abi from "./erc20.json";
 import diamondAbi from "./zksyncDiamond.json";
-import { StorageProofProvider } from "./storageManager";
+import { RpcProof, StorageProofProvider } from "./storageManager";
 import axios from "axios";
 import {
   stateManagerNFTChainAddr,
@@ -21,13 +21,51 @@ import {
   privateKeyGeth,
   privateKeyZkSync,
 } from "./config";
-import blake2 from "blakejs";
+
+type NexusState = {
+  stateRoot: string;
+  blockHash: string;
+};
+
+type NexusInfo = {
+  info: NexusState;
+  chainStateNumber: number;
+  response: {
+    account: {
+      statement: string;
+      state_root: string;
+      start_nexus_hash: string;
+      last_proof_height: number;
+      height: number;
+    };
+    proof: string[];
+    value_hash: string;
+    nexus_header: {
+      parent_hash: string;
+      prev_state_root: string;
+      state_root: string;
+      avail_header_hash: string;
+      number: number;
+    };
+  };
+};
+
+type Message = {
+  messageType: string;
+  from: string;
+  data: string;
+  messageId: number;
+  chainId: number;
+};
 
 async function main() {
   // 1. setup contracts across two chains
 
   let providerPayment = L2Provider.getDefaultProvider(types.Network.Localhost);
   let providerNFT = new ethers.JsonRpcProvider(nftMintProviderURL);
+  if (!providerPayment) {
+    return;
+  }
   let signerPayment = new ethers.Wallet(privateKeyZkSync, providerPayment);
   let signerNFT = new ethers.Wallet(privateKeyGeth, providerNFT);
 
@@ -61,41 +99,71 @@ async function main() {
   );
 
   // 2. send payment on one chain ( payment chain )
-  await sendPayment(paymentContract, paymentToken, signerPayment);
-  let batchNumber = await fetchUpdatesFromNexus();
+  let message = await sendPayment(
+    providerPayment,
+    paymentContract,
+    paymentToken,
+    signerPayment
+  );
+  let nexus = await fetchUpdatesFromNexus();
+  if (!nexus) {
+    return;
+  }
+
   // 3. get storage proof on the given chain
-  await getStorageProof(
+  let proof = await getStorageProof(
     providerNFT,
     providerPayment,
     paymentContract,
     zkSyncDiamond,
-    batchNumber
+    nexus.chainStateNumber,
+    message.messageId
   );
+  console.log(message);
   // 4. update nexus state for the chain
-  await updateNexusState(stateManagerNFTChain);
+  await updateNexusState(stateManagerNFTChain, nexus);
+  if (!proof) {
+    return;
+  }
   // 5. provide the storage proof and get the nft on target chain
-  await mintNFT();
+  await mintNFT(
+    storageNFTChain,
+    proof,
+    signerNFT,
+    message,
+    nexus.chainStateNumber
+  );
 }
 
-async function fetchUpdatesFromNexus(): Promise<number> {
+async function fetchUpdatesFromNexus(): Promise<NexusInfo | undefined> {
+  await sleep();
+
   try {
-    let response = await axios.get(nexusRPCUrl + "/account", {
+    let response = await axios.get(nexusRPCUrl + "/account-hex", {
       params: {
         app_account_id: nexusAppID,
       },
     });
 
-    return response.data.account.height;
+    return {
+      chainStateNumber: response.data.account.height,
+      info: {
+        stateRoot: "0x" + response.data.nexus_header.state_root,
+        blockHash: "0x" + response.data.nexus_header.state_root, // fix
+      },
+      response: response.data,
+    };
   } catch (e) {
     console.log(e);
-    return 0;
+    return undefined;
   }
 }
 async function sendPayment(
+  l2Provider: L2Provider,
   paymentContract: ethers.Contract,
   paymentToken: ethers.Contract,
   signer: ethers.Wallet
-) {
+): Promise<Message> {
   await paymentContract.updatePrice(
     await paymentToken.getAddress(),
     amount / BigInt(2)
@@ -111,18 +179,40 @@ async function sendPayment(
     await paymentToken.getAddress()
   );
 
-  // Wait for the transaction to be mined
   const receipt = await tx.wait();
-  console.log(receipt);
-  // Log all the events
 
-  console.log("checing hash");
-  const val = await paymentContract.getValueFromId(2);
+  const txDetails = await l2Provider.getTransactionReceipt(receipt.hash);
+
+  const preImageEvents = txDetails.logs.filter(
+    (log) =>
+      log.topics[0] ===
+      ethers.id("PreImage(bytes1,bytes32,bytes,uint256,uint256)")
+  );
+
+  const parsedEvents = preImageEvents.map((event) => {
+    const [messageType, from, data, messageId, chainId] =
+      ethers.AbiCoder.defaultAbiCoder().decode(
+        ["bytes1", "bytes32", "bytes", "uint256", "uint256"],
+        event.data
+      );
+
+    return {
+      messageType,
+      from,
+      data,
+      messageId: messageId.toString(),
+      chainId: chainId.toString(),
+    };
+  });
+
+  const val = await paymentContract.getValueFromId(parsedEvents[0].messageId);
   console.log(val);
 
-  setTimeout(() => {
-    console.log("waiting");
-  }, 100 * 60);
+  return parsedEvents[0];
+}
+
+function sleep() {
+  return new Promise((resolve) => setTimeout(resolve, 30 * 1000));
 }
 
 async function getStorageProof(
@@ -130,8 +220,9 @@ async function getStorageProof(
   l2Provider: L2Provider | undefined,
   paymentContract: ethers.Contract,
   diamondContract: ethers.Contract,
-  batchNumber: number
-) {
+  batchNumber: number,
+  id: number
+): Promise<RpcProof | undefined> {
   if (l2Provider) {
     let storageProofProvider = new StorageProofProvider(
       new ethers.JsonRpcProvider("http://127.0.0.1:8545"),
@@ -139,34 +230,71 @@ async function getStorageProof(
       "0x1d2b23271e49351d9aee701b1b33bd1d03136aae"
     );
 
-    const slot = 0;
-    const key = 1;
-    const slotBytes32 = ethers.zeroPadValue(ethers.toBeHex(slot), 32);
-    const keyBytes32 = ethers.zeroPadValue(ethers.toBeHex(key), 32);
-
-    // Concatenate key and slot
-    const concatenated = ethers.concat([keyBytes32, slotBytes32]);
-
-    const position = ethers.keccak256(concatenated);
+    let storageLocation = await paymentContract.getStorageLocationForKey(id);
 
     try {
       let proof = await storageProofProvider.getProof(
         await paymentContract.getAddress(),
-        blake2.blake2sHex(concatenated),
-        14
+        storageLocation,
+        batchNumber
       );
-      console.log(proof);
+
       return proof;
     } catch (e) {
       console.log(e);
     }
   } else {
-    return null;
+    return undefined;
   }
 }
 
-async function updateNexusState(stateManager: ethers.Contract) {}
+async function updateNexusState(
+  stateManager: ethers.Contract,
+  nexus: NexusInfo
+) {
+  console.log("Updating nexus state on nft chain");
+  console.log(
+    nexus.info,
+    nexus.chainStateNumber,
+    nexus.response.proof,
+    "0x" + nexusAppID,
+    {
+      statementDigest: "0x" + nexus.response.account.statement,
+      stateRoot: "0x" + nexus.response.account.state_root,
+      startNexusHash: "0x" + nexus.response.account.start_nexus_hash,
+      lastProofHeight: nexus.response.account.last_proof_height,
+      height: nexus.response.account.height,
+    }
+  );
+  await stateManager.updateNexusBlock(nexus.chainStateNumber, nexus.info);
+  console.log("failing after this");
+  await stateManager.updateChainState(
+    nexus.chainStateNumber,
+    nexus.response.proof,
+    "0x" + nexusAppID,
+    {
+      statementDigest: "0x" + nexus.response.account.statement,
+      stateRoot: "0x" + nexus.response.account.state_root,
+      startNexusHash: "0x" + nexus.response.account.start_nexus_hash,
+      lastProofHeight: nexus.response.account.last_proof_height,
+      height: nexus.response.account.height,
+    },
+    {
+      gasLimit: 100000000000,
+    }
+  );
+  console.log("Successfully completed state manager updates");
+}
 
-async function mintNFT() {}
+async function mintNFT(
+  nftContract: ethers.Contract,
+  proof: RpcProof,
+  signer: ethers.Wallet,
+  message: Message,
+  batchNumber: number
+) {
+  console.log(signer.address, message, { ...proof, batchNumber });
+  await nftContract.mintNFT(signer.address, message, { ...proof, batchNumber });
+}
 
 main();

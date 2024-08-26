@@ -36,7 +36,7 @@ abstract contract Payment {
         return idToHash[key];
      }
 
-    function getStorageLocationForKey(bytes memory _key) public pure returns(bytes32) {
+    function getStorageLocationForKey(uint256 _key) public pure returns(bytes32) {
         return keccak256(abi.encode(_key, NAMES_MAPPING_SLOT));
     }   
 

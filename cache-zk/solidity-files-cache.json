@@ -4155,8 +4155,8 @@
       ]
     },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/zknft/Payment.sol": {
-      "lastModificationDate": 1724665198811,
-      "contentHash": "169c7f11be78c10f68782911ce5408eb",
+      "lastModificationDate": 1724667710406,
+      "contentHash": "326f9fc19858b0b5f87184fff094ff79",
       "sourceName": "contracts/example/zknft/Payment.sol",
       "solcConfig": {
         "version": "0.8.20",
@@ -4551,8 +4551,8 @@
       ]
     },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/verification/zksync/StorageProof.sol": {
-      "lastModificationDate": 1724246697368,
-      "contentHash": "d219eebc7cacf6d8115daf49b3fddb42",
+      "lastModificationDate": 1724674083352,
+      "contentHash": "758db399aca6b1e102536fca696eee80",
       "sourceName": "contracts/verification/zksync/StorageProof.sol",
       "solcConfig": {
         "version": "0.8.20",

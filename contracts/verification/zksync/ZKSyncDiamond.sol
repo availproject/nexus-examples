@@ -1,6 +1,7 @@
 pragma solidity ^0.8.13;
 
 import "../../interfaces/INexusProofManager.sol";
+import "forge-std/console.sol";
 
 contract ZKSyncDiamond {
 

@@ -5,28 +5,29 @@ export const stateManagerNFTChainAddr =
 export const storageNFTChainAddress =
   "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d";
 export const diamondAddress = "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE";
-export const paymentTokenAddr = "0x3F015117432f4E2e970D3B6b918F3B92D17eFC88";
+export const paymentTokenAddr = "0x9809186b8B8593DBbA4f73e050Ad18fDFF4d090a";
 export const paymentContractAddress =
-  "0x9C8475A3f11720F016639779BEf4BD5eA214EF63";
+  "0x6bc15F6C8abD245812C7eC650D4586b9B52Ae546";
 
 export const paymentZKSyncProviderURL = "http://0.0.0.0:3050";
 export const nftMintProviderURL = "http://0.0.0.0:3100";
 export const nexusRPCUrl = "http://127.0.0.1:7000";
 export const nexusAppID =
-  "ad57366865126e55649ecb23ae1d48887544976efea46a48eb5d85a6eeb4d306";
+  "3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 export const privateKeyZkSync =
-  "0xe338cadae0f665139a7a4f2b846b91e188a2d100dcd34f58771c903cd2b08cd1";
+  "0xc76bee37a768a74d893d86041a6339bab150679c14c273a33afff53874f87b42";
 export const privateKeyGeth =
   "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
 
 export const amount = ethers.toBigInt("1000000000000000000");
 
 // zksync
-// JellyfishMerkleTreeVerifier deployed to 0x2D60d2a35Dc1dD64b2E0a8eCB06887728a869185
-// NexusProofManager deployed to 0x58424DE0E3C21476934E8Cf165258a06372B1A41
-// Avail Token deployed to 0x3F015117432f4E2e970D3B6b918F3B92D17eFC88
-// Payment contract: 0x9C8475A3f11720F016639779BEf4BD5eA214EF63
-// Avail Token: 0x3F015117432f4E2e970D3B6b918F3B92D17eFC88
+// JellyfishMerkleTreeVerifier deployed to 0xfc1204903651B7904cE0788F64DfaABaEC1c82Ca
+// NexusProofManager deployed to 0xe800C2a994D66C6D7D10D4D3eE73B1970B592c1B
+// Avail Token deployed to 0x9809186b8B8593DBbA4f73e050Ad18fDFF4d090a
+// Payment contract deployed to 0x6bc15F6C8abD245812C7eC650D4586b9B52Ae546
+// Payment contract: 0x6bc15F6C8abD245812C7eC650D4586b9B52Ae546
+// Avail Token: 0x9809186b8B8593DBbA4f73e050Ad18fDFF4d090a
 
 // geth
 // Deploying contracts with the account: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266

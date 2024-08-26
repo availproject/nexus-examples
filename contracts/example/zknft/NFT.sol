@@ -4,6 +4,7 @@ pragma solidity ^0.8.13;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
 import {StorageProofVerifier, StorageProof} from "../../verification/zksync/StorageProof.sol";
+import "forge-std/console.sol";
 
 contract MyNFT is ERC721 {
     mapping(uint256 => bytes32) confirmationReceipts;
@@ -37,12 +38,14 @@ contract MyNFT is ERC721 {
     }
 
     function mintNFT(address recipient, Message calldata message, StorageProof calldata storageSlotTrieProof) public returns (uint256) {
-        require(usedMessageid[message.messageId], "Message id already digested");
+        require(!usedMessageid[message.messageId], "Message id already digested");
         verifyPayment(storageSlotTrieProof);
-        (address to,,) = abi.decode(message.data, (address, uint256, uint256));
+        (address to, ,) = abi.decode(message.data, (address, uint256, uint256));
         _tokenIds += 1;
+
         uint256 newItemId = _tokenIds;
         _mint(recipient, newItemId);
+
         ConfirmationReciept memory receipt = ConfirmationReciept(1, message.messageId, to);
         bytes32 hashedReceipt = keccak256(abi.encode(receipt));
         confirmationReceipts[newItemId] = hashedReceipt;

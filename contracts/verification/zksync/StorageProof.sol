@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
+import "forge-std/console.sol";
 import { SparseMerkleTree, TreeEntry } from "./SparseMerkleTree.sol";
 
 /// @notice Interface for the zkSync's contract
@@ -29,22 +30,10 @@ struct StoredBatchInfo {
     bytes32 commitment;
 }
 
-/// @notice Metadata of the batch provided by the offchain resolver
-/// @dev batchHash is omitted because it will be calculated from the proof
-struct BatchMetadata {
-    uint64 batchNumber;
-    uint64 indexRepeatedStorageChanges;
-    uint256 numberOfLayer1Txs;
-    bytes32 priorityOperationsHash;
-    bytes32 l2LogsTreeRoot;
-    uint256 timestamp;
-    bytes32 commitment;
-}
 
 /// @notice Storage proof that proves a storage key-value pair is included in the batch
 struct StorageProof {
-    // Metadata of the batch
-    BatchMetadata metadata;
+    uint64 batchNumber;
     // Account and key-value pair of its storage
     address account;
     uint256 key;
@@ -75,9 +64,10 @@ contract StorageProofVerifier {
             }), 
             _proof.account
         );
-
-        bytes32 l1BatchHash = zksyncDiamondAddress.storedBatchHash(_proof.metadata.batchNumber);
-
+        console.log(_proof.batchNumber);
+        bytes32 l1BatchHash = zksyncDiamondAddress.storedBatchHash(_proof.batchNumber);
+        console.logBytes32(l1BatchHash);
+        console.logBytes32(l2BatchHash);
         valid = l2BatchHash == l1BatchHash;
     }
 }

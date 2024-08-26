@@ -2,7 +2,7 @@ pragma solidity ^0.8.13;
 
 
 import {JellyfishMerkleTreeVerifier} from "./lib/JellyfishMerkleTreeVerifier.sol";
-
+import "forge-std/console.sol";
 contract NexusProofManager  {
     uint256 public latestNexusBlockNumber = 0;
 
@@ -55,7 +55,9 @@ contract NexusProofManager  {
     }
 
 
-    function verifyRollupState(bytes32 root, JellyfishMerkleTreeVerifier.Proof memory proof, JellyfishMerkleTreeVerifier.Leaf memory leaf) pure public {
+    function verifyRollupState(bytes32 root, JellyfishMerkleTreeVerifier.Proof memory proof, JellyfishMerkleTreeVerifier.Leaf memory leaf) view public {
+        console.logBytes32(leaf.addr);
+        console.logBytes32(leaf.valueHash);
         bool verify = JellyfishMerkleTreeVerifier.verifyProof(root, leaf, proof);
         require(verify,"Invalid leaf against nexus state root");
     }

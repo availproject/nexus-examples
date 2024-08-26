@@ -17,13 +17,8 @@
         "type": "address"
       },
       {
-        "internalType": "address",
-        "name": "targetContract",
-        "type": "address"
-      },
-      {
         "internalType": "contract StorageProofVerifier",
-        "name": "verifier",
+        "name": "_storageProof",
         "type": "address"
       }
     ],
@@ -343,46 +338,9 @@
       {
         "components": [
           {
-            "components": [
-              {
-                "internalType": "uint64",
-                "name": "batchNumber",
-                "type": "uint64"
-              },
-              {
-                "internalType": "uint64",
-                "name": "indexRepeatedStorageChanges",
-                "type": "uint64"
-              },
-              {
-                "internalType": "uint256",
-                "name": "numberOfLayer1Txs",
-                "type": "uint256"
-              },
-              {
-                "internalType": "bytes32",
-                "name": "priorityOperationsHash",
-                "type": "bytes32"
-              },
-              {
-                "internalType": "bytes32",
-                "name": "l2LogsTreeRoot",
-                "type": "bytes32"
-              },
-              {
-                "internalType": "uint256",
-                "name": "timestamp",
-                "type": "uint256"
-              },
-              {
-                "internalType": "bytes32",
-                "name": "commitment",
-                "type": "bytes32"
-              }
-            ],
-            "internalType": "struct BatchMetadata",
-            "name": "metadata",
-            "type": "tuple"
+            "internalType": "uint64",
+            "name": "batchNumber",
+            "type": "uint64"
           },
           {
             "internalType": "address",
@@ -472,19 +430,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "proofVerifier",
-    "outputs": [
-      {
-        "internalType": "contract StorageProofVerifier",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -551,6 +496,19 @@
     "name": "setApprovalForAll",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "storageProof",
+    "outputs": [
+      {
+        "internalType": "contract StorageProofVerifier",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -630,61 +588,11 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "addr",
-        "type": "address"
-      }
-    ],
-    "name": "updateTargetContract",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "components": [
           {
-            "components": [
-              {
-                "internalType": "uint64",
-                "name": "batchNumber",
-                "type": "uint64"
-              },
-              {
-                "internalType": "uint64",
-                "name": "indexRepeatedStorageChanges",
-                "type": "uint64"
-              },
-              {
-                "internalType": "uint256",
-                "name": "numberOfLayer1Txs",
-                "type": "uint256"
-              },
-              {
-                "internalType": "bytes32",
-                "name": "priorityOperationsHash",
-                "type": "bytes32"
-              },
-              {
-                "internalType": "bytes32",
-                "name": "l2LogsTreeRoot",
-                "type": "bytes32"
-              },
-              {
-                "internalType": "uint256",
-                "name": "timestamp",
-                "type": "uint256"
-              },
-              {
-                "internalType": "bytes32",
-                "name": "commitment",
-                "type": "bytes32"
-              }
-            ],
-            "internalType": "struct BatchMetadata",
-            "name": "metadata",
-            "type": "tuple"
+            "internalType": "uint64",
+            "name": "batchNumber",
+            "type": "uint64"
           },
           {
             "internalType": "address",
@@ -713,7 +621,7 @@
           }
         ],
         "internalType": "struct StorageProof",
-        "name": "storageProof",
+        "name": "storageSlotTrieProof",
         "type": "tuple"
       }
     ],
