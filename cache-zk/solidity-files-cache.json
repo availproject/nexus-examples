@@ -4155,8 +4155,8 @@
       ]
     },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/zknft/Payment.sol": {
-      "lastModificationDate": 1724097162175,
-      "contentHash": "51ab41dac7c35f8764217b8d1249d740",
+      "lastModificationDate": 1724665198811,
+      "contentHash": "169c7f11be78c10f68782911ce5408eb",
       "sourceName": "contracts/example/zknft/Payment.sol",
       "solcConfig": {
         "version": "0.8.20",

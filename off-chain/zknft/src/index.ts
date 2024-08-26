@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { Provider as L2Provider } from "zksync-ethers";
+import { Provider as L2Provider, types } from "zksync-ethers";
 import nexusAbi from "./nexusStateManager.json";
 import nftContractAbi from "./nft.json";
 import paymentAbi from "./payment.json";
@@ -26,7 +26,7 @@ import blake2 from "blakejs";
 async function main() {
   // 1. setup contracts across two chains
 
-  let providerPayment = new L2Provider(paymentZKSyncProviderURL);
+  let providerPayment = L2Provider.getDefaultProvider(types.Network.Localhost);
   let providerNFT = new ethers.JsonRpcProvider(nftMintProviderURL);
   let signerPayment = new ethers.Wallet(privateKeyZkSync, providerPayment);
   let signerNFT = new ethers.Wallet(privateKeyGeth, providerNFT);
@@ -104,12 +104,21 @@ async function sendPayment(
   await paymentToken.mint(await signer.getAddress(), amount);
   await paymentToken.approve(await paymentContract.getAddress(), amount);
 
-  await paymentContract.paymentWithoutFallback(
+  const tx = await paymentContract.paymentWithoutFallback(
     "0x01",
     1337,
     amount,
     await paymentToken.getAddress()
   );
+
+  // Wait for the transaction to be mined
+  const receipt = await tx.wait();
+  console.log(receipt);
+  // Log all the events
+
+  console.log("checing hash");
+  const val = await paymentContract.getValueFromId(2);
+  console.log(val);
 
   setTimeout(() => {
     console.log("waiting");
@@ -118,37 +127,41 @@ async function sendPayment(
 
 async function getStorageProof(
   l1Provider: ethers.Provider,
-  l2Provider: L2Provider,
+  l2Provider: L2Provider | undefined,
   paymentContract: ethers.Contract,
   diamondContract: ethers.Contract,
   batchNumber: number
 ) {
-  let storageProofProvider = new StorageProofProvider(
-    new ethers.JsonRpcProvider("http://127.0.0.1:8545"),
-    l2Provider,
-    "0x1d2b23271e49351d9aee701b1b33bd1d03136aae"
-  );
-
-  const slot = 0;
-  const key = 1;
-  const slotBytes32 = ethers.zeroPadValue(ethers.toBeHex(slot), 32);
-  const keyBytes32 = ethers.zeroPadValue(ethers.toBeHex(key), 32);
-
-  // Concatenate key and slot
-  const concatenated = ethers.concat([keyBytes32, slotBytes32]);
-
-  const position = blake2.blake2sHex(concatenated);
-
-  try {
-    let proof = await storageProofProvider.getProof(
-      await paymentContract.getAddress(),
-      position,
-      14
+  if (l2Provider) {
+    let storageProofProvider = new StorageProofProvider(
+      new ethers.JsonRpcProvider("http://127.0.0.1:8545"),
+      l2Provider,
+      "0x1d2b23271e49351d9aee701b1b33bd1d03136aae"
     );
-    console.log(proof);
-    return proof;
-  } catch (e) {
-    console.log(e);
+
+    const slot = 0;
+    const key = 1;
+    const slotBytes32 = ethers.zeroPadValue(ethers.toBeHex(slot), 32);
+    const keyBytes32 = ethers.zeroPadValue(ethers.toBeHex(key), 32);
+
+    // Concatenate key and slot
+    const concatenated = ethers.concat([keyBytes32, slotBytes32]);
+
+    const position = ethers.keccak256(concatenated);
+
+    try {
+      let proof = await storageProofProvider.getProof(
+        await paymentContract.getAddress(),
+        blake2.blake2sHex(concatenated),
+        14
+      );
+      console.log(proof);
+      return proof;
+    } catch (e) {
+      console.log(e);
+    }
+  } else {
+    return null;
   }
 }
 

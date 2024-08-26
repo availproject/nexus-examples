@@ -2,6 +2,257 @@
   "version": "3.4",
   "log": [
     {
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/zknft/NftPayment.sol:NFTPayment": {
+        "src": "contracts/example/zknft/NftPayment.sol:7",
+        "version": {
+          "withMetadata": "ec7896722ba2663fc01c7a519ed2875944829c3d4eb001a815364fbddb0da5ee",
+          "withoutMetadata": "ec7896722ba2663fc01c7a519ed2875944829c3d4eb001a815364fbddb0da5ee",
+          "linkedWithoutMetadata": "ec7896722ba2663fc01c7a519ed2875944829c3d4eb001a815364fbddb0da5ee"
+        },
+        "inherit": [
+          "contracts/example/zknft/Payment.sol:Payment"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address,address)",
+          "paymentWithoutFallback(bytes1,uint256,uint256,address)",
+          "paymentWithFallback(bytes1,uint256,uint256,address)",
+          "claimPayment(uint256)",
+          "verifyPayment(bytes32,bytes,bytes32,bytes)",
+          "updatePrice(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NFTPayment",
+            "src": "contracts/example/zknft/NftPayment.sol:34"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "CLAIM_TIME",
+            "src": "contracts/example/zknft/NftPayment.sol:10"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "FIXED_PAYOUT_ADDRESS",
+            "src": "contracts/example/zknft/NftPayment.sol:11"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "TARGET_CONTRACT_ADDRESS",
+            "src": "contracts/example/zknft/NftPayment.sol:12"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "claimCounter",
+            "src": "contracts/example/zknft/NftPayment.sol:13"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "idToHash",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "Payment",
+              "src": "contracts/example/zknft/Payment.sol:6"
+            },
+            {
+              "label": "nexus",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_contract(INexusProofManager)685",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:8"
+            },
+            {
+              "label": "CLAIM_TIME",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:10"
+            },
+            {
+              "label": "claimCounter",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_uint256",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:13"
+            },
+            {
+              "label": "payoutPrice",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:19"
+            },
+            {
+              "label": "pendingPayouts",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_array(t_struct(PendingPayment)120_storage)dyn_storage",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:20"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_struct(PendingPayment)120_storage)dyn_storage": {
+              "label": "struct NFTPayment.PendingPayment[]",
+              "numberOfBytes": "32"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(INexusProofManager)685": {
+              "label": "contract INexusProofManager",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_struct(PendingPayment)120_storage": {
+              "label": "struct NFTPayment.PendingPayment",
+              "members": [
+                {
+                  "label": "to",
+                  "type": "t_address",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "amount",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "1"
+                },
+                {
+                  "label": "tokenAddress",
+                  "type": "t_address",
+                  "offset": 0,
+                  "slot": "2"
+                },
+                {
+                  "label": "timestamp",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "3"
+                }
+              ],
+              "numberOfBytes": "128"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/zknft/Payment.sol:Payment": {
+        "src": "contracts/example/zknft/Payment.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getValueFromId(uint256)",
+          "getStorageLocationForKey(bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "label": "idToHash",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "Payment",
+              "src": "contracts/example/zknft/Payment.sol:6"
+            }
+          ],
+          "types": {
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/interfaces/INexusProofManager.sol:INexusProofManager": {
+        "src": "contracts/interfaces/INexusProofManager.sol:5",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getStorageRoot(bytes32,uint256,address,bytes)",
+          "getChainState(uint256,bytes32)",
+          "verifyAccount(bytes32,bytes,address)",
+          "verifyStorage(bytes32,bytes32,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      }
+    },
+    {
       "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC1155Errors": {
         "src": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:113",
         "inherit": [],
