@@ -119,7 +119,7 @@ async function main() {
     nexus.chainStateNumber,
     message.messageId
   );
-  console.log(message);
+
   // 4. update nexus state for the chain
   await updateNexusState(stateManagerNFTChain, nexus);
   if (!proof) {
@@ -127,6 +127,7 @@ async function main() {
   }
   // 5. provide the storage proof and get the nft on target chain
   await mintNFT(
+    providerNFT,
     storageNFTChain,
     proof,
     signerNFT,
@@ -164,51 +165,55 @@ async function sendPayment(
   paymentToken: ethers.Contract,
   signer: ethers.Wallet
 ): Promise<Message> {
-  await paymentContract.updatePrice(
-    await paymentToken.getAddress(),
-    amount / BigInt(2)
-  );
+  try {
+    await paymentContract.updatePrice(
+      await paymentToken.getAddress(),
+      amount / BigInt(2)
+    );
 
-  await paymentToken.mint(await signer.getAddress(), amount);
-  await paymentToken.approve(await paymentContract.getAddress(), amount);
+    await paymentToken.mint(await signer.getAddress(), amount);
+    await paymentToken.approve(await paymentContract.getAddress(), amount);
 
-  const tx = await paymentContract.paymentWithoutFallback(
-    "0x01",
-    1337,
-    amount,
-    await paymentToken.getAddress()
-  );
+    const tx = await paymentContract.paymentWithoutFallback(
+      "0x01",
+      1337,
+      amount,
+      await paymentToken.getAddress()
+    );
 
-  const receipt = await tx.wait();
+    const receipt = await tx.wait();
 
-  const txDetails = await l2Provider.getTransactionReceipt(receipt.hash);
+    const txDetails = await l2Provider.getTransactionReceipt(receipt.hash);
 
-  const preImageEvents = txDetails.logs.filter(
-    (log) =>
-      log.topics[0] ===
-      ethers.id("PreImage(bytes1,bytes32,bytes,uint256,uint256)")
-  );
+    const preImageEvents = txDetails.logs.filter(
+      (log) =>
+        log.topics[0] ===
+        ethers.id("PreImage(bytes1,bytes32,bytes,uint256,uint256)")
+    );
 
-  const parsedEvents = preImageEvents.map((event) => {
-    const [messageType, from, data, messageId, chainId] =
-      ethers.AbiCoder.defaultAbiCoder().decode(
-        ["bytes1", "bytes32", "bytes", "uint256", "uint256"],
-        event.data
-      );
+    const parsedEvents = preImageEvents.map((event) => {
+      const [messageType, from, data, messageId, chainId] =
+        ethers.AbiCoder.defaultAbiCoder().decode(
+          ["bytes1", "bytes32", "bytes", "uint256", "uint256"],
+          event.data
+        );
 
-    return {
-      messageType,
-      from,
-      data,
-      messageId: messageId.toString(),
-      chainId: chainId.toString(),
-    };
-  });
+      return {
+        messageType,
+        from,
+        data,
+        messageId: messageId.toString(),
+        chainId: chainId.toString(),
+      };
+    });
+    const val = await paymentContract.getValueFromId(parsedEvents[0].messageId);
+    console.log(val);
 
-  const val = await paymentContract.getValueFromId(parsedEvents[0].messageId);
-  console.log(val);
-
-  return parsedEvents[0];
+    return parsedEvents[0];
+  } catch (e) {
+    console.error("error", e);
+    process.exit(1);
+  }
 }
 
 function sleep() {
@@ -231,7 +236,7 @@ async function getStorageProof(
     );
 
     let storageLocation = await paymentContract.getStorageLocationForKey(id);
-
+    console.log(batchNumber, id);
     try {
       let proof = await storageProofProvider.getProof(
         await paymentContract.getAddress(),
@@ -267,7 +272,8 @@ async function updateNexusState(
     }
   );
   await stateManager.updateNexusBlock(nexus.chainStateNumber, nexus.info);
-  console.log("failing after this");
+
+  await new Promise((resolve) => setTimeout(resolve, 5000));
   await stateManager.updateChainState(
     nexus.chainStateNumber,
     nexus.response.proof,
@@ -278,15 +284,16 @@ async function updateNexusState(
       startNexusHash: "0x" + nexus.response.account.start_nexus_hash,
       lastProofHeight: nexus.response.account.last_proof_height,
       height: nexus.response.account.height,
-    },
-    {
-      gasLimit: 100000000000,
     }
   );
+
+  const stateInfo = await stateManager.getChainState(0, "0x" + nexusAppID);
+  console.log("state info", stateInfo);
   console.log("Successfully completed state manager updates");
 }
 
 async function mintNFT(
+  provider: ethers.Provider,
   nftContract: ethers.Contract,
   proof: RpcProof,
   signer: ethers.Wallet,
@@ -294,7 +301,47 @@ async function mintNFT(
   batchNumber: number
 ) {
   console.log(signer.address, message, { ...proof, batchNumber });
-  await nftContract.mintNFT(signer.address, message, { ...proof, batchNumber });
+  try {
+    const nonce = await provider.getTransactionCount(signer.address, "latest");
+    let tx = await nftContract.mintNFT(
+      signer.address,
+      message,
+      {
+        ...proof,
+        batchNumber,
+      },
+      { nonce }
+    );
+
+    let receipt = await tx.wait();
+
+    const txDetails = await provider.getTransactionReceipt(receipt.hash);
+    if (!txDetails) {
+      return;
+    }
+    const transferEvents = txDetails.logs.filter((log) => {
+      return log.topics[0] === ethers.id("Transfer(address,address,uint256)");
+    });
+
+    // Decode each Transfer event
+    const decodedEvents = transferEvents.map((log) => {
+      return {
+        from: ethers.AbiCoder.defaultAbiCoder().decode(
+          ["address"],
+          log.topics[1]
+        )[0],
+        to: ethers.AbiCoder.defaultAbiCoder().decode(
+          ["address"],
+          log.topics[2]
+        )[0],
+        tokenId: ethers.toBigInt(log.topics[3]).toString(),
+      };
+    });
+
+    console.log(decodedEvents);
+  } catch (error) {
+    console.error("Transaction failed:", error);
+  }
 }
 
 main();

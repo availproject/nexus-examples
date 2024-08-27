@@ -38,8 +38,10 @@ contract MyNFT is ERC721 {
     }
 
     function mintNFT(address recipient, Message calldata message, StorageProof calldata storageSlotTrieProof) public returns (uint256) {
+ 
         require(!usedMessageid[message.messageId], "Message id already digested");
         verifyPayment(storageSlotTrieProof);
+       
         (address to, ,) = abi.decode(message.data, (address, uint256, uint256));
         _tokenIds += 1;
 

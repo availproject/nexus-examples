@@ -1,8 +1,6 @@
 import { ethers } from "hardhat";
 import { ethers as eth } from "ethers";
-
-let app_id =
-  "0x688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
+import { nexusAppID } from "../off-chain/zknft/src/config";
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with the account:", deployer.address);
@@ -18,7 +16,7 @@ async function main() {
       },
     }
   );
-  const nexusManager = await NexusProofManager.deploy(app_id);
+  const nexusManager = await NexusProofManager.deploy("0x" + nexusAppID);
 
   console.log(
     "NexusProofManager deployed to:",
@@ -33,7 +31,7 @@ async function main() {
   const ZKSyncDiamond = await ethers.getContractFactory("ZKSyncDiamond");
   const zksyncdiamond = await ZKSyncDiamond.deploy(
     await nexusManager.getAddress(),
-    stringToBytes32("1337")
+    "0x" + nexusAppID
   );
   const SparseMerkleTree = await ethers.getContractFactory("SparseMerkleTree");
   const sparseMerkleTree = await SparseMerkleTree.deploy();
@@ -54,7 +52,7 @@ async function main() {
     stringToBytes32("137"),
     stringToBytes32("1337"),
     await nexusManager.getAddress(),
-    ethers.ZeroAddress
+    await storageProofVerifier.getAddress()
   );
 
   console.log("NFT Contract: ", await nftContract.getAddress());

@@ -1,9 +1,9 @@
 import { ethers } from "ethers";
 
 export const stateManagerNFTChainAddr =
-  "0x0B306BF915C4d645ff596e518fAf3F9669b97016";
+  "0x7bc06c482DEAd17c0e297aFbC32f6e63d3846650";
 export const storageNFTChainAddress =
-  "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d";
+  "0xB0D4afd8879eD9F52b28595d31B441D079B2Ca07";
 export const diamondAddress = "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE";
 export const paymentTokenAddr = "0x9809186b8B8593DBbA4f73e050Ad18fDFF4d090a";
 export const paymentContractAddress =
@@ -31,8 +31,8 @@ export const amount = ethers.toBigInt("1000000000000000000");
 
 // geth
 // Deploying contracts with the account: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
-// NexusProofManager deployed to: 0x0B306BF915C4d645ff596e518fAf3F9669b97016
-// Avail Token: 0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1
-// Sparse Merkle Tree:  0x68B1D87F95878fE05B998F19b66F4baba5De1aed
-// ZKSync Diamond Contract:  0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE
-// NFT Contract:  0xc6e7DF5E7b4f2A278906862b61205850344D4e7d
+// NexusProofManager deployed to: 0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82
+// Avail Token: 0x9A676e781A523b5d0C0e43731313A708CB607508
+// Sparse Merkle Tree:  0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1
+// ZKSync Diamond Contract:  0x0B306BF915C4d645ff596e518fAf3F9669b97016
+// NFT Contract:  0x68B1D87F95878fE05B998F19b66F4baba5De1aed
