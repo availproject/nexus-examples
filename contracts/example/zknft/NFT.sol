@@ -1,34 +1,66 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
+import {StorageProofVerifier, StorageProof} from "../../verification/zksync/StorageProof.sol";
+import "forge-std/console.sol";
 
 contract MyNFT is ERC721 {
+    mapping(uint256 => bytes32) confirmationReceipts;
+    mapping(uint256 => bool) usedMessageid;
+
     uint256 private _tokenIds;
     INexusProofManager public nexus;
-    uint256 immutable selfChainId;
+    StorageProofVerifier public storageProof;
+    bytes32 immutable selfChainId;
     bytes32 immutable paymentChainID;
-    bytes32 private constant EMPTY_TRIE_ROOT_HASH =
-        0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
-    constructor(uint256 _selfChainId, bytes32 _paymentChainID, INexusProofManager nexusManager) ERC721("MyNFT", "MNFT") {
+
+    struct Message {
+        bytes1 messageType;
+        bytes32 from;
+        bytes data;
+        uint256 messageId;
+        uint256 chainId;
+    }
+    struct ConfirmationReciept { 
+        uint256 numberOfNFTs;
+        uint256 messageId;
+        address to;
+    }
+
+    event Confirmation(uint256 id);
+    constructor(bytes32 _selfChainId, bytes32 _paymentChainID, INexusProofManager nexusManager,StorageProofVerifier _storageProof) ERC721("MyNFT", "MNFT") {
         nexus = nexusManager;
         selfChainId = _selfChainId;
         paymentChainID = _paymentChainID;
+        storageProof = _storageProof;
     }
 
-    function mintNFT(address recipient, uint256 paymentChainBlockNumber,bytes calldata accountTrieProof,bytes32 slot,bytes calldata storageSlotTrieProof) public returns (uint256) {
-        verifyPayment(recipient, paymentChainBlockNumber, accountTrieProof, slot, storageSlotTrieProof);
+    function mintNFT(address recipient, Message calldata message, StorageProof calldata storageSlotTrieProof) public returns (uint256) {
+ 
+        require(!usedMessageid[message.messageId], "Message id already digested");
+        verifyPayment(storageSlotTrieProof);
+       
+        (address to, ,) = abi.decode(message.data, (address, uint256, uint256));
         _tokenIds += 1;
+
         uint256 newItemId = _tokenIds;
         _mint(recipient, newItemId);
+
+        ConfirmationReciept memory receipt = ConfirmationReciept(1, message.messageId, to);
+        bytes32 hashedReceipt = keccak256(abi.encode(receipt));
+        confirmationReceipts[newItemId] = hashedReceipt;
+        usedMessageid[message.messageId] = true;
+        emit Confirmation(newItemId);
         return newItemId;
     }
 
-    function verifyPayment(address recipient, uint256 paymentChainBlockNumber,bytes calldata accountTrieProof, bytes32 slot,bytes calldata storageSlotTrieProof) view public { 
-        bytes32 storageRoot = nexus.getStorageRoot(paymentChainID, paymentChainBlockNumber, recipient, accountTrieProof);
-        require(storageRoot!= EMPTY_TRIE_ROOT_HASH, "No storage root available");
-        bytes32 slotValue = nexus.verifyStorage(storageRoot, slot, storageSlotTrieProof);
-        // check slot value is not empty
+
+    function verifyPayment(StorageProof calldata storageSlotTrieProof) view  public { 
+        bool valid = storageProof.verify(storageSlotTrieProof);
+        require(valid, "invalid storage proof");
     }
+    
+
 }

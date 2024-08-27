@@ -1,0 +1,25 @@
+{
+  "name": "zknft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --outDir ./dist",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@getclave/zksync-storage-proofs": "^1.2.0-ethers5",
+    "@types/blake2": "^4.0.4",
+    "axios": "^1.7.4",
+    "blake2": "^5.0.0",
+    "blakejs": "^1.2.1",
+    "ethers": "^6.13.2",
+    "zksync-ethers": "^6.1.0"
+  }
+}

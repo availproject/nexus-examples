@@ -1,0 +1,261 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "nexusAppID",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "blockNumber",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "nexusAppID",
+                "type": "bytes32"
+            }
+        ],
+        "name": "getChainState",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "latestNexusBlockNumber",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "name": "nexusAppIDToLatestBlockNumber",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "nexusAppIDToState",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "nexusBlock",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "stateRoot",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "blockHash",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "nexusBlockNumber",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bytes32[]",
+                "name": "siblings",
+                "type": "bytes32[]"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "key",
+                "type": "bytes32"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "bytes32",
+                        "name": "statementDigest",
+                        "type": "bytes32"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "stateRoot",
+                        "type": "bytes32"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "startNexusHash",
+                        "type": "bytes32"
+                    },
+                    {
+                        "internalType": "uint128",
+                        "name": "lastProofHeight",
+                        "type": "uint128"
+                    },
+                    {
+                        "internalType": "uint128",
+                        "name": "height",
+                        "type": "uint128"
+                    }
+                ],
+                "internalType": "struct NexusProofManager.AccountState",
+                "name": "accountState",
+                "type": "tuple"
+            }
+        ],
+        "name": "updateChainState",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "blockNumber",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "bytes32",
+                        "name": "stateRoot",
+                        "type": "bytes32"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "blockHash",
+                        "type": "bytes32"
+                    }
+                ],
+                "internalType": "struct NexusProofManager.NexusBlock",
+                "name": "latestNexusBlock",
+                "type": "tuple"
+            }
+        ],
+        "name": "updateNexusBlock",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "root",
+                "type": "bytes32"
+            },
+            {
+                "components": [
+                    {
+                        "components": [
+                            {
+                                "internalType": "bytes32",
+                                "name": "addr",
+                                "type": "bytes32"
+                            },
+                            {
+                                "internalType": "bytes32",
+                                "name": "valueHash",
+                                "type": "bytes32"
+                            }
+                        ],
+                        "internalType": "struct JellyfishMerkleTreeVerifier.Leaf",
+                        "name": "leaf",
+                        "type": "tuple"
+                    },
+                    {
+                        "internalType": "bytes32[]",
+                        "name": "siblings",
+                        "type": "bytes32[]"
+                    }
+                ],
+                "internalType": "struct JellyfishMerkleTreeVerifier.Proof",
+                "name": "proof",
+                "type": "tuple"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "bytes32",
+                        "name": "addr",
+                        "type": "bytes32"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "valueHash",
+                        "type": "bytes32"
+                    }
+                ],
+                "internalType": "struct JellyfishMerkleTreeVerifier.Leaf",
+                "name": "leaf",
+                "type": "tuple"
+            }
+        ],
+        "name": "verifyRollupState",
+        "outputs": [],
+        "stateMutability": "pure",
+        "type": "function"
+    }
+]

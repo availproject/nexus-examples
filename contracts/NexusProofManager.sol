@@ -1,10 +1,9 @@
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.13;
 
-import {StorageProof} from "./StorageProof.sol";
+
 import {JellyfishMerkleTreeVerifier} from "./lib/JellyfishMerkleTreeVerifier.sol";
-
-contract NexusProofManager is StorageProof {
-
+import "forge-std/console.sol";
+contract NexusProofManager  {
     uint256 public latestNexusBlockNumber = 0;
 
     struct NexusBlock {
@@ -14,7 +13,7 @@ contract NexusProofManager is StorageProof {
 
     mapping(uint256 => NexusBlock) public nexusBlock;
     mapping(bytes32=>uint256) public nexusAppIDToLatestBlockNumber;
-    mapping(bytes32 => mapping(uint256 => bytes32)) nexusAppIDToState;
+    mapping(bytes32 => mapping(uint256 => bytes32)) public nexusAppIDToState;
 
     struct AccountState { 
         bytes32 statementDigest;
@@ -24,7 +23,7 @@ contract NexusProofManager is StorageProof {
         uint128 height;
     }
 
-    constructor(bytes32 nexusAppID) StorageProof(nexusAppID) {}
+    constructor(bytes32 nexusAppID) {}
 
     // nexus state root
     // updated when we verify the zk proof and then st block updated
@@ -56,17 +55,13 @@ contract NexusProofManager is StorageProof {
     }
 
 
-    function verifyRollupState(bytes32 root, JellyfishMerkleTreeVerifier.Proof memory proof, JellyfishMerkleTreeVerifier.Leaf memory leaf) pure public {
+    function verifyRollupState(bytes32 root, JellyfishMerkleTreeVerifier.Proof memory proof, JellyfishMerkleTreeVerifier.Leaf memory leaf) view public {
+        console.logBytes32(leaf.addr);
+        console.logBytes32(leaf.valueHash);
         bool verify = JellyfishMerkleTreeVerifier.verifyProof(root, leaf, proof);
         require(verify,"Invalid leaf against nexus state root");
     }
 
-    function getStorageRoot(bytes32 nexusAppID, uint256 chainBlockNumber, address account, bytes calldata accountTrieProof) external view returns(bytes32) {
-        require(chainBlockNumber <= nexusAppIDToLatestBlockNumber[nexusAppID], "Invalid block number");
-        bytes32 stateRoot = nexusAppIDToState[nexusAppID][chainBlockNumber];
-        (,,,bytes32 storageRoot) = verifyAccount(stateRoot, accountTrieProof, account);
-        return storageRoot;
-    }
 
     function getChainState(uint256 blockNumber, bytes32 nexusAppID) external view returns(bytes32) {
         if (blockNumber == 0 ){ 
