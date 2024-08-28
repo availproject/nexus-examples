@@ -1,6 +1,7 @@
 import { ethers } from "hardhat";
 import { ethers as eth } from "ethers";
 import { nexusAppID } from "../off-chain/zknft/src/config";
+
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with the account:", deployer.address);

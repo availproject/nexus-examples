@@ -46,7 +46,7 @@ contract MyNFT is ERC721 {
         _tokenIds += 1;
 
         uint256 newItemId = _tokenIds;
-        _mint(recipient, newItemId);
+        _safeMint(recipient, newItemId);
 
         ConfirmationReciept memory receipt = ConfirmationReciept(1, message.messageId, to);
         bytes32 hashedReceipt = keccak256(abi.encode(receipt));
