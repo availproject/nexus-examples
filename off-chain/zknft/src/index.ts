@@ -317,34 +317,7 @@ async function mintNFT(
 
     let receipt = await tx.wait();
 
-    const txDetails = await provider.getTransactionReceipt(receipt.hash);
-    if (!txDetails) {
-      return;
-    }
-
-    const transferEvents = txDetails.logs.filter((log) => {
-      return (
-        log.topics[0] === ethers.id("Confirmation(uint256,uint256,address)")
-      );
-    });
-
-    // Decode each Transfer event
-    const decodedEvents = transferEvents.map((log) => {
-      console.log(log);
-      return {
-        from: ethers.AbiCoder.defaultAbiCoder().decode(
-          ["address"],
-          log.topics[1]
-        )[0],
-        to: ethers.AbiCoder.defaultAbiCoder().decode(
-          ["address"],
-          log.topics[2]
-        )[0],
-        tokenId: ethers.toBigInt(log.topics[3]).toString(),
-      };
-    });
-
-    console.log(decodedEvents);
+    console.log("Mint NFT triggered successfully");
   } catch (error) {
     console.error("Transaction failed:", error);
   }
