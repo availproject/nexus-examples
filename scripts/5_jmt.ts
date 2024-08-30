@@ -14,3 +14,5 @@ async function main() {
 
   console.log("JMT", await jmt.getAddress());
 }
+
+main();

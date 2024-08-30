@@ -1,12 +1,12 @@
 pragma solidity ^0.8.13;
 import "./StorageProof.sol";
-import "../../NexusProofManager.sol";
+import "../../interfaces/INexusProofManager.sol";
 
 
 contract EthereumVerifier is StorageProof { 
-    NexusProofManager immutable nexusStateManager;
+    INexusProofManager immutable nexusStateManager;
 
-    constructor(bytes32 chainId, NexusProofManager _nexusStateManager) StorageProof(chainId){
+    constructor(INexusProofManager _nexusStateManager){
         nexusStateManager = _nexusStateManager;
     }
     function getStorageRoot(bytes32 nexusAppID, uint256 chainBlockNumber, address account, bytes calldata accountTrieProof) external view returns(bytes32) {

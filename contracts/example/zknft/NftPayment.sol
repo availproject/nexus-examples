@@ -4,7 +4,8 @@ pragma solidity ^0.8.13;
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
 import {Payment} from "./Payment.sol";
-contract NFTPayment is Payment {
+import {EthereumVerifier} from "../../verification/ethereum/Verifier.sol";
+contract NFTPayment is Payment, EthereumVerifier {
     INexusProofManager public nexus;
 
     uint256 CLAIM_TIME = 86400; // 1 day
@@ -31,7 +32,9 @@ contract NFTPayment is Payment {
         address to
     );
 
-    constructor(INexusProofManager nexusManager, address fixedPayoutAddress, address targetContractAddress) {
+    constructor(INexusProofManager nexusManager, address fixedPayoutAddress, address targetContractAddress) EthereumVerifier(
+        nexusManager
+    ) {
         nexus = nexusManager;
         FIXED_PAYOUT_ADDRESS = fixedPayoutAddress;
         TARGET_CONTRACT_ADDRESS = targetContractAddress;
@@ -112,9 +115,9 @@ contract NFTPayment is Payment {
     
     function verifyPayment(bytes32 paymentChainBlockNumber,bytes calldata accountTrieProof, bytes32 slot,bytes calldata storageSlotTrieProof) public { 
         bytes32 state = nexus.getChainState(0, paymentChainBlockNumber); 
-        (, , , bytes32 storageRoot) = nexus.verifyAccount(state, accountTrieProof, TARGET_CONTRACT_ADDRESS);
+        (, , , bytes32 storageRoot) = verifyAccount(state, accountTrieProof, TARGET_CONTRACT_ADDRESS);
         require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
-        nexus.verifyStorage(storageRoot, slot, storageSlotTrieProof); 
+        verifyStorage(storageRoot, slot, storageSlotTrieProof); 
     }
 
     // only admin

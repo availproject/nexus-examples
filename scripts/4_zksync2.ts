@@ -55,9 +55,4 @@ function stringToBytes32(str: string): string {
   return `0x${paddedHex}`;
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+main();

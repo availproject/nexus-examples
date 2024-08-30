@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.13;
 
 
 import "../../lib/external/trie/Lib_SecureMerkleTrie.sol";
@@ -10,8 +10,6 @@ contract StorageProof
     using Lib_RLPReader for Lib_RLPReader.RLPItem;
     using Lib_RLPReader for bytes;
 
-    bytes32 immutable public selfChainId;
-
     uint8 private constant ACCOUNT_NONCE_INDEX = 0;
     uint8 private constant ACCOUNT_BALANCE_INDEX = 1;
     uint8 private constant ACCOUNT_STORAGE_ROOT_INDEX = 2;
@@ -21,11 +19,6 @@ contract StorageProof
         0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
     bytes32 private constant EMPTY_CODE_HASH =
         0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
-
-
-    constructor(bytes32 _selfChainId) {
-        selfChainId = _selfChainId;
-    }
 
 
     function verifyAccount(

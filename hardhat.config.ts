@@ -15,7 +15,7 @@ const config: HardhatUserConfig = {
       libraries: {
         "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
           JellyfishMerkleTreeVerifier:
-            "0x4D50015B093cb8ea493Eda2711401Ec1368579BC",
+            "0x618263CE921F7dd5F4f40C29f6c524Aaf97b9bbd",
         },
       },
     },
@@ -52,7 +52,7 @@ const config: HardhatUserConfig = {
       url: "http://127.0.0.1:3050",
       ethNetwork: "sepolia",
       accounts: [
-        "0x2d64990aa363e3d38ae3417950fd40801d75e3d3bd57b86d17fcc261a6c951c6",
+        "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6",
       ],
       zksync: true,
     },
@@ -61,7 +61,7 @@ const config: HardhatUserConfig = {
       url: "http://127.0.0.1:4050",
       ethNetwork: "sepolia",
       accounts: [
-        "0xc76bee37a768a74d893d86041a6339bab150679c14c273a33afff53874f87b42",
+        "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6",
       ],
       zksync: true,
     },

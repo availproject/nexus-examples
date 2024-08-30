@@ -756,6 +756,15 @@ zk_inception server --chain era2
 
 Contract Deployment:
 
+### Automaic
+
+```
+chmod +x deploy.sh
+./deploy.sh
+```
+
+### Manual
+
 ```
 npx hardhat run scripts/3_zksync.ts --network zksync
 npx hardhat run scripts/5_jmt.ts --network zksync2

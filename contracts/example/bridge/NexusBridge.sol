@@ -15,6 +15,7 @@ import {Merkle} from "./lib/Merkle.sol";
 import {IMessageReceiver} from "./interfaces/IMessageReceiver.sol";
 import {INexusBridge} from "./interfaces/INexusBridge.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
+import {EthereumVerifier} from "../../verification/ethereum/Verifier.sol";
 
 import "forge-std/console.sol";
 
@@ -39,6 +40,7 @@ contract NexusBridge is
 
     IAvail public avail;
     INexusProofManager public nexus;
+    EthereumVerifier public verifier;
     address public feeRecipient;
     uint256 public fees; // total fees accumulated by bridge
     uint256 public feePerByte; // in wei
@@ -88,7 +90,8 @@ contract NexusBridge is
         address governance,
         address pauser,
         INexusProofManager nexusStateManager,
-        bytes32 currentChainId
+        bytes32 currentChainId,
+        EthereumVerifier _verifier
       
     ) external initializer {
         feePerByte = newFeePerByte;
@@ -98,6 +101,7 @@ contract NexusBridge is
         avail = newAvail;
         nexus = nexusStateManager;
         chainId = currentChainId;
+        verifier = _verifier;
         __AccessControlDefaultAdminRules_init(0, governance);
         _grantRole(PAUSER_ROLE, pauser);
         __Pausable_init();
@@ -420,8 +424,8 @@ contract NexusBridge is
 
     function _checkInclusionAgainstStateRoot(MessageReceieve calldata message, bytes calldata proof) private {
         bytes32 state = nexus.getChainState(0, chainId); 
-        (, , , bytes32 storageRoot) = nexus.verifyAccount(state, proof, address(uint160(uint256(message.to))));
+        (, , , bytes32 storageRoot) = verifier.verifyAccount(state, proof, address(uint160(uint256(message.to))));
         require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
-        nexus.verifyStorage(storageRoot, message.storageSlot, message.storageProof);
+        verifier.verifyStorage(storageRoot, message.storageSlot, message.storageProof);
     } 
 }

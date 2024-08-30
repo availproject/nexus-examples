@@ -22,9 +22,6 @@ async function main() {
     "JellyfishMerkleTreeVerifier"
   );
   const jmt = await deployer.deploy(jmtArtifact);
-  console.log(
-    `JellyfishMerkleTreeVerifier deployed to ${await jmt.getAddress()}`
-  );
 
   // Deploy NexusProofManager contract with the linked library
   const nexusArtifact = await deployer.loadArtifact("NexusProofManager");
@@ -52,10 +49,6 @@ async function main() {
   console.log(
     `Payment contract deployed to ${await paymentContract.getAddress()}`
   );
-
-  // Log all contract addresses
-  console.log("Payment contract:", await paymentContract.getAddress());
-  console.log("Avail Token:", await availToken.getAddress());
 }
 
 function stringToBytes32(str: string): string {

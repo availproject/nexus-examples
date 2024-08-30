@@ -2,6 +2,5319 @@
   "version": "3.4",
   "log": [
     {
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/access/Ownable.sol:Ownable": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/access/Ownable.sol:20",
+        "inherit": [
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "renounceOwnership()",
+          "transferOwnership(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "Ownable",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/access/Ownable.sol:28"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/access/Ownable.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/IERC1967.sol:IERC1967": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/IERC1967.sol:11",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/draft-IERC1822.sol:IERC1822Proxiable": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/draft-IERC1822.sol:10",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "proxiableUUID()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Proxy.sol:ERC1967Proxy": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Proxy.sol:15",
+        "version": {
+          "withMetadata": "0c5a2c7cf4790c655f76a71e698b01907c2210d5d65874d494ed40ef68b8e288",
+          "withoutMetadata": "0c5a2c7cf4790c655f76a71e698b01907c2210d5d65874d494ed40ef68b8e288",
+          "linkedWithoutMetadata": "0c5a2c7cf4790c655f76a71e698b01907c2210d5d65874d494ed40ef68b8e288"
+        },
+        "inherit": [
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Upgrade.sol:ERC1967Upgrade",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/IERC1967.sol:IERC1967",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/Proxy.sol:Proxy"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC1967Proxy",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Proxy.sol:22"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Upgrade.sol:ERC1967Upgrade": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Upgrade.sol:18",
+        "inherit": [
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/IERC1967.sol:IERC1967"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/Proxy.sol:Proxy": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/Proxy.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/BeaconProxy.sol:BeaconProxy": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/BeaconProxy.sol:18",
+        "version": {
+          "withMetadata": "6dbe968458309c8c1688179002b5f9b7b5eac6c329878db0f77bff80a0a20cae",
+          "withoutMetadata": "6dbe968458309c8c1688179002b5f9b7b5eac6c329878db0f77bff80a0a20cae",
+          "linkedWithoutMetadata": "6dbe968458309c8c1688179002b5f9b7b5eac6c329878db0f77bff80a0a20cae"
+        },
+        "inherit": [
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Upgrade.sol:ERC1967Upgrade",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/IERC1967.sol:IERC1967",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/Proxy.sol:Proxy"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "BeaconProxy",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/BeaconProxy.sol:30"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/IBeacon.sol:IBeacon": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/IBeacon.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "implementation()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/UpgradeableBeacon.sol:UpgradeableBeacon": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/UpgradeableBeacon.sol:16",
+        "version": {
+          "withMetadata": "d8369eb2671b765854d51d7c6e19d8e1ccc478b718a9ac393272475736bab736",
+          "withoutMetadata": "d8369eb2671b765854d51d7c6e19d8e1ccc478b718a9ac393272475736bab736",
+          "linkedWithoutMetadata": "d8369eb2671b765854d51d7c6e19d8e1ccc478b718a9ac393272475736bab736"
+        },
+        "inherit": [
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/access/Ownable.sol:Ownable",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Context.sol:Context",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/IBeacon.sol:IBeacon"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)",
+          "implementation()",
+          "upgradeTo(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "UpgradeableBeacon",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/UpgradeableBeacon.sol:28"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/access/Ownable.sol:21"
+            },
+            {
+              "label": "_implementation",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "UpgradeableBeacon",
+              "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/UpgradeableBeacon.sol:17"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/ProxyAdmin.sol:ProxyAdmin": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/ProxyAdmin.sol:13",
+        "version": {
+          "withMetadata": "c43b0b0965b12182f9b80ed44e212362d77d9da1b8d49feb5e259dfb6625b98d",
+          "withoutMetadata": "c43b0b0965b12182f9b80ed44e212362d77d9da1b8d49feb5e259dfb6625b98d",
+          "linkedWithoutMetadata": "c43b0b0965b12182f9b80ed44e212362d77d9da1b8d49feb5e259dfb6625b98d"
+        },
+        "inherit": [
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/access/Ownable.sol:Ownable",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "getProxyImplementation(address)",
+          "getProxyAdmin(address)",
+          "changeProxyAdmin(address,address)",
+          "upgrade(address,address)",
+          "upgradeAndCall(address,address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/access/Ownable.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/TransparentUpgradeableProxy.sol:ITransparentUpgradeableProxy": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/TransparentUpgradeableProxy.sol:14",
+        "inherit": [
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/IERC1967.sol:IERC1967"
+        ],
+        "libraries": [],
+        "methods": [
+          "admin()",
+          "implementation()",
+          "changeAdmin(address)",
+          "upgradeTo(address)",
+          "upgradeToAndCall(address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/TransparentUpgradeableProxy.sol:TransparentUpgradeableProxy": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/TransparentUpgradeableProxy.sol:58",
+        "version": {
+          "withMetadata": "05872699d02db39ad4b246eda993fc48f31912e4e6165c1cd0b7d3484f562fd9",
+          "withoutMetadata": "05872699d02db39ad4b246eda993fc48f31912e4e6165c1cd0b7d3484f562fd9",
+          "linkedWithoutMetadata": "05872699d02db39ad4b246eda993fc48f31912e4e6165c1cd0b7d3484f562fd9"
+        },
+        "inherit": [
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Proxy.sol:ERC1967Proxy",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Upgrade.sol:ERC1967Upgrade",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/IERC1967.sol:IERC1967",
+          "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/Proxy.sol:Proxy"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "TransparentUpgradeableProxy",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/TransparentUpgradeableProxy.sol:63"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:Address": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:9",
+        "version": {
+          "withMetadata": "a7ed274a020b710e4af59570dccb20deaf3df71b02c9b79b36609b3fd06b86de",
+          "withoutMetadata": "a7ed274a020b710e4af59570dccb20deaf3df71b02c9b79b36609b3fd06b86de",
+          "linkedWithoutMetadata": "a7ed274a020b710e4af59570dccb20deaf3df71b02c9b79b36609b3fd06b86de"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol:185"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Context.sol:Context": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/StorageSlot.sol:StorageSlot": {
+        "src": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/StorageSlot.sol:34",
+        "version": {
+          "withMetadata": "785b65e8145ed2a9a7d4f805cd2502d87df1e30ddcfa4ee9cc6486f564c00970",
+          "withoutMetadata": "785b65e8145ed2a9a7d4f805cd2502d87df1e30ddcfa4ee9cc6486f564c00970",
+          "linkedWithoutMetadata": "785b65e8145ed2a9a7d4f805cd2502d87df1e30ddcfa4ee9cc6486f564c00970"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:AccessControlUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:50",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:ERC165Upgradeable",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl",
+          "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)",
+          "hasRole(bytes32,address)",
+          "getRoleAdmin(bytes32)",
+          "grantRole(bytes32,address)",
+          "revokeRole(bytes32,address)",
+          "renounceRole(bytes32,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_mapping(t_bytes32,t_struct(RoleData)1642_storage)": {
+              "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_struct(RoleData)1642_storage": {
+              "label": "struct AccessControlUpgradeable.RoleData",
+              "members": [
+                {
+                  "label": "hasRole",
+                  "type": "t_mapping(t_address,t_bool)"
+                },
+                {
+                  "label": "adminRole",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.AccessControl": [
+              {
+                "contract": "AccessControlUpgradeable",
+                "label": "_roles",
+                "type": "t_mapping(t_bytes32,t_struct(RoleData)1642_storage)",
+                "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:61"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:AccessControlDefaultAdminRulesUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:41",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:AccessControlUpgradeable",
+          "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:ERC165Upgradeable",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/interfaces/IERC5313.sol:IERC5313",
+          "@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol:IAccessControlDefaultAdminRules",
+          "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl",
+          "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)",
+          "owner()",
+          "grantRole(bytes32,address)",
+          "revokeRole(bytes32,address)",
+          "renounceRole(bytes32,address)",
+          "defaultAdmin()",
+          "pendingDefaultAdmin()",
+          "defaultAdminDelay()",
+          "pendingDefaultAdminDelay()",
+          "defaultAdminDelayIncreaseWait()",
+          "beginDefaultAdminTransfer(address)",
+          "cancelDefaultAdminTransfer()",
+          "acceptDefaultAdminTransfer()",
+          "changeDefaultAdminDelay(uint48)",
+          "rollbackDefaultAdminDelay()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_address": {
+              "label": "address"
+            },
+            "t_uint48": {
+              "label": "uint48"
+            },
+            "t_mapping(t_bytes32,t_struct(RoleData)1642_storage)": {
+              "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_struct(RoleData)1642_storage": {
+              "label": "struct AccessControlUpgradeable.RoleData",
+              "members": [
+                {
+                  "label": "hasRole",
+                  "type": "t_mapping(t_address,t_bool)"
+                },
+                {
+                  "label": "adminRole",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.AccessControlDefaultAdminRules": [
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDefaultAdmin",
+                "type": "t_address",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:45"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDefaultAdminSchedule",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:46"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_currentDelay",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:48"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_currentDefaultAdmin",
+                "type": "t_address",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:49"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDelay",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:52"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDelaySchedule",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:53"
+              }
+            ],
+            "erc7201:openzeppelin.storage.AccessControl": [
+              {
+                "contract": "AccessControlUpgradeable",
+                "label": "_roles",
+                "type": "t_mapping(t_bytes32,t_struct(RoleData)1642_storage)",
+                "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:61"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable": {
+        "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:56",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_uint64": {
+              "label": "uint64"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:17",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_uint64": {
+              "label": "uint64"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:PausableUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:18",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "paused()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.Pausable": [
+              {
+                "contract": "PausableUpgradeable",
+                "label": "_paused",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:21"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:ReentrancyGuardUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:23",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.ReentrancyGuard": [
+              {
+                "contract": "ReentrancyGuardUpgradeable",
+                "label": "_status",
+                "type": "t_uint256",
+                "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:40"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:ERC165Upgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:21",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_uint64": {
+              "label": "uint64"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl": {
+        "src": "@openzeppelin/contracts/access/IAccessControl.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "hasRole(bytes32,address)",
+          "getRoleAdmin(bytes32)",
+          "grantRole(bytes32,address)",
+          "revokeRole(bytes32,address)",
+          "renounceRole(bytes32,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol:IAccessControlDefaultAdminRules": {
+        "src": "@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol:11",
+        "inherit": [
+          "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl"
+        ],
+        "libraries": [],
+        "methods": [
+          "defaultAdmin()",
+          "pendingDefaultAdmin()",
+          "defaultAdminDelay()",
+          "pendingDefaultAdminDelay()",
+          "beginDefaultAdminTransfer(address)",
+          "cancelDefaultAdminTransfer()",
+          "acceptDefaultAdminTransfer()",
+          "changeDefaultAdminDelay(uint48)",
+          "rollbackDefaultAdminDelay()",
+          "defaultAdminDelayIncreaseWait()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/interfaces/IERC5313.sol:IERC5313": {
+        "src": "@openzeppelin/contracts/interfaces/IERC5313.sol:11",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "owner()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC1155Errors": {
+        "src": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:113",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC20Errors": {
+        "src": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC721Errors": {
+        "src": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:55",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC20/ERC20.sol:ERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:34",
+        "inherit": [
+          "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC20Errors",
+          "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:IERC20Metadata",
+          "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC20",
+            "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:50"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:35"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:37"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:39"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:41"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:IERC20Metadata": {
+        "src": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:11",
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol:IERC20Permit": {
+        "src": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol:42",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+          "nonces(address)",
+          "DOMAIN_SEPARATOR()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol:SafeERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol:19",
+        "version": {
+          "withMetadata": "ca51557984dd4e34687c9a26d1762f1dc0a05d8d39948aef867c7215667127ca",
+          "withoutMetadata": "ca51557984dd4e34687c9a26d1762f1dc0a05d8d39948aef867c7215667127ca",
+          "linkedWithoutMetadata": "ca51557984dd4e34687c9a26d1762f1dc0a05d8d39948aef867c7215667127ca"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC721/ERC721.sol:ERC721": {
+        "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:19",
+        "inherit": [
+          "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC721Errors",
+          "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata",
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)",
+          "balanceOf(address)",
+          "ownerOf(uint256)",
+          "name()",
+          "symbol()",
+          "tokenURI(uint256)",
+          "approve(address,uint256)",
+          "getApproved(uint256)",
+          "setApprovalForAll(address,bool)",
+          "isApprovedForAll(address,address)",
+          "transferFrom(address,address,uint256)",
+          "safeTransferFrom(address,address,uint256)",
+          "safeTransferFrom(address,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:23"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:26"
+            },
+            {
+              "label": "_owners",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:28"
+            },
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:30"
+            },
+            {
+              "label": "_tokenApprovals",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:32"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:34"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721": {
+        "src": "@openzeppelin/contracts/token/ERC721/IERC721.sol:11",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "balanceOf(address)",
+          "ownerOf(uint256)",
+          "safeTransferFrom(address,address,uint256,bytes)",
+          "safeTransferFrom(address,address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "approve(address,uint256)",
+          "setApprovalForAll(address,bool)",
+          "getApproved(uint256)",
+          "isApprovedForAll(address,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol:IERC721Receiver": {
+        "src": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol:11",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "onERC721Received(address,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata": {
+        "src": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:12",
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "tokenURI(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/Address.sol:Address": {
+        "src": "@openzeppelin/contracts/utils/Address.sol:9",
+        "version": {
+          "withMetadata": "83ca68cb661244df15578254b3224d04ad6bcf5cb59587493d501a7f6efeace2",
+          "withoutMetadata": "83ca68cb661244df15578254b3224d04ad6bcf5cb59587493d501a7f6efeace2",
+          "linkedWithoutMetadata": "83ca68cb661244df15578254b3224d04ad6bcf5cb59587493d501a7f6efeace2"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:105"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/Context.sol:Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/Strings.sol:Strings": {
+        "src": "@openzeppelin/contracts/utils/Strings.sol:12",
+        "version": {
+          "withMetadata": "2aea451bf5cb2ecf659544338ebf459ef4af72d65e959a09968379202409ebdc",
+          "withoutMetadata": "2aea451bf5cb2ecf659544338ebf459ef4af72d65e959a09968379202409ebdc",
+          "linkedWithoutMetadata": "2aea451bf5cb2ecf659544338ebf459ef4af72d65e959a09968379202409ebdc"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165": {
+        "src": "@openzeppelin/contracts/utils/introspection/ERC165.sol:20",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165": {
+        "src": "@openzeppelin/contracts/utils/introspection/IERC165.sol:15",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/math/Math.sol:Math": {
+        "src": "@openzeppelin/contracts/utils/math/Math.sol:9",
+        "version": {
+          "withMetadata": "7d26002c0c5db252ec4b026748764891d10a414275c9f5174d15926f80626b2f",
+          "withoutMetadata": "7d26002c0c5db252ec4b026748764891d10a414275c9f5174d15926f80626b2f",
+          "linkedWithoutMetadata": "7d26002c0c5db252ec4b026748764891d10a414275c9f5174d15926f80626b2f"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/math/SafeCast.sol:SafeCast": {
+        "src": "@openzeppelin/contracts/utils/math/SafeCast.sol:19",
+        "version": {
+          "withMetadata": "3ef2f6520fb8a4bab9858d3156ce08d11669e72f512a9057f92963b7e9a683cf",
+          "withoutMetadata": "3ef2f6520fb8a4bab9858d3156ce08d11669e72f512a9057f92963b7e9a683cf",
+          "linkedWithoutMetadata": "3ef2f6520fb8a4bab9858d3156ce08d11669e72f512a9057f92963b7e9a683cf"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/math/SignedMath.sol:SignedMath": {
+        "src": "@openzeppelin/contracts/utils/math/SignedMath.sol:9",
+        "version": {
+          "withMetadata": "c688357e759b2e869359efcb2bce12634abf4912a0bbff5b580821fcc6e015cb",
+          "withoutMetadata": "c688357e759b2e869359efcb2bce12634abf4912a0bbff5b580821fcc6e015cb",
+          "linkedWithoutMetadata": "c688357e759b2e869359efcb2bce12634abf4912a0bbff5b580821fcc6e015cb"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/NexusProofManager.sol:NexusProofManager": {
+        "src": "contracts/NexusProofManager.sol:6",
+        "version": {
+          "withMetadata": "0dd106db9e8e995e9f4dcca03d5b87c7ac6295145e39aa1419aa5c518d16eb54",
+          "withoutMetadata": "0dd106db9e8e995e9f4dcca03d5b87c7ac6295145e39aa1419aa5c518d16eb54",
+          "linkedWithoutMetadata": "0dd106db9e8e995e9f4dcca03d5b87c7ac6295145e39aa1419aa5c518d16eb54"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(bytes32)",
+          "updateNexusBlock(uint256,(bytes32,bytes32))",
+          "updateChainState(uint256,bytes32[],bytes32,(bytes32,bytes32,bytes32,uint128,uint128))",
+          "verifyRollupState(bytes32,((bytes32,bytes32),bytes32[]),(bytes32,bytes32))",
+          "getChainState(uint256,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "latestNexusBlockNumber",
+            "src": "contracts/NexusProofManager.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "latestNexusBlockNumber",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_uint256",
+              "contract": "NexusProofManager",
+              "src": "contracts/NexusProofManager.sol:7"
+            },
+            {
+              "label": "nexusBlock",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_uint256,t_struct(NexusBlock)9417_storage)",
+              "contract": "NexusProofManager",
+              "src": "contracts/NexusProofManager.sol:14"
+            },
+            {
+              "label": "nexusAppIDToLatestBlockNumber",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_bytes32,t_uint256)",
+              "contract": "NexusProofManager",
+              "src": "contracts/NexusProofManager.sol:15"
+            },
+            {
+              "label": "nexusAppIDToState",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_bytes32,t_mapping(t_uint256,t_bytes32))",
+              "contract": "NexusProofManager",
+              "src": "contracts/NexusProofManager.sol:16"
+            }
+          ],
+          "types": {
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_bytes32,t_mapping(t_uint256,t_bytes32))": {
+              "label": "mapping(bytes32 => mapping(uint256 => bytes32))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_struct(NexusBlock)9417_storage)": {
+              "label": "mapping(uint256 => struct NexusProofManager.NexusBlock)",
+              "numberOfBytes": "32"
+            },
+            "t_struct(NexusBlock)9417_storage": {
+              "label": "struct NexusProofManager.NexusBlock",
+              "members": [
+                {
+                  "label": "stateRoot",
+                  "type": "t_bytes32",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "blockHash",
+                  "type": "t_bytes32",
+                  "offset": 0,
+                  "slot": "1"
+                }
+              ],
+              "numberOfBytes": "64"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/NexusBridge.sol:NexusBridge": {
+        "src": "contracts/example/bridge/NexusBridge.sol:22",
+        "version": {
+          "withMetadata": "26e0bdb6becaeec1d291884ffa285a532aa70bee5204a895c588e34a3ed00f52",
+          "withoutMetadata": "26e0bdb6becaeec1d291884ffa285a532aa70bee5204a895c588e34a3ed00f52",
+          "linkedWithoutMetadata": "26e0bdb6becaeec1d291884ffa285a532aa70bee5204a895c588e34a3ed00f52"
+        },
+        "inherit": [
+          "contracts/example/bridge/interfaces/INexusBridge.sol:INexusBridge",
+          "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:AccessControlDefaultAdminRulesUpgradeable",
+          "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:AccessControlUpgradeable",
+          "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:ERC165Upgradeable",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/interfaces/IERC5313.sol:IERC5313",
+          "@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol:IAccessControlDefaultAdminRules",
+          "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl",
+          "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:PausableUpgradeable",
+          "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable",
+          "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:ReentrancyGuardUpgradeable",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "initialize(uint256,address,address,address,address,address,bytes32,address)",
+          "setPaused(bool)",
+          "updateTokens(bytes32[],address[])",
+          "updateNexusTokens(bytes32[],address[])",
+          "updateFeePerByte(uint256)",
+          "updateFeeRecipient(address)",
+          "withdrawFees()",
+          "receiveMessage((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "receiveETH((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "receiveERC20((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "sendMessage(bytes32,bytes)",
+          "sendETH(bytes32)",
+          "sendERC20(bytes32,bytes32,uint256)",
+          "getFee(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "label": "isSent",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:33"
+            },
+            {
+              "label": "isBridged",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_bool)",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:35"
+            },
+            {
+              "label": "tokens",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:37"
+            },
+            {
+              "label": "nexusTokens",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:39"
+            },
+            {
+              "label": "avail",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_contract(IAvail)10750",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:41"
+            },
+            {
+              "label": "nexus",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_contract(INexusProofManager)11863",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:42"
+            },
+            {
+              "label": "verifier",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_contract(EthereumVerifier)16201",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:43"
+            },
+            {
+              "label": "feeRecipient",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_address",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:44"
+            },
+            {
+              "label": "fees",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_uint256",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:45"
+            },
+            {
+              "label": "feePerByte",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_uint256",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:46"
+            },
+            {
+              "label": "messageId",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_uint256",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:47"
+            },
+            {
+              "label": "chainId",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_bytes32",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:48"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(EthereumVerifier)16201": {
+              "label": "contract EthereumVerifier",
+              "numberOfBytes": "20"
+            },
+            "t_contract(IAvail)10750": {
+              "label": "contract IAvail",
+              "numberOfBytes": "20"
+            },
+            "t_contract(INexusProofManager)11863": {
+              "label": "contract INexusProofManager",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_bytes32,t_bool)": {
+              "label": "mapping(bytes32 => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            },
+            "t_uint48": {
+              "label": "uint48"
+            },
+            "t_mapping(t_bytes32,t_struct(RoleData)1642_storage)": {
+              "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)"
+            },
+            "t_struct(RoleData)1642_storage": {
+              "label": "struct AccessControlUpgradeable.RoleData",
+              "members": [
+                {
+                  "label": "hasRole",
+                  "type": "t_mapping(t_address,t_bool)"
+                },
+                {
+                  "label": "adminRole",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.AccessControlDefaultAdminRules": [
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDefaultAdmin",
+                "type": "t_address",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:45"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDefaultAdminSchedule",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:46"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_currentDelay",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:48"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_currentDefaultAdmin",
+                "type": "t_address",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:49"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDelay",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:52"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDelaySchedule",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:53"
+              }
+            ],
+            "erc7201:openzeppelin.storage.AccessControl": [
+              {
+                "contract": "AccessControlUpgradeable",
+                "label": "_roles",
+                "type": "t_mapping(t_bytes32,t_struct(RoleData)1642_storage)",
+                "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:61"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Pausable": [
+              {
+                "contract": "PausableUpgradeable",
+                "label": "_paused",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:21"
+              }
+            ],
+            "erc7201:openzeppelin.storage.ReentrancyGuard": [
+              {
+                "contract": "ReentrancyGuardUpgradeable",
+                "label": "_status",
+                "type": "t_uint256",
+                "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:40"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/interfaces/IAvail.sol:IAvail": {
+        "src": "contracts/example/bridge/interfaces/IAvail.sol:6",
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "mint(address,uint256)",
+          "burn(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/interfaces/IMessageReceiver.sol:IMessageReceiver": {
+        "src": "contracts/example/bridge/interfaces/IMessageReceiver.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "onAvailMessage(bytes32,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/interfaces/INexusBridge.sol:INexusBridge": {
+        "src": "contracts/example/bridge/interfaces/INexusBridge.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "setPaused(bool)",
+          "updateTokens(bytes32[],address[])",
+          "updateFeePerByte(uint256)",
+          "updateFeeRecipient(address)",
+          "withdrawFees()",
+          "receiveMessage((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "receiveETH((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "receiveERC20((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "sendMessage(bytes32,bytes)",
+          "sendETH(bytes32)",
+          "sendERC20(bytes32,bytes32,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/interfaces/IVectorx.sol:IVectorx": {
+        "src": "contracts/example/bridge/interfaces/IVectorx.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "dataRootCommitments(bytes32)",
+          "rangeStartBlocks(bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/lib/Merkle.sol:Merkle": {
+        "src": "contracts/example/bridge/lib/Merkle.sol:11",
+        "version": {
+          "withMetadata": "3a2c6c93a2cd33bbf3848e3db9398965bb81c40e18920f1abb8fd976f3a4dd31",
+          "withoutMetadata": "3a2c6c93a2cd33bbf3848e3db9398965bb81c40e18920f1abb8fd976f3a4dd31",
+          "linkedWithoutMetadata": "3a2c6c93a2cd33bbf3848e3db9398965bb81c40e18920f1abb8fd976f3a4dd31"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/mock/ERC20.sol:ERC20Token": {
+        "src": "contracts/example/mock/ERC20.sol:6",
+        "version": {
+          "withMetadata": "251888b842684442a790cd2ddc426282dac7c07fd0a61d0eaf9269571666891d",
+          "withoutMetadata": "251888b842684442a790cd2ddc426282dac7c07fd0a61d0eaf9269571666891d",
+          "linkedWithoutMetadata": "251888b842684442a790cd2ddc426282dac7c07fd0a61d0eaf9269571666891d"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC20/ERC20.sol:ERC20",
+          "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC20Errors",
+          "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:IERC20Metadata",
+          "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(string,string)",
+          "mint(address,uint256)",
+          "burn(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC20Token",
+            "src": "contracts/example/mock/ERC20.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:35"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:37"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:39"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:41"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/mock/ERC721.sol:ERC721Token": {
+        "src": "contracts/example/mock/ERC721.sol:6",
+        "version": {
+          "withMetadata": "81eea7fbbb2fb3252442019a780c54143297047b2feae72f4974306cdb5a1f88",
+          "withoutMetadata": "81eea7fbbb2fb3252442019a780c54143297047b2feae72f4974306cdb5a1f88",
+          "linkedWithoutMetadata": "81eea7fbbb2fb3252442019a780c54143297047b2feae72f4974306cdb5a1f88"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC721/ERC721.sol:ERC721",
+          "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC721Errors",
+          "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata",
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(string,string)",
+          "mint(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721Token",
+            "src": "contracts/example/mock/ERC721.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:23"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:26"
+            },
+            {
+              "label": "_owners",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:28"
+            },
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:30"
+            },
+            {
+              "label": "_tokenApprovals",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:32"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:34"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/zknft/NFT.sol:MyNFT": {
+        "src": "contracts/example/zknft/NFT.sol:9",
+        "version": {
+          "withMetadata": "94c074feb300b40c874f232f40a3842730c30451f5dacfdba779277df21d62d8",
+          "withoutMetadata": "94c074feb300b40c874f232f40a3842730c30451f5dacfdba779277df21d62d8",
+          "linkedWithoutMetadata": "94c074feb300b40c874f232f40a3842730c30451f5dacfdba779277df21d62d8"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC721/ERC721.sol:ERC721",
+          "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC721Errors",
+          "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata",
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(bytes32,bytes32,address,address)",
+          "mintNFT(address,(bytes1,bytes32,bytes,uint256,uint256),(uint64,address,uint256,bytes32,bytes32[],uint64))",
+          "verifyPayment((uint64,address,uint256,bytes32,bytes32[],uint64))"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "MyNFT",
+            "src": "contracts/example/zknft/NFT.sol:33"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "selfChainId",
+            "src": "contracts/example/zknft/NFT.sol:16"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "paymentChainID",
+            "src": "contracts/example/zknft/NFT.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:23"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:26"
+            },
+            {
+              "label": "_owners",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:28"
+            },
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:30"
+            },
+            {
+              "label": "_tokenApprovals",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:32"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:34"
+            },
+            {
+              "label": "confirmationReceipts",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:10"
+            },
+            {
+              "label": "usedMessageid",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:11"
+            },
+            {
+              "label": "_tokenIds",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_uint256",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:13"
+            },
+            {
+              "label": "nexus",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_contract(INexusProofManager)11863",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:14"
+            },
+            {
+              "label": "storageProof",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_contract(StorageProofVerifier)19153",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:15"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(INexusProofManager)11863": {
+              "label": "contract INexusProofManager",
+              "numberOfBytes": "20"
+            },
+            "t_contract(StorageProofVerifier)19153": {
+              "label": "contract StorageProofVerifier",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bool)": {
+              "label": "mapping(uint256 => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/zknft/NftPayment.sol:NFTPayment": {
+        "src": "contracts/example/zknft/NftPayment.sol:8",
+        "version": {
+          "withMetadata": "ed1408aa5faab3e95b093f1ebe922a3668ca6c154193cda564fbaa99100fba18",
+          "withoutMetadata": "ed1408aa5faab3e95b093f1ebe922a3668ca6c154193cda564fbaa99100fba18",
+          "linkedWithoutMetadata": "ed1408aa5faab3e95b093f1ebe922a3668ca6c154193cda564fbaa99100fba18"
+        },
+        "inherit": [
+          "contracts/verification/ethereum/Verifier.sol:EthereumVerifier",
+          "contracts/verification/ethereum/StorageProof.sol:StorageProof",
+          "contracts/example/zknft/Payment.sol:Payment"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address,address)",
+          "paymentWithoutFallback(bytes1,uint256,uint256,address)",
+          "paymentWithFallback(bytes1,uint256,uint256,address)",
+          "claimPayment(uint256)",
+          "verifyPayment(bytes32,bytes,bytes32,bytes)",
+          "updatePrice(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NFTPayment",
+            "src": "contracts/example/zknft/NftPayment.sol:35"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "CLAIM_TIME",
+            "src": "contracts/example/zknft/NftPayment.sol:11"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "FIXED_PAYOUT_ADDRESS",
+            "src": "contracts/example/zknft/NftPayment.sol:12"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "TARGET_CONTRACT_ADDRESS",
+            "src": "contracts/example/zknft/NftPayment.sol:13"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "claimCounter",
+            "src": "contracts/example/zknft/NftPayment.sol:14"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "idToHash",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "Payment",
+              "src": "contracts/example/zknft/Payment.sol:6"
+            },
+            {
+              "label": "nexus",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_contract(INexusProofManager)11863",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:9"
+            },
+            {
+              "label": "CLAIM_TIME",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:11"
+            },
+            {
+              "label": "claimCounter",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_uint256",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:14"
+            },
+            {
+              "label": "payoutPrice",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:20"
+            },
+            {
+              "label": "pendingPayouts",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_array(t_struct(PendingPayment)11310_storage)dyn_storage",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_struct(PendingPayment)11310_storage)dyn_storage": {
+              "label": "struct NFTPayment.PendingPayment[]",
+              "numberOfBytes": "32"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(INexusProofManager)11863": {
+              "label": "contract INexusProofManager",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_struct(PendingPayment)11310_storage": {
+              "label": "struct NFTPayment.PendingPayment",
+              "members": [
+                {
+                  "label": "to",
+                  "type": "t_address",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "amount",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "1"
+                },
+                {
+                  "label": "tokenAddress",
+                  "type": "t_address",
+                  "offset": 0,
+                  "slot": "2"
+                },
+                {
+                  "label": "timestamp",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "3"
+                }
+              ],
+              "numberOfBytes": "128"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/zknft/Payment.sol:Payment": {
+        "src": "contracts/example/zknft/Payment.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getValueFromId(uint256)",
+          "getStorageLocationForKey(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "label": "idToHash",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "Payment",
+              "src": "contracts/example/zknft/Payment.sol:6"
+            }
+          ],
+          "types": {
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/interfaces/INexusProofManager.sol:INexusProofManager": {
+        "src": "contracts/interfaces/INexusProofManager.sol:5",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getStorageRoot(bytes32,uint256,address,bytes)",
+          "getChainState(uint256,bytes32)",
+          "nexusAppIDToLatestBlockNumber(bytes32)",
+          "nexusAppIDToState(bytes32,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/JellyfishMerkleTreeVerifier.sol:JellyfishMerkleTreeVerifier": {
+        "src": "contracts/lib/JellyfishMerkleTreeVerifier.sol:5",
+        "version": {
+          "withMetadata": "5ed11fa20ba13e3fd28842d1a988b12220da82c439b20d0d0f9791ad88d43b2e",
+          "withoutMetadata": "5ed11fa20ba13e3fd28842d1a988b12220da82c439b20d0d0f9791ad88d43b2e",
+          "linkedWithoutMetadata": "5ed11fa20ba13e3fd28842d1a988b12220da82c439b20d0d0f9791ad88d43b2e"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "verifyProof(bytes32,(bytes32,bytes32),((bytes32,bytes32),bytes32[]))"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/rlp/Lib_RLPReader.sol:Lib_RLPReader": {
+        "src": "contracts/lib/external/rlp/Lib_RLPReader.sol:8",
+        "version": {
+          "withMetadata": "e25fb4b0639b211861a91935f7ffe9eb3da21f231608f3811a584faf7ebaf4a4",
+          "withoutMetadata": "e25fb4b0639b211861a91935f7ffe9eb3da21f231608f3811a584faf7ebaf4a4",
+          "linkedWithoutMetadata": "e25fb4b0639b211861a91935f7ffe9eb3da21f231608f3811a584faf7ebaf4a4"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/rlp/Lib_RLPWriter.sol:Lib_RLPWriter": {
+        "src": "contracts/lib/external/rlp/Lib_RLPWriter.sol:12",
+        "version": {
+          "withMetadata": "7bfada4b4dc481c8017a3e2ebce56a7dfc4cee2447430b70142b147148e14e29",
+          "withoutMetadata": "7bfada4b4dc481c8017a3e2ebce56a7dfc4cee2447430b70142b147148e14e29",
+          "linkedWithoutMetadata": "7bfada4b4dc481c8017a3e2ebce56a7dfc4cee2447430b70142b147148e14e29"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/trie/Lib_MerkleTrie.sol:Lib_MerkleTrie": {
+        "src": "contracts/lib/external/trie/Lib_MerkleTrie.sol:12",
+        "version": {
+          "withMetadata": "d65a02e014c4eeaae2a2956c801b013756871883de6f007b8099f3ec3b5ec5ec",
+          "withoutMetadata": "d65a02e014c4eeaae2a2956c801b013756871883de6f007b8099f3ec3b5ec5ec",
+          "linkedWithoutMetadata": "d65a02e014c4eeaae2a2956c801b013756871883de6f007b8099f3ec3b5ec5ec"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/trie/Lib_SecureMerkleTrie.sol:Lib_SecureMerkleTrie": {
+        "src": "contracts/lib/external/trie/Lib_SecureMerkleTrie.sol:11",
+        "version": {
+          "withMetadata": "e97a6d0c203067f44f5029af4845e329006134ffda1e3e9f79f533af7116c771",
+          "withoutMetadata": "e97a6d0c203067f44f5029af4845e329006134ffda1e3e9f79f533af7116c771",
+          "linkedWithoutMetadata": "e97a6d0c203067f44f5029af4845e329006134ffda1e3e9f79f533af7116c771"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/utils/Bytes.sol:Bytes": {
+        "src": "contracts/lib/external/utils/Bytes.sol:6",
+        "version": {
+          "withMetadata": "eb645276b5cdd1dd5d4180dbfd69d9a436f5a05c0f7f7e0a6a57f1a80e4511ba",
+          "withoutMetadata": "eb645276b5cdd1dd5d4180dbfd69d9a436f5a05c0f7f7e0a6a57f1a80e4511ba",
+          "linkedWithoutMetadata": "eb645276b5cdd1dd5d4180dbfd69d9a436f5a05c0f7f7e0a6a57f1a80e4511ba"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/utils/Lib_BytesUtils.sol:Lib_BytesUtils": {
+        "src": "contracts/lib/external/utils/Lib_BytesUtils.sol:7",
+        "version": {
+          "withMetadata": "285ed43f711fb229b71649e982f2cc120e0f805cb18d27798d729807a03d7caf",
+          "withoutMetadata": "285ed43f711fb229b71649e982f2cc120e0f805cb18d27798d729807a03d7caf",
+          "linkedWithoutMetadata": "285ed43f711fb229b71649e982f2cc120e0f805cb18d27798d729807a03d7caf"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/ethereum/StorageProof.sol:StorageProof": {
+        "src": "contracts/verification/ethereum/StorageProof.sol:8",
+        "version": {
+          "withMetadata": "0f52640bb801d291ae62d177a47bbc88cf9a599555a9b933aa58727bdb9e7717",
+          "withoutMetadata": "0f52640bb801d291ae62d177a47bbc88cf9a599555a9b933aa58727bdb9e7717",
+          "linkedWithoutMetadata": "0f52640bb801d291ae62d177a47bbc88cf9a599555a9b933aa58727bdb9e7717"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "verifyAccount(bytes32,bytes,address)",
+          "verifyStorage(bytes32,bytes32,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/ethereum/Verifier.sol:EthereumVerifier": {
+        "src": "contracts/verification/ethereum/Verifier.sol:6",
+        "version": {
+          "withMetadata": "9172562f33a0d66643b22bbc81104ef28fa13ec6a2427b552093e8cec8a13270",
+          "withoutMetadata": "9172562f33a0d66643b22bbc81104ef28fa13ec6a2427b552093e8cec8a13270",
+          "linkedWithoutMetadata": "9172562f33a0d66643b22bbc81104ef28fa13ec6a2427b552093e8cec8a13270"
+        },
+        "inherit": [
+          "contracts/verification/ethereum/StorageProof.sol:StorageProof"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)",
+          "getStorageRoot(bytes32,uint256,address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "EthereumVerifier",
+            "src": "contracts/verification/ethereum/Verifier.sol:9"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "nexusStateManager",
+            "src": "contracts/verification/ethereum/Verifier.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/Blask2s.sol:Blake2S": {
+        "src": "contracts/verification/zksync/Blask2s.sol:13",
+        "version": {
+          "withMetadata": "e007f0e8fe908c246bb2857b56d1a37ed9f04bfb395135fc40f905caafd08ecf",
+          "withoutMetadata": "e007f0e8fe908c246bb2857b56d1a37ed9f04bfb395135fc40f905caafd08ecf",
+          "linkedWithoutMetadata": "e007f0e8fe908c246bb2857b56d1a37ed9f04bfb395135fc40f905caafd08ecf"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "toDigest(bytes)",
+          "toDigest(bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/SparseMerkleTree.sol:SparseMerkleTree": {
+        "src": "contracts/verification/zksync/SparseMerkleTree.sol:26",
+        "version": {
+          "withMetadata": "d703a6c6f0491bdda5daa4dfe29ff3a116421da7e75efa6f2b011cccdf4fa9a2",
+          "withoutMetadata": "d703a6c6f0491bdda5daa4dfe29ff3a116421da7e75efa6f2b011cccdf4fa9a2",
+          "linkedWithoutMetadata": "d703a6c6f0491bdda5daa4dfe29ff3a116421da7e75efa6f2b011cccdf4fa9a2"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "getRootHash(bytes32[],(uint256,bytes32,uint64),address)",
+          "hashBranch(bytes32,bytes32)",
+          "hashLeaf(uint64,bytes32)",
+          "bit(uint256,uint256)",
+          "reverse(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "SparseMerkleTree",
+            "src": "contracts/verification/zksync/SparseMerkleTree.sol:29"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "emptyTreeHashes_",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "SparseMerkleTree",
+              "src": "contracts/verification/zksync/SparseMerkleTree.sol:27"
+            }
+          ],
+          "types": {
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/StorageProof.sol:IZkSyncDiamond": {
+        "src": "contracts/verification/zksync/StorageProof.sol:8",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "storedBatchHash(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/StorageProof.sol:StorageProofVerifier": {
+        "src": "contracts/verification/zksync/StorageProof.sol:46",
+        "version": {
+          "withMetadata": "0a3ceef7ccd85360ef8cf0a92f2e893f6c9a56d12ff06dc4e8d37ed330a437e4",
+          "withoutMetadata": "0a3ceef7ccd85360ef8cf0a92f2e893f6c9a56d12ff06dc4e8d37ed330a437e4",
+          "linkedWithoutMetadata": "0a3ceef7ccd85360ef8cf0a92f2e893f6c9a56d12ff06dc4e8d37ed330a437e4"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "verify((uint64,address,uint256,bytes32,bytes32[],uint64))"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "StorageProofVerifier",
+            "src": "contracts/verification/zksync/StorageProof.sol:50"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "zksyncDiamondAddress",
+            "src": "contracts/verification/zksync/StorageProof.sol:47"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "smt",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(SparseMerkleTree)19018",
+              "contract": "StorageProofVerifier",
+              "src": "contracts/verification/zksync/StorageProof.sol:48"
+            }
+          ],
+          "types": {
+            "t_contract(SparseMerkleTree)19018": {
+              "label": "contract SparseMerkleTree",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/ZKSyncDiamond.sol:ZKSyncDiamond": {
+        "src": "contracts/verification/zksync/ZKSyncDiamond.sol:6",
+        "version": {
+          "withMetadata": "d46a7065375a3fba63865197aaf1c0c442d82050d7f760d7bf8da19d25cbc949",
+          "withoutMetadata": "d46a7065375a3fba63865197aaf1c0c442d82050d7f760d7bf8da19d25cbc949",
+          "linkedWithoutMetadata": "d46a7065375a3fba63865197aaf1c0c442d82050d7f760d7bf8da19d25cbc949"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address,bytes32)",
+          "storedBatchHash(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ZKSyncDiamond",
+            "src": "contracts/verification/zksync/ZKSyncDiamond.sol:11"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "proofManager",
+            "src": "contracts/verification/zksync/ZKSyncDiamond.sol:8"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "chainId",
+            "src": "contracts/verification/zksync/ZKSyncDiamond.sol:9"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "forge-std/console.sol:console": {
+        "src": "forge-std/console.sol:4",
+        "version": {
+          "withMetadata": "e8e6a9b90002d5214fc5ca7c5eb09888836b16eea6e725fae6e62c9af459f474",
+          "withoutMetadata": "e8e6a9b90002d5214fc5ca7c5eb09888836b16eea6e725fae6e62c9af459f474",
+          "linkedWithoutMetadata": "e8e6a9b90002d5214fc5ca7c5eb09888836b16eea6e725fae6e62c9af459f474"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      }
+    },
+    {
+      "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:AccessControlUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:50",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:ERC165Upgradeable",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl",
+          "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)",
+          "hasRole(bytes32,address)",
+          "getRoleAdmin(bytes32)",
+          "grantRole(bytes32,address)",
+          "revokeRole(bytes32,address)",
+          "renounceRole(bytes32,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_mapping(t_bytes32,t_struct(RoleData)25_storage)": {
+              "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_struct(RoleData)25_storage": {
+              "label": "struct AccessControlUpgradeable.RoleData",
+              "members": [
+                {
+                  "label": "hasRole",
+                  "type": "t_mapping(t_address,t_bool)"
+                },
+                {
+                  "label": "adminRole",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.AccessControl": [
+              {
+                "contract": "AccessControlUpgradeable",
+                "label": "_roles",
+                "type": "t_mapping(t_bytes32,t_struct(RoleData)25_storage)",
+                "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:61"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:AccessControlDefaultAdminRulesUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:41",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:AccessControlUpgradeable",
+          "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:ERC165Upgradeable",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/interfaces/IERC5313.sol:IERC5313",
+          "@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol:IAccessControlDefaultAdminRules",
+          "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl",
+          "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)",
+          "owner()",
+          "grantRole(bytes32,address)",
+          "revokeRole(bytes32,address)",
+          "renounceRole(bytes32,address)",
+          "defaultAdmin()",
+          "pendingDefaultAdmin()",
+          "defaultAdminDelay()",
+          "pendingDefaultAdminDelay()",
+          "defaultAdminDelayIncreaseWait()",
+          "beginDefaultAdminTransfer(address)",
+          "cancelDefaultAdminTransfer()",
+          "acceptDefaultAdminTransfer()",
+          "changeDefaultAdminDelay(uint48)",
+          "rollbackDefaultAdminDelay()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_address": {
+              "label": "address"
+            },
+            "t_uint48": {
+              "label": "uint48"
+            },
+            "t_mapping(t_bytes32,t_struct(RoleData)25_storage)": {
+              "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_struct(RoleData)25_storage": {
+              "label": "struct AccessControlUpgradeable.RoleData",
+              "members": [
+                {
+                  "label": "hasRole",
+                  "type": "t_mapping(t_address,t_bool)"
+                },
+                {
+                  "label": "adminRole",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.AccessControlDefaultAdminRules": [
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDefaultAdmin",
+                "type": "t_address",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:45"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDefaultAdminSchedule",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:46"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_currentDelay",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:48"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_currentDefaultAdmin",
+                "type": "t_address",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:49"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDelay",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:52"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDelaySchedule",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:53"
+              }
+            ],
+            "erc7201:openzeppelin.storage.AccessControl": [
+              {
+                "contract": "AccessControlUpgradeable",
+                "label": "_roles",
+                "type": "t_mapping(t_bytes32,t_struct(RoleData)25_storage)",
+                "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:61"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable": {
+        "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:56",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_uint64": {
+              "label": "uint64"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:17",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_uint64": {
+              "label": "uint64"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:PausableUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:18",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "paused()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.Pausable": [
+              {
+                "contract": "PausableUpgradeable",
+                "label": "_paused",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:21"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:ReentrancyGuardUpgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:23",
+        "inherit": [
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.ReentrancyGuard": [
+              {
+                "contract": "ReentrancyGuardUpgradeable",
+                "label": "_status",
+                "type": "t_uint256",
+                "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:40"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:ERC165Upgradeable": {
+        "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:21",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {
+            "t_uint64": {
+              "label": "uint64"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl": {
+        "src": "@openzeppelin/contracts/access/IAccessControl.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "hasRole(bytes32,address)",
+          "getRoleAdmin(bytes32)",
+          "grantRole(bytes32,address)",
+          "revokeRole(bytes32,address)",
+          "renounceRole(bytes32,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol:IAccessControlDefaultAdminRules": {
+        "src": "@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol:11",
+        "inherit": [
+          "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl"
+        ],
+        "libraries": [],
+        "methods": [
+          "defaultAdmin()",
+          "pendingDefaultAdmin()",
+          "defaultAdminDelay()",
+          "pendingDefaultAdminDelay()",
+          "beginDefaultAdminTransfer(address)",
+          "cancelDefaultAdminTransfer()",
+          "acceptDefaultAdminTransfer()",
+          "changeDefaultAdminDelay(uint48)",
+          "rollbackDefaultAdminDelay()",
+          "defaultAdminDelayIncreaseWait()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/interfaces/IERC5313.sol:IERC5313": {
+        "src": "@openzeppelin/contracts/interfaces/IERC5313.sol:11",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "owner()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC1155Errors": {
+        "src": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:113",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC20Errors": {
+        "src": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC721Errors": {
+        "src": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:55",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol:IERC20Permit": {
+        "src": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol:42",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+          "nonces(address)",
+          "DOMAIN_SEPARATOR()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol:SafeERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol:19",
+        "version": {
+          "withMetadata": "b889703ac1e865ca3aa38958224034a02f7c73a8bfe697c0df95a792c66687dd",
+          "withoutMetadata": "b889703ac1e865ca3aa38958224034a02f7c73a8bfe697c0df95a792c66687dd",
+          "linkedWithoutMetadata": "b889703ac1e865ca3aa38958224034a02f7c73a8bfe697c0df95a792c66687dd"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC721/ERC721.sol:ERC721": {
+        "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:19",
+        "inherit": [
+          "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC721Errors",
+          "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata",
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)",
+          "balanceOf(address)",
+          "ownerOf(uint256)",
+          "name()",
+          "symbol()",
+          "tokenURI(uint256)",
+          "approve(address,uint256)",
+          "getApproved(uint256)",
+          "setApprovalForAll(address,bool)",
+          "isApprovedForAll(address,address)",
+          "transferFrom(address,address,uint256)",
+          "safeTransferFrom(address,address,uint256)",
+          "safeTransferFrom(address,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:23"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:26"
+            },
+            {
+              "label": "_owners",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:28"
+            },
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:30"
+            },
+            {
+              "label": "_tokenApprovals",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:32"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:34"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721": {
+        "src": "@openzeppelin/contracts/token/ERC721/IERC721.sol:11",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "balanceOf(address)",
+          "ownerOf(uint256)",
+          "safeTransferFrom(address,address,uint256,bytes)",
+          "safeTransferFrom(address,address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "approve(address,uint256)",
+          "setApprovalForAll(address,bool)",
+          "getApproved(uint256)",
+          "isApprovedForAll(address,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol:IERC721Receiver": {
+        "src": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol:11",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "onERC721Received(address,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata": {
+        "src": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:12",
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "tokenURI(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/Address.sol:Address": {
+        "src": "@openzeppelin/contracts/utils/Address.sol:9",
+        "version": {
+          "withMetadata": "63ca5a9e5325e3dab9e7f498bada39ce94e861903c55e3439c891b85d4e234d8",
+          "withoutMetadata": "63ca5a9e5325e3dab9e7f498bada39ce94e861903c55e3439c891b85d4e234d8",
+          "linkedWithoutMetadata": "63ca5a9e5325e3dab9e7f498bada39ce94e861903c55e3439c891b85d4e234d8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:105"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/Context.sol:Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/Strings.sol:Strings": {
+        "src": "@openzeppelin/contracts/utils/Strings.sol:12",
+        "version": {
+          "withMetadata": "7c698b369a4291e56ea7d3fe832e435cb28aa8557c25689f5331d937257f584b",
+          "withoutMetadata": "7c698b369a4291e56ea7d3fe832e435cb28aa8557c25689f5331d937257f584b",
+          "linkedWithoutMetadata": "7c698b369a4291e56ea7d3fe832e435cb28aa8557c25689f5331d937257f584b"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165": {
+        "src": "@openzeppelin/contracts/utils/introspection/ERC165.sol:20",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165": {
+        "src": "@openzeppelin/contracts/utils/introspection/IERC165.sol:15",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/math/Math.sol:Math": {
+        "src": "@openzeppelin/contracts/utils/math/Math.sol:9",
+        "version": {
+          "withMetadata": "5526bd183e1453d4b1cb48fd53ccc561f2b1f0e480d11225483007e72eee860c",
+          "withoutMetadata": "5526bd183e1453d4b1cb48fd53ccc561f2b1f0e480d11225483007e72eee860c",
+          "linkedWithoutMetadata": "5526bd183e1453d4b1cb48fd53ccc561f2b1f0e480d11225483007e72eee860c"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/math/SafeCast.sol:SafeCast": {
+        "src": "@openzeppelin/contracts/utils/math/SafeCast.sol:19",
+        "version": {
+          "withMetadata": "c0735be54d086b3bc76bc66a2d3c44729bb694c4d853a49f1d45b9d0118f3202",
+          "withoutMetadata": "c0735be54d086b3bc76bc66a2d3c44729bb694c4d853a49f1d45b9d0118f3202",
+          "linkedWithoutMetadata": "c0735be54d086b3bc76bc66a2d3c44729bb694c4d853a49f1d45b9d0118f3202"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "@openzeppelin/contracts/utils/math/SignedMath.sol:SignedMath": {
+        "src": "@openzeppelin/contracts/utils/math/SignedMath.sol:9",
+        "version": {
+          "withMetadata": "0cc9d643bafb08fd52dd4c2000de9cb2460912a743bf4571b3ef49f9d89ae822",
+          "withoutMetadata": "0cc9d643bafb08fd52dd4c2000de9cb2460912a743bf4571b3ef49f9d89ae822",
+          "linkedWithoutMetadata": "0cc9d643bafb08fd52dd4c2000de9cb2460912a743bf4571b3ef49f9d89ae822"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/NexusBridge.sol:NexusBridge": {
+        "src": "contracts/example/bridge/NexusBridge.sol:22",
+        "version": {
+          "withMetadata": "704e8dec58205fa316ce35e163012400260ec059fd38e12e7d02a1a35d8e32a0",
+          "withoutMetadata": "704e8dec58205fa316ce35e163012400260ec059fd38e12e7d02a1a35d8e32a0",
+          "linkedWithoutMetadata": "704e8dec58205fa316ce35e163012400260ec059fd38e12e7d02a1a35d8e32a0"
+        },
+        "inherit": [
+          "contracts/example/bridge/interfaces/INexusBridge.sol:INexusBridge",
+          "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:AccessControlDefaultAdminRulesUpgradeable",
+          "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:AccessControlUpgradeable",
+          "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:ERC165Upgradeable",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/interfaces/IERC5313.sol:IERC5313",
+          "@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol:IAccessControlDefaultAdminRules",
+          "@openzeppelin/contracts/access/IAccessControl.sol:IAccessControl",
+          "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:PausableUpgradeable",
+          "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:ContextUpgradeable",
+          "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:ReentrancyGuardUpgradeable",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable"
+        ],
+        "libraries": [],
+        "methods": [
+          "initialize(uint256,address,address,address,address,address,bytes32,address)",
+          "setPaused(bool)",
+          "updateTokens(bytes32[],address[])",
+          "updateNexusTokens(bytes32[],address[])",
+          "updateFeePerByte(uint256)",
+          "updateFeeRecipient(address)",
+          "withdrawFees()",
+          "receiveMessage((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "receiveETH((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "receiveERC20((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "sendMessage(bytes32,bytes)",
+          "sendETH(bytes32)",
+          "sendERC20(bytes32,bytes32,uint256)",
+          "getFee(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "label": "isSent",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:33"
+            },
+            {
+              "label": "isBridged",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_bool)",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:35"
+            },
+            {
+              "label": "tokens",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:37"
+            },
+            {
+              "label": "nexusTokens",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:39"
+            },
+            {
+              "label": "avail",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_contract(IAvail)8366",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:41"
+            },
+            {
+              "label": "nexus",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_contract(INexusProofManager)9404",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:42"
+            },
+            {
+              "label": "verifier",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_contract(EthereumVerifier)13357",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:43"
+            },
+            {
+              "label": "feeRecipient",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_address",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:44"
+            },
+            {
+              "label": "fees",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_uint256",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:45"
+            },
+            {
+              "label": "feePerByte",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_uint256",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:46"
+            },
+            {
+              "label": "messageId",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_uint256",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:47"
+            },
+            {
+              "label": "chainId",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_bytes32",
+              "contract": "NexusBridge",
+              "src": "contracts/example/bridge/NexusBridge.sol:48"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(EthereumVerifier)13357": {
+              "label": "contract EthereumVerifier",
+              "numberOfBytes": "20"
+            },
+            "t_contract(IAvail)8366": {
+              "label": "contract IAvail",
+              "numberOfBytes": "20"
+            },
+            "t_contract(INexusProofManager)9404": {
+              "label": "contract INexusProofManager",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_bytes32,t_bool)": {
+              "label": "mapping(bytes32 => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            },
+            "t_uint48": {
+              "label": "uint48"
+            },
+            "t_mapping(t_bytes32,t_struct(RoleData)25_storage)": {
+              "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)"
+            },
+            "t_struct(RoleData)25_storage": {
+              "label": "struct AccessControlUpgradeable.RoleData",
+              "members": [
+                {
+                  "label": "hasRole",
+                  "type": "t_mapping(t_address,t_bool)"
+                },
+                {
+                  "label": "adminRole",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_uint64": {
+              "label": "uint64"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {
+            "erc7201:openzeppelin.storage.AccessControlDefaultAdminRules": [
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDefaultAdmin",
+                "type": "t_address",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:45"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDefaultAdminSchedule",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:46"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_currentDelay",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:48"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_currentDefaultAdmin",
+                "type": "t_address",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:49"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDelay",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:52"
+              },
+              {
+                "contract": "AccessControlDefaultAdminRulesUpgradeable",
+                "label": "_pendingDelaySchedule",
+                "type": "t_uint48",
+                "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:53"
+              }
+            ],
+            "erc7201:openzeppelin.storage.AccessControl": [
+              {
+                "contract": "AccessControlUpgradeable",
+                "label": "_roles",
+                "type": "t_mapping(t_bytes32,t_struct(RoleData)25_storage)",
+                "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:61"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Pausable": [
+              {
+                "contract": "PausableUpgradeable",
+                "label": "_paused",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:21"
+              }
+            ],
+            "erc7201:openzeppelin.storage.ReentrancyGuard": [
+              {
+                "contract": "ReentrancyGuardUpgradeable",
+                "label": "_status",
+                "type": "t_uint256",
+                "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:40"
+              }
+            ],
+            "erc7201:openzeppelin.storage.Initializable": [
+              {
+                "contract": "Initializable",
+                "label": "_initialized",
+                "type": "t_uint64",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+              },
+              {
+                "contract": "Initializable",
+                "label": "_initializing",
+                "type": "t_bool",
+                "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+              }
+            ]
+          }
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/interfaces/IAvail.sol:IAvail": {
+        "src": "contracts/example/bridge/interfaces/IAvail.sol:6",
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "mint(address,uint256)",
+          "burn(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/interfaces/IMessageReceiver.sol:IMessageReceiver": {
+        "src": "contracts/example/bridge/interfaces/IMessageReceiver.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "onAvailMessage(bytes32,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/interfaces/INexusBridge.sol:INexusBridge": {
+        "src": "contracts/example/bridge/interfaces/INexusBridge.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "setPaused(bool)",
+          "updateTokens(bytes32[],address[])",
+          "updateFeePerByte(uint256)",
+          "updateFeeRecipient(address)",
+          "withdrawFees()",
+          "receiveMessage((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "receiveETH((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "receiveERC20((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32),bytes)",
+          "sendMessage(bytes32,bytes)",
+          "sendETH(bytes32)",
+          "sendERC20(bytes32,bytes32,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/interfaces/IVectorx.sol:IVectorx": {
+        "src": "contracts/example/bridge/interfaces/IVectorx.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "dataRootCommitments(bytes32)",
+          "rangeStartBlocks(bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/bridge/lib/Merkle.sol:Merkle": {
+        "src": "contracts/example/bridge/lib/Merkle.sol:11",
+        "version": {
+          "withMetadata": "f296a0b01ad5822dd77dc83653d24adf5b332585ee22c8656c93f6827364aa21",
+          "withoutMetadata": "f296a0b01ad5822dd77dc83653d24adf5b332585ee22c8656c93f6827364aa21",
+          "linkedWithoutMetadata": "f296a0b01ad5822dd77dc83653d24adf5b332585ee22c8656c93f6827364aa21"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/zknft/NFT.sol:MyNFT": {
+        "src": "contracts/example/zknft/NFT.sol:9",
+        "version": {
+          "withMetadata": "7a6efa8a7bc1932083a991dae46ff30d0d81d0facc6aa43cabb12daaf4a2eb83",
+          "withoutMetadata": "7a6efa8a7bc1932083a991dae46ff30d0d81d0facc6aa43cabb12daaf4a2eb83",
+          "linkedWithoutMetadata": "7a6efa8a7bc1932083a991dae46ff30d0d81d0facc6aa43cabb12daaf4a2eb83"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC721/ERC721.sol:ERC721",
+          "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC721Errors",
+          "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata",
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(bytes32,bytes32,address,address)",
+          "mintNFT(address,(bytes1,bytes32,bytes,uint256,uint256),(uint64,address,uint256,bytes32,bytes32[],uint64))",
+          "verifyPayment((uint64,address,uint256,bytes32,bytes32[],uint64))"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "MyNFT",
+            "src": "contracts/example/zknft/NFT.sol:33"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "selfChainId",
+            "src": "contracts/example/zknft/NFT.sol:16"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "paymentChainID",
+            "src": "contracts/example/zknft/NFT.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:23"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:26"
+            },
+            {
+              "label": "_owners",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:28"
+            },
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:30"
+            },
+            {
+              "label": "_tokenApprovals",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:32"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC721",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:34"
+            },
+            {
+              "label": "confirmationReceipts",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:10"
+            },
+            {
+              "label": "usedMessageid",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:11"
+            },
+            {
+              "label": "_tokenIds",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_uint256",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:13"
+            },
+            {
+              "label": "nexus",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_contract(INexusProofManager)9404",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:14"
+            },
+            {
+              "label": "storageProof",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_contract(StorageProofVerifier)16309",
+              "contract": "MyNFT",
+              "src": "contracts/example/zknft/NFT.sol:15"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(INexusProofManager)9404": {
+              "label": "contract INexusProofManager",
+              "numberOfBytes": "20"
+            },
+            "t_contract(StorageProofVerifier)16309": {
+              "label": "contract StorageProofVerifier",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bool)": {
+              "label": "mapping(uint256 => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/zknft/NftPayment.sol:NFTPayment": {
+        "src": "contracts/example/zknft/NftPayment.sol:8",
+        "version": {
+          "withMetadata": "1ce76ae8995ff011040063d2a2ed4f8661cfd74cfab6ab5a0ecc2c8bd5cf13b0",
+          "withoutMetadata": "1ce76ae8995ff011040063d2a2ed4f8661cfd74cfab6ab5a0ecc2c8bd5cf13b0",
+          "linkedWithoutMetadata": "1ce76ae8995ff011040063d2a2ed4f8661cfd74cfab6ab5a0ecc2c8bd5cf13b0"
+        },
+        "inherit": [
+          "contracts/verification/ethereum/Verifier.sol:EthereumVerifier",
+          "contracts/verification/ethereum/StorageProof.sol:StorageProof",
+          "contracts/example/zknft/Payment.sol:Payment"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address,address)",
+          "paymentWithoutFallback(bytes1,uint256,uint256,address)",
+          "paymentWithFallback(bytes1,uint256,uint256,address)",
+          "claimPayment(uint256)",
+          "verifyPayment(bytes32,bytes,bytes32,bytes)",
+          "updatePrice(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NFTPayment",
+            "src": "contracts/example/zknft/NftPayment.sol:35"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "CLAIM_TIME",
+            "src": "contracts/example/zknft/NftPayment.sol:11"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "FIXED_PAYOUT_ADDRESS",
+            "src": "contracts/example/zknft/NftPayment.sol:12"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "TARGET_CONTRACT_ADDRESS",
+            "src": "contracts/example/zknft/NftPayment.sol:13"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "claimCounter",
+            "src": "contracts/example/zknft/NftPayment.sol:14"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "idToHash",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "Payment",
+              "src": "contracts/example/zknft/Payment.sol:6"
+            },
+            {
+              "label": "nexus",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_contract(INexusProofManager)9404",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:9"
+            },
+            {
+              "label": "CLAIM_TIME",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:11"
+            },
+            {
+              "label": "claimCounter",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_uint256",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:14"
+            },
+            {
+              "label": "payoutPrice",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:20"
+            },
+            {
+              "label": "pendingPayouts",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_array(t_struct(PendingPayment)8851_storage)dyn_storage",
+              "contract": "NFTPayment",
+              "src": "contracts/example/zknft/NftPayment.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_struct(PendingPayment)8851_storage)dyn_storage": {
+              "label": "struct NFTPayment.PendingPayment[]",
+              "numberOfBytes": "32"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(INexusProofManager)9404": {
+              "label": "contract INexusProofManager",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_struct(PendingPayment)8851_storage": {
+              "label": "struct NFTPayment.PendingPayment",
+              "members": [
+                {
+                  "label": "to",
+                  "type": "t_address",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "amount",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "1"
+                },
+                {
+                  "label": "tokenAddress",
+                  "type": "t_address",
+                  "offset": 0,
+                  "slot": "2"
+                },
+                {
+                  "label": "timestamp",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "3"
+                }
+              ],
+              "numberOfBytes": "128"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/example/zknft/Payment.sol:Payment": {
+        "src": "contracts/example/zknft/Payment.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getValueFromId(uint256)",
+          "getStorageLocationForKey(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "label": "idToHash",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "Payment",
+              "src": "contracts/example/zknft/Payment.sol:6"
+            }
+          ],
+          "types": {
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/interfaces/INexusProofManager.sol:INexusProofManager": {
+        "src": "contracts/interfaces/INexusProofManager.sol:5",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getStorageRoot(bytes32,uint256,address,bytes)",
+          "getChainState(uint256,bytes32)",
+          "nexusAppIDToLatestBlockNumber(bytes32)",
+          "nexusAppIDToState(bytes32,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/rlp/Lib_RLPReader.sol:Lib_RLPReader": {
+        "src": "contracts/lib/external/rlp/Lib_RLPReader.sol:8",
+        "version": {
+          "withMetadata": "074756af578aa742d868142d314734a904cc2fcaac08a589b135073b4c4f1cb0",
+          "withoutMetadata": "074756af578aa742d868142d314734a904cc2fcaac08a589b135073b4c4f1cb0",
+          "linkedWithoutMetadata": "074756af578aa742d868142d314734a904cc2fcaac08a589b135073b4c4f1cb0"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/rlp/Lib_RLPWriter.sol:Lib_RLPWriter": {
+        "src": "contracts/lib/external/rlp/Lib_RLPWriter.sol:12",
+        "version": {
+          "withMetadata": "cf771fb37736e921a890f7e957129062ffb4cc97cee4e7045c402b160376851c",
+          "withoutMetadata": "cf771fb37736e921a890f7e957129062ffb4cc97cee4e7045c402b160376851c",
+          "linkedWithoutMetadata": "cf771fb37736e921a890f7e957129062ffb4cc97cee4e7045c402b160376851c"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/trie/Lib_MerkleTrie.sol:Lib_MerkleTrie": {
+        "src": "contracts/lib/external/trie/Lib_MerkleTrie.sol:12",
+        "version": {
+          "withMetadata": "a26dc5ef78dc07f752e752d1758230400e9ea3c57f898965726b95ad573e77a1",
+          "withoutMetadata": "a26dc5ef78dc07f752e752d1758230400e9ea3c57f898965726b95ad573e77a1",
+          "linkedWithoutMetadata": "a26dc5ef78dc07f752e752d1758230400e9ea3c57f898965726b95ad573e77a1"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/trie/Lib_SecureMerkleTrie.sol:Lib_SecureMerkleTrie": {
+        "src": "contracts/lib/external/trie/Lib_SecureMerkleTrie.sol:11",
+        "version": {
+          "withMetadata": "310b3987b70182caf4b8b6a21a3260927d01683d4a9f0842a61184b4dc9f6603",
+          "withoutMetadata": "310b3987b70182caf4b8b6a21a3260927d01683d4a9f0842a61184b4dc9f6603",
+          "linkedWithoutMetadata": "310b3987b70182caf4b8b6a21a3260927d01683d4a9f0842a61184b4dc9f6603"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/lib/external/utils/Lib_BytesUtils.sol:Lib_BytesUtils": {
+        "src": "contracts/lib/external/utils/Lib_BytesUtils.sol:7",
+        "version": {
+          "withMetadata": "51c6ea24ff70ad0f6b5ad58d8b792534451b60dfa758629d0a92beb21be2cafb",
+          "withoutMetadata": "51c6ea24ff70ad0f6b5ad58d8b792534451b60dfa758629d0a92beb21be2cafb",
+          "linkedWithoutMetadata": "51c6ea24ff70ad0f6b5ad58d8b792534451b60dfa758629d0a92beb21be2cafb"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/ethereum/StorageProof.sol:StorageProof": {
+        "src": "contracts/verification/ethereum/StorageProof.sol:8",
+        "version": {
+          "withMetadata": "cda60690ce85de2832bad93aa30806a8f334c2d4483a1f071c4891c441d85093",
+          "withoutMetadata": "cda60690ce85de2832bad93aa30806a8f334c2d4483a1f071c4891c441d85093",
+          "linkedWithoutMetadata": "cda60690ce85de2832bad93aa30806a8f334c2d4483a1f071c4891c441d85093"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "verifyAccount(bytes32,bytes,address)",
+          "verifyStorage(bytes32,bytes32,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/ethereum/Verifier.sol:EthereumVerifier": {
+        "src": "contracts/verification/ethereum/Verifier.sol:6",
+        "version": {
+          "withMetadata": "f2c7ec4ced7b73826eae57a4988acfc2c3bee7ab2f7a5d1b870c46224fbc04ab",
+          "withoutMetadata": "f2c7ec4ced7b73826eae57a4988acfc2c3bee7ab2f7a5d1b870c46224fbc04ab",
+          "linkedWithoutMetadata": "f2c7ec4ced7b73826eae57a4988acfc2c3bee7ab2f7a5d1b870c46224fbc04ab"
+        },
+        "inherit": [
+          "contracts/verification/ethereum/StorageProof.sol:StorageProof"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)",
+          "getStorageRoot(bytes32,uint256,address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "EthereumVerifier",
+            "src": "contracts/verification/ethereum/Verifier.sol:9"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "nexusStateManager",
+            "src": "contracts/verification/ethereum/Verifier.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/Blask2s.sol:Blake2S": {
+        "src": "contracts/verification/zksync/Blask2s.sol:13",
+        "version": {
+          "withMetadata": "978f9308736476a1288d6d8164e278b59672a8853da9233957131a3bb5834b71",
+          "withoutMetadata": "978f9308736476a1288d6d8164e278b59672a8853da9233957131a3bb5834b71",
+          "linkedWithoutMetadata": "978f9308736476a1288d6d8164e278b59672a8853da9233957131a3bb5834b71"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "toDigest(bytes)",
+          "toDigest(bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/SparseMerkleTree.sol:SparseMerkleTree": {
+        "src": "contracts/verification/zksync/SparseMerkleTree.sol:26",
+        "version": {
+          "withMetadata": "0b137709cda3e824f559ae7c59f009253bc4e72e7d837c7cfeafa34fec1baf8a",
+          "withoutMetadata": "0b137709cda3e824f559ae7c59f009253bc4e72e7d837c7cfeafa34fec1baf8a",
+          "linkedWithoutMetadata": "0b137709cda3e824f559ae7c59f009253bc4e72e7d837c7cfeafa34fec1baf8a"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "getRootHash(bytes32[],(uint256,bytes32,uint64),address)",
+          "hashBranch(bytes32,bytes32)",
+          "hashLeaf(uint64,bytes32)",
+          "bit(uint256,uint256)",
+          "reverse(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "SparseMerkleTree",
+            "src": "contracts/verification/zksync/SparseMerkleTree.sol:29"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "emptyTreeHashes_",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "SparseMerkleTree",
+              "src": "contracts/verification/zksync/SparseMerkleTree.sol:27"
+            }
+          ],
+          "types": {
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/StorageProof.sol:IZkSyncDiamond": {
+        "src": "contracts/verification/zksync/StorageProof.sol:8",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "storedBatchHash(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/StorageProof.sol:StorageProofVerifier": {
+        "src": "contracts/verification/zksync/StorageProof.sol:46",
+        "version": {
+          "withMetadata": "07b29bb4b7cc643ea1513a38d91a5c3a4b177f9728fa10108e89e3ef47c24556",
+          "withoutMetadata": "07b29bb4b7cc643ea1513a38d91a5c3a4b177f9728fa10108e89e3ef47c24556",
+          "linkedWithoutMetadata": "07b29bb4b7cc643ea1513a38d91a5c3a4b177f9728fa10108e89e3ef47c24556"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "verify((uint64,address,uint256,bytes32,bytes32[],uint64))"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "StorageProofVerifier",
+            "src": "contracts/verification/zksync/StorageProof.sol:50"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "zksyncDiamondAddress",
+            "src": "contracts/verification/zksync/StorageProof.sol:47"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "smt",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(SparseMerkleTree)16174",
+              "contract": "StorageProofVerifier",
+              "src": "contracts/verification/zksync/StorageProof.sol:48"
+            }
+          ],
+          "types": {
+            "t_contract(SparseMerkleTree)16174": {
+              "label": "contract SparseMerkleTree",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "contracts/verification/zksync/ZKSyncDiamond.sol:ZKSyncDiamond": {
+        "src": "contracts/verification/zksync/ZKSyncDiamond.sol:6",
+        "version": {
+          "withMetadata": "b8b61fe7c9c0c041e59bc2fd556c5b0e0d16182e3fe2601de62b98c979541d20",
+          "withoutMetadata": "b8b61fe7c9c0c041e59bc2fd556c5b0e0d16182e3fe2601de62b98c979541d20",
+          "linkedWithoutMetadata": "b8b61fe7c9c0c041e59bc2fd556c5b0e0d16182e3fe2601de62b98c979541d20"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address,bytes32)",
+          "storedBatchHash(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ZKSyncDiamond",
+            "src": "contracts/verification/zksync/ZKSyncDiamond.sol:11"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "proofManager",
+            "src": "contracts/verification/zksync/ZKSyncDiamond.sol:8"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "chainId",
+            "src": "contracts/verification/zksync/ZKSyncDiamond.sol:9"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      },
+      "forge-std/console.sol:console": {
+        "src": "forge-std/console.sol:4",
+        "version": {
+          "withMetadata": "8bdaeb2082c81138faf0a3504dbe2fe456be81413cbb1e54361b6ee60ada88df",
+          "withoutMetadata": "8bdaeb2082c81138faf0a3504dbe2fe456be81413cbb1e54361b6ee60ada88df",
+          "linkedWithoutMetadata": "8bdaeb2082c81138faf0a3504dbe2fe456be81413cbb1e54361b6ee60ada88df"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.20"
+      }
+    },
+    {
       "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC1155Errors": {
         "src": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:113",
         "inherit": [],

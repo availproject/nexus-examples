@@ -15,8 +15,8 @@ export const nexusRPCUrl = "http://127.0.0.1:7000";
 export const nexusAppID =
   "3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 export const privateKeyZkSync =
-  "0xc76bee37a768a74d893d86041a6339bab150679c14c273a33afff53874f87b42";
+  "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 export const privateKeyZkSync2 =
-  "0xc76bee37a768a74d893d86041a6339bab150679c14c273a33afff53874f87b42";
+  "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 
 export const amount = ethers.toBigInt("1000000000000000000");
