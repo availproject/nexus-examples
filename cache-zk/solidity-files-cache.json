@@ -31,7 +31,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -50,7 +50,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -99,7 +99,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -118,7 +118,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -164,7 +164,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -183,7 +183,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -229,7 +229,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -248,7 +248,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -297,7 +297,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -316,7 +316,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -365,7 +365,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -384,7 +384,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -432,7 +432,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -451,7 +451,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -497,7 +497,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -516,7 +516,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -566,7 +566,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -585,7 +585,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -631,7 +631,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -650,7 +650,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -698,7 +698,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -717,7 +717,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -766,7 +766,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -785,7 +785,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -831,7 +831,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -850,7 +850,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -900,7 +900,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -919,7 +919,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -965,7 +965,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -984,7 +984,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1030,7 +1030,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1049,7 +1049,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1097,7 +1097,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1116,7 +1116,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1167,7 +1167,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1186,7 +1186,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1234,7 +1234,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1253,7 +1253,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1299,7 +1299,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1318,7 +1318,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1372,7 +1372,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1391,7 +1391,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1440,7 +1440,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1459,7 +1459,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1507,7 +1507,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1526,7 +1526,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1572,7 +1572,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1591,7 +1591,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1639,7 +1639,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1658,7 +1658,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1706,7 +1706,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1725,7 +1725,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1771,7 +1771,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1790,7 +1790,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1836,7 +1836,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1855,7 +1855,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1901,7 +1901,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1920,7 +1920,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -1969,7 +1969,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -1988,7 +1988,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2034,7 +2034,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2053,7 +2053,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2104,7 +2104,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2123,7 +2123,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2171,7 +2171,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2190,7 +2190,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2236,7 +2236,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2255,7 +2255,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2303,7 +2303,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2322,7 +2322,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2376,7 +2376,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2395,7 +2395,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2441,7 +2441,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2460,7 +2460,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2506,7 +2506,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2525,7 +2525,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2584,7 +2584,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2603,7 +2603,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2651,7 +2651,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2670,7 +2670,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2716,7 +2716,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2735,7 +2735,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2781,7 +2781,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2800,7 +2800,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2848,7 +2848,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2867,7 +2867,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2915,7 +2915,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -2934,7 +2934,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -2983,7 +2983,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3002,7 +3002,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3052,7 +3052,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3071,7 +3071,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3117,7 +3117,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3136,7 +3136,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3182,7 +3182,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3201,7 +3201,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3218,8 +3218,8 @@
       ]
     },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/zknft/NFT.sol": {
-      "lastModificationDate": 1724845224347,
-      "contentHash": "8fffc3d462fd17f40789d59c277aee16",
+      "lastModificationDate": 1724853212051,
+      "contentHash": "a27615154dac94d2c005bb6d0e27b5b6",
       "sourceName": "contracts/example/zknft/NFT.sol",
       "solcConfig": {
         "version": "0.8.20",
@@ -3247,7 +3247,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3266,7 +3266,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3317,7 +3317,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3336,7 +3336,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3386,7 +3386,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3405,7 +3405,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3453,7 +3453,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3472,7 +3472,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3518,7 +3518,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3537,7 +3537,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3585,7 +3585,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3604,7 +3604,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3652,7 +3652,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3671,7 +3671,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3717,7 +3717,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3736,7 +3736,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3785,7 +3785,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3804,7 +3804,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3853,7 +3853,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3872,7 +3872,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3920,7 +3920,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -3939,7 +3939,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -3988,7 +3988,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4007,7 +4007,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -4053,7 +4053,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4072,7 +4072,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -4124,7 +4124,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4143,7 +4143,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -4189,7 +4189,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4208,7 +4208,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -4254,7 +4254,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4273,7 +4273,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -4319,7 +4319,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4338,7 +4338,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -4384,7 +4384,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4403,7 +4403,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -4449,7 +4449,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4468,7 +4468,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -4514,7 +4514,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4533,7 +4533,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,
@@ -4583,7 +4583,7 @@
           "enableEraVMExtensions": false,
           "libraries": {
             "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+              "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
             }
           }
         },
@@ -4602,7 +4602,7 @@
             "experimental": {},
             "libraries": {
               "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x801Cea7757b6dEB8a68F74554432914b71088994"
+                "JellyfishMerkleTreeVerifier": "0x4D50015B093cb8ea493Eda2711401Ec1368579BC"
               }
             },
             "enableEraVMExtensions": false,

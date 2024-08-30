@@ -18,7 +18,7 @@ import {
   nexusRPCUrl,
   nexusAppID,
   amount,
-  privateKeyGeth,
+  privateKeyZkSync2,
   privateKeyZkSync,
 } from "./config";
 
@@ -67,7 +67,7 @@ async function main() {
     return;
   }
   let signerPayment = new ethers.Wallet(privateKeyZkSync, providerPayment);
-  let signerNFT = new ethers.Wallet(privateKeyGeth, providerNFT);
+  let signerNFT = new ethers.Wallet(privateKeyZkSync2, providerNFT);
 
   const stateManagerNFTChain = new ethers.Contract(
     stateManagerNFTChainAddr,
@@ -323,11 +323,14 @@ async function mintNFT(
     }
 
     const transferEvents = txDetails.logs.filter((log) => {
-      return log.topics[0] === ethers.id("Transfer(address,address,uint256)");
+      return (
+        log.topics[0] === ethers.id("Confirmation(uint256,uint256,address)")
+      );
     });
 
     // Decode each Transfer event
     const decodedEvents = transferEvents.map((log) => {
+      console.log(log);
       return {
         from: ethers.AbiCoder.defaultAbiCoder().decode(
           ["address"],

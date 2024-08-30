@@ -8,10 +8,7 @@ async function main() {
   console.log("Deploying contracts with the account:", signer.address);
   const wallet = new Wallet(privateKeyGeth);
   const deployer = new Deployer(hre, wallet);
-  const JMT = await deployer.loadArtifact("JellyfishMerkleTreeVerifier");
-  const jmt = await deployer.deploy(JMT);
 
-  console.log("JMT", await jmt.getAddress());
   const NexusProofManager = await deployer.loadArtifact("NexusProofManager");
   const nexusManager = await deployer.deploy(NexusProofManager, [
     "0x" + nexusAppID,
@@ -21,11 +18,6 @@ async function main() {
     "NexusProofManager deployed to:",
     await nexusManager.getAddress()
   );
-
-  const AvailToken = await deployer.loadArtifact("ERC20Token");
-  const availToken = await deployer.deploy(AvailToken, ["Avail", "AVAIL"]);
-
-  console.log("Avail Token:", await availToken.getAddress());
 
   const ZKSyncDiamond = await deployer.loadArtifact("ZKSyncDiamond");
   const zksyncdiamond = await deployer.deploy(ZKSyncDiamond, [
@@ -43,8 +35,8 @@ async function main() {
     await sparseMerkleTree.getAddress(),
   ]);
 
-  console.log("Sparse Merkle Tree: ", await sparseMerkleTree.getAddress());
-  console.log("ZKSync Diamond Contract: ", await zksyncdiamond.getAddress());
+  // console.log("Sparse Merkle Tree: ", await sparseMerkleTree.getAddress());
+  // console.log("ZKSync Diamond Contract: ", await zksyncdiamond.getAddress());
 
   const MyNFT = await deployer.loadArtifact("MyNFT");
   const nftContract = await deployer.deploy(MyNFT, [
