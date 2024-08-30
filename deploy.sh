@@ -13,13 +13,13 @@ update_hardhat_config() {
     echo "Updated $config_file with new JMT address: $jmt_address"
 }
 
-# # Step 1: Deploy ZKSync contract
-# echo "Deploying ZKSync contract..."
-# npx hardhat run scripts/3_zksync.ts --network zksync
+# Step 1: Deploy ZKSync contract
+echo "Deploying ZKSync contract..."
+npx hardhat run scripts/3_zksync.ts --network zksync
 
-# # Step 2: Deploy JMT contract
-# echo "Deploying JMT contract..."
-# npx hardhat run scripts/5_jmt.ts --network zksync2
+# Step 2: Deploy JMT contract
+echo "Deploying JMT contract..."
+npx hardhat run scripts/5_jmt.ts --network zksync2
 
 # Prompt user for the new JMT address
 read -p "Enter the new JellyfishMerkleTreeVerifier address: " jmt_address
