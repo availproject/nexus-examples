@@ -4,12 +4,9 @@ import "@foundry-rs/hardhat-anvil";
 import "@matterlabs/hardhat-zksync";
 
 import dotenv from "dotenv";
-import { vars } from "hardhat/config";
 import "@nomicfoundation/hardhat-verify";
 import "@nomicfoundation/hardhat-foundry";
 dotenv.config();
-
-const ETHERSCAN_API_KEY = vars.get("ETHERSCAN_API_KEY");
 
 const config: HardhatUserConfig = {
   zksolc: {
@@ -67,20 +64,6 @@ const config: HardhatUserConfig = {
         "0xc76bee37a768a74d893d86041a6339bab150679c14c273a33afff53874f87b42",
       ],
       zksync: true,
-    },
-    arbitrum: {
-      url: process.env.RPC_PROVIDER_ORIGIN,
-      accounts: [
-        "0x2d64990aa363e3d38ae3417950fd40801d75e3d3bd57b86d17fcc261a6c951c6",
-      ],
-      zksync: false,
-    },
-    polygonZKEvm: {
-      url: process.env.RPC_PROVIDER_DESTINATION,
-      accounts: [
-        "0x2d64990aa363e3d38ae3417950fd40801d75e3d3bd57b86d17fcc261a6c951c6",
-      ],
-      zksync: false,
     },
   },
   etherscan: {
