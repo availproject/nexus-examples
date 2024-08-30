@@ -29,7 +29,7 @@ contract MyNFT is ERC721 {
         address to;
     }
 
-    event Confirmation(uint256 id);
+    event Confirmation(uint256 id, uint256 tokenId, address to);
     constructor(bytes32 _selfChainId, bytes32 _paymentChainID, INexusProofManager nexusManager,StorageProofVerifier _storageProof) ERC721("MyNFT", "MNFT") {
         nexus = nexusManager;
         selfChainId = _selfChainId;
@@ -46,13 +46,13 @@ contract MyNFT is ERC721 {
         _tokenIds += 1;
 
         uint256 newItemId = _tokenIds;
-        _mint(recipient, newItemId);
+        _safeMint(recipient, newItemId);
 
         ConfirmationReciept memory receipt = ConfirmationReciept(1, message.messageId, to);
         bytes32 hashedReceipt = keccak256(abi.encode(receipt));
         confirmationReceipts[newItemId] = hashedReceipt;
         usedMessageid[message.messageId] = true;
-        emit Confirmation(newItemId);
+        emit Confirmation(newItemId, newItemId, recipient);
         return newItemId;
     }
 

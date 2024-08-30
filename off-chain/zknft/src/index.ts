@@ -18,7 +18,7 @@ import {
   nexusRPCUrl,
   nexusAppID,
   amount,
-  privateKeyGeth,
+  privateKeyZkSync2,
   privateKeyZkSync,
 } from "./config";
 
@@ -62,12 +62,12 @@ async function main() {
   // 1. setup contracts across two chains
 
   let providerPayment = L2Provider.getDefaultProvider(types.Network.Localhost);
-  let providerNFT = new ethers.JsonRpcProvider(nftMintProviderURL);
+  let providerNFT = new L2Provider(nftMintProviderURL);
   if (!providerPayment) {
     return;
   }
   let signerPayment = new ethers.Wallet(privateKeyZkSync, providerPayment);
-  let signerNFT = new ethers.Wallet(privateKeyGeth, providerNFT);
+  let signerNFT = new ethers.Wallet(privateKeyZkSync2, providerNFT);
 
   const stateManagerNFTChain = new ethers.Contract(
     stateManagerNFTChainAddr,
@@ -184,7 +184,7 @@ async function sendPayment(
     const receipt = await tx.wait();
 
     const txDetails = await l2Provider.getTransactionReceipt(receipt.hash);
-
+    console.log(txDetails);
     const preImageEvents = txDetails.logs.filter(
       (log) =>
         log.topics[0] ===
@@ -216,8 +216,9 @@ async function sendPayment(
   }
 }
 
-function sleep() {
-  return new Promise((resolve) => setTimeout(resolve, 30 * 1000));
+function sleep(val?: number) {
+  const duration = val !== undefined ? val : 30 * 1000;
+  return new Promise((resolve) => setTimeout(resolve, duration));
 }
 
 async function getStorageProof(
@@ -272,7 +273,7 @@ async function updateNexusState(
     }
   );
   await stateManager.updateNexusBlock(nexus.chainStateNumber, nexus.info);
-
+  console.log("passing this");
   await new Promise((resolve) => setTimeout(resolve, 5000));
   await stateManager.updateChainState(
     nexus.chainStateNumber,
@@ -302,6 +303,7 @@ async function mintNFT(
 ) {
   console.log(signer.address, message, { ...proof, batchNumber });
   try {
+    await sleep(2000);
     const nonce = await provider.getTransactionCount(signer.address, "latest");
     let tx = await nftContract.mintNFT(
       signer.address,
@@ -319,12 +321,16 @@ async function mintNFT(
     if (!txDetails) {
       return;
     }
+
     const transferEvents = txDetails.logs.filter((log) => {
-      return log.topics[0] === ethers.id("Transfer(address,address,uint256)");
+      return (
+        log.topics[0] === ethers.id("Confirmation(uint256,uint256,address)")
+      );
     });
 
     // Decode each Transfer event
     const decodedEvents = transferEvents.map((log) => {
+      console.log(log);
       return {
         from: ethers.AbiCoder.defaultAbiCoder().decode(
           ["address"],

@@ -55,9 +55,7 @@ contract NexusProofManager  {
     }
 
 
-    function verifyRollupState(bytes32 root, JellyfishMerkleTreeVerifier.Proof memory proof, JellyfishMerkleTreeVerifier.Leaf memory leaf) view public {
-        console.logBytes32(leaf.addr);
-        console.logBytes32(leaf.valueHash);
+    function verifyRollupState(bytes32 root, JellyfishMerkleTreeVerifier.Proof memory proof, JellyfishMerkleTreeVerifier.Leaf memory leaf) pure public {
         bool verify = JellyfishMerkleTreeVerifier.verifyProof(root, leaf, proof);
         require(verify,"Invalid leaf against nexus state root");
     }

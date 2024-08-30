@@ -37,9 +37,9 @@ library JellyfishMerkleTreeVerifier {
                 }
             }
         }
-
   
         bytes32 calculatedRoot;
+
         if (proof.leaf.addr == 0x0 && proof.leaf.valueHash == 0x0) {
             calculatedRoot = 0x0;
         } else {
