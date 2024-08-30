@@ -47,15 +47,15 @@ Follow the guide below to setup and run the demo on your machines.
 
 - For more details on zksync cli refer [here](https://github.com/vibhurajeev/zksync-era/blob/main/zk_toolbox/README.md)
 
-## 2. Contract Deployment:
+### 2. Contract Deployment:
 
-### Automaic
+#### Automaic
 
 ```
 chmod +x deploy.sh
 ./deploy.sh
 ```
-### Manual
+#### Manual
 If you prefer a more manual approach, you can follow the guidelines below: 
 
 - Deploy relevant contracts on origin chain and the JMT verifier library on recipient chain:
@@ -71,6 +71,23 @@ If you prefer a more manual approach, you can follow the guidelines below:
   ```
   npx hardhat run scripts/4_zksync2.ts --network zksync2
   ```
+
+### 3. Setup and Run Nexus
+
+- **Clone the Nexus Repository**:
+   - Begin by cloning the Nexus repository from GitHub:
+      
+      ```bash
+      git clone https://github.com/availproject/nexus.git
+      cd nexus
+      ```
+
+- **Set Up and First Run the Nexus Instance**:
+   - Follow the detailed setup guide [here](https://github.com/availproject/nexus/blob/main/docs/development/1_getting_started.md) to set up and run the Nexus instance for the first time.
+
+- **Run the ZKSync Adapter for Nexus**:
+   - After setting up Nexus, run the ZKSync adapter by following the guidelines provided [here](https://github.com/availproject/nexus/blob/main/docs/development/2_zksync_example.md).
+
 
 ## Test
 To run tests with values pre-populated ( or new ones by running the rust scripts above ):
