@@ -28,7 +28,14 @@ Follow the guide below to setup and run the demo on your machines.
   ```
 
 - Update the config `general.yaml` in `chains/era/configs` with in `configs/era_general.yaml`.
-- Update `general.yaml` in `chains/era2/configs/` with config in `configs/era2_general.yaml`. 
+- Update `general.yaml` in `chains/era2/configs/` with config in `configs/era2_general.yaml`.
+
+- Now run:
+
+  ```
+  zk_inception server
+  zk_inception server --chain era2
+  ```
 
 - Bridge funds to your accounts on zksync chains to be able to run the demo by following instructions [here](https://github.com/vibhurajeev/zksync-era/blob/main/docs/guides/advanced/02_deposits.md). 
 
@@ -37,19 +44,11 @@ Follow the guide below to setup and run the demo on your machines.
   npx zksync-cli bridge deposit --chain=dockerized-node --amount 3 --pk=0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6 --to=0x618263CE921F7dd5F4f40C29f6c524Aaf97b9bbd --rpc http://127.0.0.1:4050
   ```
 
-
-- Now finally run:
-
-  ```
-  zk_inception server
-  zk_inception server --chain era2
-  ```
-
 - For more details on zksync cli refer [here](https://github.com/vibhurajeev/zksync-era/blob/main/zk_toolbox/README.md)
 
 ### 2. Contract Deployment:
 
-#### Automaic
+#### Automatic
 
 ```
 chmod +x deploy.sh
