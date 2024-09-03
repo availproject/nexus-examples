@@ -15,6 +15,7 @@ import {
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter, useSearchParams } from 'next/navigation';
+import { AbiCoder } from 'ethers';
 
 export default function Home() {
   const [amount, setAmount] = useState<null | number>(null);
@@ -84,7 +85,7 @@ export default function Home() {
     transfer(BigInt(selectedAmount)).then(response => {
       if (response) {
         if (origin) {
-          router.push(`${urlWithoutQuotes}&selectedPaymentAddress=${response.from}&paymentReceipt=${JSON.stringify(response)}`);
+          router.push(`${urlWithoutQuotes}&selectedPaymentAddress=${AbiCoder.defaultAbiCoder().decode(["address"], response.from)}&paymentReceipt=${JSON.stringify(response)}`);
         }
       } else {
         alert("Payment failed try again");

@@ -222,6 +222,28 @@ export default async function BuyNftModal({
     )
   }
 
+  function ModalSideBar() {
+    if (nftStatus === TransferStatus.PaymentDone) return (<>
+      <h1 className="text-3xl text-white">Payment successful!</h1>
+      <p className="font-display mt-4 text-white/80 text-sm font-medium">
+        Mint your mystery NFT right now.
+      </p>
+    </>
+    )
+    else if (nftStatus === TransferStatus.NFTTransferred) return (<>
+      <h1 className="text-3xl text-white">Success!</h1>
+      <p className="font-display mt-4 text-white/80 text-sm font-medium">
+        The NFT has now been minted to your account.
+      </p>
+    </>)
+    else return (<>
+      <h1 className="text-3xl text-white">Buy NFT now.</h1>
+      <p className="font-display mt-4 text-white/80 text-sm font-medium">
+        This is a mystery NFT, details will be revealed after minting.
+      </p>
+    </>)
+  }
+
   return (
     <ModalWrapper
       isOpen={open}
@@ -230,10 +252,7 @@ export default async function BuyNftModal({
       className="h-2/3 w-3/4 md:max-h-[460px] md:max-w-[715px]"
     >
       <section className="relative h-full w-1/3 py-12 px-9 border-r border-[#1E1E24] hidden md:block">
-        <h1 className="text-3xl text-white">Buy NFT now.</h1>
-        <p className="font-display mt-4 text-white/80 text-sm font-medium">
-          This is a mystery NFT, details will be revealed after minting.
-        </p>
+        <ModalSideBar />
         <img className="absolute bottom-0 left-0 right-0" src="https://www.bleepstatic.com/content/hl-images/2022/05/13/binance-mystery-nft-box.jpg" />
       </section>
       <section className="h-full w-full md:w-2/3 p-8">
