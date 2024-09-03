@@ -24,14 +24,11 @@ export function getPaymentWallet(provider?: Provider): Wallet {
 }
 
 export async function getAddress(): Promise<string> {
-  console.log("Called get address");
-
   return await getPaymentWallet().getAddress();
 }
 
 export async function transfer(amount: bigint): Promise<Message | undefined> {
   try {
-    console.log("Transfer is called", amount, amount / BigInt(2));
     const provider = getProvider();
     const wallet: Wallet = getPaymentWallet(provider);
     let paymentToken: Contract = new Contract(
@@ -44,16 +41,16 @@ export async function transfer(amount: bigint): Promise<Message | undefined> {
       paymentAbi,
       wallet,
     );
-    console.log("Updating price");
+
     const response = await paymentContract.updatePrice(
       await paymentToken.getAddress(),
       amount / BigInt(2)
     );
-    console.log("minting token", response);
+
     await paymentToken!.mint(await wallet.getAddress(), amount);
     await paymentToken!.approve(await paymentContract.getAddress(), amount);
 
-    console.log("making payment");
+    console.debug("Making Payment");
     const tx = await paymentContract!.paymentWithoutFallback(
       "0x01",
       1337,
@@ -64,7 +61,7 @@ export async function transfer(amount: bigint): Promise<Message | undefined> {
     const receipt = await tx.wait();
 
     const txDetails = await provider.getTransactionReceipt(receipt.hash);
-    console.log(txDetails);
+    console.debug("Payment Receipt: ", txDetails);
     const preImageEvents = txDetails!.logs.filter(
       (log) =>
         log.topics[0] ===

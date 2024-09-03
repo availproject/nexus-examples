@@ -35,6 +35,7 @@ export function GridTileImage({
           className={clsx('relative h-full w-full object-contain', {
             'transition duration-300 ease-in-out group-hover:scale-105': isInteractive
           })}
+          objectFit='cover'
           {...props}
         />
       ) : null}
@@ -76,6 +77,7 @@ export function BuyNFTGrid({
             'transition duration-300 ease-in-out group-hover:scale-105': isInteractive
           })}
           {...props}
+          objectFit='cover'
         />
       ) : null}
       <LabelLarge

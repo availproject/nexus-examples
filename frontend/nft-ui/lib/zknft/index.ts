@@ -53,23 +53,9 @@ export async function mintNFT(
       signer
     );
 
-    console.log("Updating nexus state on nft chain");
-    console.log(
-      nexus.info,
-      nexus.chainStateNumber,
-      nexus.response.proof,
-      "0x" + nexusAppID,
-      {
-        statementDigest: "0x" + nexus.response.account.statement,
-        stateRoot: "0x" + nexus.response.account.state_root,
-        startNexusHash: "0x" + nexus.response.account.start_nexus_hash,
-        lastProofHeight: nexus.response.account.last_proof_height,
-        height: nexus.response.account.height,
-      }
-    );
+    console.debug("Updating nexus state on nft chain");
     //@ts-ignore
     await stateManagerNFTChain.updateNexusBlock(nexus.chainStateNumber, nexus.info);
-    console.log("passing this");
     await new Promise((resolve) => setTimeout(resolve, 5000));
     //@ts-ignore
     await stateManagerNFTChain.updateChainState(
@@ -87,8 +73,8 @@ export async function mintNFT(
 
     //@ts-ignore
     const stateInfo = await stateManagerNFTChain.getChainState(0, "0x" + nexusAppID);
-    console.log("state info", stateInfo);
-    console.log("Successfully completed state manager updates");
+    console.debug("State Info: ", stateInfo);
+    console.debug("Successfully completed state manager updates");
 
     await sleep(2000);
 
@@ -105,13 +91,14 @@ export async function mintNFT(
     );
 
     let receipt = await tx.wait();
-    console.log("Mint NFT triggered successfully");
+    console.debug("Mint NFT triggered successfully");
 
     return receipt;
   } catch (error) {
     console.error("Transaction failed:", error);
   }
 }
+
 
 export async function getStorageProof(
   batchNumber: number,
@@ -130,7 +117,6 @@ export async function getStorageProof(
 
   //@ts-ignore
   let storageLocation = await paymentContract.getStorageLocationForKey(id);
-  console.log(batchNumber, id);
 
   try {
     let proof = await storageProofProvider.getProof(
@@ -141,7 +127,7 @@ export async function getStorageProof(
 
     return proof;
   } catch (e) {
-    console.log(e);
+    console.debug(e);
   }
 }
 
@@ -157,14 +143,12 @@ export async function getStorageProof(
 // }
 
 export async function fetchUpdatesFromNexus(): Promise<NexusInfo | undefined> {
-  console.log("Woke up");
   try {
     let response = await axios.get(nexusRPCUrl + "/account-hex", {
       params: {
         app_account_id: nexusAppID,
       },
     });
-    console.log(response);
     return {
       chainStateNumber: response.data.account.height,
       info: {

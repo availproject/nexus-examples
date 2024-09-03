@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faCopy,
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -21,6 +22,7 @@ export default function Home() {
   const router = useRouter();
   const [myValue, setMyValue] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
   const preSetTo: string | null = searchParams.get("to");
   const preSetAmount: string | null = searchParams.get("amount");
@@ -31,7 +33,6 @@ export default function Home() {
 
   const amountOk = (): boolean => {
     if (amount != 0 && amount != null) {
-      console.log("Returning truee");
       return true;
     }
 
@@ -65,31 +66,37 @@ export default function Home() {
   // };
 
   const handleSend = () => {
-    console.log("Handle confirm");
 
     if (preSetFrom && preSetFrom !== myValue) {
       alert!("From does not match your account.");
 
       return;
     }
-    console.log(amountOk());
+
     if (!amountOk()) {
       return;
     }
 
     const selectedAmount = preSetAmount || amount as number | string;
     //const selectedTo = preSetTo && preSetTo !== '' ? preSetTo : to;
-
+    setIsLoading(true);
+    console.log("Setting isLoading to true");
     transfer(BigInt(selectedAmount)).then(response => {
       if (response) {
         if (origin) {
-          console.log(originURL, origin)
-          console.log(urlWithoutQuotes);
           router.push(`${urlWithoutQuotes}&selectedPaymentAddress=${response.from}&paymentReceipt=${JSON.stringify(response)}`);
         }
       } else {
         alert("Payment failed try again");
       }
+
+
+      setIsLoading(false);
+    }).catch((e) => {
+      alert("Payment failed try again");
+      console.error(e);
+
+      setIsLoading(false);
     });
   };
 
@@ -213,8 +220,15 @@ export default function Home() {
             Amount
           </div>
         </div>
-        <button onClick={handleSend} disabled={!amountOk()} className="mt-6 ml-auto mr-auto w-[100px] bg-transparent hover:bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
-          Confirm + {amountOk()}
+        <button onClick={handleSend} disabled={!amountOk() || isLoading} className="mt-6 ml-auto mr-auto w-[150px] bg-transparent hover:bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
+          Confirm {isLoading && <FontAwesomeIcon
+            className='ml-2'
+            icon={faSpinner}
+            spin={true}
+            style={{ fontSize: 14, color: "white" }}
+          />} {
+            isLoading
+          }
         </button>
       </div>
 

@@ -18,9 +18,10 @@ export default async function HomePage({
       price: 10,
       metadata: {
         name: "NFT 1",
-        url: "https://storage.googleapis.com/nftimagebucket/tokens/0x60e4d786628fea6478f785a6d7e704777c86a7c6/preview/5933.png",
+        url: "/img/nft-1.jpg",
         description: "mock NFT",
-      }
+      },
+      alt: "Photo by https://unsplash.com/@and_machines",
     },
     {
       id: "0",
@@ -28,10 +29,11 @@ export default async function HomePage({
       price: 30,
       metadata: {
         name: "NFT 2",
-        url: "https://storage.googleapis.com/nftimagebucket/tokens/0x60e4d786628fea6478f785a6d7e704777c86a7c6/preview/5933.png",
+        url: "/img/nft-2.jpg",
         description: "mock NFT",
-      }
-    }
+      },
+      alt: "Photo by https://unsplash.com/@hazelz"
+    },
   ];
 
   const selectedBuy = searchParams.buyNFT?.toString() ?? null;

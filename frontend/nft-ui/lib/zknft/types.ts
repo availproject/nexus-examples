@@ -6,6 +6,7 @@ export type NFT = {
   owner: string,
   metadata: NftMetadata,
   price: number,
+  alt: string,
 };
 
 export type NftMetadata = {

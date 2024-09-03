@@ -50,13 +50,13 @@ function BuyNFT({
       className={'md:col-span-4 md:row-span-2'}
     >
       <Link href={'/?buyNFT=true'} className="relative block aspect-square h-full w-full cursor-pointer">
-        <BuyNFTGrid src={item.metadata.url}
+        <BuyNFTGrid src={"/img/buy-now.jpg"}
           fill
           sizes={
             "full"
           }
           priority={true}
-          alt={"BUY NFT"} />
+          alt="Photo by https://unsplash.com/@kolamdigital?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" />
       </Link>
     </div >
   );

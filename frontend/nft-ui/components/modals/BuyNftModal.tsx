@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faCopy,
+  faSpinner
 } from "@fortawesome/free-solid-svg-icons";
 
 interface BuyNftModalProps {
@@ -28,6 +29,7 @@ export default async function BuyNftModal({
   const [buyer, setBuyer] = useState('');
   const [nftStatus, setNftStatus] = useState<TransferStatus | null>(null);
   const [paymentReceiptWithProof, setPaymentReceiptWithProof] = useState<[NexusInfo, RpcProof] | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   //const [paymentAttemptDone, setPaymentAttemptDone] = useState(false);
   const router = useRouter();
 
@@ -39,9 +41,10 @@ export default async function BuyNftModal({
   const paymentAddress: string | null = params.get("selectedPaymentAddress") as string || null;
   const message: string | null = params.get("paymentReceipt");
   const currentUrl = paymentAddress && paymentAddress !== '' ? `http://localhost:3000/?buyNFT=true&selectedPaymentAddress=${paymentAddress}'` : `http://localhost:3000/?buyNFT=true`;
-  console.log(currentUrl);
+
   const handleSend = async () => {
     if (paymentAddress && paymentReceiptWithProof && message) {
+      setIsLoading(true);
       let decodedMessage: Message = JSON.parse(message);
       const nexusStatus = paymentReceiptWithProof[0];
       const proof = paymentReceiptWithProof[1];
@@ -49,14 +52,20 @@ export default async function BuyNftModal({
       // Call mintNFT and set status to the last step upon success
       mintNFT(nexusStatus as NexusInfo, proof, decodedMessage, (nexusStatus as NexusInfo).chainStateNumber).then((response) => {
         if (response) {
-          console.log(response);
+          console.debug("NFT Mint receipt: ", response);
           setNftStatus(TransferStatus.NFTTransferred);
         } else {
           setPaymentReceiptWithProof(null);
           setNftStatus(TransferStatus.WaitingForPayment);
         }
+
+
+        setIsLoading(false);
       }).catch((error) => {
+
+        setIsLoading(false);
         console.error("Minting NFT failed:", error);
+        alert("NFT Minting failed, refresh page and retry.");
         setNftStatus(TransferStatus.NotInitiated); // Handle any errors during minting
       });
     }
@@ -67,16 +76,16 @@ export default async function BuyNftModal({
 
   const check = () => {
     checkPaymentAndSet();
-
     router.refresh();
   }
 
   const checkPaymentAndSet = () => {
-    console.log("SETTTINNGGGG")
     if (message) {
+      setIsLoading(true);
       let decodedMessage: Message = JSON.parse(message);
       let nexusStatus: NexusInfo | undefined = undefined;
-      console.log("Fetching updates from nexus");
+      //TODO: Query the L1 batch number where message was emitted, and only proceed below, if
+      //updated batch number on nexus is greater or equal. 
       fetchUpdatesFromNexus().then((i) => {
         nexusStatus = i;
         // Check if paymentReceipt is set
@@ -92,26 +101,34 @@ export default async function BuyNftModal({
                 // If proof is empty, set status to Waiting
                 setNftStatus(TransferStatus.WaitingForPayment);
               }
+
+
+              setIsLoading(false);
             }).catch(error => {
+
+              setIsLoading(false);
               alert(error);
 
               setNftStatus(TransferStatus.NotInitiated);
             });
         } else {
+
+
+          setIsLoading(false);
           // If paymentReceipt is not set, set to WaitingForPayment
           setNftStatus(TransferStatus.WaitingForPayment);
         }
       }).catch((error) => {
         console.error("Failed to fetch updates from Nexus:", error);
+
+        setIsLoading(false);
         setNftStatus(TransferStatus.NotInitiated); // Handle fetch errors
       });
     } else {
-      console.log("In else")
       setNftStatus(TransferStatus.NotInitiated);
     }
   }
   useEffect(() => {
-    console.log("use effect triggered....");
     getBuyerAddress().then(address => {
       setBuyer(address)
     })
@@ -120,7 +137,6 @@ export default async function BuyNftModal({
   }, [message]);
 
   function ModalContent() {
-    console.log(nftStatus);
     if (nftStatus === null) return (
       <div className='flex h-full justify-center items-center'>
         Loading hold on....
@@ -128,16 +144,26 @@ export default async function BuyNftModal({
     )
     else if (nftStatus === TransferStatus.NotInitiated) return (
       <div className='flex flex-col h-full justify-center items-center'>
-        <button onClick={makePayment} disabled={false} className="mt-6 ml-auto mr-auto w-[200px] bg-transparent hover:bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
-          Pay now!
+        <button onClick={makePayment} disabled={isLoading} className="mt-6 ml-auto mr-auto w-[200px] bg-transparent hover:bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
+          Pay now! {isLoading && <FontAwesomeIcon
+            className="mr-2"
+            icon={faSpinner}
+            spin={true}
+            style={{ fontSize: 14, color: "white" }}
+          />}
         </button>
       </div>
     )
     else if (nftStatus == TransferStatus.WaitingForPayment) return (
       <div className='flex h-full justify-center items-center'>
         <div className='flex flex-col gap-4'>
-          <button onClick={check} disabled={false} className="mt-6 ml-auto mr-auto w-[100px] h-[50px] bg-transparent hover:bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
-            Check
+          <button onClick={check} disabled={isLoading} className="mt-6 ml-auto mr-auto w-[150px] h-[50px] bg-transparent hover:bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
+            Check {isLoading && <FontAwesomeIcon
+              className="mr-2"
+              icon={faSpinner}
+              spin={true}
+              style={{ fontSize: 14, color: "white" }}
+            />}
           </button>
 
           {
@@ -148,8 +174,13 @@ export default async function BuyNftModal({
                 </button>
               </a>
             ) :
-              <button onClick={makePayment} className="w-[150px] h-[50px] bg-gray-800/50 hover:bg-gray-900 text-white py-2 px-4 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
-                Try Again.
+              <button onClick={makePayment} disabled={isLoading} className="w-[150px] h-[50px] bg-gray-800/50 hover:bg-gray-900 text-white py-2 px-4 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
+                Try Again. {isLoading && <FontAwesomeIcon
+                  className="mr-2"
+                  icon={faSpinner}
+                  spin={true}
+                  style={{ fontSize: 14, color: "white" }}
+                />}
               </button>
           }
         </div>
@@ -169,8 +200,13 @@ export default async function BuyNftModal({
             </span>
           </p>
         </div>
-        <button onClick={handleSend} disabled={false} className="mt-6 ml-auto mr-auto w-[100px] bg-transparent hover:bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
-          Mint now!
+        <button onClick={handleSend} disabled={isLoading} className="mt-6 ml-auto mr-auto w-[150px] bg-transparent hover:bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow disabled:bg-gray-900 disabled:cursor-not-allowed">
+          Mint now! {isLoading && <FontAwesomeIcon
+            className="mr-2"
+            icon={faSpinner}
+            spin={true}
+            style={{ fontSize: 14, color: "white" }}
+          />}
         </button>
       </div>
     )
