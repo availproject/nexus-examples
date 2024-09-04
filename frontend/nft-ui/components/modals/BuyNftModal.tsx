@@ -86,8 +86,7 @@ export default async function BuyNftModal({
       let nexusStatus: NexusInfo | undefined = undefined;
       //TODO: Query the L1 batch number where message was emitted, and only proceed below, if
       //updated batch number on nexus is greater or equal. 
-      fetchUpdatesFromNexus().then((i) => {
-        nexusStatus = i;
+      fetchUpdatesFromNexus().then((nexusStatus) => {
         // Check if paymentReceipt is set
         if (decodedMessage && nexusStatus) {
           // Query proof using paymentReceipt

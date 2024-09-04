@@ -24,10 +24,6 @@ export function getProvider(): Provider {
   return provider;
 }
 
-export async function getBuyerAddress(provider?: Provider): Promise<string> {
-  return await new Wallet(privateKeyZkSync2, provider).getAddress();
-}
-
 export function getBuyerWallet(provider?: Provider): Wallet {
   return new Wallet(privateKeyZkSync2, provider)
 }
