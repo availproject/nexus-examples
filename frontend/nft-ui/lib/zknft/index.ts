@@ -35,6 +35,8 @@ export async function mintNFT(
   batchNumber: number
 ): Promise<any | undefined> {
   try {
+    const LATEST_CHAIN_STATE = 0;
+
     let provider: Provider = getProvider();
     let signer: Wallet = getBuyerWallet(provider);
     const nftContract = new Contract(
@@ -68,7 +70,7 @@ export async function mintNFT(
     );
 
     //@ts-ignore
-    const stateInfo = await stateManagerNFTChain.getChainState(0, "0x" + nexusAppID);
+    const stateInfo = await stateManagerNFTChain.getChainState(LATEST_CHAIN_STATE, "0x" + nexusAppID);
     console.debug("State Info: ", stateInfo);
     console.debug("Successfully completed state manager updates");
 
