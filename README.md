@@ -95,34 +95,43 @@ To run tests with values pre-populated ( or new ones by running the rust scripts
 
 ## Running the demo
 
-- Now to run the script
+You can choose to use a CLI to test the flow, or alternatively run the frontend demo. Below are instructions for both. 
+
+### Frontend
+
+- Go to nft ui directory 
+
+  ```
+  cd frontend/nft-ui
+  ```
+- Install npm modules and run the frontend. 
+
+  ```
+  npm install
+  npm run dev
+  ```
+- Go to payments ui directory 
+
+  ```
+  cd frontend/payments-ui
+  ```
+- Install npm modules and run the frontend. 
+
+  ```
+  npm install
+  npm run dev
+  ```  
+
+The demo should be running [here](http://localhost:3000/).
+
+### CLI
+- If you choose to run the script instead first copy the env:
 
   ```
   cp .env.example .env   // fill all the variables
   cd off-chain/zknft/
   touch src/config.ts
   ```
-
-- Add the following values inside config.ts:
-
-  ```
-  import { ethers } from "ethers";
-
-  export const stateManagerNFTChainAddr = "";
-  export const storageNFTChainAddress ="";
-  export const diamondAddress = "";
-  export const paymentTokenAddr = "";
-  export const paymentContractAddress ="";
-  export const paymentZKSyncProviderURL = "";
-  export const nftMintProviderURL = "";
-  export const nexusRPCUrl = "";
-  export const nexusAppID = "";
-  export const privateKeyZkSync = "";
-  export const privateKeyZkSync2 =""
-  export const amount = "";
-  ```
-
-  > Use the addresses logged during the deployment step and fill these values
 
 
 Now you are ready to pay on one chain and get nft on another using nexus:

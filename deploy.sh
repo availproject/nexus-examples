@@ -26,45 +26,47 @@ update_hardhat_config() {
     fi
 }
 
-# Function to update config.json with new addresses
+# Function to update hardhat.config.ts with new JMT address
 update_config_json() {
     local payment_contract_address=$1
     local payment_token_address=$2
     local state_manager_address=$3
     local nft_address=$4
-    local config_file="./off-chain/zknft/src/config_j.json"
+    local config_file="./off-chain/zknft/src/contracts_config.json"
+    local frontend_dir_1="frontend/payments-ui/lib/zknft/contracts_config.json"
+    local frontend_dir_2="frontend/nft-ui/lib/zknft/contracts_config.json"
 
-    # Use jq to update the config.json file in-place if sponge is available
-    if command -v sponge &> /dev/null; then
-        if ! jq --arg paymentContractAddress "$payment_contract_address" \
-            --arg paymentTokenAddr "$payment_token_address" \
-            --arg stateManagerNFTChainAddr "$state_manager_address" \
-            --arg storageNFTChainAddress "$nft_address" \
-            '.paymentContractAddress = $paymentContractAddress | .paymentTokenAddr = $paymentTokenAddr | .stateManagerNFTChainAddr = $stateManagerNFTChainAddr | .storageNFTChainAddress = $storageNFTChainAddress' \
-            "$config_file" | sponge "$config_file"; then
-            log_error "Failed to update $config_file with new addresses. Please updated manually or try again."
-        fi
-    else
-        # Fallback to using a temporary file and delete it afterward
-        tmp_file=$(mktemp)
-        if ! jq --arg paymentContractAddress "$payment_contract_address" \
-            --arg paymentTokenAddr "$payment_token_address" \
-            --arg stateManagerNFTChainAddr "$state_manager_address" \
-            --arg storageNFTChainAddress "$nft_address" \
-            '.paymentContractAddress = $paymentContractAddress | .paymentTokenAddr = $paymentTokenAddr | .stateManagerNFTChainAddr = $stateManagerNFTChainAddr | .storageNFTChainAddress = $storageNFTChainAddress' \
-            "$config_file" > "$tmp_file" && mv "$tmp_file" "$config_file"; then
-            rm -f "$tmp_file"
-            log_error "Failed to update $config_file with new addresses. Please updated manually or try again."
-        fi
-        rm -f "$tmp_file"
-    fi
+    # Check if the config files exist and delete them
+    [[ -f "$config_file" ]] && rm -f "$config_file"
+    [[ -f "$frontend_dir_1" ]] && rm -f "$frontend_dir_1"
+    [[ -f "$frontend_dir_2" ]] && rm -f "$frontend_dir_2"
 
-    echo "Updated $config_file with new addresses:"
-    echo "  paymentContractAddress: $payment_contract_address"
-    echo "  paymentTokenAddr: $payment_token_address"
-    echo "  stateManagerNFTChainAddr: $state_manager_address"
-    echo "  storageNFTChainAddress: $nft_address"
+    # Create a new contracts_config.json file with the provided addresses
+    cat <<EOF > "$config_file"
+{
+  "paymentContractAddress": "$payment_contract_address",
+  "paymentTokenAddr": "$payment_token_address",
+  "stateManagerNFTChainAddr": "$state_manager_address",
+  "storageNFTChainAddress": "$nft_address"
 }
+EOF
+
+    echo "Created $config_file with new addresses:"
+
+    # Ensure the frontend directories exist
+    mkdir -p "$(dirname "$frontend_dir_1")"
+    mkdir -p "$(dirname "$frontend_dir_2")"
+
+    # Copy the updated config file to frontend directories
+    cp "$config_file" "$frontend_dir_1"
+    cp "$config_file" "$frontend_dir_2"
+
+    echo "Copied updated $config_file to:"
+    echo "  $frontend_dir_1"
+    echo "  $frontend_dir_2"
+}
+
+
 
 # Function to extract addresses from deployment JSON files
 extract_addresses() {
