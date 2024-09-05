@@ -1,8 +1,6 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "forge-std/console.sol";
-
 import "../contracts/example/zknft/NFT.sol";
 import "../contracts/example/zknft/NftPayment.sol";
 import "../contracts/NexusProofManager.sol";
@@ -29,7 +27,7 @@ contract ZKNFTTest is Test  {
     function setUp() public { 
         address bob = vm.addr(2);
         erc20 = new ERC20Token("Avail","Avail");
-        proofManager = new NexusProofManager(bytes32(uint256(100)));
+        proofManager = new NexusProofManager();
         SparseMerkleTree smt = new SparseMerkleTree();
         ZKSyncDiamond zksyncDiamond = new ZKSyncDiamond(INexusProofManager(address(proofManager)), appid);
         StorageProofVerifier verifier = new StorageProofVerifier(IZkSyncDiamond(address(zksyncDiamond)), smt);
@@ -45,15 +43,15 @@ contract ZKNFTTest is Test  {
             0x04, 137, 2*mintAmount, address(erc20)
         );
         bytes32 val = paymentContract.getValueFromId(0);
-        console.logBytes32(val);
+        
 
         erc20.mint(address(this), 2* mintAmount);
         erc20.approve(address(paymentContract), 2*mintAmount);
         paymentContract.paymentWithoutFallback(
             0x04, 137, 2*mintAmount, address(erc20)
         );
-        val = paymentContract.getValueFromId(1);
-        console.logBytes32(val);
+        bytes32 val2 = paymentContract.getValueFromId(1);
+        assert(val != val2);
     }
 
     function testNexusStateManagerUpdate() public { 

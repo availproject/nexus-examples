@@ -124,9 +124,9 @@ prometheus:
   pushgateway_url: http://127.0.0.1:9091
   push_interval_ms: 100
 db:
-  state_keeper_db_path: /Volumes/Personal/Avail/zksync-era/./chains/era/db/main/state_keeper
+  state_keeper_db_path: ./chains/era/db/main/state_keeper
   merkle_tree:
-    path: /Volumes/Personal/Avail/zksync-era/./chains/era/db/main/tree
+    path: ./chains/era/db/main/tree
     mode: FULL
     multi_get_chunk_size: 500
     block_cache_size_mb: 128

@@ -187,7 +187,7 @@ async function sendPayment(
 
     const txDetails = await l2Provider.getTransactionReceipt(receipt.hash);
     console.log(txDetails);
-    const preImageEvents = txDetails.logs.filter(
+    const preImageEvents = txDetails!.logs.filter(
       (log) =>
         log.topics[0] ===
         ethers.id("PreImage(bytes1,bytes32,bytes,uint256,uint256)")

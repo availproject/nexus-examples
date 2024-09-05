@@ -17,7 +17,6 @@ import {INexusBridge} from "./interfaces/INexusBridge.sol";
 import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
 import {EthereumVerifier} from "../../verification/ethereum/Verifier.sol";
 
-import "forge-std/console.sol";
 
 contract NexusBridge is
     Initializable,

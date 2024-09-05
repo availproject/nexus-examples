@@ -23,3 +23,6 @@ off-chain/.env
 
 .DS_STORE
 .vscode
+**/contracts_config.json
+
+off-chain/bridge/target

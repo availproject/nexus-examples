@@ -23,8 +23,6 @@ contract NexusProofManager  {
         uint128 height;
     }
 
-    constructor(bytes32 nexusAppID) {}
-
     // nexus state root
     // updated when we verify the zk proof and then st block updated
     function updateNexusBlock(uint256 blockNumber, NexusBlock calldata latestNexusBlock) external  {

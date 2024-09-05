@@ -1,13 +1,18 @@
 import { ethers } from "ethers";
+import contractsConfig from "./contracts_config.json";
 
-export const stateManagerNFTChainAddr =
-  "0xc1C13de125E0D2A8D04EFa3BDc904A99409376d8";
-export const storageNFTChainAddress =
-  "0xB2C7286EBd7EFb837c02955772D29F879BD1d94B";
-export const diamondAddress = "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE";
-export const paymentTokenAddr = "0x0B0E86d6242201B163412F0239a18A0ea02b60CB";
-export const paymentContractAddress =
-  "0x9B128e90689468428cDB98d8D44d75355A2eEaC5";
+export const stateManagerNFTChainAddr = contractsConfig.stateManagerNFTChainAddr
+  ? contractsConfig.stateManagerNFTChainAddr
+  : "0xd0FD2c20e2f2Ee5F3D7A03abB5F8557BA73e888A";
+export const storageNFTChainAddress = contractsConfig.storageNFTChainAddress
+  ? contractsConfig.storageNFTChainAddress
+  : "0x6db09Fd22Fab0CCDa6c443aFc861c9515F7632bf";
+export const paymentTokenAddr = contractsConfig.paymentTokenAddr
+  ? contractsConfig.paymentTokenAddr
+  : "0x3F015117432f4E2e970D3B6b918F3B92D17eFC88";
+export const paymentContractAddress = contractsConfig.paymentContractAddress
+  ? contractsConfig.paymentContractAddress
+  : "0x9C8475A3f11720F016639779BEf4BD5eA214EF63";
 
 export const paymentZKSyncProviderURL = "http://0.0.0.0:3050";
 export const nftMintProviderURL = "http://0.0.0.0:4050";

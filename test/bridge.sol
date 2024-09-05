@@ -5,8 +5,10 @@ import "forge-std/Test.sol";
 import {IAvail} from "../contracts/example/bridge/interfaces/IAvail.sol";
 import "../contracts/example/bridge/NexusBridge.sol";
 import "../contracts/example/mock/ERC20.sol";
+
+import "../contracts/verification/ethereum/Verifier.sol";
 import "../contracts/NexusProofManager.sol";
-import "forge-std/console.sol";
+
 import "../contracts/interfaces/INexusProofManager.sol";
 
 contract BridgeTest is Test { 
@@ -36,8 +38,9 @@ contract BridgeTest is Test {
         erc20_3.mint(address(this), mintAmount);
         erc20_3.approve(address(bridge), mintAmount);
 
-        NexusProofManager nexusState = new NexusProofManager(bytes32(uint256(27)));
-        bridge.initialize(100,address(this), IAvail(address(erc20)),address(this), address(this), INexusProofManager(address(nexusState)), bytes32(uint256(137)));
+        NexusProofManager nexusState = new NexusProofManager();
+        EthereumVerifier verifier = new EthereumVerifier(INexusProofManager(address(nexusState)));
+        bridge.initialize(100,address(this), IAvail(address(erc20)),address(this), address(this), INexusProofManager(address(nexusState)), bytes32(uint256(137)), verifier);
         bytes32[] memory assetIds = new bytes32[](1);
         assetIds[0]= assetId;
 
