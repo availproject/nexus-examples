@@ -1,13 +1,13 @@
 import { ethers } from "ethers";
 
 export const stateManagerNFTChainAddr =
-  "0xAa3C0cF14A0288FF6F9bc75b2e3A99c7961e25fE";
+  "0xc1C13de125E0D2A8D04EFa3BDc904A99409376d8";
 export const storageNFTChainAddress =
-  "0xcba1435A4fF5e7aF1f2cB695ccf6fb256B972c61";
+  "0xB2C7286EBd7EFb837c02955772D29F879BD1d94B";
 export const diamondAddress = "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE";
-export const paymentTokenAddr = "0x3F015117432f4E2e970D3B6b918F3B92D17eFC88";
+export const paymentTokenAddr = "0x0B0E86d6242201B163412F0239a18A0ea02b60CB";
 export const paymentContractAddress =
-  "0x9C8475A3f11720F016639779BEf4BD5eA214EF63";
+  "0x9B128e90689468428cDB98d8D44d75355A2eEaC5";
 
 export const paymentZKSyncProviderURL = "http://0.0.0.0:3050";
 export const nftMintProviderURL = "http://0.0.0.0:4050";

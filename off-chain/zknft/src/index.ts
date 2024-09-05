@@ -22,6 +22,8 @@ import {
   privateKeyZkSync,
 } from "./config";
 
+import fs from "fs";
+
 type NexusState = {
   stateRoot: string;
   blockHash: string;
@@ -324,3 +326,6 @@ async function mintNFT(
 }
 
 main();
+
+// const stderrOutput = fs.openSync("/dev/null", "w");
+// process.stderr.write = fs.writeSync.bind(fs, stderrOutput);
