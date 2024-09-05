@@ -28,7 +28,14 @@ Follow the guide below to setup and run the demo on your machines.
   ```
 
 - Update the config `general.yaml` in `chains/era/configs` with in `configs/era_general.yaml`.
-- Update `general.yaml` in `chains/era2/configs/` with config in `configs/era2_general.yaml`. 
+- Update `general.yaml` in `chains/era2/configs/` with config in `configs/era2_general.yaml`.
+
+- Now run:
+
+  ```
+  zk_inception server
+  zk_inception server --chain era2
+  ```
 
 - Bridge funds to your accounts on zksync chains to be able to run the demo by following instructions [here](https://github.com/vibhurajeev/zksync-era/blob/main/docs/guides/advanced/02_deposits.md). 
 
@@ -37,19 +44,11 @@ Follow the guide below to setup and run the demo on your machines.
   npx zksync-cli bridge deposit --chain=dockerized-node --amount 3 --pk=0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6 --to=0x618263CE921F7dd5F4f40C29f6c524Aaf97b9bbd --rpc http://127.0.0.1:4050
   ```
 
-
-- Now finally run:
-
-  ```
-  zk_inception server
-  zk_inception server --chain era2
-  ```
-
 - For more details on zksync cli refer [here](https://github.com/vibhurajeev/zksync-era/blob/main/zk_toolbox/README.md)
 
 ### 2. Contract Deployment:
 
-#### Automaic
+#### Automatic
 
 ```
 chmod +x deploy.sh
@@ -96,34 +95,43 @@ To run tests with values pre-populated ( or new ones by running the rust scripts
 
 ## Running the demo
 
-- Now to run the script
+You can choose to use a CLI to test the flow, or alternatively run the frontend demo. Below are instructions for both. 
+
+### Frontend
+
+- Go to nft ui directory 
+
+  ```
+  cd frontend/nft-ui
+  ```
+- Install npm modules and run the frontend. 
+
+  ```
+  npm install
+  npm run dev
+  ```
+- Go to payments ui directory 
+
+  ```
+  cd frontend/payments-ui
+  ```
+- Install npm modules and run the frontend. 
+
+  ```
+  npm install
+  npm run dev
+  ```  
+
+The demo should be running [here](http://localhost:3000/).
+
+### CLI
+- If you choose to run the script instead first copy the env:
 
   ```
   cp .env.example .env   // fill all the variables
   cd off-chain/zknft/
   touch src/config.ts
   ```
-
-- Add the following values inside config.ts:
-
-  ```
-  import { ethers } from "ethers";
-
-  export const stateManagerNFTChainAddr = "";
-  export const storageNFTChainAddress ="";
-  export const diamondAddress = "";
-  export const paymentTokenAddr = "";
-  export const paymentContractAddress ="";
-  export const paymentZKSyncProviderURL = "";
-  export const nftMintProviderURL = "";
-  export const nexusRPCUrl = "";
-  export const nexusAppID = "";
-  export const privateKeyZkSync = "";
-  export const privateKeyZkSync2 =""
-  export const amount = "";
-  ```
-
-  > Use the addresses logged during the deployment step and fill these values
 
 
 Now you are ready to pay on one chain and get nft on another using nexus:
