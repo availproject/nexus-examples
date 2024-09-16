@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/NexusProofManager.sol": {
-      "lastModificationDate": 1725007541529,
-      "contentHash": "a8551194ee6ee93d8fe07f2e9f5ceee9",
+      "lastModificationDate": 1725530058771,
+      "contentHash": "d67ac3e5838a6cfb1bffee94118f04c7",
       "sourceName": "contracts/NexusProofManager.sol",
       "solcConfig": {
         "version": "0.8.20",
@@ -2478,8 +2478,8 @@
       ]
     },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/bridge/NexusBridge.sol": {
-      "lastModificationDate": 1725017281039,
-      "contentHash": "6405c227bc358a1896000727f0234e73",
+      "lastModificationDate": 1725529923169,
+      "contentHash": "464c795b9ee9f3b307a7bbf347efe45f",
       "sourceName": "contracts/example/bridge/NexusBridge.sol",
       "solcConfig": {
         "version": "0.8.20",
@@ -2546,8 +2546,7 @@
         "./interfaces/IMessageReceiver.sol",
         "./interfaces/INexusBridge.sol",
         "../../interfaces/INexusProofManager.sol",
-        "../../verification/ethereum/Verifier.sol",
-        "forge-std/console.sol"
+        "../../verification/ethereum/Verifier.sol"
       ],
       "versionPragmas": [
         "^0.8.20"

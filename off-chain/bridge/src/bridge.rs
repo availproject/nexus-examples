@@ -327,12 +327,10 @@ async fn bridge_eth_on_receiver(
             .try_into()
             .unwrap(),
         to: output,
-        origin_domain: 1_u32,
-        destination_domain: 2_u32,
         data: Bytes::from(encoded),
         message_id: 2_u64,
         storage_proof: Bytes::from(encoded_storage_proof),
-        storage_slot: proof.storage_slot,
+        storage_slot: proof.proof.storage_proof[0].value.into(),
     };
 
     let tx = bridge_contract_destination

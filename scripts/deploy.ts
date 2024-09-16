@@ -18,7 +18,7 @@ async function main() {
       },
     }
   );
-  const nexusManager = await NexusProofManager.deploy(app_id);
+  const nexusManager = await NexusProofManager.deploy();
 
   console.log(
     "NexusProofManager deployed to:",
@@ -35,6 +35,11 @@ async function main() {
   console.log("Bridge deployed to:", await bridge.getAddress());
   console.log("Avail Token:", await availToken.getAddress());
 
+  const EthereumVerifier = await ethers.getContractFactory("EthereumVerifier");
+  const ethereumVerifier = await EthereumVerifier.deploy(
+    await nexusManager.getAddress()
+  );
+
   await bridge.initialize(
     10,
     ethers.ZeroAddress,
@@ -42,7 +47,8 @@ async function main() {
     address[0],
     address[0],
     await nexusManager.getAddress(),
-    app_id
+    app_id,
+    await ethereumVerifier.getAddress()
   );
 
   // required only for destination chain

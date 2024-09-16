@@ -425,6 +425,7 @@ contract NexusBridge is
         bytes32 state = nexus.getChainState(0, chainId); 
         (, , , bytes32 storageRoot) = verifier.verifyAccount(state, proof, address(uint160(uint256(message.to))));
         require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
-        verifier.verifyStorage(storageRoot, message.storageSlot, message.storageProof);
+        bytes32 value = verifier.verifyStorage(storageRoot, message.storageSlot, message.storageProof);
+        require(value == message.slotValue, "Invalid slot value");
     } 
 }

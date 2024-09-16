@@ -64,10 +64,8 @@ contract StorageProofVerifier {
             }), 
             _proof.account
         );
-        console.log(_proof.batchNumber);
+   
         bytes32 l1BatchHash = zksyncDiamondAddress.storedBatchHash(_proof.batchNumber);
-        console.logBytes32(l1BatchHash);
-        console.logBytes32(l2BatchHash);
         valid = l2BatchHash == l1BatchHash;
     }
 }

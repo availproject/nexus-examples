@@ -698,6 +698,11 @@
         "internalType": "bytes32",
         "name": "currentChainId",
         "type": "bytes32"
+      },
+      {
+        "internalType": "contract EthereumVerifier",
+        "name": "_verifier",
+        "type": "address"
       }
     ],
     "name": "initialize",
@@ -762,6 +767,25 @@
     "outputs": [
       {
         "internalType": "contract INexusProofManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "nexusTokens",
+    "outputs": [
+      {
+        "internalType": "address",
         "name": "",
         "type": "address"
       }
@@ -851,81 +875,6 @@
             "type": "bytes32"
           },
           {
-            "internalType": "uint32",
-            "name": "originDomain",
-            "type": "uint32"
-          },
-          {
-            "internalType": "uint32",
-            "name": "destinationDomain",
-            "type": "uint32"
-          },
-          {
-            "internalType": "bytes",
-            "name": "data",
-            "type": "bytes"
-          },
-          {
-            "internalType": "uint64",
-            "name": "messageId",
-            "type": "uint64"
-          },
-          {
-            "internalType": "bytes",
-            "name": "storageProof",
-            "type": "bytes"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "storageSlot",
-            "type": "bytes32"
-          }
-        ],
-        "internalType": "struct INexusBridge.MessageReceieve",
-        "name": "message",
-        "type": "tuple"
-      },
-      {
-        "internalType": "bytes",
-        "name": "input",
-        "type": "bytes"
-      }
-    ],
-    "name": "receiveAVAIL",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "components": [
-          {
-            "internalType": "bytes1",
-            "name": "messageType",
-            "type": "bytes1"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "from",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "to",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "uint32",
-            "name": "originDomain",
-            "type": "uint32"
-          },
-          {
-            "internalType": "uint32",
-            "name": "destinationDomain",
-            "type": "uint32"
-          },
-          {
             "internalType": "bytes",
             "name": "data",
             "type": "bytes"
@@ -981,16 +930,6 @@
             "type": "bytes32"
           },
           {
-            "internalType": "uint32",
-            "name": "originDomain",
-            "type": "uint32"
-          },
-          {
-            "internalType": "uint32",
-            "name": "destinationDomain",
-            "type": "uint32"
-          },
-          {
             "internalType": "bytes",
             "name": "data",
             "type": "bytes"
@@ -1044,16 +983,6 @@
             "internalType": "bytes32",
             "name": "to",
             "type": "bytes32"
-          },
-          {
-            "internalType": "uint32",
-            "name": "originDomain",
-            "type": "uint32"
-          },
-          {
-            "internalType": "uint32",
-            "name": "destinationDomain",
-            "type": "uint32"
           },
           {
             "internalType": "bytes",
@@ -1130,24 +1059,6 @@
   {
     "inputs": [],
     "name": "rollbackDefaultAdminDelay",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "recipient",
-        "type": "bytes32"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "sendAVAIL",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1296,9 +1207,40 @@
         "type": "address[]"
       }
     ],
+    "name": "updateNexusTokens",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "assetIds",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "tokenAddresses",
+        "type": "address[]"
+      }
+    ],
     "name": "updateTokens",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "verifier",
+    "outputs": [
+      {
+        "internalType": "contract EthereumVerifier",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

@@ -31,6 +31,7 @@ interface INexusBridge {
         bytes storageProof;
 
         bytes32 storageSlot;
+        bytes32 slotValue;
     }
 
     event MessageReceived(bytes32 indexed from, address indexed to, uint256 messageId);
