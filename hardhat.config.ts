@@ -14,8 +14,7 @@ const config: HardhatUserConfig = {
     settings: {
       libraries: {
         "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-          JellyfishMerkleTreeVerifier:
-            "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8",
+          JellyfishMerkleTreeVerifier: "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8",
         },
       },
     },

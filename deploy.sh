@@ -19,11 +19,32 @@ update_hardhat_config() {
     local jmt_address=$1
     local config_file="hardhat.config.ts"
 
-    if sed -i '' -e "/JellyfishMerkleTreeVerifier:/{s/:.*/: \"$jmt_address\",/;n;d;}" "$config_file"; then
+    # Determine the platform (Linux or macOS)
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        sed -i '' -e "/JellyfishMerkleTreeVerifier:/s/:.*/: \"$jmt_address\",/" "$config_file"
+    else
+        # Linux and other Unix-like systems
+        sed -i -e "/JellyfishMerkleTreeVerifier:/s/:.*/: \"$jmt_address\",/" "$config_file"
+    fi
+
+    # Check if the sed command was successful
+    if [[ $? -eq 0 ]]; then
         echo "Updated $config_file with new JMT address: $jmt_address"
     else
         log_error "Failed to update $config_file with new JMT address."
     fi
+}
+
+#Function to create empty contracts config json file. 
+create_empty_config() {
+    local config_file="./off-chain/zknft/src/contracts_config.json"
+
+    # Check if the file exists and remove it
+    [[ -f "$config_file" ]] && rm -f "$config_file"
+
+    # Create an empty JSON file
+    echo '{}' > "$config_file"
 }
 
 # Function to update hardhat.config.ts with new JMT address
@@ -93,6 +114,10 @@ extract_addresses() {
     # Update config.json with the extracted addresses
     update_config_json "$payment_contract_address" "$payment_token_address" "$state_manager_address" "$nft_address"
 }
+
+# Pre deployment
+echo "Clearing existing config"
+create_empty_config
 
 # Step 1: Deploy ZKSync contract
 echo "Deploying ZKSync contract..."
