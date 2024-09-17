@@ -10,9 +10,7 @@ async function main() {
   const deployer = new Deployer(hre, wallet);
 
   const NexusProofManager = await deployer.loadArtifact("NexusProofManager");
-  const nexusManager = await deployer.deploy(NexusProofManager, [
-    "0x" + nexusAppID,
-  ]);
+  const nexusManager = await deployer.deploy(NexusProofManager);
 
   console.log(
     "NexusProofManager deployed to:",

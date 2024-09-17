@@ -25,7 +25,7 @@ async function main() {
 
   // Deploy NexusProofManager contract with the linked library
   const nexusArtifact = await deployer.loadArtifact("NexusProofManager");
-  const nexusManager = await deployer.deploy(nexusArtifact, [app_id]);
+  const nexusManager = await deployer.deploy(nexusArtifact);
   console.log(
     `NexusProofManager deployed to ${await nexusManager.getAddress()}`
   );

@@ -6,7 +6,7 @@ import {INexusProofManager} from "../../interfaces/INexusProofManager.sol";
 import {StorageProofVerifier, StorageProof} from "../../verification/zksync/StorageProof.sol";
 import "forge-std/console.sol";
 
-contract MyNFT is ERC721 {
+contract NFT is ERC721 {
     mapping(uint256 => bytes32) confirmationReceipts;
     mapping(uint256 => bool) usedMessageid;
 
@@ -61,6 +61,4 @@ contract MyNFT is ERC721 {
         bool valid = storageProof.verify(storageSlotTrieProof);
         require(valid, "invalid storage proof");
     }
-    
-
 }
