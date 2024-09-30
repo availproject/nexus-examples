@@ -1,16 +1,16 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "../contracts/example/zknft/NFT.sol";
-import "../contracts/example/zknft/NftPayment.sol";
-import "../contracts/NexusProofManager.sol";
-import "../contracts/interfaces/INexusProofManager.sol";
-import "../contracts/example/mock/ERC20.sol";
-import "../contracts/verification/zksync/StorageProof.sol";
+import "../contracts/zknft/NFT.sol";
+import "../contracts/zknft/NftPayment.sol";
+import "nexus/NexusProofManager.sol";
+import "nexus/interfaces/INexusProofManager.sol";
+import "../contracts/mock/ERC20.sol";
+import "nexus/verification/zksync/StorageProof.sol";
 
-import "../contracts/verification/zksync/SparseMerkleTree.sol";
-import "../contracts/verification/zksync/ZKSyncDiamond.sol";
-import "../contracts/example/mock/ERC721.sol";
+import "nexus/verification/zksync/SparseMerkleTree.sol";
+import "nexus/verification/zksync/ZKSyncNexusManagerRouter.sol";
+import "../contracts/mock/ERC721.sol";
 
 contract ZKNFTTest is Test  { 
     NexusProofManager proofManager;
@@ -29,8 +29,8 @@ contract ZKNFTTest is Test  {
         erc20 = new ERC20Token("Avail","Avail");
         proofManager = new NexusProofManager();
         SparseMerkleTree smt = new SparseMerkleTree();
-        ZKSyncDiamond zksyncDiamond = new ZKSyncDiamond(INexusProofManager(address(proofManager)), appid);
-        StorageProofVerifier verifier = new StorageProofVerifier(IZkSyncDiamond(address(zksyncDiamond)), smt);
+        ZKSyncNexusManagerRouter zksyncDiamond = new ZKSyncNexusManagerRouter(INexusProofManager(address(proofManager)), appid);
+        StorageProofVerifier verifier = new StorageProofVerifier(IZKSyncNexusManagerRouter(address(zksyncDiamond)), smt);
         nftContract = new MyNFT(bytes32(uint256(uint160(137))), bytes32(uint256(uint160(1337))), INexusProofManager(address(proofManager)),verifier);
         paymentContract = new NFTPayment(INexusProofManager(address(proofManager)), bob, address(nftContract));
         paymentContract.updatePrice(address(erc20), mintAmount);

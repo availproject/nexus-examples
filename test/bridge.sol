@@ -2,14 +2,14 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import {IAvail} from "../contracts/example/bridge/interfaces/IAvail.sol";
-import "../contracts/example/bridge/NexusBridge.sol";
-import "../contracts/example/mock/ERC20.sol";
+import {IAvail} from "../contracts/bridge/interfaces/IAvail.sol";
+import "../contracts/bridge/NexusBridge.sol";
+import "../contracts/mock/ERC20.sol";
 
-import "../contracts/verification/ethereum/Verifier.sol";
-import "../contracts/NexusProofManager.sol";
+import "nexus/verification/ethereum/Verifier.sol";
+import "nexus/NexusProofManager.sol";
 
-import "../contracts/interfaces/INexusProofManager.sol";
+import "nexus/interfaces/INexusProofManager.sol";
 
 contract BridgeTest is Test { 
     NexusBridge public bridge;
