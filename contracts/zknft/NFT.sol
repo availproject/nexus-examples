@@ -23,26 +23,35 @@ contract MyNFT is ERC721 {
         uint256 messageId;
         uint256 chainId;
     }
-    struct ConfirmationReciept { 
+
+    struct ConfirmationReciept {
         uint256 numberOfNFTs;
         uint256 messageId;
         address to;
     }
 
     event Confirmation(uint256 id, uint256 tokenId, address to);
-    constructor(bytes32 _selfChainId, bytes32 _paymentChainID, INexusProofManager nexusManager,StorageProofVerifier _storageProof) ERC721("MyNFT", "MNFT") {
+
+    constructor(
+        bytes32 _selfChainId,
+        bytes32 _paymentChainID,
+        INexusProofManager nexusManager,
+        StorageProofVerifier _storageProof
+    ) ERC721("MyNFT", "MNFT") {
         nexus = nexusManager;
         selfChainId = _selfChainId;
         paymentChainID = _paymentChainID;
         storageProof = _storageProof;
     }
 
-    function mintNFT(address recipient, Message calldata message, StorageProof calldata storageSlotTrieProof) public returns (uint256) {
- 
+    function mintNFT(address recipient, Message calldata message, StorageProof calldata storageSlotTrieProof)
+        public
+        returns (uint256)
+    {
         require(!usedMessageid[message.messageId], "Message id already digested");
         verifyPayment(storageSlotTrieProof);
-       
-        (address to, ,) = abi.decode(message.data, (address, uint256, uint256));
+
+        (address to,,) = abi.decode(message.data, (address, uint256, uint256));
         _tokenIds += 1;
 
         uint256 newItemId = _tokenIds;
@@ -56,11 +65,8 @@ contract MyNFT is ERC721 {
         return newItemId;
     }
 
-
-    function verifyPayment(StorageProof calldata storageSlotTrieProof) view  public { 
+    function verifyPayment(StorageProof calldata storageSlotTrieProof) public view {
         bool valid = storageProof.verify(storageSlotTrieProof);
         require(valid, "invalid storage proof");
     }
-    
-
 }

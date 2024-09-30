@@ -16,6 +16,7 @@ interface INexusBridge {
         // nonce
         uint64 messageId;
     }
+
     struct MessageReceieve {
         // single-byte prefix representing the message type
         bytes1 messageType;
@@ -27,9 +28,7 @@ interface INexusBridge {
         bytes data;
         // nonce
         uint64 messageId;
-
         bytes storageProof;
-
         bytes32 storageSlot;
         bytes32 slotValue;
     }

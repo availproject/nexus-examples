@@ -2,8 +2,7 @@
 pragma solidity ^0.8.20;
 
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import {ReentrancyGuardUpgradeable} from
-    "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import {ReentrancyGuardUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import {PausableUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import {AccessControlDefaultAdminRulesUpgradeable} from
     "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol";
@@ -16,7 +15,6 @@ import {IMessageReceiver} from "./interfaces/IMessageReceiver.sol";
 import {INexusBridge} from "./interfaces/INexusBridge.sol";
 import {EthereumVerifier} from "nexus/verification/ethereum/Verifier.sol";
 import {INexusProofManager} from "nexus/interfaces/INexusProofManager.sol";
-
 
 contract NexusBridge is
     Initializable,
@@ -35,7 +33,7 @@ contract NexusBridge is
     // map asset IDs to an Respective chain's address
     mapping(bytes32 => address) public tokens;
     // map asset IDs to nexus asset addresses on given chain
-    mapping(bytes32 => address) public nexusTokens; 
+    mapping(bytes32 => address) public nexusTokens;
 
     IAvail public avail;
     INexusProofManager public nexus;
@@ -54,11 +52,8 @@ contract NexusBridge is
     // slither-disable-next-line too-many-digits
     bytes32 private constant ETH_ASSET_ID = 0x4554480000000000000000000000000000000000000000000000000000000000;
     bytes32 private constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
-     bytes32 private constant EMPTY_TRIE_ROOT_HASH =
-        0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
-    bytes32 private constant EMPTY_CODE_HASH =
-        0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
-
+    bytes32 private constant EMPTY_TRIE_ROOT_HASH = 0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
+    bytes32 private constant EMPTY_CODE_HASH = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
 
     modifier onlyTokenTransfer(bytes1 messageType) {
         if (messageType != TOKEN_TX_PREFIX) {
@@ -91,12 +86,11 @@ contract NexusBridge is
         INexusProofManager nexusStateManager,
         bytes32 currentChainId,
         EthereumVerifier _verifier
-      
     ) external initializer {
         feePerByte = newFeePerByte;
         // slither-disable-next-line missing-zero-check
         feeRecipient = newFeeRecipient;
-      
+
         avail = newAvail;
         nexus = nexusStateManager;
         chainId = currentChainId;
@@ -119,7 +113,6 @@ contract NexusBridge is
         }
     }
 
- 
     /**
      * @notice  Function to update asset ID -> token address mapping
      * @dev     Only callable by governance
@@ -213,9 +206,9 @@ contract NexusBridge is
         if (message.messageType != MESSAGE_TX_PREFIX) {
             revert InvalidMessage();
         }
-     
+
         _checkInclusionAgainstStateRoot(message, input);
-        
+
         // downcast SCALE-encoded bytes to an Ethereum address
         address dest = address(bytes20(message.to));
         // IMessageReceiver(dest).onAvailMessage(message.from, message.data);
@@ -236,7 +229,7 @@ contract NexusBridge is
         nonReentrant
     {
         (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
- 
+
         _checkInclusionAgainstStateRoot(message, input);
 
         // downcast SCALE-encoded bytes to an Ethereum address
@@ -245,11 +238,11 @@ contract NexusBridge is
 
         emit MessageReceived(message.from, dest, message.messageId);
 
-        if(nexusTokens[assetId] != address(0)) {
+        if (nexusTokens[assetId] != address(0)) {
             IAvail(nexusTokens[assetId]).mint(dest, value);
             return;
         }
-        
+
         // slither-disable-next-line arbitrary-send-eth,missing-zero-check,low-level-calls
         (bool success,) = dest.call{value: value}("");
         if (!success) {
@@ -272,19 +265,18 @@ contract NexusBridge is
         (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
         address token = tokens[assetId];
         if (token != address(0)) {
-             _checkInclusionAgainstStateRoot(message, input);
+            _checkInclusionAgainstStateRoot(message, input);
 
             // revert to message.to later
             address dest = address(uint160(uint256(message.from)));
 
             emit MessageReceived(message.from, dest, message.messageId);
 
-            
             IERC20(token).safeTransfer(dest, value);
             return;
         }
         token = nexusTokens[assetId];
-        if(token != address(0)) {
+        if (token != address(0)) {
             _checkInclusionAgainstStateRoot(message, input);
 
             // revert to message.to later
@@ -294,8 +286,8 @@ contract NexusBridge is
 
             IAvail(token).mint(dest, value);
             return;
-        }             
-        revert InvalidAssetId();  
+        }
+        revert InvalidAssetId();
     }
 
     /**
@@ -318,9 +310,7 @@ contract NexusBridge is
             id = messageId++;
         }
         fees += msg.value;
-        Message memory message = Message(
-            MESSAGE_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, data, uint64(id)
-        );
+        Message memory message = Message(MESSAGE_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, data, uint64(id));
         // store message hash to be retrieved later by our light client
         isSent[id] = keccak256(abi.encode(message));
 
@@ -338,14 +328,10 @@ contract NexusBridge is
             id = messageId++;
         }
         Message memory message = Message(
-            TOKEN_TX_PREFIX,
-            bytes32(bytes20(msg.sender)),
-            recipient,
-            abi.encode(ETH_ASSET_ID, msg.value),
-            uint64(id)
+            TOKEN_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, abi.encode(ETH_ASSET_ID, msg.value), uint64(id)
         );
         // store message hash to be retrieved later by our light client
-        isSent[id] = keccak256(abi.encode(message)); 
+        isSent[id] = keccak256(abi.encode(message));
 
         emit MessageSent(msg.sender, recipient, id);
     }
@@ -364,17 +350,12 @@ contract NexusBridge is
     {
         address token = tokens[assetId];
         if (token != address(0)) {
-           
             uint256 id;
             unchecked {
                 id = messageId++;
             }
             Message memory message = Message(
-                TOKEN_TX_PREFIX,
-                bytes32(bytes20(msg.sender)),
-                recipient,
-                abi.encode(assetId, amount),
-                uint64(id)
+                TOKEN_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, abi.encode(assetId, amount), uint64(id)
             );
             // store message hash to be retrieved later by our light client
             isSent[id] = keccak256(abi.encode(message));
@@ -383,21 +364,16 @@ contract NexusBridge is
 
             IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
             return;
-           
         }
-        
+
         token = nexusTokens[assetId];
-        if(token != address(0)){ 
+        if (token != address(0)) {
             uint256 id;
             unchecked {
                 id = messageId++;
             }
             Message memory message = Message(
-                TOKEN_TX_PREFIX,
-                bytes32(bytes20(msg.sender)),
-                recipient,
-                abi.encode(assetId, amount),
-                uint64(id)
+                TOKEN_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, abi.encode(assetId, amount), uint64(id)
             );
             // store message hash to be retrieved later by our light client
             isSent[id] = keccak256(abi.encode(message));
@@ -411,7 +387,6 @@ contract NexusBridge is
         revert InvalidAssetId();
     }
 
-
     /**
      * @notice  Returns the minimum fee for a given message length
      * @param   length  Length of the message (in bytes)
@@ -422,10 +397,10 @@ contract NexusBridge is
     }
 
     function _checkInclusionAgainstStateRoot(MessageReceieve calldata message, bytes calldata proof) private {
-        bytes32 state = nexus.getChainState(0, chainId); 
-        (, , , bytes32 storageRoot) = verifier.verifyAccount(state, proof, address(uint160(uint256(message.to))));
+        bytes32 state = nexus.getChainState(0, chainId);
+        (,,, bytes32 storageRoot) = verifier.verifyAccount(state, proof, address(uint160(uint256(message.to))));
         require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
         bytes32 value = verifier.verifyStorage(storageRoot, message.storageSlot, message.storageProof);
         require(value == message.slotValue, "Invalid slot value");
-    } 
+    }
 }
