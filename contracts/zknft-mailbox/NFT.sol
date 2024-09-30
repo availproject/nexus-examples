@@ -7,7 +7,6 @@ import "forge-std/console.sol";
 import {LockNFT, PendingPayment, ConfirmationReciept, UnLockNFT} from "./types.sol";
 
 contract MyNFT is ERC721 {
-    uint256 private _tokenIds;
     INexusMailbox public mailbox;
     bytes32 immutable selfChainId;
     bytes32 immutable paymentChainID;
