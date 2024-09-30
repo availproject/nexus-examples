@@ -9,7 +9,6 @@ contract NFTPayment {
     INexusMailbox public mailbox;
     bytes32 immutable selfChainId;
     bytes32 immutable nftChainId;
-    uint256 CLAIM_TIME = 86400; // 1 day
 
     mapping(uint256 => PendingPayment) paymentFrom;
 
