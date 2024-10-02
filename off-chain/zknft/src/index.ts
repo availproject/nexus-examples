@@ -22,8 +22,6 @@ import {
   privateKeyZkSync,
 } from "./config";
 
-import fs from "fs";
-
 type NexusState = {
   stateRoot: string;
   blockHash: string;
