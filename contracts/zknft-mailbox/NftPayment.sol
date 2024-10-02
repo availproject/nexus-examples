@@ -24,42 +24,31 @@ contract NFTPayment {
         nftChainId = _nftChainId;
     }
 
+    // We assume the user verifies that a payment message was generated at this step before making payment
+    // @dev nonce should be the same as NFT sell send message
     function pay(
-        Receipt calldata nftLockedMailboxReceipt,
-        uint256 chainBlockNumber,
-        bytes calldata proof
+        address tokenAddress,
+        uint256 amount,
+        uint256 nftId,
+        uint256 nonce
     ) public {
-        mailbox.receiveMessage(
-            chainBlockNumber,
-            nftLockedMailboxReceipt,
-            proof,
-            false
-        );
-        LockNFT memory lockNft = abi.decode(
-            nftLockedMailboxReceipt.data,
-            (LockNFT)
-        );
-        IERC20(lockNft.tokenAddress).transferFrom(
-            msg.sender,
-            address(this),
-            lockNft.amount
-        );
+        IERC20(tokenAddress).transferFrom(msg.sender, address(this), amount);
 
         PendingPayment memory pendingReceipt = PendingPayment(
             msg.sender,
-            lockNft.nftId,
+            nftId,
             block.timestamp, // insecure
-            lockNft.amount,
-            lockNft.tokenAddress
+            amount,
+            tokenAddress
         );
 
-        paymentFrom[lockNft.nftId] = pendingReceipt;
+        paymentFrom[nftId] = pendingReceipt;
         bytes memory data = abi.encode(pendingReceipt);
         bytes32[] memory chainIdTo = new bytes32[](1);
         chainIdTo[0] = nftChainId;
         address[] memory to = new address[](1);
         to[0] = address(0);
-        mailbox.sendMessage(chainIdTo, to, data);
+        mailbox.sendMessage(chainIdTo, to, nonce, data);
     }
 
     function claimPayment(
@@ -87,6 +76,7 @@ contract NFTPayment {
         bytes calldata proof,
         bool callback
     ) public {
+        // inclusion proof check for withdrawl event
         mailbox.receiveMessage(
             chainblockNumber,
             mailboxReceipt,

@@ -18,6 +18,8 @@ contract MyNFT is ERC721 {
     error InvalidSender();
     error TransferAlreadyCompleted();
 
+    uint256 nonce = 0;
+
     constructor(
         bytes32 _selfChainId,
         bytes32 _paymentChainID,
@@ -46,7 +48,7 @@ contract MyNFT is ERC721 {
         bytes memory data = abi.encode(lockNft);
         lockNFTMap[keccak256(data)] = lockNft;
         transferFrom(msg.sender, address(this), tokenId);
-        mailbox.sendMessage(chainIdTo, to, data);
+        mailbox.sendMessage(chainIdTo, to, ++nonce, data);
     }
 
     function transferNFT(
@@ -80,7 +82,7 @@ contract MyNFT is ERC721 {
         address[] memory to = new address[](1);
         to[0] = address(0);
         bytes memory dataNew = abi.encode(receipt);
-        mailbox.sendMessage(chainIdTo, to, dataNew); // used furthur to claim payment on payment chain from escrow
+        mailbox.sendMessage(chainIdTo, to, ++nonce, dataNew); // used furthur to claim payment on payment chain from escrow
     }
 
     function withdrawNFT(bytes32 lockHash) public {
@@ -98,7 +100,7 @@ contract MyNFT is ERC721 {
         UnLockNFT memory unLockNft = UnLockNFT({nftId: lock.nftId});
         bytes memory data = abi.encode(unLockNft);
         transferFrom(msg.sender, address(this), lock.nftId);
-        mailbox.sendMessage(chainIdTo, to, data);
+        mailbox.sendMessage(chainIdTo, to, ++nonce, data);
         delete lockNFTMap[lockHash];
     }
 }
