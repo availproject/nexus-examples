@@ -6,6 +6,6 @@ erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-te
 eth-gas-reporter/=node_modules/eth-gas-reporter/
 forge-std/=lib/forge-std/src/
 hardhat/=node_modules/hardhat/
-nexus/=lib/nexus.git/contracts/src/
+nexus/=lib/nexus/contracts/src/
 openzeppelin-contracts-upgradeable/=lib/nexus.git/contracts/lib/openzeppelin-contracts-upgradeable/
 openzeppelin-contracts/=node_modules/openzeppelin-contracts/

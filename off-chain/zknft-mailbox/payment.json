@@ -1,0 +1,69 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "_mailbox",
+        "type": "address",
+        "internalType": "contract INexusMailbox"
+      },
+      { "name": "_nftNexusId", "type": "bytes32", "internalType": "bytes32" },
+      {
+        "name": "_nftContractAddress",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "mailbox",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract INexusMailbox"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pay",
+    "inputs": [
+      {
+        "name": "tokenAddress",
+        "type": "address",
+        "internalType": "address"
+      },
+      { "name": "amount", "type": "uint256", "internalType": "uint256" },
+      { "name": "nftId", "type": "uint256", "internalType": "uint256" },
+      { "name": "nonce", "type": "uint256", "internalType": "uint256" },
+      { "name": "to", "type": "address", "internalType": "address" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "PendingPayout",
+    "inputs": [
+      {
+        "name": "index",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  { "type": "error", "name": "AlreadyPaidFor", "inputs": [] }
+]

@@ -2,32 +2,44 @@
 pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import {INexusMailbox, Receipt} from "nexus/interfaces/INexusMailbox.sol";
+import {INexusMailbox, MailboxMessage} from "nexus/interfaces/INexusMailbox.sol";
 import "forge-std/console.sol";
-import {LockNFT, PendingPayment, ConfirmationReciept, UnLockNFT} from "./types.sol";
+import {LockNFT, PendingPayment} from "./types.sol";
 
-contract MyNFT is ERC721 {
+contract MyNFTMailbox is ERC721 {
     INexusMailbox public mailbox;
-    bytes32 immutable selfChainId;
-    bytes32 immutable paymentChainID;
+    bytes32 immutable selfNexusId;
+    bytes32 immutable paymentNexusId;
+    address paymentContractAddress;
+    uint256 constant TIMEOUT_BLOCKS = 10;
 
     mapping(bytes32 => LockNFT) lockNFTMap;
 
     event Confirmation(uint256 tokenId, address to);
+    event LockHash(bytes32 lockHash);
 
     error InvalidSender();
     error TransferAlreadyCompleted();
+    error CannotWithdrawBeforeTimeout();
+    error InvalidChain();
 
     uint256 nonce = 0;
 
     constructor(
-        bytes32 _selfChainId,
-        bytes32 _paymentChainID,
+        bytes32 _selfNexusId,
+        bytes32 _paymentNexusId,
         INexusMailbox _mailbox
     ) ERC721("MyNFT", "MNFT") {
         mailbox = _mailbox;
-        selfChainId = _selfChainId;
-        paymentChainID = _paymentChainID;
+        selfNexusId = _selfNexusId;
+        paymentNexusId = _paymentNexusId;
+    }
+
+    // TODO: make only owner
+    function setNftPaymentContractAddress(
+        address _paymentContractAddress
+    ) public {
+        paymentContractAddress = _paymentContractAddress;
     }
 
     function lockNFT(
@@ -35,31 +47,41 @@ contract MyNFT is ERC721 {
         uint256 amount,
         address tokenAddress
     ) public {
-        bytes32[] memory chainIdTo = new bytes32[](1);
-        chainIdTo[0] = paymentChainID;
-        address[] memory to = new address[](1);
-        to[0] = address(0);
         LockNFT memory lockNft = LockNFT({
             from: msg.sender,
             nftId: tokenId,
             amount: amount,
-            tokenAddress: tokenAddress
+            tokenAddress: tokenAddress,
+            blockNumber: block.number,
+            nonce: ++nonce
         });
         bytes memory data = abi.encode(lockNft);
         lockNFTMap[keccak256(data)] = lockNft;
         transferFrom(msg.sender, address(this), tokenId);
-        mailbox.sendMessage(chainIdTo, to, ++nonce, data);
+        emit LockHash(keccak256(data));
     }
 
     function transferNFT(
         uint256 chainBlockNumber,
-        Receipt calldata mailboxReceipt,
+        MailboxMessage calldata mailboxReceipt,
         bytes calldata proof
     ) public {
-        mailbox.receiveMessage(chainBlockNumber, mailboxReceipt, proof, false);
+        mailbox.receiveMessage(chainBlockNumber, mailboxReceipt, proof);
+    }
 
+    function onNexusMessage(
+        bytes32 nexusAppIdFrom,
+        address sender,
+        bytes memory data
+    ) public {
+        if (nexusAppIdFrom != paymentNexusId) {
+            revert InvalidChain();
+        }
+        if (sender != paymentContractAddress) {
+            revert InvalidSender();
+        }
         PendingPayment memory pendingPaymentInfo = abi.decode(
-            mailboxReceipt.data,
+            data,
             (PendingPayment)
         );
 
@@ -70,37 +92,60 @@ contract MyNFT is ERC721 {
             pendingPaymentInfo.nftId
         );
 
-        ConfirmationReciept memory receipt = ConfirmationReciept(
-            pendingPaymentInfo.nftId,
-            pendingPaymentInfo.to,
-            pendingPaymentInfo.amount,
-            pendingPaymentInfo.tokenAddress
-        );
         emit Confirmation(pendingPaymentInfo.nftId, pendingPaymentInfo.to);
-        bytes32[] memory chainIdTo = new bytes32[](1);
-        chainIdTo[0] = paymentChainID;
-        address[] memory to = new address[](1);
-        to[0] = address(0);
-        bytes memory dataNew = abi.encode(receipt);
-        mailbox.sendMessage(chainIdTo, to, ++nonce, dataNew); // used furthur to claim payment on payment chain from escrow
     }
 
-    function withdrawNFT(bytes32 lockHash) public {
+    function withdrawNFT(bytes32 lockHash, bytes calldata proof) public {
         LockNFT memory lock = lockNFTMap[lockHash];
+        if (lock.blockNumber + TIMEOUT_BLOCKS < block.number) {
+            revert CannotWithdrawBeforeTimeout();
+        }
         if (lock.from != msg.sender) {
             revert InvalidSender();
         }
         if (ownerOf(lock.nftId) == address(this)) {
             revert TransferAlreadyCompleted();
         }
-        bytes32[] memory chainIdTo = new bytes32[](1);
-        chainIdTo[0] = paymentChainID;
+        bytes32[] memory nexusIdTo = new bytes32[](1);
+        nexusIdTo[0] = selfNexusId;
         address[] memory to = new address[](1);
-        to[0] = address(0);
-        UnLockNFT memory unLockNft = UnLockNFT({nftId: lock.nftId});
-        bytes memory data = abi.encode(unLockNft);
-        transferFrom(msg.sender, address(this), lock.nftId);
-        mailbox.sendMessage(chainIdTo, to, ++nonce, data);
-        delete lockNFTMap[lockHash];
+        to[0] = address(this);
+        PendingPayment memory payment = PendingPayment({
+            nftId: lock.nftId,
+            to: lock.from,
+            amount: lock.amount,
+            tokenAddress: lock.tokenAddress
+        });
+
+        bytes memory data = abi.encode(payment);
+
+        MailboxMessage memory receipt = MailboxMessage({
+            nexusAppIdFrom: paymentNexusId,
+            nexusAppIdTo: nexusIdTo,
+            data: data,
+            from: paymentContractAddress,
+            to: to,
+            nonce: lock.nonce
+        });
+
+        // if the message verfication fails => no payment is done
+        (bool success, ) = address(mailbox).call(
+            abi.encodeWithSignature(
+                "receiveMessage(uint256, bytes, bytes)",
+                0, // zk sync verifier doesn't require the block number
+                receipt,
+                proof
+            )
+        );
+
+        // implies the verification failed
+        if (!success) {
+            transferFrom(msg.sender, address(this), lock.nftId);
+            delete lockNFTMap[lockHash];
+        }
+    }
+
+    function mint(uint256 tokenId) public {
+        _mint(msg.sender, tokenId);
     }
 }
