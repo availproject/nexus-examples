@@ -1,1 +1,510 @@
-{"abi":[{"type":"function","name":"getChainState","inputs":[{"name":"blockNumber","type":"uint256","internalType":"uint256"},{"name":"nexusAppID","type":"bytes32","internalType":"bytes32"}],"outputs":[{"name":"","type":"bytes32","internalType":"bytes32"}],"stateMutability":"view"},{"type":"function","name":"latestNexusBlockNumber","inputs":[],"outputs":[{"name":"","type":"uint256","internalType":"uint256"}],"stateMutability":"view"},{"type":"function","name":"nexusAppIdToLatestBlockNumber","inputs":[{"name":"","type":"bytes32","internalType":"bytes32"}],"outputs":[{"name":"","type":"uint256","internalType":"uint256"}],"stateMutability":"view"},{"type":"function","name":"nexusAppIdToState","inputs":[{"name":"","type":"bytes32","internalType":"bytes32"},{"name":"","type":"uint256","internalType":"uint256"}],"outputs":[{"name":"","type":"bytes32","internalType":"bytes32"}],"stateMutability":"view"},{"type":"function","name":"nexusBlock","inputs":[{"name":"","type":"uint256","internalType":"uint256"}],"outputs":[{"name":"stateRoot","type":"bytes32","internalType":"bytes32"},{"name":"blockHash","type":"bytes32","internalType":"bytes32"}],"stateMutability":"view"},{"type":"function","name":"updateChainState","inputs":[{"name":"nexusBlockNumber","type":"uint256","internalType":"uint256"},{"name":"siblings","type":"bytes32[]","internalType":"bytes32[]"},{"name":"key","type":"bytes32","internalType":"bytes32"},{"name":"accountState","type":"tuple","internalType":"struct NexusProofManager.AccountState","components":[{"name":"statementDigest","type":"bytes32","internalType":"bytes32"},{"name":"stateRoot","type":"bytes32","internalType":"bytes32"},{"name":"startNexusHash","type":"bytes32","internalType":"bytes32"},{"name":"lastProofHeight","type":"uint128","internalType":"uint128"},{"name":"height","type":"uint128","internalType":"uint128"}]}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"updateNexusBlock","inputs":[{"name":"blockNumber","type":"uint256","internalType":"uint256"},{"name":"nexusBlockInfo","type":"tuple","internalType":"struct NexusProofManager.NexusBlock","components":[{"name":"stateRoot","type":"bytes32","internalType":"bytes32"},{"name":"blockHash","type":"bytes32","internalType":"bytes32"}]}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"verifyRollupState","inputs":[{"name":"root","type":"bytes32","internalType":"bytes32"},{"name":"proof","type":"tuple","internalType":"struct JellyfishMerkleTreeVerifier.Proof","components":[{"name":"leaf","type":"tuple","internalType":"struct JellyfishMerkleTreeVerifier.Leaf","components":[{"name":"addr","type":"bytes32","internalType":"bytes32"},{"name":"valueHash","type":"bytes32","internalType":"bytes32"}]},{"name":"siblings","type":"bytes32[]","internalType":"bytes32[]"}]},{"name":"leaf","type":"tuple","internalType":"struct JellyfishMerkleTreeVerifier.Leaf","components":[{"name":"addr","type":"bytes32","internalType":"bytes32"},{"name":"valueHash","type":"bytes32","internalType":"bytes32"}]}],"outputs":[],"stateMutability":"pure"},{"type":"error","name":"AlreadyUpdatedBlock","inputs":[{"name":"blockNumber","type":"uint256","internalType":"uint256"}]},{"type":"error","name":"InvalidBlockNumber","inputs":[{"name":"blockNumber","type":"uint256","internalType":"uint256"},{"name":"latestBlockNumber","type":"uint256","internalType":"uint256"}]},{"type":"error","name":"NexusLeafInclusionCheckFailed","inputs":[]}],"bytecode":{"object":"0x608060405260008055348015601357600080fd5b50610903806100236000396000f3fe608060405234801561001057600080fd5b50600436106100885760003560e01c80638a6305401161005b5780638a6305401461013c5780638bb9dc06146101455780638d2383a914610158578063998862ec1461016b57600080fd5b80632d4383591461008d5780633bf38b10146100cb578063520782a11461010757806376ac39cb14610127575b600080fd5b6100b861009b3660046104e8565b600360209081526000928352604080842090915290825290205481565b6040519081526020015b60405180910390f35b6100f26100d936600461050a565b6001602081905260009182526040909120805491015482565b604080519283526020830191909152016100c2565b6100b861011536600461050a565b60026020526000908152604090205481565b61013a610135366004610523565b61017e565b005b6100b860005481565b61013a6101533660046105fb565b6101e0565b61013a6101663660046106ff565b61027e565b6100b86101793660046104e8565b610464565b600082815260016020526040902054156101b35760405163a9d81c2960e01b8152600481018390526024015b60405180910390fd5b600082815260016020818152604083208435815590840135910155548211156101dc5760008290555b5050565b604051632e6840fb60e21b815273__$b77a7e19957b1584528e98a188a995bdf6$__9063b9a103ec9061021b908690859087906004016107a6565b602060405180830381865af4158015610238573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061025c9190610833565b61027957604051637368fda760e11b815260040160405180910390fd5b505050565b6000600282356020840135604085013561029e608087016060880161085c565b6102ae60a088016080890161085c565b60408051602081019690965285019390935260608401919091526001600160801b0390811660808401521660a082015260c00160408051601f19818403018152908290526102fb91610885565b602060405180830381855afa158015610318573d6000803e3d6000fd5b5050506040513d601f19601f8201168201806040525081019061033b91906108b4565b9050600060405180604001604052808581526020018381525090506000604051806040016040528083815260200188888080602002602001604051908101604052809392919081815260200183836020028082843760009201829052509390945250508a8152600160205260409020549192506103bb91905082846101e0565b6103cb60a085016080860161085c565b6001600160801b03166002600087815260200190815260200160002054101561041b576103fe60a085016080860161085c565b60008681526002602052604090206001600160801b039190911690555b60008581526003602090815260408220908601359161044060a088016080890161085c565b6001600160801b031681526020810191909152604001600020555050505050505050565b60008181526002602052604081205483820361049a576000838152600360209081526040808320938352929052205490506104e2565b808411156104c55760405163d5dc642d60e01b815260048101859052602481018290526044016101aa565b505060008181526003602090815260408083208584529091529020545b92915050565b600080604083850312156104fb57600080fd5b50508035926020909101359150565b60006020828403121561051c57600080fd5b5035919050565b600080828403606081121561053757600080fd5b833592506040601f198201121561054d57600080fd5b506020830190509250929050565b634e487b7160e01b600052604160045260246000fd5b6040805190810167ffffffffffffffff811182821017156105945761059461055b565b60405290565b604051601f8201601f1916810167ffffffffffffffff811182821017156105c3576105c361055b565b604052919050565b6000604082840312156105dd57600080fd5b6105e5610571565b9050813581526020820135602082015292915050565b60008060006080848603121561061057600080fd5b8335925060208085013567ffffffffffffffff8082111561063057600080fd5b908601906060828903121561064457600080fd5b61064c610571565b61065689846105cb565b815260408301358281111561066a57600080fd5b80840193505088601f84011261067f57600080fd5b8235828111156106915761069161055b565b8060051b92506106a285840161059a565b818152928401850192858101908b8511156106bc57600080fd5b948601945b848610156106da578535825294860194908601906106c1565b8087850152505050809550505050506106f685604086016105cb565b90509250925092565b600080600080600085870361010081121561071957600080fd5b86359550602087013567ffffffffffffffff8082111561073857600080fd5b818901915089601f83011261074c57600080fd5b81358181111561075b57600080fd5b8a60208260051b850101111561077057600080fd5b6020929092019650909450506040870135925060a0605f198201121561079557600080fd5b506060860190509295509295909350565b838152600060206107c4602084018680518252602090810151910152565b6080606084015260e083016107e760808501865180518252602090810151910152565b602085810151606060c087015280519283905201906000906101008601905b808310156108265783518252928401926001929092019190840190610806565b5098975050505050505050565b60006020828403121561084557600080fd5b8151801515811461085557600080fd5b9392505050565b60006020828403121561086e57600080fd5b81356001600160801b038116811461085557600080fd5b6000825160005b818110156108a6576020818601810151858301520161088c565b506000920191825250919050565b6000602082840312156108c657600080fd5b505191905056fea2646970667358221220b98ac77a3d96649e1cda8747e41f2d14e2e8887ce53d18962c5563ca7071e61c64736f6c63430008190033","sourceMap":"149:3176:37:-:0;;;222:1;182:41;;149:3176;;;;;;;;;;;;;;;;","linkReferences":{"lib/nexus/contracts/src/lib/JellyfishMerkleTreeVerifier.sol":{"JellyfishMerkleTreeVerifier":[{"start":530,"length":20}]}}},"deployedBytecode":{"object":"0x608060405234801561001057600080fd5b50600436106100885760003560e01c80638a6305401161005b5780638a6305401461013c5780638bb9dc06146101455780638d2383a914610158578063998862ec1461016b57600080fd5b80632d4383591461008d5780633bf38b10146100cb578063520782a11461010757806376ac39cb14610127575b600080fd5b6100b861009b3660046104e8565b600360209081526000928352604080842090915290825290205481565b6040519081526020015b60405180910390f35b6100f26100d936600461050a565b6001602081905260009182526040909120805491015482565b604080519283526020830191909152016100c2565b6100b861011536600461050a565b60026020526000908152604090205481565b61013a610135366004610523565b61017e565b005b6100b860005481565b61013a6101533660046105fb565b6101e0565b61013a6101663660046106ff565b61027e565b6100b86101793660046104e8565b610464565b600082815260016020526040902054156101b35760405163a9d81c2960e01b8152600481018390526024015b60405180910390fd5b600082815260016020818152604083208435815590840135910155548211156101dc5760008290555b5050565b604051632e6840fb60e21b815273__$b77a7e19957b1584528e98a188a995bdf6$__9063b9a103ec9061021b908690859087906004016107a6565b602060405180830381865af4158015610238573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061025c9190610833565b61027957604051637368fda760e11b815260040160405180910390fd5b505050565b6000600282356020840135604085013561029e608087016060880161085c565b6102ae60a088016080890161085c565b60408051602081019690965285019390935260608401919091526001600160801b0390811660808401521660a082015260c00160408051601f19818403018152908290526102fb91610885565b602060405180830381855afa158015610318573d6000803e3d6000fd5b5050506040513d601f19601f8201168201806040525081019061033b91906108b4565b9050600060405180604001604052808581526020018381525090506000604051806040016040528083815260200188888080602002602001604051908101604052809392919081815260200183836020028082843760009201829052509390945250508a8152600160205260409020549192506103bb91905082846101e0565b6103cb60a085016080860161085c565b6001600160801b03166002600087815260200190815260200160002054101561041b576103fe60a085016080860161085c565b60008681526002602052604090206001600160801b039190911690555b60008581526003602090815260408220908601359161044060a088016080890161085c565b6001600160801b031681526020810191909152604001600020555050505050505050565b60008181526002602052604081205483820361049a576000838152600360209081526040808320938352929052205490506104e2565b808411156104c55760405163d5dc642d60e01b815260048101859052602481018290526044016101aa565b505060008181526003602090815260408083208584529091529020545b92915050565b600080604083850312156104fb57600080fd5b50508035926020909101359150565b60006020828403121561051c57600080fd5b5035919050565b600080828403606081121561053757600080fd5b833592506040601f198201121561054d57600080fd5b506020830190509250929050565b634e487b7160e01b600052604160045260246000fd5b6040805190810167ffffffffffffffff811182821017156105945761059461055b565b60405290565b604051601f8201601f1916810167ffffffffffffffff811182821017156105c3576105c361055b565b604052919050565b6000604082840312156105dd57600080fd5b6105e5610571565b9050813581526020820135602082015292915050565b60008060006080848603121561061057600080fd5b8335925060208085013567ffffffffffffffff8082111561063057600080fd5b908601906060828903121561064457600080fd5b61064c610571565b61065689846105cb565b815260408301358281111561066a57600080fd5b80840193505088601f84011261067f57600080fd5b8235828111156106915761069161055b565b8060051b92506106a285840161059a565b818152928401850192858101908b8511156106bc57600080fd5b948601945b848610156106da578535825294860194908601906106c1565b8087850152505050809550505050506106f685604086016105cb565b90509250925092565b600080600080600085870361010081121561071957600080fd5b86359550602087013567ffffffffffffffff8082111561073857600080fd5b818901915089601f83011261074c57600080fd5b81358181111561075b57600080fd5b8a60208260051b850101111561077057600080fd5b6020929092019650909450506040870135925060a0605f198201121561079557600080fd5b506060860190509295509295909350565b838152600060206107c4602084018680518252602090810151910152565b6080606084015260e083016107e760808501865180518252602090810151910152565b602085810151606060c087015280519283905201906000906101008601905b808310156108265783518252928401926001929092019190840190610806565b5098975050505050505050565b60006020828403121561084557600080fd5b8151801515811461085557600080fd5b9392505050565b60006020828403121561086e57600080fd5b81356001600160801b038116811461085557600080fd5b6000825160005b818110156108a6576020818601810151858301520161088c565b506000920191825250919050565b6000602082840312156108c657600080fd5b505191905056fea2646970667358221220b98ac77a3d96649e1cda8747e41f2d14e2e8887ce53d18962c5563ca7071e61c64736f6c63430008190033","sourceMap":"149:3176:37:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;439:72;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;413:25:82;;;401:2;386:18;439:72:37;;;;;;;;315:48;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;808:25:82;;;864:2;849:18;;842:34;;;;781:18;315:48:37;634:248:82;369:64:37;;;;;;:::i;:::-;;;;;;;;;;;;;;967:434;;;;;;:::i;:::-;;:::i;:::-;;182:41;;;;;;2483:321;;;;;;:::i;:::-;;:::i;1407:1070::-;;;;;;:::i;:::-;;:::i;2810:513::-;;;;;;:::i;:::-;;:::i;967:434::-;1118:1;1073:23;;;:10;:23;;;;;:33;:47;1069:117;;1143:32;;-1:-1:-1;;;1143:32:37;;;;;413:25:82;;;386:18;;1143:32:37;;;;;;;;1069:117;1195:23;;;;:10;:23;;;;;;;5349:19:82;;5336:33;;5412:14;;;5399:28;5385:12;;5378:50;1310:22:37;1296:36;;1292:103;;;1348:22;:36;;;1292:103;967:434;;:::o;2483:321::-;2675:58;;-1:-1:-1;;;2675:58:37;;:27;;:39;;:58;;2715:4;;2721;;2727:5;;2675:58;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;2670:128;;2756:31;;-1:-1:-1;;;2756:31:37;;;;;;;;;;;2670:128;2483:321;;;:::o;1407:1070::-;1594:17;1614:268;1662:28;;1708:22;;;;1748:27;;;;1793:28;;;;;;;;:::i;:::-;1839:19;;;;;;;;:::i;:::-;1634:238;;;;;;7456:25:82;;;;7497:18;;7490:34;;;;7540:18;;;7533:34;;;;-1:-1:-1;;;;;7656:15:82;;;7636:18;;;7629:43;7709:15;7688:19;;;7681:44;7428:19;;1634:238:37;;;-1:-1:-1;;1634:238:37;;;;;;;;;;1614:268;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1594:288;;1892:44;1951:67;;;;;;;;1991:3;1951:67;;;;2007:9;1951:67;;;1892:126;;2029:46;2090:67;;;;;;;;2131:4;2090:67;;;;2147:8;;2090:67;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;2090:67:37;;;;-1:-1:-1;;2186:28:37;;;:10;:28;;;;;:38;2029:128;;-1:-1:-1;2168:70:37;;2186:38;-1:-1:-1;2029:128:37;2233:4;2168:17;:70::i;:::-;2290:19;;;;;;;;:::i;:::-;-1:-1:-1;;;;;2253:56:37;:29;:34;2283:3;2253:34;;;;;;;;;;;;:56;2249:143;;;2362:19;;;;;;;;:::i;:::-;2325:34;;;;:29;:34;;;;;-1:-1:-1;;;;;2325:56:37;;;;;;2249:143;2402:22;;;;:17;2448:22;2402;;;;;;2448;;;;;2425:19;;;;;;;;:::i;:::-;-1:-1:-1;;;;;2402:43:37;;;;;;;;;;;;-1:-1:-1;2402:43:37;:68;-1:-1:-1;;;;;;;;1407:1070:37:o;2810:513::-;2897:7;2944:41;;;:29;:41;;;;;;2999:16;;;2995:322;;3038:29;;;;:17;:29;;;;;;;;:48;;;;;;;;;-1:-1:-1;3031:55:37;;2995:322;3135:17;3121:11;:31;3117:127;;;3179:50;;-1:-1:-1;;;3179:50:37;;;;;808:25:82;;;849:18;;;842:34;;;781:18;;3179:50:37;634:248:82;3117:127:37;-1:-1:-1;;3264:29:37;;;;:17;:29;;;;;;;;:42;;;;;;;;;2810:513;;;;;:::o;14:248:82:-;82:6;90;143:2;131:9;122:7;118:23;114:32;111:52;;;159:1;156;149:12;111:52;-1:-1:-1;;182:23:82;;;252:2;237:18;;;224:32;;-1:-1:-1;14:248:82:o;449:180::-;508:6;561:2;549:9;540:7;536:23;532:32;529:52;;;577:1;574;567:12;529:52;-1:-1:-1;600:23:82;;449:180;-1:-1:-1;449:180:82:o;1254:340::-;1353:6;1361;1405:9;1396:7;1392:23;1435:2;1431;1427:11;1424:31;;;1451:1;1448;1441:12;1424:31;1474:23;;;-1:-1:-1;1531:2:82;-1:-1:-1;;1513:16:82;;1509:25;1506:45;;;1547:1;1544;1537:12;1506:45;;1585:2;1574:9;1570:18;1560:28;;1254:340;;;;;:::o;1599:127::-;1660:10;1655:3;1651:20;1648:1;1641:31;1691:4;1688:1;1681:15;1715:4;1712:1;1705:15;1731:257;1803:4;1797:11;;;1835:17;;1882:18;1867:34;;1903:22;;;1864:62;1861:88;;;1929:18;;:::i;:::-;1965:4;1958:24;1731:257;:::o;1993:275::-;2064:2;2058:9;2129:2;2110:13;;-1:-1:-1;;2106:27:82;2094:40;;2164:18;2149:34;;2185:22;;;2146:62;2143:88;;;2211:18;;:::i;:::-;2247:2;2240:22;1993:275;;-1:-1:-1;1993:275:82:o;2273:279::-;2324:5;2372:4;2360:9;2355:3;2351:19;2347:30;2344:50;;;2390:1;2387;2380:12;2344:50;2412:22;;:::i;:::-;2403:31;;2470:9;2457:23;2450:5;2443:38;2541:2;2530:9;2526:18;2513:32;2508:2;2501:5;2497:14;2490:56;2273:279;;;;:::o;2557:1456::-;2681:6;2689;2697;2750:3;2738:9;2729:7;2725:23;2721:33;2718:53;;;2767:1;2764;2757:12;2718:53;2803:9;2790:23;2780:33;;2832:2;2885;2874:9;2870:18;2857:32;2908:18;2949:2;2941:6;2938:14;2935:34;;;2965:1;2962;2955:12;2935:34;2988:22;;;;3044:4;3026:16;;;3022:27;3019:47;;;3062:1;3059;3052:12;3019:47;3088:22;;:::i;:::-;3133:35;3160:7;3156:2;3133:35;:::i;:::-;3126:5;3119:50;3215:4;3211:2;3207:13;3194:27;3246:2;3236:8;3233:16;3230:36;;;3262:1;3259;3252:12;3230:36;3293:8;3289:2;3285:17;3275:27;;;3340:7;3333:4;3329:2;3325:13;3321:27;3311:55;;3362:1;3359;3352:12;3311:55;3398:2;3385:16;3420:2;3416;3413:10;3410:36;;;3426:18;;:::i;:::-;3472:2;3469:1;3465:10;3455:20;;3495:28;3519:2;3515;3511:11;3495:28;:::i;:::-;3557:15;;;3627:11;;;3623:20;;;3588:12;;;;3655:19;;;3652:39;;;3687:1;3684;3677:12;3652:39;3711:11;;;;3731:142;3747:6;3742:3;3739:15;3731:142;;;3813:17;;3801:30;;3764:12;;;;3851;;;;3731:142;;;3905:5;3900:2;3893:5;3889:14;3882:29;;;;3930:5;3920:15;;;;;;3954:53;3999:7;3992:4;3981:9;3977:20;3954:53;:::i;:::-;3944:63;;2557:1456;;;;;:::o;4018:915::-;4164:6;4172;4180;4188;4196;4240:9;4231:7;4227:23;4270:3;4266:2;4262:12;4259:32;;;4287:1;4284;4277:12;4259:32;4323:9;4310:23;4300:33;;4384:2;4373:9;4369:18;4356:32;4407:18;4448:2;4440:6;4437:14;4434:34;;;4464:1;4461;4454:12;4434:34;4502:6;4491:9;4487:22;4477:32;;4547:7;4540:4;4536:2;4532:13;4528:27;4518:55;;4569:1;4566;4559:12;4518:55;4609:2;4596:16;4635:2;4627:6;4624:14;4621:34;;;4651:1;4648;4641:12;4621:34;4704:7;4699:2;4689:6;4686:1;4682:14;4678:2;4674:23;4670:32;4667:45;4664:65;;;4725:1;4722;4715:12;4664:65;4756:2;4748:11;;;;;-1:-1:-1;4778:6:82;;-1:-1:-1;;4831:2:82;4816:18;;4803:32;;-1:-1:-1;4869:3:82;-1:-1:-1;;4851:16:82;;4847:26;4844:46;;;4886:1;4883;4876:12;4844:46;;4924:2;4913:9;4909:18;4899:28;;4018:915;;;;;;;;:::o;5589:1015::-;5876:6;5865:9;5858:25;5839:4;5902:2;5913:50;5959:2;5948:9;5944:18;5936:6;5509:12;;5497:25;;5571:4;5560:16;;;5554:23;5538:14;;5531:47;5439:145;5913:50;5999:3;5994:2;5983:9;5979:18;5972:31;6041:3;6030:9;6026:19;6054:58;6107:3;6096:9;6092:19;6083:6;6077:13;5509:12;;5497:25;;5571:4;5560:16;;;5554:23;5538:14;;5531:47;5439:145;6054:58;6159:2;6147:15;;;6141:22;6200:2;6194:3;6179:19;;6172:31;6252:19;;6280:22;;;;6360:21;;6399:1;;6333:3;6318:19;;;6409:169;6423:6;6420:1;6417:13;6409:169;;;6484:13;;6472:26;;6553:15;;;;6445:1;6438:9;;;;;6518:12;;;;6409:169;;;-1:-1:-1;6595:3:82;5589:1015;-1:-1:-1;;;;;;;;5589:1015:82:o;6609:277::-;6676:6;6729:2;6717:9;6708:7;6704:23;6700:32;6697:52;;;6745:1;6742;6735:12;6697:52;6777:9;6771:16;6830:5;6823:13;6816:21;6809:5;6806:32;6796:60;;6852:1;6849;6842:12;6796:60;6875:5;6609:277;-1:-1:-1;;;6609:277:82:o;6891:301::-;6950:6;7003:2;6991:9;6982:7;6978:23;6974:32;6971:52;;;7019:1;7016;7009:12;6971:52;7058:9;7045:23;-1:-1:-1;;;;;7101:5:82;7097:46;7090:5;7087:57;7077:85;;7158:1;7155;7148:12;7736:412;7865:3;7903:6;7897:13;7928:1;7938:129;7952:6;7949:1;7946:13;7938:129;;;8050:4;8034:14;;;8030:25;;8024:32;8011:11;;;8004:53;7967:12;7938:129;;;-1:-1:-1;8122:1:82;8086:16;;8111:13;;;-1:-1:-1;8086:16:82;7736:412;-1:-1:-1;7736:412:82:o;8153:184::-;8223:6;8276:2;8264:9;8255:7;8251:23;8247:32;8244:52;;;8292:1;8289;8282:12;8244:52;-1:-1:-1;8315:16:82;;8153:184;-1:-1:-1;8153:184:82:o","linkReferences":{"lib/nexus/contracts/src/lib/JellyfishMerkleTreeVerifier.sol":{"JellyfishMerkleTreeVerifier":[{"start":495,"length":20}]}}},"methodIdentifiers":{"getChainState(uint256,bytes32)":"998862ec","latestNexusBlockNumber()":"8a630540","nexusAppIdToLatestBlockNumber(bytes32)":"520782a1","nexusAppIdToState(bytes32,uint256)":"2d438359","nexusBlock(uint256)":"3bf38b10","updateChainState(uint256,bytes32[],bytes32,(bytes32,bytes32,bytes32,uint128,uint128))":"8d2383a9","updateNexusBlock(uint256,(bytes32,bytes32))":"76ac39cb","verifyRollupState(bytes32,((bytes32,bytes32),bytes32[]),(bytes32,bytes32))":"8bb9dc06"},"rawMetadata":"{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"}],\"name\":\"AlreadyUpdatedBlock\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"latestBlockNumber\",\"type\":\"uint256\"}],\"name\":\"InvalidBlockNumber\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NexusLeafInclusionCheckFailed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"nexusAppID\",\"type\":\"bytes32\"}],\"name\":\"getChainState\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestNexusBlockNumber\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"nexusAppIdToLatestBlockNumber\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"nexusAppIdToState\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"nexusBlock\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"blockHash\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nexusBlockNumber\",\"type\":\"uint256\"},{\"internalType\":\"bytes32[]\",\"name\":\"siblings\",\"type\":\"bytes32[]\"},{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"statementDigest\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"startNexusHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint128\",\"name\":\"lastProofHeight\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"height\",\"type\":\"uint128\"}],\"internalType\":\"struct NexusProofManager.AccountState\",\"name\":\"accountState\",\"type\":\"tuple\"}],\"name\":\"updateChainState\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"blockHash\",\"type\":\"bytes32\"}],\"internalType\":\"struct NexusProofManager.NexusBlock\",\"name\":\"nexusBlockInfo\",\"type\":\"tuple\"}],\"name\":\"updateNexusBlock\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"components\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"addr\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"valueHash\",\"type\":\"bytes32\"}],\"internalType\":\"struct JellyfishMerkleTreeVerifier.Leaf\",\"name\":\"leaf\",\"type\":\"tuple\"},{\"internalType\":\"bytes32[]\",\"name\":\"siblings\",\"type\":\"bytes32[]\"}],\"internalType\":\"struct JellyfishMerkleTreeVerifier.Proof\",\"name\":\"proof\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"addr\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"valueHash\",\"type\":\"bytes32\"}],\"internalType\":\"struct JellyfishMerkleTreeVerifier.Leaf\",\"name\":\"leaf\",\"type\":\"tuple\"}],\"name\":\"verifyRollupState\",\"outputs\":[],\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/nexus/contracts/src/NexusProofManager.sol\":\"NexusProofManager\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat/=node_modules/hardhat/\",\":nexus/=lib/nexus/contracts/src/\",\":openzeppelin-contracts-upgradeable/=lib/nexus.git/contracts/lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=node_modules/openzeppelin-contracts/\"]},\"sources\":{\"lib/nexus/contracts/src/NexusProofManager.sol\":{\"keccak256\":\"0x1bd65f475ae238466de5b85dbea0e65dee95cb5ec54eaaa954ee431d70664fa9\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://3241231615ed45eb7af7a4c108ce8ac8d54d318645f31ed34b04dc264791125b\",\"dweb:/ipfs/QmWkmeLSnwF6MtJoFWdAWsS9Hr44JRrdiwBxUNpMjdiZTK\"]},\"lib/nexus/contracts/src/lib/JellyfishMerkleTreeVerifier.sol\":{\"keccak256\":\"0x0a98548ad5b6d99d3ef8db73b09fc4e749ef2e8329d1387df92775b553a9bb1a\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://edace27699d623a432bde2d09c2e1263046637639dbd4b78bfac0369d4ec2ff2\",\"dweb:/ipfs/QmbgoFhYvouMHs3DoD4qfJcY3ZrK3YjHaN6UmVnKJsMtGP\"]}},\"version\":1}","metadata":{"compiler":{"version":"0.8.25+commit.b61c2a91"},"language":"Solidity","output":{"abi":[{"inputs":[{"internalType":"uint256","name":"blockNumber","type":"uint256"}],"type":"error","name":"AlreadyUpdatedBlock"},{"inputs":[{"internalType":"uint256","name":"blockNumber","type":"uint256"},{"internalType":"uint256","name":"latestBlockNumber","type":"uint256"}],"type":"error","name":"InvalidBlockNumber"},{"inputs":[],"type":"error","name":"NexusLeafInclusionCheckFailed"},{"inputs":[{"internalType":"uint256","name":"blockNumber","type":"uint256"},{"internalType":"bytes32","name":"nexusAppID","type":"bytes32"}],"stateMutability":"view","type":"function","name":"getChainState","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}]},{"inputs":[],"stateMutability":"view","type":"function","name":"latestNexusBlockNumber","outputs":[{"internalType":"uint256","name":"","type":"uint256"}]},{"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function","name":"nexusAppIdToLatestBlockNumber","outputs":[{"internalType":"uint256","name":"","type":"uint256"}]},{"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function","name":"nexusAppIdToState","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}]},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function","name":"nexusBlock","outputs":[{"internalType":"bytes32","name":"stateRoot","type":"bytes32"},{"internalType":"bytes32","name":"blockHash","type":"bytes32"}]},{"inputs":[{"internalType":"uint256","name":"nexusBlockNumber","type":"uint256"},{"internalType":"bytes32[]","name":"siblings","type":"bytes32[]"},{"internalType":"bytes32","name":"key","type":"bytes32"},{"internalType":"struct NexusProofManager.AccountState","name":"accountState","type":"tuple","components":[{"internalType":"bytes32","name":"statementDigest","type":"bytes32"},{"internalType":"bytes32","name":"stateRoot","type":"bytes32"},{"internalType":"bytes32","name":"startNexusHash","type":"bytes32"},{"internalType":"uint128","name":"lastProofHeight","type":"uint128"},{"internalType":"uint128","name":"height","type":"uint128"}]}],"stateMutability":"nonpayable","type":"function","name":"updateChainState"},{"inputs":[{"internalType":"uint256","name":"blockNumber","type":"uint256"},{"internalType":"struct NexusProofManager.NexusBlock","name":"nexusBlockInfo","type":"tuple","components":[{"internalType":"bytes32","name":"stateRoot","type":"bytes32"},{"internalType":"bytes32","name":"blockHash","type":"bytes32"}]}],"stateMutability":"nonpayable","type":"function","name":"updateNexusBlock"},{"inputs":[{"internalType":"bytes32","name":"root","type":"bytes32"},{"internalType":"struct JellyfishMerkleTreeVerifier.Proof","name":"proof","type":"tuple","components":[{"internalType":"struct JellyfishMerkleTreeVerifier.Leaf","name":"leaf","type":"tuple","components":[{"internalType":"bytes32","name":"addr","type":"bytes32"},{"internalType":"bytes32","name":"valueHash","type":"bytes32"}]},{"internalType":"bytes32[]","name":"siblings","type":"bytes32[]"}]},{"internalType":"struct JellyfishMerkleTreeVerifier.Leaf","name":"leaf","type":"tuple","components":[{"internalType":"bytes32","name":"addr","type":"bytes32"},{"internalType":"bytes32","name":"valueHash","type":"bytes32"}]}],"stateMutability":"pure","type":"function","name":"verifyRollupState"}],"devdoc":{"kind":"dev","methods":{},"version":1},"userdoc":{"kind":"user","methods":{},"version":1}},"settings":{"remappings":["@ensdomains/=node_modules/@ensdomains/","@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/","@openzeppelin/=node_modules/@openzeppelin/","ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/","erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/","eth-gas-reporter/=node_modules/eth-gas-reporter/","forge-std/=lib/forge-std/src/","hardhat/=node_modules/hardhat/","nexus/=lib/nexus/contracts/src/","openzeppelin-contracts-upgradeable/=lib/nexus.git/contracts/lib/openzeppelin-contracts-upgradeable/","openzeppelin-contracts/=node_modules/openzeppelin-contracts/"],"optimizer":{"enabled":true,"runs":200},"metadata":{"bytecodeHash":"ipfs"},"compilationTarget":{"lib/nexus/contracts/src/NexusProofManager.sol":"NexusProofManager"},"evmVersion":"paris","libraries":{}},"sources":{"lib/nexus/contracts/src/NexusProofManager.sol":{"keccak256":"0x1bd65f475ae238466de5b85dbea0e65dee95cb5ec54eaaa954ee431d70664fa9","urls":["bzz-raw://3241231615ed45eb7af7a4c108ce8ac8d54d318645f31ed34b04dc264791125b","dweb:/ipfs/QmWkmeLSnwF6MtJoFWdAWsS9Hr44JRrdiwBxUNpMjdiZTK"],"license":"Apache-2.0"},"lib/nexus/contracts/src/lib/JellyfishMerkleTreeVerifier.sol":{"keccak256":"0x0a98548ad5b6d99d3ef8db73b09fc4e749ef2e8329d1387df92775b553a9bb1a","urls":["bzz-raw://edace27699d623a432bde2d09c2e1263046637639dbd4b78bfac0369d4ec2ff2","dweb:/ipfs/QmbgoFhYvouMHs3DoD4qfJcY3ZrK3YjHaN6UmVnKJsMtGP"],"license":"Apache-2.0"}},"version":1},"id":37}
+{
+  "abi": [
+    {
+      "type": "function",
+      "name": "getChainState",
+      "inputs": [
+        { "name": "blockNumber", "type": "uint256", "internalType": "uint256" },
+        { "name": "nexusAppID", "type": "bytes32", "internalType": "bytes32" }
+      ],
+      "outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "latestNexusBlockNumber",
+      "inputs": [],
+      "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "nexusAppIdToLatestBlockNumber",
+      "inputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
+      "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "nexusAppIdToState",
+      "inputs": [
+        { "name": "", "type": "bytes32", "internalType": "bytes32" },
+        { "name": "", "type": "uint256", "internalType": "uint256" }
+      ],
+      "outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "nexusBlock",
+      "inputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+      "outputs": [
+        { "name": "stateRoot", "type": "bytes32", "internalType": "bytes32" },
+        { "name": "blockHash", "type": "bytes32", "internalType": "bytes32" }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "updateChainState",
+      "inputs": [
+        {
+          "name": "nexusBlockNumber",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "siblings",
+          "type": "bytes32[]",
+          "internalType": "bytes32[]"
+        },
+        { "name": "key", "type": "bytes32", "internalType": "bytes32" },
+        {
+          "name": "accountState",
+          "type": "tuple",
+          "internalType": "struct NexusProofManager.AccountState",
+          "components": [
+            {
+              "name": "statementDigest",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "stateRoot",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "startNexusHash",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "lastProofHeight",
+              "type": "uint128",
+              "internalType": "uint128"
+            },
+            { "name": "height", "type": "uint128", "internalType": "uint128" }
+          ]
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "updateNexusBlock",
+      "inputs": [
+        { "name": "blockNumber", "type": "uint256", "internalType": "uint256" },
+        {
+          "name": "nexusBlockInfo",
+          "type": "tuple",
+          "internalType": "struct NexusProofManager.NexusBlock",
+          "components": [
+            {
+              "name": "stateRoot",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "blockHash",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "verifyRollupState",
+      "inputs": [
+        { "name": "root", "type": "bytes32", "internalType": "bytes32" },
+        {
+          "name": "proof",
+          "type": "tuple",
+          "internalType": "struct JellyfishMerkleTreeVerifier.Proof",
+          "components": [
+            {
+              "name": "leaf",
+              "type": "tuple",
+              "internalType": "struct JellyfishMerkleTreeVerifier.Leaf",
+              "components": [
+                {
+                  "name": "addr",
+                  "type": "bytes32",
+                  "internalType": "bytes32"
+                },
+                {
+                  "name": "valueHash",
+                  "type": "bytes32",
+                  "internalType": "bytes32"
+                }
+              ]
+            },
+            {
+              "name": "siblings",
+              "type": "bytes32[]",
+              "internalType": "bytes32[]"
+            }
+          ]
+        },
+        {
+          "name": "leaf",
+          "type": "tuple",
+          "internalType": "struct JellyfishMerkleTreeVerifier.Leaf",
+          "components": [
+            { "name": "addr", "type": "bytes32", "internalType": "bytes32" },
+            {
+              "name": "valueHash",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "error",
+      "name": "AlreadyUpdatedBlock",
+      "inputs": [
+        { "name": "blockNumber", "type": "uint256", "internalType": "uint256" }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "InvalidBlockNumber",
+      "inputs": [
+        { "name": "blockNumber", "type": "uint256", "internalType": "uint256" },
+        {
+          "name": "latestBlockNumber",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ]
+    },
+    { "type": "error", "name": "NexusLeafInclusionCheckFailed", "inputs": [] }
+  ],
+  "bytecode": {
+    "object": "0x608060405260008055348015601357600080fd5b50610903806100236000396000f3fe608060405234801561001057600080fd5b50600436106100885760003560e01c80638a6305401161005b5780638a6305401461013c5780638bb9dc06146101455780638d2383a914610158578063998862ec1461016b57600080fd5b80632d4383591461008d5780633bf38b10146100cb578063520782a11461010757806376ac39cb14610127575b600080fd5b6100b861009b3660046104e8565b600360209081526000928352604080842090915290825290205481565b6040519081526020015b60405180910390f35b6100f26100d936600461050a565b6001602081905260009182526040909120805491015482565b604080519283526020830191909152016100c2565b6100b861011536600461050a565b60026020526000908152604090205481565b61013a610135366004610523565b61017e565b005b6100b860005481565b61013a6101533660046105fb565b6101e0565b61013a6101663660046106ff565b61027e565b6100b86101793660046104e8565b610464565b600082815260016020526040902054156101b35760405163a9d81c2960e01b8152600481018390526024015b60405180910390fd5b600082815260016020818152604083208435815590840135910155548211156101dc5760008290555b5050565b604051632e6840fb60e21b815273__$b77a7e19957b1584528e98a188a995bdf6$__9063b9a103ec9061021b908690859087906004016107a6565b602060405180830381865af4158015610238573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061025c9190610833565b61027957604051637368fda760e11b815260040160405180910390fd5b505050565b6000600282356020840135604085013561029e608087016060880161085c565b6102ae60a088016080890161085c565b60408051602081019690965285019390935260608401919091526001600160801b0390811660808401521660a082015260c00160408051601f19818403018152908290526102fb91610885565b602060405180830381855afa158015610318573d6000803e3d6000fd5b5050506040513d601f19601f8201168201806040525081019061033b91906108b4565b9050600060405180604001604052808581526020018381525090506000604051806040016040528083815260200188888080602002602001604051908101604052809392919081815260200183836020028082843760009201829052509390945250508a8152600160205260409020549192506103bb91905082846101e0565b6103cb60a085016080860161085c565b6001600160801b03166002600087815260200190815260200160002054101561041b576103fe60a085016080860161085c565b60008681526002602052604090206001600160801b039190911690555b60008581526003602090815260408220908601359161044060a088016080890161085c565b6001600160801b031681526020810191909152604001600020555050505050505050565b60008181526002602052604081205483820361049a576000838152600360209081526040808320938352929052205490506104e2565b808411156104c55760405163d5dc642d60e01b815260048101859052602481018290526044016101aa565b505060008181526003602090815260408083208584529091529020545b92915050565b600080604083850312156104fb57600080fd5b50508035926020909101359150565b60006020828403121561051c57600080fd5b5035919050565b600080828403606081121561053757600080fd5b833592506040601f198201121561054d57600080fd5b506020830190509250929050565b634e487b7160e01b600052604160045260246000fd5b6040805190810167ffffffffffffffff811182821017156105945761059461055b565b60405290565b604051601f8201601f1916810167ffffffffffffffff811182821017156105c3576105c361055b565b604052919050565b6000604082840312156105dd57600080fd5b6105e5610571565b9050813581526020820135602082015292915050565b60008060006080848603121561061057600080fd5b8335925060208085013567ffffffffffffffff8082111561063057600080fd5b908601906060828903121561064457600080fd5b61064c610571565b61065689846105cb565b815260408301358281111561066a57600080fd5b80840193505088601f84011261067f57600080fd5b8235828111156106915761069161055b565b8060051b92506106a285840161059a565b818152928401850192858101908b8511156106bc57600080fd5b948601945b848610156106da578535825294860194908601906106c1565b8087850152505050809550505050506106f685604086016105cb565b90509250925092565b600080600080600085870361010081121561071957600080fd5b86359550602087013567ffffffffffffffff8082111561073857600080fd5b818901915089601f83011261074c57600080fd5b81358181111561075b57600080fd5b8a60208260051b850101111561077057600080fd5b6020929092019650909450506040870135925060a0605f198201121561079557600080fd5b506060860190509295509295909350565b838152600060206107c4602084018680518252602090810151910152565b6080606084015260e083016107e760808501865180518252602090810151910152565b602085810151606060c087015280519283905201906000906101008601905b808310156108265783518252928401926001929092019190840190610806565b5098975050505050505050565b60006020828403121561084557600080fd5b8151801515811461085557600080fd5b9392505050565b60006020828403121561086e57600080fd5b81356001600160801b038116811461085557600080fd5b6000825160005b818110156108a6576020818601810151858301520161088c565b506000920191825250919050565b6000602082840312156108c657600080fd5b505191905056fea2646970667358221220b98ac77a3d96649e1cda8747e41f2d14e2e8887ce53d18962c5563ca7071e61c64736f6c63430008190033",
+    "sourceMap": "149:3176:37:-:0;;;222:1;182:41;;149:3176;;;;;;;;;;;;;;;;",
+    "linkReferences": {
+      "lib/nexus/contracts/src/lib/JellyfishMerkleTreeVerifier.sol": {
+        "JellyfishMerkleTreeVerifier": [{ "start": 530, "length": 20 }]
+      }
+    }
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b50600436106100885760003560e01c80638a6305401161005b5780638a6305401461013c5780638bb9dc06146101455780638d2383a914610158578063998862ec1461016b57600080fd5b80632d4383591461008d5780633bf38b10146100cb578063520782a11461010757806376ac39cb14610127575b600080fd5b6100b861009b3660046104e8565b600360209081526000928352604080842090915290825290205481565b6040519081526020015b60405180910390f35b6100f26100d936600461050a565b6001602081905260009182526040909120805491015482565b604080519283526020830191909152016100c2565b6100b861011536600461050a565b60026020526000908152604090205481565b61013a610135366004610523565b61017e565b005b6100b860005481565b61013a6101533660046105fb565b6101e0565b61013a6101663660046106ff565b61027e565b6100b86101793660046104e8565b610464565b600082815260016020526040902054156101b35760405163a9d81c2960e01b8152600481018390526024015b60405180910390fd5b600082815260016020818152604083208435815590840135910155548211156101dc5760008290555b5050565b604051632e6840fb60e21b815273__$b77a7e19957b1584528e98a188a995bdf6$__9063b9a103ec9061021b908690859087906004016107a6565b602060405180830381865af4158015610238573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061025c9190610833565b61027957604051637368fda760e11b815260040160405180910390fd5b505050565b6000600282356020840135604085013561029e608087016060880161085c565b6102ae60a088016080890161085c565b60408051602081019690965285019390935260608401919091526001600160801b0390811660808401521660a082015260c00160408051601f19818403018152908290526102fb91610885565b602060405180830381855afa158015610318573d6000803e3d6000fd5b5050506040513d601f19601f8201168201806040525081019061033b91906108b4565b9050600060405180604001604052808581526020018381525090506000604051806040016040528083815260200188888080602002602001604051908101604052809392919081815260200183836020028082843760009201829052509390945250508a8152600160205260409020549192506103bb91905082846101e0565b6103cb60a085016080860161085c565b6001600160801b03166002600087815260200190815260200160002054101561041b576103fe60a085016080860161085c565b60008681526002602052604090206001600160801b039190911690555b60008581526003602090815260408220908601359161044060a088016080890161085c565b6001600160801b031681526020810191909152604001600020555050505050505050565b60008181526002602052604081205483820361049a576000838152600360209081526040808320938352929052205490506104e2565b808411156104c55760405163d5dc642d60e01b815260048101859052602481018290526044016101aa565b505060008181526003602090815260408083208584529091529020545b92915050565b600080604083850312156104fb57600080fd5b50508035926020909101359150565b60006020828403121561051c57600080fd5b5035919050565b600080828403606081121561053757600080fd5b833592506040601f198201121561054d57600080fd5b506020830190509250929050565b634e487b7160e01b600052604160045260246000fd5b6040805190810167ffffffffffffffff811182821017156105945761059461055b565b60405290565b604051601f8201601f1916810167ffffffffffffffff811182821017156105c3576105c361055b565b604052919050565b6000604082840312156105dd57600080fd5b6105e5610571565b9050813581526020820135602082015292915050565b60008060006080848603121561061057600080fd5b8335925060208085013567ffffffffffffffff8082111561063057600080fd5b908601906060828903121561064457600080fd5b61064c610571565b61065689846105cb565b815260408301358281111561066a57600080fd5b80840193505088601f84011261067f57600080fd5b8235828111156106915761069161055b565b8060051b92506106a285840161059a565b818152928401850192858101908b8511156106bc57600080fd5b948601945b848610156106da578535825294860194908601906106c1565b8087850152505050809550505050506106f685604086016105cb565b90509250925092565b600080600080600085870361010081121561071957600080fd5b86359550602087013567ffffffffffffffff8082111561073857600080fd5b818901915089601f83011261074c57600080fd5b81358181111561075b57600080fd5b8a60208260051b850101111561077057600080fd5b6020929092019650909450506040870135925060a0605f198201121561079557600080fd5b506060860190509295509295909350565b838152600060206107c4602084018680518252602090810151910152565b6080606084015260e083016107e760808501865180518252602090810151910152565b602085810151606060c087015280519283905201906000906101008601905b808310156108265783518252928401926001929092019190840190610806565b5098975050505050505050565b60006020828403121561084557600080fd5b8151801515811461085557600080fd5b9392505050565b60006020828403121561086e57600080fd5b81356001600160801b038116811461085557600080fd5b6000825160005b818110156108a6576020818601810151858301520161088c565b506000920191825250919050565b6000602082840312156108c657600080fd5b505191905056fea2646970667358221220b98ac77a3d96649e1cda8747e41f2d14e2e8887ce53d18962c5563ca7071e61c64736f6c63430008190033",
+    "sourceMap": "149:3176:37:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;439:72;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;413:25:82;;;401:2;386:18;439:72:37;;;;;;;;315:48;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;808:25:82;;;864:2;849:18;;842:34;;;;781:18;315:48:37;634:248:82;369:64:37;;;;;;:::i;:::-;;;;;;;;;;;;;;967:434;;;;;;:::i;:::-;;:::i;:::-;;182:41;;;;;;2483:321;;;;;;:::i;:::-;;:::i;1407:1070::-;;;;;;:::i;:::-;;:::i;2810:513::-;;;;;;:::i;:::-;;:::i;967:434::-;1118:1;1073:23;;;:10;:23;;;;;:33;:47;1069:117;;1143:32;;-1:-1:-1;;;1143:32:37;;;;;413:25:82;;;386:18;;1143:32:37;;;;;;;;1069:117;1195:23;;;;:10;:23;;;;;;;5349:19:82;;5336:33;;5412:14;;;5399:28;5385:12;;5378:50;1310:22:37;1296:36;;1292:103;;;1348:22;:36;;;1292:103;967:434;;:::o;2483:321::-;2675:58;;-1:-1:-1;;;2675:58:37;;:27;;:39;;:58;;2715:4;;2721;;2727:5;;2675:58;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;2670:128;;2756:31;;-1:-1:-1;;;2756:31:37;;;;;;;;;;;2670:128;2483:321;;;:::o;1407:1070::-;1594:17;1614:268;1662:28;;1708:22;;;;1748:27;;;;1793:28;;;;;;;;:::i;:::-;1839:19;;;;;;;;:::i;:::-;1634:238;;;;;;7456:25:82;;;;7497:18;;7490:34;;;;7540:18;;;7533:34;;;;-1:-1:-1;;;;;7656:15:82;;;7636:18;;;7629:43;7709:15;7688:19;;;7681:44;7428:19;;1634:238:37;;;-1:-1:-1;;1634:238:37;;;;;;;;;;1614:268;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1594:288;;1892:44;1951:67;;;;;;;;1991:3;1951:67;;;;2007:9;1951:67;;;1892:126;;2029:46;2090:67;;;;;;;;2131:4;2090:67;;;;2147:8;;2090:67;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;2090:67:37;;;;-1:-1:-1;;2186:28:37;;;:10;:28;;;;;:38;2029:128;;-1:-1:-1;2168:70:37;;2186:38;-1:-1:-1;2029:128:37;2233:4;2168:17;:70::i;:::-;2290:19;;;;;;;;:::i;:::-;-1:-1:-1;;;;;2253:56:37;:29;:34;2283:3;2253:34;;;;;;;;;;;;:56;2249:143;;;2362:19;;;;;;;;:::i;:::-;2325:34;;;;:29;:34;;;;;-1:-1:-1;;;;;2325:56:37;;;;;;2249:143;2402:22;;;;:17;2448:22;2402;;;;;;2448;;;;;2425:19;;;;;;;;:::i;:::-;-1:-1:-1;;;;;2402:43:37;;;;;;;;;;;;-1:-1:-1;2402:43:37;:68;-1:-1:-1;;;;;;;;1407:1070:37:o;2810:513::-;2897:7;2944:41;;;:29;:41;;;;;;2999:16;;;2995:322;;3038:29;;;;:17;:29;;;;;;;;:48;;;;;;;;;-1:-1:-1;3031:55:37;;2995:322;3135:17;3121:11;:31;3117:127;;;3179:50;;-1:-1:-1;;;3179:50:37;;;;;808:25:82;;;849:18;;;842:34;;;781:18;;3179:50:37;634:248:82;3117:127:37;-1:-1:-1;;3264:29:37;;;;:17;:29;;;;;;;;:42;;;;;;;;;2810:513;;;;;:::o;14:248:82:-;82:6;90;143:2;131:9;122:7;118:23;114:32;111:52;;;159:1;156;149:12;111:52;-1:-1:-1;;182:23:82;;;252:2;237:18;;;224:32;;-1:-1:-1;14:248:82:o;449:180::-;508:6;561:2;549:9;540:7;536:23;532:32;529:52;;;577:1;574;567:12;529:52;-1:-1:-1;600:23:82;;449:180;-1:-1:-1;449:180:82:o;1254:340::-;1353:6;1361;1405:9;1396:7;1392:23;1435:2;1431;1427:11;1424:31;;;1451:1;1448;1441:12;1424:31;1474:23;;;-1:-1:-1;1531:2:82;-1:-1:-1;;1513:16:82;;1509:25;1506:45;;;1547:1;1544;1537:12;1506:45;;1585:2;1574:9;1570:18;1560:28;;1254:340;;;;;:::o;1599:127::-;1660:10;1655:3;1651:20;1648:1;1641:31;1691:4;1688:1;1681:15;1715:4;1712:1;1705:15;1731:257;1803:4;1797:11;;;1835:17;;1882:18;1867:34;;1903:22;;;1864:62;1861:88;;;1929:18;;:::i;:::-;1965:4;1958:24;1731:257;:::o;1993:275::-;2064:2;2058:9;2129:2;2110:13;;-1:-1:-1;;2106:27:82;2094:40;;2164:18;2149:34;;2185:22;;;2146:62;2143:88;;;2211:18;;:::i;:::-;2247:2;2240:22;1993:275;;-1:-1:-1;1993:275:82:o;2273:279::-;2324:5;2372:4;2360:9;2355:3;2351:19;2347:30;2344:50;;;2390:1;2387;2380:12;2344:50;2412:22;;:::i;:::-;2403:31;;2470:9;2457:23;2450:5;2443:38;2541:2;2530:9;2526:18;2513:32;2508:2;2501:5;2497:14;2490:56;2273:279;;;;:::o;2557:1456::-;2681:6;2689;2697;2750:3;2738:9;2729:7;2725:23;2721:33;2718:53;;;2767:1;2764;2757:12;2718:53;2803:9;2790:23;2780:33;;2832:2;2885;2874:9;2870:18;2857:32;2908:18;2949:2;2941:6;2938:14;2935:34;;;2965:1;2962;2955:12;2935:34;2988:22;;;;3044:4;3026:16;;;3022:27;3019:47;;;3062:1;3059;3052:12;3019:47;3088:22;;:::i;:::-;3133:35;3160:7;3156:2;3133:35;:::i;:::-;3126:5;3119:50;3215:4;3211:2;3207:13;3194:27;3246:2;3236:8;3233:16;3230:36;;;3262:1;3259;3252:12;3230:36;3293:8;3289:2;3285:17;3275:27;;;3340:7;3333:4;3329:2;3325:13;3321:27;3311:55;;3362:1;3359;3352:12;3311:55;3398:2;3385:16;3420:2;3416;3413:10;3410:36;;;3426:18;;:::i;:::-;3472:2;3469:1;3465:10;3455:20;;3495:28;3519:2;3515;3511:11;3495:28;:::i;:::-;3557:15;;;3627:11;;;3623:20;;;3588:12;;;;3655:19;;;3652:39;;;3687:1;3684;3677:12;3652:39;3711:11;;;;3731:142;3747:6;3742:3;3739:15;3731:142;;;3813:17;;3801:30;;3764:12;;;;3851;;;;3731:142;;;3905:5;3900:2;3893:5;3889:14;3882:29;;;;3930:5;3920:15;;;;;;3954:53;3999:7;3992:4;3981:9;3977:20;3954:53;:::i;:::-;3944:63;;2557:1456;;;;;:::o;4018:915::-;4164:6;4172;4180;4188;4196;4240:9;4231:7;4227:23;4270:3;4266:2;4262:12;4259:32;;;4287:1;4284;4277:12;4259:32;4323:9;4310:23;4300:33;;4384:2;4373:9;4369:18;4356:32;4407:18;4448:2;4440:6;4437:14;4434:34;;;4464:1;4461;4454:12;4434:34;4502:6;4491:9;4487:22;4477:32;;4547:7;4540:4;4536:2;4532:13;4528:27;4518:55;;4569:1;4566;4559:12;4518:55;4609:2;4596:16;4635:2;4627:6;4624:14;4621:34;;;4651:1;4648;4641:12;4621:34;4704:7;4699:2;4689:6;4686:1;4682:14;4678:2;4674:23;4670:32;4667:45;4664:65;;;4725:1;4722;4715:12;4664:65;4756:2;4748:11;;;;;-1:-1:-1;4778:6:82;;-1:-1:-1;;4831:2:82;4816:18;;4803:32;;-1:-1:-1;4869:3:82;-1:-1:-1;;4851:16:82;;4847:26;4844:46;;;4886:1;4883;4876:12;4844:46;;4924:2;4913:9;4909:18;4899:28;;4018:915;;;;;;;;:::o;5589:1015::-;5876:6;5865:9;5858:25;5839:4;5902:2;5913:50;5959:2;5948:9;5944:18;5936:6;5509:12;;5497:25;;5571:4;5560:16;;;5554:23;5538:14;;5531:47;5439:145;5913:50;5999:3;5994:2;5983:9;5979:18;5972:31;6041:3;6030:9;6026:19;6054:58;6107:3;6096:9;6092:19;6083:6;6077:13;5509:12;;5497:25;;5571:4;5560:16;;;5554:23;5538:14;;5531:47;5439:145;6054:58;6159:2;6147:15;;;6141:22;6200:2;6194:3;6179:19;;6172:31;6252:19;;6280:22;;;;6360:21;;6399:1;;6333:3;6318:19;;;6409:169;6423:6;6420:1;6417:13;6409:169;;;6484:13;;6472:26;;6553:15;;;;6445:1;6438:9;;;;;6518:12;;;;6409:169;;;-1:-1:-1;6595:3:82;5589:1015;-1:-1:-1;;;;;;;;5589:1015:82:o;6609:277::-;6676:6;6729:2;6717:9;6708:7;6704:23;6700:32;6697:52;;;6745:1;6742;6735:12;6697:52;6777:9;6771:16;6830:5;6823:13;6816:21;6809:5;6806:32;6796:60;;6852:1;6849;6842:12;6796:60;6875:5;6609:277;-1:-1:-1;;;6609:277:82:o;6891:301::-;6950:6;7003:2;6991:9;6982:7;6978:23;6974:32;6971:52;;;7019:1;7016;7009:12;6971:52;7058:9;7045:23;-1:-1:-1;;;;;7101:5:82;7097:46;7090:5;7087:57;7077:85;;7158:1;7155;7148:12;7736:412;7865:3;7903:6;7897:13;7928:1;7938:129;7952:6;7949:1;7946:13;7938:129;;;8050:4;8034:14;;;8030:25;;8024:32;8011:11;;;8004:53;7967:12;7938:129;;;-1:-1:-1;8122:1:82;8086:16;;8111:13;;;-1:-1:-1;8086:16:82;7736:412;-1:-1:-1;7736:412:82:o;8153:184::-;8223:6;8276:2;8264:9;8255:7;8251:23;8247:32;8244:52;;;8292:1;8289;8282:12;8244:52;-1:-1:-1;8315:16:82;;8153:184;-1:-1:-1;8153:184:82:o",
+    "linkReferences": {
+      "lib/nexus/contracts/src/lib/JellyfishMerkleTreeVerifier.sol": {
+        "JellyfishMerkleTreeVerifier": [{ "start": 495, "length": 20 }]
+      }
+    }
+  },
+  "methodIdentifiers": {
+    "getChainState(uint256,bytes32)": "998862ec",
+    "latestNexusBlockNumber()": "8a630540",
+    "nexusAppIdToLatestBlockNumber(bytes32)": "520782a1",
+    "nexusAppIdToState(bytes32,uint256)": "2d438359",
+    "nexusBlock(uint256)": "3bf38b10",
+    "updateChainState(uint256,bytes32[],bytes32,(bytes32,bytes32,bytes32,uint128,uint128))": "8d2383a9",
+    "updateNexusBlock(uint256,(bytes32,bytes32))": "76ac39cb",
+    "verifyRollupState(bytes32,((bytes32,bytes32),bytes32[]),(bytes32,bytes32))": "8bb9dc06"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"}],\"name\":\"AlreadyUpdatedBlock\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"latestBlockNumber\",\"type\":\"uint256\"}],\"name\":\"InvalidBlockNumber\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NexusLeafInclusionCheckFailed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"nexusAppID\",\"type\":\"bytes32\"}],\"name\":\"getChainState\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestNexusBlockNumber\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"nexusAppIdToLatestBlockNumber\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"nexusAppIdToState\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"nexusBlock\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"blockHash\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nexusBlockNumber\",\"type\":\"uint256\"},{\"internalType\":\"bytes32[]\",\"name\":\"siblings\",\"type\":\"bytes32[]\"},{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"statementDigest\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"startNexusHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint128\",\"name\":\"lastProofHeight\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"height\",\"type\":\"uint128\"}],\"internalType\":\"struct NexusProofManager.AccountState\",\"name\":\"accountState\",\"type\":\"tuple\"}],\"name\":\"updateChainState\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"blockHash\",\"type\":\"bytes32\"}],\"internalType\":\"struct NexusProofManager.NexusBlock\",\"name\":\"nexusBlockInfo\",\"type\":\"tuple\"}],\"name\":\"updateNexusBlock\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"components\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"addr\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"valueHash\",\"type\":\"bytes32\"}],\"internalType\":\"struct JellyfishMerkleTreeVerifier.Leaf\",\"name\":\"leaf\",\"type\":\"tuple\"},{\"internalType\":\"bytes32[]\",\"name\":\"siblings\",\"type\":\"bytes32[]\"}],\"internalType\":\"struct JellyfishMerkleTreeVerifier.Proof\",\"name\":\"proof\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"addr\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"valueHash\",\"type\":\"bytes32\"}],\"internalType\":\"struct JellyfishMerkleTreeVerifier.Leaf\",\"name\":\"leaf\",\"type\":\"tuple\"}],\"name\":\"verifyRollupState\",\"outputs\":[],\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/nexus/contracts/src/NexusProofManager.sol\":\"NexusProofManager\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat/=node_modules/hardhat/\",\":nexus/=lib/nexus/contracts/src/\",\":@openzeppelin/contracts-upgradeable/=lib/nexus.git/contracts/lib/@openzeppelin/contracts-upgradeable/\",\":openzeppelin-contracts/=node_modules/openzeppelin-contracts/\"]},\"sources\":{\"lib/nexus/contracts/src/NexusProofManager.sol\":{\"keccak256\":\"0x1bd65f475ae238466de5b85dbea0e65dee95cb5ec54eaaa954ee431d70664fa9\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://3241231615ed45eb7af7a4c108ce8ac8d54d318645f31ed34b04dc264791125b\",\"dweb:/ipfs/QmWkmeLSnwF6MtJoFWdAWsS9Hr44JRrdiwBxUNpMjdiZTK\"]},\"lib/nexus/contracts/src/lib/JellyfishMerkleTreeVerifier.sol\":{\"keccak256\":\"0x0a98548ad5b6d99d3ef8db73b09fc4e749ef2e8329d1387df92775b553a9bb1a\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://edace27699d623a432bde2d09c2e1263046637639dbd4b78bfac0369d4ec2ff2\",\"dweb:/ipfs/QmbgoFhYvouMHs3DoD4qfJcY3ZrK3YjHaN6UmVnKJsMtGP\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": { "version": "0.8.25+commit.b61c2a91" },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "blockNumber",
+              "type": "uint256"
+            }
+          ],
+          "type": "error",
+          "name": "AlreadyUpdatedBlock"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "blockNumber",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "latestBlockNumber",
+              "type": "uint256"
+            }
+          ],
+          "type": "error",
+          "name": "InvalidBlockNumber"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "NexusLeafInclusionCheckFailed"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "blockNumber",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "nexusAppID",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getChainState",
+          "outputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "latestNexusBlockNumber",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ]
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "nexusAppIdToLatestBlockNumber",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ]
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "nexusAppIdToState",
+          "outputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" }
+          ]
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "nexusBlock",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "stateRoot",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "blockHash",
+              "type": "bytes32"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "nexusBlockNumber",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32[]",
+              "name": "siblings",
+              "type": "bytes32[]"
+            },
+            { "internalType": "bytes32", "name": "key", "type": "bytes32" },
+            {
+              "internalType": "struct NexusProofManager.AccountState",
+              "name": "accountState",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "statementDigest",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "stateRoot",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "startNexusHash",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "uint128",
+                  "name": "lastProofHeight",
+                  "type": "uint128"
+                },
+                {
+                  "internalType": "uint128",
+                  "name": "height",
+                  "type": "uint128"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "updateChainState"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "blockNumber",
+              "type": "uint256"
+            },
+            {
+              "internalType": "struct NexusProofManager.NexusBlock",
+              "name": "nexusBlockInfo",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "stateRoot",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "blockHash",
+                  "type": "bytes32"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "updateNexusBlock"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes32", "name": "root", "type": "bytes32" },
+            {
+              "internalType": "struct JellyfishMerkleTreeVerifier.Proof",
+              "name": "proof",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "struct JellyfishMerkleTreeVerifier.Leaf",
+                  "name": "leaf",
+                  "type": "tuple",
+                  "components": [
+                    {
+                      "internalType": "bytes32",
+                      "name": "addr",
+                      "type": "bytes32"
+                    },
+                    {
+                      "internalType": "bytes32",
+                      "name": "valueHash",
+                      "type": "bytes32"
+                    }
+                  ]
+                },
+                {
+                  "internalType": "bytes32[]",
+                  "name": "siblings",
+                  "type": "bytes32[]"
+                }
+              ]
+            },
+            {
+              "internalType": "struct JellyfishMerkleTreeVerifier.Leaf",
+              "name": "leaf",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "addr",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "valueHash",
+                  "type": "bytes32"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function",
+          "name": "verifyRollupState"
+        }
+      ],
+      "devdoc": { "kind": "dev", "methods": {}, "version": 1 },
+      "userdoc": { "kind": "user", "methods": {}, "version": 1 }
+    },
+    "settings": {
+      "remappings": [
+        "@ensdomains/=node_modules/@ensdomains/",
+        "@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/",
+        "@openzeppelin/=node_modules/@openzeppelin/",
+        "ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        "forge-std/=lib/forge-std/src/",
+        "hardhat/=node_modules/hardhat/",
+        "nexus/=lib/nexus/contracts/src/",
+        "@openzeppelin/contracts-upgradeable/=lib/nexus.git/contracts/lib/@openzeppelin/contracts-upgradeable/",
+        "openzeppelin-contracts/=node_modules/openzeppelin-contracts/"
+      ],
+      "optimizer": { "enabled": true, "runs": 200 },
+      "metadata": { "bytecodeHash": "ipfs" },
+      "compilationTarget": {
+        "lib/nexus/contracts/src/NexusProofManager.sol": "NexusProofManager"
+      },
+      "evmVersion": "paris",
+      "libraries": {}
+    },
+    "sources": {
+      "lib/nexus/contracts/src/NexusProofManager.sol": {
+        "keccak256": "0x1bd65f475ae238466de5b85dbea0e65dee95cb5ec54eaaa954ee431d70664fa9",
+        "urls": [
+          "bzz-raw://3241231615ed45eb7af7a4c108ce8ac8d54d318645f31ed34b04dc264791125b",
+          "dweb:/ipfs/QmWkmeLSnwF6MtJoFWdAWsS9Hr44JRrdiwBxUNpMjdiZTK"
+        ],
+        "license": "Apache-2.0"
+      },
+      "lib/nexus/contracts/src/lib/JellyfishMerkleTreeVerifier.sol": {
+        "keccak256": "0x0a98548ad5b6d99d3ef8db73b09fc4e749ef2e8329d1387df92775b553a9bb1a",
+        "urls": [
+          "bzz-raw://edace27699d623a432bde2d09c2e1263046637639dbd4b78bfac0369d4ec2ff2",
+          "dweb:/ipfs/QmbgoFhYvouMHs3DoD4qfJcY3ZrK3YjHaN6UmVnKJsMtGP"
+        ],
+        "license": "Apache-2.0"
+      }
+    },
+    "version": 1
+  },
+  "id": 37
+}

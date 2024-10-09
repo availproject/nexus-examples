@@ -1,1 +1,653 @@
-{"abi":[{"type":"function","name":"receiveERC20","inputs":[{"name":"message","type":"tuple","internalType":"struct INexusBridge.MessageReceieve","components":[{"name":"messageType","type":"bytes1","internalType":"bytes1"},{"name":"from","type":"bytes32","internalType":"bytes32"},{"name":"to","type":"bytes32","internalType":"bytes32"},{"name":"data","type":"bytes","internalType":"bytes"},{"name":"messageId","type":"uint64","internalType":"uint64"},{"name":"storageProof","type":"bytes","internalType":"bytes"},{"name":"storageSlot","type":"bytes32","internalType":"bytes32"},{"name":"slotValue","type":"bytes32","internalType":"bytes32"}]},{"name":"input","type":"bytes","internalType":"bytes"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"receiveETH","inputs":[{"name":"message","type":"tuple","internalType":"struct INexusBridge.MessageReceieve","components":[{"name":"messageType","type":"bytes1","internalType":"bytes1"},{"name":"from","type":"bytes32","internalType":"bytes32"},{"name":"to","type":"bytes32","internalType":"bytes32"},{"name":"data","type":"bytes","internalType":"bytes"},{"name":"messageId","type":"uint64","internalType":"uint64"},{"name":"storageProof","type":"bytes","internalType":"bytes"},{"name":"storageSlot","type":"bytes32","internalType":"bytes32"},{"name":"slotValue","type":"bytes32","internalType":"bytes32"}]},{"name":"input","type":"bytes","internalType":"bytes"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"receiveMessage","inputs":[{"name":"message","type":"tuple","internalType":"struct INexusBridge.MessageReceieve","components":[{"name":"messageType","type":"bytes1","internalType":"bytes1"},{"name":"from","type":"bytes32","internalType":"bytes32"},{"name":"to","type":"bytes32","internalType":"bytes32"},{"name":"data","type":"bytes","internalType":"bytes"},{"name":"messageId","type":"uint64","internalType":"uint64"},{"name":"storageProof","type":"bytes","internalType":"bytes"},{"name":"storageSlot","type":"bytes32","internalType":"bytes32"},{"name":"slotValue","type":"bytes32","internalType":"bytes32"}]},{"name":"input","type":"bytes","internalType":"bytes"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"sendERC20","inputs":[{"name":"assetId","type":"bytes32","internalType":"bytes32"},{"name":"recipient","type":"bytes32","internalType":"bytes32"},{"name":"amount","type":"uint256","internalType":"uint256"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"sendETH","inputs":[{"name":"recipient","type":"bytes32","internalType":"bytes32"}],"outputs":[],"stateMutability":"payable"},{"type":"function","name":"sendMessage","inputs":[{"name":"recipient","type":"bytes32","internalType":"bytes32"},{"name":"data","type":"bytes","internalType":"bytes"}],"outputs":[],"stateMutability":"payable"},{"type":"function","name":"setPaused","inputs":[{"name":"status","type":"bool","internalType":"bool"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"updateFeePerByte","inputs":[{"name":"newFeePerByte","type":"uint256","internalType":"uint256"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"updateFeeRecipient","inputs":[{"name":"newFeeRecipient","type":"address","internalType":"address"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"updateTokens","inputs":[{"name":"assetIds","type":"bytes32[]","internalType":"bytes32[]"},{"name":"tokenAddresses","type":"address[]","internalType":"address[]"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"function","name":"withdrawFees","inputs":[],"outputs":[],"stateMutability":"nonpayable"},{"type":"event","name":"MessageReceived","inputs":[{"name":"from","type":"bytes32","indexed":true,"internalType":"bytes32"},{"name":"to","type":"address","indexed":true,"internalType":"address"},{"name":"messageId","type":"uint256","indexed":false,"internalType":"uint256"}],"anonymous":false},{"type":"event","name":"MessageSent","inputs":[{"name":"from","type":"address","indexed":true,"internalType":"address"},{"name":"to","type":"bytes32","indexed":true,"internalType":"bytes32"},{"name":"messageId","type":"uint256","indexed":false,"internalType":"uint256"}],"anonymous":false},{"type":"error","name":"AlreadyBridged","inputs":[]},{"type":"error","name":"ArrayLengthMismatch","inputs":[]},{"type":"error","name":"BlobRootEmpty","inputs":[]},{"type":"error","name":"BridgeRootEmpty","inputs":[]},{"type":"error","name":"DataRootCommitmentEmpty","inputs":[]},{"type":"error","name":"FeeTooLow","inputs":[]},{"type":"error","name":"InvalidAssetId","inputs":[]},{"type":"error","name":"InvalidDataLength","inputs":[]},{"type":"error","name":"InvalidDataRootProof","inputs":[]},{"type":"error","name":"InvalidDestinationOrAmount","inputs":[]},{"type":"error","name":"InvalidDomain","inputs":[]},{"type":"error","name":"InvalidFungibleTokenTransfer","inputs":[]},{"type":"error","name":"InvalidLeaf","inputs":[]},{"type":"error","name":"InvalidMerkleProof","inputs":[]},{"type":"error","name":"InvalidMessage","inputs":[]},{"type":"error","name":"UnlockFailed","inputs":[]},{"type":"error","name":"WithdrawFailed","inputs":[]}],"bytecode":{"object":"0x","sourceMap":"","linkReferences":{}},"deployedBytecode":{"object":"0x","sourceMap":"","linkReferences":{}},"methodIdentifiers":{"receiveERC20((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32,bytes32),bytes)":"6cc891f6","receiveETH((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32,bytes32),bytes)":"73854bfb","receiveMessage((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32,bytes32),bytes)":"413dfeff","sendERC20(bytes32,bytes32,uint256)":"758f666f","sendETH(bytes32)":"0846691f","sendMessage(bytes32,bytes)":"23c640e7","setPaused(bool)":"16c38b3c","updateFeePerByte(uint256)":"5e6c8c6c","updateFeeRecipient(address)":"f160d369","updateTokens(bytes32[],address[])":"d590bd34","withdrawFees()":"476343ee"},"rawMetadata":"{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"AlreadyBridged\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ArrayLengthMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"BlobRootEmpty\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"BridgeRootEmpty\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DataRootCommitmentEmpty\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"FeeTooLow\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidAssetId\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidDataLength\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidDataRootProof\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidDestinationOrAmount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidDomain\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidFungibleTokenTransfer\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidLeaf\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidMerkleProof\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidMessage\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"UnlockFailed\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"WithdrawFailed\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"from\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"messageId\",\"type\":\"uint256\"}],\"name\":\"MessageReceived\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"to\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"messageId\",\"type\":\"uint256\"}],\"name\":\"MessageSent\",\"type\":\"event\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes1\",\"name\":\"messageType\",\"type\":\"bytes1\"},{\"internalType\":\"bytes32\",\"name\":\"from\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"to\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"messageId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"storageProof\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"storageSlot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"slotValue\",\"type\":\"bytes32\"}],\"internalType\":\"struct INexusBridge.MessageReceieve\",\"name\":\"message\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"}],\"name\":\"receiveERC20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes1\",\"name\":\"messageType\",\"type\":\"bytes1\"},{\"internalType\":\"bytes32\",\"name\":\"from\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"to\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"messageId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"storageProof\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"storageSlot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"slotValue\",\"type\":\"bytes32\"}],\"internalType\":\"struct INexusBridge.MessageReceieve\",\"name\":\"message\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"}],\"name\":\"receiveETH\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes1\",\"name\":\"messageType\",\"type\":\"bytes1\"},{\"internalType\":\"bytes32\",\"name\":\"from\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"to\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"messageId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"storageProof\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"storageSlot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"slotValue\",\"type\":\"bytes32\"}],\"internalType\":\"struct INexusBridge.MessageReceieve\",\"name\":\"message\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"}],\"name\":\"receiveMessage\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"assetId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"recipient\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"sendERC20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"recipient\",\"type\":\"bytes32\"}],\"name\":\"sendETH\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"recipient\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"sendMessage\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"}],\"name\":\"setPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newFeePerByte\",\"type\":\"uint256\"}],\"name\":\"updateFeePerByte\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newFeeRecipient\",\"type\":\"address\"}],\"name\":\"updateFeeRecipient\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"assetIds\",\"type\":\"bytes32[]\"},{\"internalType\":\"address[]\",\"name\":\"tokenAddresses\",\"type\":\"address[]\"}],\"name\":\"updateTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawFees\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/bridge/interfaces/INexusBridge.sol\":\"INexusBridge\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat/=node_modules/hardhat/\",\":nexus/=lib/nexus/contracts/src/\",\":openzeppelin-contracts-upgradeable/=lib/nexus.git/contracts/lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=node_modules/openzeppelin-contracts/\"]},\"sources\":{\"contracts/bridge/interfaces/INexusBridge.sol\":{\"keccak256\":\"0xb6edfb61b71d9e82e9621145b989faf6558af17488da05df200baf021a6dc1fc\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://9ec8bc9070f4214f6386854b2640e986d80a0019cde3bb33610840ac8a5c7b2f\",\"dweb:/ipfs/QmRLHCAnV1CPkyXx3k3Bvg8aH1bRPkHW9atxx11aZJKeCT\"]},\"contracts/bridge/interfaces/IVectorx.sol\":{\"keccak256\":\"0xe2409ae42268d0733b19901da07c7ffc53a2cc140f81de15bf5e12c7a29d8abe\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://87a7f439d957c1d02d35ba64b41b62886d5c0e1898585fb68b22bd8be0a81ed7\",\"dweb:/ipfs/QmPFeoJNKB6t4SrfMgNavJn1CLxgqZ7gWwYZQg4mDZmx38\"]}},\"version\":1}","metadata":{"compiler":{"version":"0.8.25+commit.b61c2a91"},"language":"Solidity","output":{"abi":[{"inputs":[],"type":"error","name":"AlreadyBridged"},{"inputs":[],"type":"error","name":"ArrayLengthMismatch"},{"inputs":[],"type":"error","name":"BlobRootEmpty"},{"inputs":[],"type":"error","name":"BridgeRootEmpty"},{"inputs":[],"type":"error","name":"DataRootCommitmentEmpty"},{"inputs":[],"type":"error","name":"FeeTooLow"},{"inputs":[],"type":"error","name":"InvalidAssetId"},{"inputs":[],"type":"error","name":"InvalidDataLength"},{"inputs":[],"type":"error","name":"InvalidDataRootProof"},{"inputs":[],"type":"error","name":"InvalidDestinationOrAmount"},{"inputs":[],"type":"error","name":"InvalidDomain"},{"inputs":[],"type":"error","name":"InvalidFungibleTokenTransfer"},{"inputs":[],"type":"error","name":"InvalidLeaf"},{"inputs":[],"type":"error","name":"InvalidMerkleProof"},{"inputs":[],"type":"error","name":"InvalidMessage"},{"inputs":[],"type":"error","name":"UnlockFailed"},{"inputs":[],"type":"error","name":"WithdrawFailed"},{"inputs":[{"internalType":"bytes32","name":"from","type":"bytes32","indexed":true},{"internalType":"address","name":"to","type":"address","indexed":true},{"internalType":"uint256","name":"messageId","type":"uint256","indexed":false}],"type":"event","name":"MessageReceived","anonymous":false},{"inputs":[{"internalType":"address","name":"from","type":"address","indexed":true},{"internalType":"bytes32","name":"to","type":"bytes32","indexed":true},{"internalType":"uint256","name":"messageId","type":"uint256","indexed":false}],"type":"event","name":"MessageSent","anonymous":false},{"inputs":[{"internalType":"struct INexusBridge.MessageReceieve","name":"message","type":"tuple","components":[{"internalType":"bytes1","name":"messageType","type":"bytes1"},{"internalType":"bytes32","name":"from","type":"bytes32"},{"internalType":"bytes32","name":"to","type":"bytes32"},{"internalType":"bytes","name":"data","type":"bytes"},{"internalType":"uint64","name":"messageId","type":"uint64"},{"internalType":"bytes","name":"storageProof","type":"bytes"},{"internalType":"bytes32","name":"storageSlot","type":"bytes32"},{"internalType":"bytes32","name":"slotValue","type":"bytes32"}]},{"internalType":"bytes","name":"input","type":"bytes"}],"stateMutability":"nonpayable","type":"function","name":"receiveERC20"},{"inputs":[{"internalType":"struct INexusBridge.MessageReceieve","name":"message","type":"tuple","components":[{"internalType":"bytes1","name":"messageType","type":"bytes1"},{"internalType":"bytes32","name":"from","type":"bytes32"},{"internalType":"bytes32","name":"to","type":"bytes32"},{"internalType":"bytes","name":"data","type":"bytes"},{"internalType":"uint64","name":"messageId","type":"uint64"},{"internalType":"bytes","name":"storageProof","type":"bytes"},{"internalType":"bytes32","name":"storageSlot","type":"bytes32"},{"internalType":"bytes32","name":"slotValue","type":"bytes32"}]},{"internalType":"bytes","name":"input","type":"bytes"}],"stateMutability":"nonpayable","type":"function","name":"receiveETH"},{"inputs":[{"internalType":"struct INexusBridge.MessageReceieve","name":"message","type":"tuple","components":[{"internalType":"bytes1","name":"messageType","type":"bytes1"},{"internalType":"bytes32","name":"from","type":"bytes32"},{"internalType":"bytes32","name":"to","type":"bytes32"},{"internalType":"bytes","name":"data","type":"bytes"},{"internalType":"uint64","name":"messageId","type":"uint64"},{"internalType":"bytes","name":"storageProof","type":"bytes"},{"internalType":"bytes32","name":"storageSlot","type":"bytes32"},{"internalType":"bytes32","name":"slotValue","type":"bytes32"}]},{"internalType":"bytes","name":"input","type":"bytes"}],"stateMutability":"nonpayable","type":"function","name":"receiveMessage"},{"inputs":[{"internalType":"bytes32","name":"assetId","type":"bytes32"},{"internalType":"bytes32","name":"recipient","type":"bytes32"},{"internalType":"uint256","name":"amount","type":"uint256"}],"stateMutability":"nonpayable","type":"function","name":"sendERC20"},{"inputs":[{"internalType":"bytes32","name":"recipient","type":"bytes32"}],"stateMutability":"payable","type":"function","name":"sendETH"},{"inputs":[{"internalType":"bytes32","name":"recipient","type":"bytes32"},{"internalType":"bytes","name":"data","type":"bytes"}],"stateMutability":"payable","type":"function","name":"sendMessage"},{"inputs":[{"internalType":"bool","name":"status","type":"bool"}],"stateMutability":"nonpayable","type":"function","name":"setPaused"},{"inputs":[{"internalType":"uint256","name":"newFeePerByte","type":"uint256"}],"stateMutability":"nonpayable","type":"function","name":"updateFeePerByte"},{"inputs":[{"internalType":"address","name":"newFeeRecipient","type":"address"}],"stateMutability":"nonpayable","type":"function","name":"updateFeeRecipient"},{"inputs":[{"internalType":"bytes32[]","name":"assetIds","type":"bytes32[]"},{"internalType":"address[]","name":"tokenAddresses","type":"address[]"}],"stateMutability":"nonpayable","type":"function","name":"updateTokens"},{"inputs":[],"stateMutability":"nonpayable","type":"function","name":"withdrawFees"}],"devdoc":{"kind":"dev","methods":{},"version":1},"userdoc":{"kind":"user","methods":{},"version":1}},"settings":{"remappings":["@ensdomains/=node_modules/@ensdomains/","@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/","@openzeppelin/=node_modules/@openzeppelin/","ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/","erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/","eth-gas-reporter/=node_modules/eth-gas-reporter/","forge-std/=lib/forge-std/src/","hardhat/=node_modules/hardhat/","nexus/=lib/nexus/contracts/src/","openzeppelin-contracts-upgradeable/=lib/nexus.git/contracts/lib/openzeppelin-contracts-upgradeable/","openzeppelin-contracts/=node_modules/openzeppelin-contracts/"],"optimizer":{"enabled":true,"runs":200},"metadata":{"bytecodeHash":"ipfs"},"compilationTarget":{"contracts/bridge/interfaces/INexusBridge.sol":"INexusBridge"},"evmVersion":"paris","libraries":{}},"sources":{"contracts/bridge/interfaces/INexusBridge.sol":{"keccak256":"0xb6edfb61b71d9e82e9621145b989faf6558af17488da05df200baf021a6dc1fc","urls":["bzz-raw://9ec8bc9070f4214f6386854b2640e986d80a0019cde3bb33610840ac8a5c7b2f","dweb:/ipfs/QmRLHCAnV1CPkyXx3k3Bvg8aH1bRPkHW9atxx11aZJKeCT"],"license":"Apache-2.0"},"contracts/bridge/interfaces/IVectorx.sol":{"keccak256":"0xe2409ae42268d0733b19901da07c7ffc53a2cc140f81de15bf5e12c7a29d8abe","urls":["bzz-raw://87a7f439d957c1d02d35ba64b41b62886d5c0e1898585fb68b22bd8be0a81ed7","dweb:/ipfs/QmPFeoJNKB6t4SrfMgNavJn1CLxgqZ7gWwYZQg4mDZmx38"],"license":"Apache-2.0"}},"version":1},"id":3}
+{
+  "abi": [
+    {
+      "type": "function",
+      "name": "receiveERC20",
+      "inputs": [
+        {
+          "name": "message",
+          "type": "tuple",
+          "internalType": "struct INexusBridge.MessageReceieve",
+          "components": [
+            {
+              "name": "messageType",
+              "type": "bytes1",
+              "internalType": "bytes1"
+            },
+            { "name": "from", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "to", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "data", "type": "bytes", "internalType": "bytes" },
+            { "name": "messageId", "type": "uint64", "internalType": "uint64" },
+            {
+              "name": "storageProof",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "storageSlot",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "slotValue",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ]
+        },
+        { "name": "input", "type": "bytes", "internalType": "bytes" }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "receiveETH",
+      "inputs": [
+        {
+          "name": "message",
+          "type": "tuple",
+          "internalType": "struct INexusBridge.MessageReceieve",
+          "components": [
+            {
+              "name": "messageType",
+              "type": "bytes1",
+              "internalType": "bytes1"
+            },
+            { "name": "from", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "to", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "data", "type": "bytes", "internalType": "bytes" },
+            { "name": "messageId", "type": "uint64", "internalType": "uint64" },
+            {
+              "name": "storageProof",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "storageSlot",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "slotValue",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ]
+        },
+        { "name": "input", "type": "bytes", "internalType": "bytes" }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "receiveMessage",
+      "inputs": [
+        {
+          "name": "message",
+          "type": "tuple",
+          "internalType": "struct INexusBridge.MessageReceieve",
+          "components": [
+            {
+              "name": "messageType",
+              "type": "bytes1",
+              "internalType": "bytes1"
+            },
+            { "name": "from", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "to", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "data", "type": "bytes", "internalType": "bytes" },
+            { "name": "messageId", "type": "uint64", "internalType": "uint64" },
+            {
+              "name": "storageProof",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "storageSlot",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "slotValue",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ]
+        },
+        { "name": "input", "type": "bytes", "internalType": "bytes" }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "sendERC20",
+      "inputs": [
+        { "name": "assetId", "type": "bytes32", "internalType": "bytes32" },
+        { "name": "recipient", "type": "bytes32", "internalType": "bytes32" },
+        { "name": "amount", "type": "uint256", "internalType": "uint256" }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "sendETH",
+      "inputs": [
+        { "name": "recipient", "type": "bytes32", "internalType": "bytes32" }
+      ],
+      "outputs": [],
+      "stateMutability": "payable"
+    },
+    {
+      "type": "function",
+      "name": "sendMessage",
+      "inputs": [
+        { "name": "recipient", "type": "bytes32", "internalType": "bytes32" },
+        { "name": "data", "type": "bytes", "internalType": "bytes" }
+      ],
+      "outputs": [],
+      "stateMutability": "payable"
+    },
+    {
+      "type": "function",
+      "name": "setPaused",
+      "inputs": [{ "name": "status", "type": "bool", "internalType": "bool" }],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "updateFeePerByte",
+      "inputs": [
+        {
+          "name": "newFeePerByte",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "updateFeeRecipient",
+      "inputs": [
+        {
+          "name": "newFeeRecipient",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "updateTokens",
+      "inputs": [
+        {
+          "name": "assetIds",
+          "type": "bytes32[]",
+          "internalType": "bytes32[]"
+        },
+        {
+          "name": "tokenAddresses",
+          "type": "address[]",
+          "internalType": "address[]"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "withdrawFees",
+      "inputs": [],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "event",
+      "name": "MessageReceived",
+      "inputs": [
+        {
+          "name": "from",
+          "type": "bytes32",
+          "indexed": true,
+          "internalType": "bytes32"
+        },
+        {
+          "name": "to",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "messageId",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "MessageSent",
+      "inputs": [
+        {
+          "name": "from",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "to",
+          "type": "bytes32",
+          "indexed": true,
+          "internalType": "bytes32"
+        },
+        {
+          "name": "messageId",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    { "type": "error", "name": "AlreadyBridged", "inputs": [] },
+    { "type": "error", "name": "ArrayLengthMismatch", "inputs": [] },
+    { "type": "error", "name": "BlobRootEmpty", "inputs": [] },
+    { "type": "error", "name": "BridgeRootEmpty", "inputs": [] },
+    { "type": "error", "name": "DataRootCommitmentEmpty", "inputs": [] },
+    { "type": "error", "name": "FeeTooLow", "inputs": [] },
+    { "type": "error", "name": "InvalidAssetId", "inputs": [] },
+    { "type": "error", "name": "InvalidDataLength", "inputs": [] },
+    { "type": "error", "name": "InvalidDataRootProof", "inputs": [] },
+    { "type": "error", "name": "InvalidDestinationOrAmount", "inputs": [] },
+    { "type": "error", "name": "InvalidDomain", "inputs": [] },
+    { "type": "error", "name": "InvalidFungibleTokenTransfer", "inputs": [] },
+    { "type": "error", "name": "InvalidLeaf", "inputs": [] },
+    { "type": "error", "name": "InvalidMerkleProof", "inputs": [] },
+    { "type": "error", "name": "InvalidMessage", "inputs": [] },
+    { "type": "error", "name": "UnlockFailed", "inputs": [] },
+    { "type": "error", "name": "WithdrawFailed", "inputs": [] }
+  ],
+  "bytecode": { "object": "0x", "sourceMap": "", "linkReferences": {} },
+  "deployedBytecode": { "object": "0x", "sourceMap": "", "linkReferences": {} },
+  "methodIdentifiers": {
+    "receiveERC20((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32,bytes32),bytes)": "6cc891f6",
+    "receiveETH((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32,bytes32),bytes)": "73854bfb",
+    "receiveMessage((bytes1,bytes32,bytes32,bytes,uint64,bytes,bytes32,bytes32),bytes)": "413dfeff",
+    "sendERC20(bytes32,bytes32,uint256)": "758f666f",
+    "sendETH(bytes32)": "0846691f",
+    "sendMessage(bytes32,bytes)": "23c640e7",
+    "setPaused(bool)": "16c38b3c",
+    "updateFeePerByte(uint256)": "5e6c8c6c",
+    "updateFeeRecipient(address)": "f160d369",
+    "updateTokens(bytes32[],address[])": "d590bd34",
+    "withdrawFees()": "476343ee"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"AlreadyBridged\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ArrayLengthMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"BlobRootEmpty\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"BridgeRootEmpty\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DataRootCommitmentEmpty\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"FeeTooLow\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidAssetId\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidDataLength\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidDataRootProof\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidDestinationOrAmount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidDomain\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidFungibleTokenTransfer\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidLeaf\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidMerkleProof\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidMessage\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"UnlockFailed\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"WithdrawFailed\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"from\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"messageId\",\"type\":\"uint256\"}],\"name\":\"MessageReceived\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"to\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"messageId\",\"type\":\"uint256\"}],\"name\":\"MessageSent\",\"type\":\"event\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes1\",\"name\":\"messageType\",\"type\":\"bytes1\"},{\"internalType\":\"bytes32\",\"name\":\"from\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"to\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"messageId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"storageProof\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"storageSlot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"slotValue\",\"type\":\"bytes32\"}],\"internalType\":\"struct INexusBridge.MessageReceieve\",\"name\":\"message\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"}],\"name\":\"receiveERC20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes1\",\"name\":\"messageType\",\"type\":\"bytes1\"},{\"internalType\":\"bytes32\",\"name\":\"from\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"to\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"messageId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"storageProof\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"storageSlot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"slotValue\",\"type\":\"bytes32\"}],\"internalType\":\"struct INexusBridge.MessageReceieve\",\"name\":\"message\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"}],\"name\":\"receiveETH\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes1\",\"name\":\"messageType\",\"type\":\"bytes1\"},{\"internalType\":\"bytes32\",\"name\":\"from\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"to\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"messageId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"storageProof\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"storageSlot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"slotValue\",\"type\":\"bytes32\"}],\"internalType\":\"struct INexusBridge.MessageReceieve\",\"name\":\"message\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"}],\"name\":\"receiveMessage\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"assetId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"recipient\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"sendERC20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"recipient\",\"type\":\"bytes32\"}],\"name\":\"sendETH\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"recipient\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"sendMessage\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"}],\"name\":\"setPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newFeePerByte\",\"type\":\"uint256\"}],\"name\":\"updateFeePerByte\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newFeeRecipient\",\"type\":\"address\"}],\"name\":\"updateFeeRecipient\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"assetIds\",\"type\":\"bytes32[]\"},{\"internalType\":\"address[]\",\"name\":\"tokenAddresses\",\"type\":\"address[]\"}],\"name\":\"updateTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawFees\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/bridge/interfaces/INexusBridge.sol\":\"INexusBridge\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat/=node_modules/hardhat/\",\":nexus/=lib/nexus/contracts/src/\",\":@openzeppelin/contracts-upgradeable/=lib/nexus.git/contracts/lib/@openzeppelin/contracts-upgradeable/\",\":openzeppelin-contracts/=node_modules/openzeppelin-contracts/\"]},\"sources\":{\"contracts/bridge/interfaces/INexusBridge.sol\":{\"keccak256\":\"0xb6edfb61b71d9e82e9621145b989faf6558af17488da05df200baf021a6dc1fc\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://9ec8bc9070f4214f6386854b2640e986d80a0019cde3bb33610840ac8a5c7b2f\",\"dweb:/ipfs/QmRLHCAnV1CPkyXx3k3Bvg8aH1bRPkHW9atxx11aZJKeCT\"]},\"contracts/bridge/interfaces/IVectorx.sol\":{\"keccak256\":\"0xe2409ae42268d0733b19901da07c7ffc53a2cc140f81de15bf5e12c7a29d8abe\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://87a7f439d957c1d02d35ba64b41b62886d5c0e1898585fb68b22bd8be0a81ed7\",\"dweb:/ipfs/QmPFeoJNKB6t4SrfMgNavJn1CLxgqZ7gWwYZQg4mDZmx38\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": { "version": "0.8.25+commit.b61c2a91" },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        { "inputs": [], "type": "error", "name": "AlreadyBridged" },
+        { "inputs": [], "type": "error", "name": "ArrayLengthMismatch" },
+        { "inputs": [], "type": "error", "name": "BlobRootEmpty" },
+        { "inputs": [], "type": "error", "name": "BridgeRootEmpty" },
+        { "inputs": [], "type": "error", "name": "DataRootCommitmentEmpty" },
+        { "inputs": [], "type": "error", "name": "FeeTooLow" },
+        { "inputs": [], "type": "error", "name": "InvalidAssetId" },
+        { "inputs": [], "type": "error", "name": "InvalidDataLength" },
+        { "inputs": [], "type": "error", "name": "InvalidDataRootProof" },
+        { "inputs": [], "type": "error", "name": "InvalidDestinationOrAmount" },
+        { "inputs": [], "type": "error", "name": "InvalidDomain" },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "InvalidFungibleTokenTransfer"
+        },
+        { "inputs": [], "type": "error", "name": "InvalidLeaf" },
+        { "inputs": [], "type": "error", "name": "InvalidMerkleProof" },
+        { "inputs": [], "type": "error", "name": "InvalidMessage" },
+        { "inputs": [], "type": "error", "name": "UnlockFailed" },
+        { "inputs": [], "type": "error", "name": "WithdrawFailed" },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "from",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "messageId",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "MessageReceived",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "bytes32",
+              "name": "to",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "messageId",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "MessageSent",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct INexusBridge.MessageReceieve",
+              "name": "message",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes1",
+                  "name": "messageType",
+                  "type": "bytes1"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "from",
+                  "type": "bytes32"
+                },
+                { "internalType": "bytes32", "name": "to", "type": "bytes32" },
+                { "internalType": "bytes", "name": "data", "type": "bytes" },
+                {
+                  "internalType": "uint64",
+                  "name": "messageId",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "storageProof",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "storageSlot",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "slotValue",
+                  "type": "bytes32"
+                }
+              ]
+            },
+            { "internalType": "bytes", "name": "input", "type": "bytes" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "receiveERC20"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct INexusBridge.MessageReceieve",
+              "name": "message",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes1",
+                  "name": "messageType",
+                  "type": "bytes1"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "from",
+                  "type": "bytes32"
+                },
+                { "internalType": "bytes32", "name": "to", "type": "bytes32" },
+                { "internalType": "bytes", "name": "data", "type": "bytes" },
+                {
+                  "internalType": "uint64",
+                  "name": "messageId",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "storageProof",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "storageSlot",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "slotValue",
+                  "type": "bytes32"
+                }
+              ]
+            },
+            { "internalType": "bytes", "name": "input", "type": "bytes" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "receiveETH"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct INexusBridge.MessageReceieve",
+              "name": "message",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes1",
+                  "name": "messageType",
+                  "type": "bytes1"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "from",
+                  "type": "bytes32"
+                },
+                { "internalType": "bytes32", "name": "to", "type": "bytes32" },
+                { "internalType": "bytes", "name": "data", "type": "bytes" },
+                {
+                  "internalType": "uint64",
+                  "name": "messageId",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "storageProof",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "storageSlot",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "slotValue",
+                  "type": "bytes32"
+                }
+              ]
+            },
+            { "internalType": "bytes", "name": "input", "type": "bytes" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "receiveMessage"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes32", "name": "assetId", "type": "bytes32" },
+            {
+              "internalType": "bytes32",
+              "name": "recipient",
+              "type": "bytes32"
+            },
+            { "internalType": "uint256", "name": "amount", "type": "uint256" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "sendERC20"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "recipient",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "sendETH"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "recipient",
+              "type": "bytes32"
+            },
+            { "internalType": "bytes", "name": "data", "type": "bytes" }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "sendMessage"
+        },
+        {
+          "inputs": [
+            { "internalType": "bool", "name": "status", "type": "bool" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setPaused"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "newFeePerByte",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "updateFeePerByte"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newFeeRecipient",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "updateFeeRecipient"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32[]",
+              "name": "assetIds",
+              "type": "bytes32[]"
+            },
+            {
+              "internalType": "address[]",
+              "name": "tokenAddresses",
+              "type": "address[]"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "updateTokens"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "withdrawFees"
+        }
+      ],
+      "devdoc": { "kind": "dev", "methods": {}, "version": 1 },
+      "userdoc": { "kind": "user", "methods": {}, "version": 1 }
+    },
+    "settings": {
+      "remappings": [
+        "@ensdomains/=node_modules/@ensdomains/",
+        "@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/",
+        "@openzeppelin/=node_modules/@openzeppelin/",
+        "ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        "forge-std/=lib/forge-std/src/",
+        "hardhat/=node_modules/hardhat/",
+        "nexus/=lib/nexus/contracts/src/",
+        "@openzeppelin/contracts-upgradeable/=lib/nexus.git/contracts/lib/@openzeppelin/contracts-upgradeable/",
+        "openzeppelin-contracts/=node_modules/openzeppelin-contracts/"
+      ],
+      "optimizer": { "enabled": true, "runs": 200 },
+      "metadata": { "bytecodeHash": "ipfs" },
+      "compilationTarget": {
+        "contracts/bridge/interfaces/INexusBridge.sol": "INexusBridge"
+      },
+      "evmVersion": "paris",
+      "libraries": {}
+    },
+    "sources": {
+      "contracts/bridge/interfaces/INexusBridge.sol": {
+        "keccak256": "0xb6edfb61b71d9e82e9621145b989faf6558af17488da05df200baf021a6dc1fc",
+        "urls": [
+          "bzz-raw://9ec8bc9070f4214f6386854b2640e986d80a0019cde3bb33610840ac8a5c7b2f",
+          "dweb:/ipfs/QmRLHCAnV1CPkyXx3k3Bvg8aH1bRPkHW9atxx11aZJKeCT"
+        ],
+        "license": "Apache-2.0"
+      },
+      "contracts/bridge/interfaces/IVectorx.sol": {
+        "keccak256": "0xe2409ae42268d0733b19901da07c7ffc53a2cc140f81de15bf5e12c7a29d8abe",
+        "urls": [
+          "bzz-raw://87a7f439d957c1d02d35ba64b41b62886d5c0e1898585fb68b22bd8be0a81ed7",
+          "dweb:/ipfs/QmPFeoJNKB6t4SrfMgNavJn1CLxgqZ7gWwYZQg4mDZmx38"
+        ],
+        "license": "Apache-2.0"
+      }
+    },
+    "version": 1
+  },
+  "id": 3
+}

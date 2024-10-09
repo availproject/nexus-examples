@@ -1,145 +1,12 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/NexusProofManager.sol": {
-      "lastModificationDate": 1725530058771,
-      "contentHash": "d67ac3e5838a6cfb1bffee94118f04c7",
-      "sourceName": "contracts/NexusProofManager.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "./lib/JellyfishMerkleTreeVerifier.sol",
-        "forge-std/console.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "NexusProofManager"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-      "lastModificationDate": 1725007541531,
-      "contentHash": "b0b2d80ca8143a040946d9a70fa000c7",
-      "sourceName": "contracts/lib/JellyfishMerkleTreeVerifier.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "JellyfishMerkleTreeVerifier"
-      ]
-    },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/forge-std/src/console.sol": {
       "lastModificationDate": 1718919213198,
       "contentHash": "100b8a33b917da1147740d7ab8b0ded3",
       "sourceName": "forge-std/console.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -170,14 +37,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -199,749 +66,12 @@
         "console"
       ]
     },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/verification/ethereum/Verifier.sol": {
-      "lastModificationDate": 1725017031132,
-      "contentHash": "b27f5c2fadc344000b91a2b2357f9df7",
-      "sourceName": "contracts/verification/ethereum/Verifier.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "./StorageProof.sol",
-        "../../interfaces/INexusProofManager.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "EthereumVerifier"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/verification/ethereum/StorageProof.sol": {
-      "lastModificationDate": 1725017018536,
-      "contentHash": "f75c4b137fb6a86eabfcecf0e89b962d",
-      "sourceName": "contracts/verification/ethereum/StorageProof.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "../../lib/external/trie/Lib_SecureMerkleTrie.sol",
-        "../../lib/external/rlp/Lib_RLPReader.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "StorageProof"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/lib/external/trie/Lib_SecureMerkleTrie.sol": {
-      "lastModificationDate": 1716535354999,
-      "contentHash": "d27264af1795d723a3005f41e11f23ed",
-      "sourceName": "contracts/lib/external/trie/Lib_SecureMerkleTrie.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "./Lib_MerkleTrie.sol"
-      ],
-      "versionPragmas": [
-        ">0.5.0 <0.8.21"
-      ],
-      "artifacts": [
-        "Lib_SecureMerkleTrie"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/lib/external/rlp/Lib_RLPReader.sol": {
-      "lastModificationDate": 1716535354996,
-      "contentHash": "71fe197ca2db0e0c139d88b4bdf05065",
-      "sourceName": "contracts/lib/external/rlp/Lib_RLPReader.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">0.5.0 <0.8.21"
-      ],
-      "artifacts": [
-        "Lib_RLPReader"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/lib/external/trie/Lib_MerkleTrie.sol": {
-      "lastModificationDate": 1716535354997,
-      "contentHash": "feabf12ed1b4e8f86e45377f34ab4db6",
-      "sourceName": "contracts/lib/external/trie/Lib_MerkleTrie.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "../utils/Lib_BytesUtils.sol",
-        "../rlp/Lib_RLPReader.sol",
-        "../rlp/Lib_RLPWriter.sol"
-      ],
-      "versionPragmas": [
-        ">0.5.0 <0.8.21"
-      ],
-      "artifacts": [
-        "Lib_MerkleTrie"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/lib/external/utils/Lib_BytesUtils.sol": {
-      "lastModificationDate": 1716469245258,
-      "contentHash": "e27bbc490c4242cd1837ce31fab4c1e6",
-      "sourceName": "contracts/lib/external/utils/Lib_BytesUtils.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">0.5.0 <0.8.21"
-      ],
-      "artifacts": [
-        "Lib_BytesUtils"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/lib/external/rlp/Lib_RLPWriter.sol": {
-      "lastModificationDate": 1716535354997,
-      "contentHash": "d10c3d69ec11daa53363a0f46ad5a106",
-      "sourceName": "contracts/lib/external/rlp/Lib_RLPWriter.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "../utils/Lib_BytesUtils.sol"
-      ],
-      "versionPragmas": [
-        ">0.5.0 <0.8.21"
-      ],
-      "artifacts": [
-        "Lib_RLPWriter"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/verification/zksync/ZKSyncDiamond.sol": {
-      "lastModificationDate": 1725007541533,
-      "contentHash": "a7b70a8c56dae27830f974e4a4883d09",
-      "sourceName": "contracts/verification/zksync/ZKSyncDiamond.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "../../interfaces/INexusProofManager.sol",
-        "forge-std/console.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "ZKSyncDiamond"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/interfaces/INexusProofManager.sol": {
-      "lastModificationDate": 1725016960386,
-      "contentHash": "6e400a63f9a288a7fc0bcc612ed5166a",
-      "sourceName": "contracts/interfaces/INexusProofManager.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "INexusProofManager"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/zknft/NftPayment.sol": {
-      "lastModificationDate": 1725017071324,
-      "contentHash": "dd125eec7f66f3bb4600f64ccc445a2c",
-      "sourceName": "contracts/example/zknft/NftPayment.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "../../interfaces/INexusProofManager.sol",
-        "./Payment.sol",
-        "../../verification/ethereum/Verifier.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "NFTPayment"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/zknft/Payment.sol": {
-      "lastModificationDate": 1725007541531,
-      "contentHash": "326f9fc19858b0b5f87184fff094ff79",
-      "sourceName": "contracts/example/zknft/Payment.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Payment"
-      ]
-    },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
       "lastModificationDate": 1724414172034,
       "contentHash": "5517c8678c18eb1a8ba58810e7ca39ca",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -972,14 +102,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1006,7 +136,7 @@
       "contentHash": "4c02fa6f7ae7b6c289cef80424f0c875",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1037,14 +167,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1073,7 +203,7 @@
       "contentHash": "c6375ef25e84c90b3d15f9ec4eef218f",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1104,14 +234,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1143,7 +273,7 @@
       "contentHash": "4aefc698f77ecbace7f401257dfe182d",
       "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1174,14 +304,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1210,7 +340,7 @@
       "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1241,14 +371,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1275,7 +405,7 @@
       "contentHash": "1e64e2ad597dc5b2dae11346502baad4",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1306,14 +436,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1348,7 +478,7 @@
       "contentHash": "ba57ff4ddf1d9cae9d2009792795b7f6",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1379,14 +509,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1416,7 +546,7 @@
       "contentHash": "6a55c353946e471d9792965d06208295",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1447,14 +577,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1483,7 +613,7 @@
       "contentHash": "fc8a9841f4bdd6329c26a00d5e75f4b3",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1514,14 +644,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1548,7 +678,7 @@
       "contentHash": "5df8fdb527e563085847cad29e3c5f2e",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1579,14 +709,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1615,7 +745,7 @@
       "contentHash": "12c206f185cb951213799561fdcaa40d",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1646,14 +776,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1682,7 +812,7 @@
       "contentHash": "718fa8ba0ff269c92e364c1429d9de57",
       "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1713,14 +843,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1747,7 +877,7 @@
       "contentHash": "b6c6bdc7aaca4fe5b680760a72e09d3e",
       "sourceName": "@openzeppelin/contracts/utils/math/SignedMath.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1778,14 +908,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1812,7 +942,7 @@
       "contentHash": "de0163561b417b800d01749cbbe2147e",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1843,14 +973,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1877,7 +1007,7 @@
       "contentHash": "ea9d297971734d541e82cc31ec88b84f",
       "sourceName": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1908,14 +1038,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -1945,7 +1075,7 @@
       "contentHash": "f0cedd674b4863ee90d1521a92ab82df",
       "sourceName": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -1976,14 +1106,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2010,7 +1140,7 @@
       "contentHash": "61a6b098d98b3b945beb7d9de481c025",
       "sourceName": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2041,14 +1171,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2080,7 +1210,7 @@
       "contentHash": "c28aaa25d083a9a55bd9ec9e0b785122",
       "sourceName": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2111,14 +1241,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2147,7 +1277,7 @@
       "contentHash": "e3a14b0714caaaa82d58fa0bc3756079",
       "sourceName": "@openzeppelin/contracts/access/IAccessControl.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2178,14 +1308,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2212,7 +1342,7 @@
       "contentHash": "a99615d9875393acb1c5f5385d663d39",
       "sourceName": "@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2243,14 +1373,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2279,7 +1409,7 @@
       "contentHash": "d31669784ee1d10f0e2c9e0f9e0fd39f",
       "sourceName": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2310,14 +1440,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2352,7 +1482,7 @@
       "contentHash": "102f441e8bc28c4fc48b349151273d01",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC5313.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2383,14 +1513,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2417,7 +1547,7 @@
       "contentHash": "d72cdfaacd4b1b8e090b57f4b7200ddc",
       "sourceName": "@openzeppelin/contracts/utils/math/SafeCast.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2448,14 +1578,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2477,354 +1607,12 @@
         "SafeCast"
       ]
     },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/bridge/NexusBridge.sol": {
-      "lastModificationDate": 1725529923169,
-      "contentHash": "464c795b9ee9f3b307a7bbf347efe45f",
-      "sourceName": "contracts/example/bridge/NexusBridge.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
-        "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol",
-        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "./interfaces/IAvail.sol",
-        "./lib/Merkle.sol",
-        "./interfaces/IMessageReceiver.sol",
-        "./interfaces/INexusBridge.sol",
-        "../../interfaces/INexusProofManager.sol",
-        "../../verification/ethereum/Verifier.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "NexusBridge"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/bridge/interfaces/IAvail.sol": {
-      "lastModificationDate": 1717099830382,
-      "contentHash": "b97a89a337d99d61e15baaf4a1eff44d",
-      "sourceName": "contracts/example/bridge/interfaces/IAvail.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IAvail"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/bridge/lib/Merkle.sol": {
-      "lastModificationDate": 1717099851749,
-      "contentHash": "4849c65dae8134303957bed464084797",
-      "sourceName": "contracts/example/bridge/lib/Merkle.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Merkle"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/bridge/interfaces/IMessageReceiver.sol": {
-      "lastModificationDate": 1717099830372,
-      "contentHash": "9255330f70c31b0e7bebce61430857a5",
-      "sourceName": "contracts/example/bridge/interfaces/IMessageReceiver.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IMessageReceiver"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/bridge/interfaces/INexusBridge.sol": {
-      "lastModificationDate": 1720698484587,
-      "contentHash": "3fee38634e3177c6bd2cdf382de2b9a7",
-      "sourceName": "contracts/example/bridge/interfaces/INexusBridge.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "./IVectorx.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "INexusBridge"
-      ]
-    },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/node_modules/@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol": {
       "lastModificationDate": 1724412681455,
       "contentHash": "a5bcbeef155f4b5dfb458e420afbaca6",
       "sourceName": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2855,14 +1643,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2891,7 +1679,7 @@
       "contentHash": "ef20fd32f5bdcc50bd466abc8fc7f181",
       "sourceName": "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2922,14 +1710,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -2959,7 +1747,7 @@
       "contentHash": "697fd27924863e77c17dace2179018b2",
       "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -2990,14 +1778,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -3023,77 +1811,12 @@
         "SafeERC20"
       ]
     },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/bridge/interfaces/IVectorx.sol": {
-      "lastModificationDate": 1717099966624,
-      "contentHash": "df32615c18122ed157a3823eb7b1c083",
-      "sourceName": "contracts/example/bridge/interfaces/IVectorx.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IVectorx"
-      ]
-    },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/node_modules/@openzeppelin/contracts/utils/Address.sol": {
       "lastModificationDate": 1724414171463,
       "contentHash": "79c699f80eb8a9b168cb34e37816f894",
       "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -3124,14 +1847,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -3158,7 +1881,7 @@
       "contentHash": "da291753fa4641f2c5837bfc4aa4c01b",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -3189,14 +1912,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -3218,482 +1941,12 @@
         "IERC20Permit"
       ]
     },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/zknft/NFT.sol": {
-      "lastModificationDate": 1725007541530,
-      "contentHash": "a27615154dac94d2c005bb6d0e27b5b6",
-      "sourceName": "contracts/example/zknft/NFT.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        "../../interfaces/INexusProofManager.sol",
-        "../../verification/zksync/StorageProof.sol",
-        "forge-std/console.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "MyNFT"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/verification/zksync/StorageProof.sol": {
-      "lastModificationDate": 1725007541533,
-      "contentHash": "5f172e043aa744c7e6fe82bdb953bff1",
-      "sourceName": "contracts/verification/zksync/StorageProof.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "forge-std/console.sol",
-        "./SparseMerkleTree.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "IZkSyncDiamond",
-        "StorageProofVerifier"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/verification/zksync/SparseMerkleTree.sol": {
-      "lastModificationDate": 1725007541533,
-      "contentHash": "fe9ebf12a5e25f4401b32227d297ef5f",
-      "sourceName": "contracts/verification/zksync/SparseMerkleTree.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "./Blask2s.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "SparseMerkleTree"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/verification/zksync/Blask2s.sol": {
-      "lastModificationDate": 1725007541532,
-      "contentHash": "0c633a60638b9559909d86b939630e3d",
-      "sourceName": "contracts/verification/zksync/Blask2s.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.13"
-      ],
-      "artifacts": [
-        "Blake2S"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/mock/ERC721.sol": {
-      "lastModificationDate": 1725007541529,
-      "contentHash": "0aeb079edd948d91d8538ee59330ecc9",
-      "sourceName": "contracts/example/mock/ERC721.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC721Token"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/example/mock/ERC20.sol": {
-      "lastModificationDate": 1721193313438,
-      "contentHash": "e6eaf9e3526c21c40cd449e141d35efb",
-      "sourceName": "contracts/example/mock/ERC20.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/ERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC20Token"
-      ]
-    },
-    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/lib/external/utils/Bytes.sol": {
-      "lastModificationDate": 1716534971606,
-      "contentHash": "85932b891683139546468e9f71cfafaf",
-      "sourceName": "contracts/lib/external/utils/Bytes.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "mode": "3"
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "detectMissingLibraries": false,
-          "forceEVMLA": false,
-          "enableEraVMExtensions": false,
-          "libraries": {
-            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-            }
-          }
-        },
-        "eraVersion": "1.0.1",
-        "zksolc": {
-          "version": "1.5.3",
-          "compilerSource": "binary",
-          "settings": {
-            "optimizer": {
-              "enabled": true,
-              "mode": "3"
-            },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
-            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
-            "areLibrariesMissing": false,
-            "experimental": {},
-            "libraries": {
-              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
-              }
-            },
-            "enableEraVMExtensions": false,
-            "forceEVMLA": false
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Bytes"
-      ]
-    },
     "/Volumes/Personal/Avail/storgeproof-nexus-poc/node_modules/@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/ProxyAdmin.sol": {
       "lastModificationDate": 1724412684999,
       "contentHash": "9891986e27d357222a8ac8c0c13abe31",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/ProxyAdmin.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -3724,14 +1977,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -3761,7 +2014,7 @@
       "contentHash": "1286aa8d056c7120d1a2da252e310d2f",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/transparent/TransparentUpgradeableProxy.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -3792,14 +2045,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -3829,7 +2082,7 @@
       "contentHash": "5a20b2cad87ddb61c7a3a6af21289e28",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/access/Ownable.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -3860,14 +2113,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -3896,7 +2149,7 @@
       "contentHash": "3fc3c7c0a2956f36e766691bb9473b06",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Proxy.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -3927,14 +2180,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -3964,7 +2217,7 @@
       "contentHash": "40b3d81a836d50ff47e03893dcaaf204",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/Proxy.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -3995,14 +2248,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4029,7 +2282,7 @@
       "contentHash": "a127706394bead18392601a20d44867a",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/ERC1967/ERC1967Upgrade.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -4060,14 +2313,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4100,7 +2353,7 @@
       "contentHash": "211ffd288c1588ba8c10eae668ca3c66",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Address.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -4131,14 +2384,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4165,7 +2418,7 @@
       "contentHash": "682f7dd1f2e1147c8390e7575deceb2d",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/StorageSlot.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -4196,14 +2449,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4230,7 +2483,7 @@
       "contentHash": "d0d060231a45da7a1eecbb5cd286fa40",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/IERC1967.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -4261,14 +2514,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4295,7 +2548,7 @@
       "contentHash": "2858d98e74e67987ec81b39605230b74",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/interfaces/draft-IERC1822.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -4326,14 +2579,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4360,7 +2613,7 @@
       "contentHash": "b6bd23bf19e90b771337037706470933",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/IBeacon.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -4391,14 +2644,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4425,7 +2678,7 @@
       "contentHash": "f07feb4a44b1a4872370da5aa70e8e46",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -4456,14 +2709,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4490,7 +2743,7 @@
       "contentHash": "8ffefb755605824cf730ce4092b2f581",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/UpgradeableBeacon.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -4521,14 +2774,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4559,7 +2812,7 @@
       "contentHash": "dc9dcb6e542154d9cfbfaece646c1092",
       "sourceName": "@openzeppelin/contracts-hardhat-zksync-upgradable/proxy/beacon/BeaconProxy.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.21",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -4590,14 +2843,14 @@
         },
         "eraVersion": "1.0.1",
         "zksolc": {
-          "version": "1.5.3",
+          "version": "1.5.4",
           "compilerSource": "binary",
           "settings": {
             "optimizer": {
               "enabled": true,
               "mode": "3"
             },
-            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.3",
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
             "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
             "areLibrariesMissing": false,
             "experimental": {},
@@ -4621,6 +2874,1753 @@
       ],
       "artifacts": [
         "BeaconProxy"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/bridge/NexusBridge.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "7f5588b84e26d5745324fbf266a8dd5e",
+      "sourceName": "contracts/bridge/NexusBridge.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+        "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol",
+        "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol",
+        "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol",
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "./interfaces/IAvail.sol",
+        "./lib/Merkle.sol",
+        "./interfaces/IMessageReceiver.sol",
+        "./interfaces/INexusBridge.sol",
+        "nexus/verification/ethereum/Verifier.sol",
+        "nexus/interfaces/INexusProofManager.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "NexusBridge"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/bridge/lib/Merkle.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "e43f3d4ad069cd48176e2ce4648bba8a",
+      "sourceName": "contracts/bridge/lib/Merkle.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Merkle"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/bridge/interfaces/IAvail.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "a47dc755e9376e67ce31beaca6afaae5",
+      "sourceName": "contracts/bridge/interfaces/IAvail.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IAvail"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/bridge/interfaces/INexusBridge.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "f87db3b0629963f168a143369b8eafc4",
+      "sourceName": "contracts/bridge/interfaces/INexusBridge.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "./IVectorx.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "INexusBridge"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/bridge/interfaces/IMessageReceiver.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "166a2710601728ab42cf55c7d91998d2",
+      "sourceName": "contracts/bridge/interfaces/IMessageReceiver.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IMessageReceiver"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/interfaces/INexusProofManager.sol": {
+      "lastModificationDate": 1728324722014,
+      "contentHash": "ee6343e977f0e305e6874857f06de156",
+      "sourceName": "nexus/interfaces/INexusProofManager.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "INexusProofManager"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/verification/ethereum/Verifier.sol": {
+      "lastModificationDate": 1728324722017,
+      "contentHash": "955613d40d2edb8c521cc6fe507c4f87",
+      "sourceName": "nexus/verification/ethereum/Verifier.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "./StorageProof.sol",
+        "../../interfaces/INexusProofManager.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "EthereumVerifier"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/bridge/interfaces/IVectorx.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "2767cf461fea98047f365f082bbc33f5",
+      "sourceName": "contracts/bridge/interfaces/IVectorx.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IVectorx"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/verification/ethereum/StorageProof.sol": {
+      "lastModificationDate": 1728324722017,
+      "contentHash": "8a0b0b13696252c64b1de888f90c5ae2",
+      "sourceName": "nexus/verification/ethereum/StorageProof.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "../../lib/external/trie/Lib_SecureMerkleTrie.sol",
+        "../../lib/external/rlp/Lib_RLPReader.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "StorageProof"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/lib/external/trie/Lib_SecureMerkleTrie.sol": {
+      "lastModificationDate": 1728324722016,
+      "contentHash": "5b2779684795cea5895cdb97410553f5",
+      "sourceName": "nexus/lib/external/trie/Lib_SecureMerkleTrie.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "./Lib_MerkleTrie.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "Lib_SecureMerkleTrie"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/lib/external/rlp/Lib_RLPReader.sol": {
+      "lastModificationDate": 1728324722015,
+      "contentHash": "3c1c904de3ebc55e96a534db5bdf0782",
+      "sourceName": "nexus/lib/external/rlp/Lib_RLPReader.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "Lib_RLPReader"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/lib/external/trie/Lib_MerkleTrie.sol": {
+      "lastModificationDate": 1728324722015,
+      "contentHash": "5ff29d74acc8f2ce78dd01fd6f43fa08",
+      "sourceName": "nexus/lib/external/trie/Lib_MerkleTrie.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "../utils/Lib_BytesUtils.sol",
+        "../rlp/Lib_RLPReader.sol",
+        "../rlp/Lib_RLPWriter.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "Lib_MerkleTrie"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/lib/external/utils/Lib_BytesUtils.sol": {
+      "lastModificationDate": 1728324722016,
+      "contentHash": "0e389efb6448d0b1c084b1bf994a7b54",
+      "sourceName": "nexus/lib/external/utils/Lib_BytesUtils.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "Lib_BytesUtils"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/lib/external/rlp/Lib_RLPWriter.sol": {
+      "lastModificationDate": 1728324722015,
+      "contentHash": "44b16a1d4a8e4f58586d99ab6b92af37",
+      "sourceName": "nexus/lib/external/rlp/Lib_RLPWriter.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "../utils/Lib_BytesUtils.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "Lib_RLPWriter"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/zknft-mailbox/NFT.sol": {
+      "lastModificationDate": 1728330727413,
+      "contentHash": "1a0ae25d94257c65f56648325bc1d0bb",
+      "sourceName": "contracts/zknft-mailbox/NFT.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "nexus/interfaces/INexusMailbox.sol",
+        "forge-std/console.sol",
+        "./types.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.13"
+      ],
+      "artifacts": [
+        "MyNFTMailbox"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/zknft-mailbox/types.sol": {
+      "lastModificationDate": 1728305922889,
+      "contentHash": "4e79c7b9380b9a9562793c7f14c90ccb",
+      "sourceName": "contracts/zknft-mailbox/types.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.13"
+      ],
+      "artifacts": []
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/interfaces/INexusMailbox.sol": {
+      "lastModificationDate": 1728324722014,
+      "contentHash": "cb03d10da2c6958728a1a91dffc3ba48",
+      "sourceName": "nexus/interfaces/INexusMailbox.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "INexusMailbox"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/zknft-mailbox/NftPayment.sol": {
+      "lastModificationDate": 1728326390047,
+      "contentHash": "82f603d7b60225878fc127c17cf93dc3",
+      "sourceName": "contracts/zknft-mailbox/NftPayment.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "nexus/interfaces/INexusMailbox.sol",
+        "./types.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.13"
+      ],
+      "artifacts": [
+        "NFTPaymentMailbox"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/zknft/NFT.sol": {
+      "lastModificationDate": 1727907435035,
+      "contentHash": "7c285096e4a6f96007099b0a0da5c80a",
+      "sourceName": "contracts/zknft/NFT.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "nexus/interfaces/INexusProofManager.sol",
+        "nexus/verification/zksync/StorageProof.sol",
+        "forge-std/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.13"
+      ],
+      "artifacts": [
+        "MyNFT"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/verification/zksync/StorageProof.sol": {
+      "lastModificationDate": 1728324722018,
+      "contentHash": "ba3800eeabfc674ff4cd242d682c0c9c",
+      "sourceName": "nexus/verification/zksync/StorageProof.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "./SparseMerkleTree.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "IZKSyncNexusManagerRouter",
+        "StorageProofVerifier"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/verification/zksync/SparseMerkleTree.sol": {
+      "lastModificationDate": 1728324722018,
+      "contentHash": "444499dca14771d6d67c888a222ea696",
+      "sourceName": "nexus/verification/zksync/SparseMerkleTree.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "./Blask2s.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "SparseMerkleTree"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/src/verification/zksync/Blask2s.sol": {
+      "lastModificationDate": 1728324722017,
+      "contentHash": "664ad4cc0dfb2d9465751400cf5dc70d",
+      "sourceName": "nexus/verification/zksync/Blask2s.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.21"
+      ],
+      "artifacts": [
+        "Blake2S"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/zknft/NftPayment.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "49d7c78feacc9757db3a15d5f389ea45",
+      "sourceName": "contracts/zknft/NftPayment.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "nexus/interfaces/INexusProofManager.sol",
+        "./Payment.sol",
+        "nexus/verification/ethereum/Verifier.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.13"
+      ],
+      "artifacts": [
+        "NFTPayment"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/zknft/Payment.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "80a8fd8d7f751933e25b96faacadd035",
+      "sourceName": "contracts/zknft/Payment.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Payment"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/mock/ERC721.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "8e05d5b8fde2649d068e4a46073357e7",
+      "sourceName": "contracts/mock/ERC721.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC721Token"
+      ]
+    },
+    "/Volumes/Personal/Avail/storgeproof-nexus-poc/contracts/mock/ERC20.sol": {
+      "lastModificationDate": 1727725685409,
+      "contentHash": "984d7e38e7cad6d2e1bafca0114d8475",
+      "sourceName": "contracts/mock/ERC20.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "detectMissingLibraries": false,
+          "forceEVMLA": false,
+          "enableEraVMExtensions": false,
+          "libraries": {
+            "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+              "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+            }
+          }
+        },
+        "eraVersion": "1.0.1",
+        "zksolc": {
+          "version": "1.5.4",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "/Users/rachitsrivastava/Library/Caches/hardhat-nodejs/compilers-v2/zksolc/zksolc-v1.5.4",
+            "missingLibrariesPath": "./.zksolc-libraries-cache/missingLibraryDependencies.json",
+            "areLibrariesMissing": false,
+            "experimental": {},
+            "libraries": {
+              "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
+                "JellyfishMerkleTreeVerifier": "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8"
+              }
+            },
+            "enableEraVMExtensions": false,
+            "forceEVMLA": false
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC20Token"
       ]
     }
   }

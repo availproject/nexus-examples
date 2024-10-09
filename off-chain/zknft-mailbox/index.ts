@@ -6,6 +6,7 @@ import nexusStateManagerAbi from "./nexusStateManager.json";
 import axios from "axios";
 import paymentAbi from "./payment.json";
 import nftAbi from "./nft.json";
+import nexus from "nexus-js";
 
 type NexusState = {
   stateRoot: string;
@@ -68,6 +69,14 @@ async function main() {
   // 4. Receive on NFT using inclusiong proof.
   // 5. Lock nft on one chain
   // 6. Withdraw nft using exclusion proof after timeout
+  const nexusStateManager = new nexus.NexusClient(
+    "http://localhost:7000",
+    app_id
+  );
+  // const mailbox = new nexus.MailBoxClient({
+  //   `${app_id}` : nexus.
+  // })
+  const zksyncVerifier = new nexus.ZKSyncVerifier();
   let providerPayment = L2Provider.getDefaultProvider(types.Network.Localhost);
   let providerNFT = new L2Provider(zksync_nft_url);
   if (!providerPayment) {
@@ -110,6 +119,7 @@ async function main() {
     // 4. Receive on NFT using inclusiong proof.
     await lockNFT();
     await fetchUpdatesFromNexus();
+    await payForNFT();
     // following available via sdk now:
     // await updateNexusState(); // from sdk
     // await updateChainState(); // from sdk

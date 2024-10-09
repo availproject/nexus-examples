@@ -8,6 +8,8 @@ let app_id =
 let app_id_2 =
   "0x688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
 let nftContractAddress = "";
+let mailBoxAddress = "";
+
 async function main() {
   console.log(`Running deploy script`);
 
@@ -19,46 +21,11 @@ async function main() {
   // Create deployer object.
   const deployer = new Deployer(hre, wallet);
 
-  // Deploy JellyfishMerkleTreeVerifier contract
-  const jmtArtifact = await deployer.loadArtifact(
-    "JellyfishMerkleTreeVerifier"
-  );
-  const jmt = await deployer.deploy(jmtArtifact);
-
-  // Deploy NexusProofManager contract with the linked library
-  const nexusArtifact = await deployer.loadArtifact("NexusProofManager");
-  const nexusManager = await deployer.deploy(nexusArtifact);
-  console.log(
-    `NexusProofManager deployed to ${await nexusManager.getAddress()}`
-  );
-
-  const mailboxArtifact = await deployer.loadArtifact("NexusMailbox");
-  const mailbox = await deployer.deploy(mailboxArtifact);
-  await mailbox.initialize(app_id);
-  console.log("Mailbox deployed to ", await mailbox.getAddress());
-
-  const ZKSyncDiamond = await deployer.loadArtifact("ZKSyncDiamond");
-  const zksyncdiamond = await deployer.deploy(ZKSyncDiamond, [
-    await nexusManager.getAddress(),
-    app_id_2,
-  ]);
-
-  const SparseMerkleTree = await deployer.loadArtifact("SparseMerkleTree");
-  const sparseMerkleTree = await deployer.deploy(SparseMerkleTree);
-
-  const VerifierWrapper = await deployer.loadArtifact("VerifierWrapper");
-  const verifierWrapper = await deployer.deploy(VerifierWrapper, [
-    await zksyncdiamond.getAddress(),
-    await sparseMerkleTree.getAddress(),
-  ]);
-
-  await mailbox.addOrUpdateWrapper(app_id, await verifierWrapper.getAddress());
-
   // Deploy NFTPayment contract
   const MyNFTArtifact = await deployer.loadArtifact("NFTPaymentMailbox");
 
   const MyNFTContract = await deployer.deploy(MyNFTArtifact, [
-    await mailbox.getAddress(),
+    mailBoxAddress,
     app_id,
     nftContractAddress,
   ]);

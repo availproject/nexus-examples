@@ -1,1 +1,90 @@
-{"abi":[],"bytecode":{"object":"0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220532380eea9d0415cad87d22498a45e538a06cea4bd43542bfddda8314ab6f8bb64736f6c63430008190033","sourceMap":"173:4273:44:-:0;;;;;;;;;;;;;;;-1:-1:-1;;;173:4273:44;;;;;;;;;;;;;;;;;","linkReferences":{}},"deployedBytecode":{"object":"0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220532380eea9d0415cad87d22498a45e538a06cea4bd43542bfddda8314ab6f8bb64736f6c63430008190033","sourceMap":"173:4273:44:-:0;;;;;;;;","linkReferences":{}},"methodIdentifiers":{},"rawMetadata":"{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"Lib_SecureMerkleTrie\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/nexus/contracts/src/lib/external/trie/Lib_SecureMerkleTrie.sol\":\"Lib_SecureMerkleTrie\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat/=node_modules/hardhat/\",\":nexus/=lib/nexus/contracts/src/\",\":openzeppelin-contracts-upgradeable/=lib/nexus.git/contracts/lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=node_modules/openzeppelin-contracts/\"]},\"sources\":{\"lib/nexus/contracts/src/lib/external/rlp/Lib_RLPReader.sol\":{\"keccak256\":\"0xcc400b2a5e9c26125f9e5c1aa4283b8f05675ec2a226dbe8bf213451d0e31945\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f35985388d18525f86f7e80f3e2add61d9413c1f2db384cee08d72cf37bb6ba6\",\"dweb:/ipfs/QmXiaqJjFKKPVey4jjPswLekLqmf6acjESEDBijPR515s3\"]},\"lib/nexus/contracts/src/lib/external/rlp/Lib_RLPWriter.sol\":{\"keccak256\":\"0x76b1ced560c84ce82a4bffbdfa0c48873bc491b6329a5744fb39f66bb36cae8e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c802d321f8a611992d35a53a47eae1fc79e9a817dc6229fe8f1de455a1dc6c97\",\"dweb:/ipfs/QmfFUkJLwLybDsN3tc8c37eYW8X4tjDP2mhPyneGxHCMo3\"]},\"lib/nexus/contracts/src/lib/external/trie/Lib_MerkleTrie.sol\":{\"keccak256\":\"0x3360a102ce6518a707aa89fb5da4d6f306866a11c18a26004bd7d4b1b338ccc3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://37a671881826c66b7aa8b29b4ca349c324f0f5f3f9b689ddd7b7df2895a05ce8\",\"dweb:/ipfs/QmQgj32Yqrxb6aYYsCvQHvnDZQS5a89HYde9HQwazAB8E2\"]},\"lib/nexus/contracts/src/lib/external/trie/Lib_SecureMerkleTrie.sol\":{\"keccak256\":\"0x1cde7d84bc9018f408e8a4b0c9763c8f25063b89caf1b7809d5a5425498d45d2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b1d52923df04f0b2700c05a2914733b7c03ff534494addaa07b92c9686aab878\",\"dweb:/ipfs/QmcdwmNeYoNULXX2pZrbLoL6qRYyrLqhn34Tob444BDqSs\"]},\"lib/nexus/contracts/src/lib/external/utils/Lib_BytesUtils.sol\":{\"keccak256\":\"0x5755d46698d1153b953937509163484a7fe9e4ae6acb461ad34367833d52043b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2fd7132e152f49c90b322b986e7f7bb64794c1e966258902fb3753bc3e1ce6ec\",\"dweb:/ipfs/QmSsAvQTt9joWPiH88Crnd35cLKn1zsz48gdmz41HE6jfP\"]}},\"version\":1}","metadata":{"compiler":{"version":"0.8.25+commit.b61c2a91"},"language":"Solidity","output":{"abi":[],"devdoc":{"kind":"dev","methods":{},"version":1},"userdoc":{"kind":"user","methods":{},"version":1}},"settings":{"remappings":["@ensdomains/=node_modules/@ensdomains/","@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/","@openzeppelin/=node_modules/@openzeppelin/","ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/","erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/","eth-gas-reporter/=node_modules/eth-gas-reporter/","forge-std/=lib/forge-std/src/","hardhat/=node_modules/hardhat/","nexus/=lib/nexus/contracts/src/","openzeppelin-contracts-upgradeable/=lib/nexus.git/contracts/lib/openzeppelin-contracts-upgradeable/","openzeppelin-contracts/=node_modules/openzeppelin-contracts/"],"optimizer":{"enabled":true,"runs":200},"metadata":{"bytecodeHash":"ipfs"},"compilationTarget":{"lib/nexus/contracts/src/lib/external/trie/Lib_SecureMerkleTrie.sol":"Lib_SecureMerkleTrie"},"evmVersion":"paris","libraries":{}},"sources":{"lib/nexus/contracts/src/lib/external/rlp/Lib_RLPReader.sol":{"keccak256":"0xcc400b2a5e9c26125f9e5c1aa4283b8f05675ec2a226dbe8bf213451d0e31945","urls":["bzz-raw://f35985388d18525f86f7e80f3e2add61d9413c1f2db384cee08d72cf37bb6ba6","dweb:/ipfs/QmXiaqJjFKKPVey4jjPswLekLqmf6acjESEDBijPR515s3"],"license":"MIT"},"lib/nexus/contracts/src/lib/external/rlp/Lib_RLPWriter.sol":{"keccak256":"0x76b1ced560c84ce82a4bffbdfa0c48873bc491b6329a5744fb39f66bb36cae8e","urls":["bzz-raw://c802d321f8a611992d35a53a47eae1fc79e9a817dc6229fe8f1de455a1dc6c97","dweb:/ipfs/QmfFUkJLwLybDsN3tc8c37eYW8X4tjDP2mhPyneGxHCMo3"],"license":"MIT"},"lib/nexus/contracts/src/lib/external/trie/Lib_MerkleTrie.sol":{"keccak256":"0x3360a102ce6518a707aa89fb5da4d6f306866a11c18a26004bd7d4b1b338ccc3","urls":["bzz-raw://37a671881826c66b7aa8b29b4ca349c324f0f5f3f9b689ddd7b7df2895a05ce8","dweb:/ipfs/QmQgj32Yqrxb6aYYsCvQHvnDZQS5a89HYde9HQwazAB8E2"],"license":"MIT"},"lib/nexus/contracts/src/lib/external/trie/Lib_SecureMerkleTrie.sol":{"keccak256":"0x1cde7d84bc9018f408e8a4b0c9763c8f25063b89caf1b7809d5a5425498d45d2","urls":["bzz-raw://b1d52923df04f0b2700c05a2914733b7c03ff534494addaa07b92c9686aab878","dweb:/ipfs/QmcdwmNeYoNULXX2pZrbLoL6qRYyrLqhn34Tob444BDqSs"],"license":"MIT"},"lib/nexus/contracts/src/lib/external/utils/Lib_BytesUtils.sol":{"keccak256":"0x5755d46698d1153b953937509163484a7fe9e4ae6acb461ad34367833d52043b","urls":["bzz-raw://2fd7132e152f49c90b322b986e7f7bb64794c1e966258902fb3753bc3e1ce6ec","dweb:/ipfs/QmSsAvQTt9joWPiH88Crnd35cLKn1zsz48gdmz41HE6jfP"],"license":"MIT"}},"version":1},"id":44}
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220532380eea9d0415cad87d22498a45e538a06cea4bd43542bfddda8314ab6f8bb64736f6c63430008190033",
+    "sourceMap": "173:4273:44:-:0;;;;;;;;;;;;;;;-1:-1:-1;;;173:4273:44;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220532380eea9d0415cad87d22498a45e538a06cea4bd43542bfddda8314ab6f8bb64736f6c63430008190033",
+    "sourceMap": "173:4273:44:-:0;;;;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"Lib_SecureMerkleTrie\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/nexus/contracts/src/lib/external/trie/Lib_SecureMerkleTrie.sol\":\"Lib_SecureMerkleTrie\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat/=node_modules/hardhat/\",\":nexus/=lib/nexus/contracts/src/\",\":@openzeppelin/contracts-upgradeable/=lib/nexus.git/contracts/lib/@openzeppelin/contracts-upgradeable/\",\":openzeppelin-contracts/=node_modules/openzeppelin-contracts/\"]},\"sources\":{\"lib/nexus/contracts/src/lib/external/rlp/Lib_RLPReader.sol\":{\"keccak256\":\"0xcc400b2a5e9c26125f9e5c1aa4283b8f05675ec2a226dbe8bf213451d0e31945\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f35985388d18525f86f7e80f3e2add61d9413c1f2db384cee08d72cf37bb6ba6\",\"dweb:/ipfs/QmXiaqJjFKKPVey4jjPswLekLqmf6acjESEDBijPR515s3\"]},\"lib/nexus/contracts/src/lib/external/rlp/Lib_RLPWriter.sol\":{\"keccak256\":\"0x76b1ced560c84ce82a4bffbdfa0c48873bc491b6329a5744fb39f66bb36cae8e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c802d321f8a611992d35a53a47eae1fc79e9a817dc6229fe8f1de455a1dc6c97\",\"dweb:/ipfs/QmfFUkJLwLybDsN3tc8c37eYW8X4tjDP2mhPyneGxHCMo3\"]},\"lib/nexus/contracts/src/lib/external/trie/Lib_MerkleTrie.sol\":{\"keccak256\":\"0x3360a102ce6518a707aa89fb5da4d6f306866a11c18a26004bd7d4b1b338ccc3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://37a671881826c66b7aa8b29b4ca349c324f0f5f3f9b689ddd7b7df2895a05ce8\",\"dweb:/ipfs/QmQgj32Yqrxb6aYYsCvQHvnDZQS5a89HYde9HQwazAB8E2\"]},\"lib/nexus/contracts/src/lib/external/trie/Lib_SecureMerkleTrie.sol\":{\"keccak256\":\"0x1cde7d84bc9018f408e8a4b0c9763c8f25063b89caf1b7809d5a5425498d45d2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b1d52923df04f0b2700c05a2914733b7c03ff534494addaa07b92c9686aab878\",\"dweb:/ipfs/QmcdwmNeYoNULXX2pZrbLoL6qRYyrLqhn34Tob444BDqSs\"]},\"lib/nexus/contracts/src/lib/external/utils/Lib_BytesUtils.sol\":{\"keccak256\":\"0x5755d46698d1153b953937509163484a7fe9e4ae6acb461ad34367833d52043b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2fd7132e152f49c90b322b986e7f7bb64794c1e966258902fb3753bc3e1ce6ec\",\"dweb:/ipfs/QmSsAvQTt9joWPiH88Crnd35cLKn1zsz48gdmz41HE6jfP\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": { "version": "0.8.25+commit.b61c2a91" },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": { "kind": "dev", "methods": {}, "version": 1 },
+      "userdoc": { "kind": "user", "methods": {}, "version": 1 }
+    },
+    "settings": {
+      "remappings": [
+        "@ensdomains/=node_modules/@ensdomains/",
+        "@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/",
+        "@openzeppelin/=node_modules/@openzeppelin/",
+        "ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        "forge-std/=lib/forge-std/src/",
+        "hardhat/=node_modules/hardhat/",
+        "nexus/=lib/nexus/contracts/src/",
+        "@openzeppelin/contracts-upgradeable/=lib/nexus.git/contracts/lib/@openzeppelin/contracts-upgradeable/",
+        "openzeppelin-contracts/=node_modules/openzeppelin-contracts/"
+      ],
+      "optimizer": { "enabled": true, "runs": 200 },
+      "metadata": { "bytecodeHash": "ipfs" },
+      "compilationTarget": {
+        "lib/nexus/contracts/src/lib/external/trie/Lib_SecureMerkleTrie.sol": "Lib_SecureMerkleTrie"
+      },
+      "evmVersion": "paris",
+      "libraries": {}
+    },
+    "sources": {
+      "lib/nexus/contracts/src/lib/external/rlp/Lib_RLPReader.sol": {
+        "keccak256": "0xcc400b2a5e9c26125f9e5c1aa4283b8f05675ec2a226dbe8bf213451d0e31945",
+        "urls": [
+          "bzz-raw://f35985388d18525f86f7e80f3e2add61d9413c1f2db384cee08d72cf37bb6ba6",
+          "dweb:/ipfs/QmXiaqJjFKKPVey4jjPswLekLqmf6acjESEDBijPR515s3"
+        ],
+        "license": "MIT"
+      },
+      "lib/nexus/contracts/src/lib/external/rlp/Lib_RLPWriter.sol": {
+        "keccak256": "0x76b1ced560c84ce82a4bffbdfa0c48873bc491b6329a5744fb39f66bb36cae8e",
+        "urls": [
+          "bzz-raw://c802d321f8a611992d35a53a47eae1fc79e9a817dc6229fe8f1de455a1dc6c97",
+          "dweb:/ipfs/QmfFUkJLwLybDsN3tc8c37eYW8X4tjDP2mhPyneGxHCMo3"
+        ],
+        "license": "MIT"
+      },
+      "lib/nexus/contracts/src/lib/external/trie/Lib_MerkleTrie.sol": {
+        "keccak256": "0x3360a102ce6518a707aa89fb5da4d6f306866a11c18a26004bd7d4b1b338ccc3",
+        "urls": [
+          "bzz-raw://37a671881826c66b7aa8b29b4ca349c324f0f5f3f9b689ddd7b7df2895a05ce8",
+          "dweb:/ipfs/QmQgj32Yqrxb6aYYsCvQHvnDZQS5a89HYde9HQwazAB8E2"
+        ],
+        "license": "MIT"
+      },
+      "lib/nexus/contracts/src/lib/external/trie/Lib_SecureMerkleTrie.sol": {
+        "keccak256": "0x1cde7d84bc9018f408e8a4b0c9763c8f25063b89caf1b7809d5a5425498d45d2",
+        "urls": [
+          "bzz-raw://b1d52923df04f0b2700c05a2914733b7c03ff534494addaa07b92c9686aab878",
+          "dweb:/ipfs/QmcdwmNeYoNULXX2pZrbLoL6qRYyrLqhn34Tob444BDqSs"
+        ],
+        "license": "MIT"
+      },
+      "lib/nexus/contracts/src/lib/external/utils/Lib_BytesUtils.sol": {
+        "keccak256": "0x5755d46698d1153b953937509163484a7fe9e4ae6acb461ad34367833d52043b",
+        "urls": [
+          "bzz-raw://2fd7132e152f49c90b322b986e7f7bb64794c1e966258902fb3753bc3e1ce6ec",
+          "dweb:/ipfs/QmSsAvQTt9joWPiH88Crnd35cLKn1zsz48gdmz41HE6jfP"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "id": 44
+}
