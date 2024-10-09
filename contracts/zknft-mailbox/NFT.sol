@@ -140,7 +140,7 @@ contract MyNFTMailbox is ERC721 {
 
         // implies the verification failed
         if (!success) {
-            transferFrom(msg.sender, address(this), lock.nftId);
+            transferFrom(address(this), lock.from, lock.nftId);
             delete lockNFTMap[lockHash];
         }
     }
