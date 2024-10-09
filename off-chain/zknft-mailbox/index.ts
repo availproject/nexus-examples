@@ -76,7 +76,7 @@ async function main() {
   // const mailbox = new nexus.MailBoxClient({
   //   `${app_id}` : nexus.
   // })
-  const zksyncVerifier = new nexus.ZKSyncVerifier();
+  //  const zksyncVerifier = new nexus.ZKSyncVerifier();
   let providerPayment = L2Provider.getDefaultProvider(types.Network.Localhost);
   let providerNFT = new L2Provider(zksync_nft_url);
   if (!providerPayment) {
@@ -191,6 +191,7 @@ async function main() {
     nftContract.withdrawNFT(lockHash, proof);
   }
 
+  // redundant, should be exposed through sdk
   async function fetchUpdatesFromNexus(): Promise<NexusInfo | undefined> {
     await sleep();
 
