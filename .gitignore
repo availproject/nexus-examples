@@ -5,6 +5,11 @@ node_modules
 /cache
 /artifacts
 
+# ZKSync Hardhat plugin  files
+/cache_forge
+/carch-zk
+/artifacts-zk
+
 # TypeChain files
 /typechain
 /typechain-types

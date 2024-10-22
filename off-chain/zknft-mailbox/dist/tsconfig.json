@@ -1,0 +1,43 @@
+{
+    "compilerOptions": {
+        /* Basic Options */
+        "target": "ESNext", // Ensures compatibility with older JavaScript environments
+        "module": "NodeNext", // Use ES6 modules, which is widely supported
+        "lib": [
+            "DOM",
+            "ESNext"
+        ], // Use DOM for browser support and ESNext for modern features
+        "declaration": true, // Emit `.d.ts` declaration files for TypeScript users
+        "declarationMap": true, // Emit source maps for declarations
+        "sourceMap": true, // Emit source maps for debugging
+        "outDir": "./dist", // Redirect output structure to `dist` directory
+        "rootDir": "./", // Specify the root directory of input files
+        "composite": true, // Enable for incremental builds in a monorepo setup
+        "strict": true, // Enable strict type checking
+        "esModuleInterop": true, // Enable interoperability between ES modules and CommonJS
+        "skipLibCheck": true, // Skip type checking of declaration files for faster builds
+        "forceConsistentCasingInFileNames": true, // Enforce consistent file naming
+        "resolveJsonModule": true, // Allow importing `.json` files
+        /* Module Resolution Options */
+        "moduleResolution": "NodeNext", // Use Node.js module resolution strategy
+        "allowSyntheticDefaultImports": true, // Allow default imports from modules without default exports
+        /* Paths and Aliasing */
+        "paths": {
+            "*": [
+                "./node_modules/*"
+            ]
+        }, // Support module aliasing for better module resolution
+        /* Interop Options */
+        "downlevelIteration": true, // Support `for...of` in ES5/ES3 by transforming iterables
+        /* Optimization Options */
+        "removeComments": false
+    },
+    "include": [
+        "./index.ts",
+        "./*.json"
+    ], // Include all files in the src directory
+    "exclude": [
+        "node_modules",
+        "dist"
+    ] // Exclude output directories and dependencies
+}

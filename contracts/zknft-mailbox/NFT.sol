@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {INexusMailbox, MailboxMessage} from "nexus/interfaces/INexusMailbox.sol";
 import "forge-std/console.sol";
-import {LockNFT, PendingPayment} from "./types.sol";
+import {LockedNFT, PaymentReceipt} from "./types.sol";
 
 contract MyNFTMailbox is ERC721 {
     INexusMailbox public mailbox;
@@ -13,17 +13,14 @@ contract MyNFTMailbox is ERC721 {
     address paymentContractAddress;
     uint256 constant TIMEOUT_BLOCKS = 10;
 
-    mapping(bytes32 => LockNFT) lockNFTMap;
+    mapping(uint256 => LockedNFT) lockedNFTs;
 
     event Confirmation(uint256 tokenId, address to);
-    event LockHash(bytes32 lockHash);
 
     error InvalidSender();
     error TransferAlreadyCompleted();
     error CannotWithdrawBeforeTimeout();
     error InvalidChain();
-
-    uint256 nonce = 0;
 
     constructor(
         bytes32 _selfNexusId,
@@ -45,20 +42,31 @@ contract MyNFTMailbox is ERC721 {
     function lockNFT(
         uint256 tokenId,
         uint256 amount,
-        address tokenAddress
+        uint256 nonce,
+        address tokenAddress,
+        address paymentReceiver,
+        address paymentFrom,
+        address nftReceiver
     ) public {
-        LockNFT memory lockNft = LockNFT({
+        if (lockedNFTs[tokenId].nftId != 0) {
+            revert("NFT is already locked");
+        }
+
+        LockedNFT memory lockedNFT = LockedNFT({
             from: msg.sender,
             nftId: tokenId,
             amount: amount,
             tokenAddress: tokenAddress,
             blockNumber: block.number,
-            nonce: ++nonce
+            nonce: nonce,
+            paymentReceiver: paymentReceiver,
+            paymentFrom: paymentFrom,
+            nftReceiver: nftReceiver
         });
-        bytes memory data = abi.encode(lockNft);
-        lockNFTMap[keccak256(data)] = lockNft;
+
+        lockedNFTs[tokenId] = lockedNFT;
+
         transferFrom(msg.sender, address(this), tokenId);
-        emit LockHash(keccak256(data));
     }
 
     function transferNFT(
@@ -70,33 +78,61 @@ contract MyNFTMailbox is ERC721 {
     }
 
     function onNexusMessage(
-        bytes32 nexusAppIdFrom,
+        bytes32 nexusAppIDFrom,
         address sender,
-        bytes memory data
+        bytes memory data,
+        uint256 nonce
     ) public {
-        if (nexusAppIdFrom != paymentNexusId) {
+        // Check if the nexusAppIDFrom matches the expected paymentNexusId
+        if (nexusAppIDFrom != paymentNexusId) {
             revert InvalidChain();
         }
+
+        // Check if the sender matches the expected paymentContractAddress
         if (sender != paymentContractAddress) {
             revert InvalidSender();
         }
-        PendingPayment memory pendingPaymentInfo = abi.decode(
+
+        PaymentReceipt memory paymentReceipt = abi.decode(
             data,
-            (PendingPayment)
+            (PaymentReceipt)
         );
 
-        // mint to the person who transfered the payment
-        _transfer(
-            address(this),
-            pendingPaymentInfo.to,
-            pendingPaymentInfo.nftId
-        );
+        // Retrieve the corresponding LockedNFT using the nftId from the PaymentReceipt
+        LockedNFT memory lockedNft = lockedNFTs[paymentReceipt.nftId];
 
-        emit Confirmation(pendingPaymentInfo.nftId, pendingPaymentInfo.to);
+        // Check if the nonce matches
+        if (nonce != lockedNft.nonce) {
+            revert("Nonce mismatch");
+        }
+
+        // Reconstruct the PaymentReceipt from the LockedNFT details.
+        PaymentReceipt memory expectedPaymentReceipt = PaymentReceipt({
+            from: lockedNft.paymentFrom,
+            to: lockedNft.paymentReceiver,
+            nftId: lockedNft.nftId,
+            amount: lockedNft.amount,
+            tokenAddress: lockedNft.tokenAddress
+        });
+
+        //TODO: Check if hashing is more expensive than equality check of each field.
+        if (keccak256(abi.encode(expectedPaymentReceipt)) != keccak256(data)) {
+            revert("Payment receipt hash mismatch");
+        }
+
+        // Transfer the NFT to the lockedNFT paymentReceiver
+        _transfer(address(this), lockedNft.nftReceiver, lockedNft.nftId);
+
+        // Emit confirmation event
+        emit Confirmation(lockedNft.nftId, lockedNft.paymentReceiver);
+
+        // Remove the entry from lockedNFTs to clear the record
+        delete lockedNFTs[paymentReceipt.nftId];
     }
 
-    function withdrawNFT(bytes32 lockHash, bytes calldata proof) public {
-        LockNFT memory lock = lockNFTMap[lockHash];
+    function withdrawNFT(uint256 tokenID, bytes calldata proof) public {
+        LockedNFT memory lock = lockedNFTs[tokenID];
+        //TODO: Discuss whether this should be payment chain block number or nft chain.
         if (lock.blockNumber + TIMEOUT_BLOCKS < block.number) {
             revert CannotWithdrawBeforeTimeout();
         }
@@ -110,9 +146,10 @@ contract MyNFTMailbox is ERC721 {
         nexusIdTo[0] = selfNexusId;
         address[] memory to = new address[](1);
         to[0] = address(this);
-        PendingPayment memory payment = PendingPayment({
+        PaymentReceipt memory payment = PaymentReceipt({
+            from: lock.paymentFrom,
             nftId: lock.nftId,
-            to: lock.from,
+            to: lock.paymentReceiver,
             amount: lock.amount,
             tokenAddress: lock.tokenAddress
         });
@@ -120,8 +157,8 @@ contract MyNFTMailbox is ERC721 {
         bytes memory data = abi.encode(payment);
 
         MailboxMessage memory receipt = MailboxMessage({
-            nexusAppIdFrom: paymentNexusId,
-            nexusAppIdTo: nexusIdTo,
+            nexusAppIDFrom: paymentNexusId,
+            nexusAppIDTo: nexusIdTo,
             data: data,
             from: paymentContractAddress,
             to: to,
@@ -141,7 +178,7 @@ contract MyNFTMailbox is ERC721 {
         // implies the verification failed
         if (!success) {
             transferFrom(address(this), lock.from, lock.nftId);
-            delete lockNFTMap[lockHash];
+            delete lockedNFTs[tokenID];
         }
     }
 

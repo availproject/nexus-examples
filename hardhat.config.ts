@@ -11,14 +11,6 @@ dotenv.config();
 const config: HardhatUserConfig = {
   zksolc: {
     version: "latest",
-    settings: {
-      libraries: {
-        "contracts/lib/JellyfishMerkleTreeVerifier.sol": {
-          JellyfishMerkleTreeVerifier:
-            "0x8A6abBC5aa4A1767d31a0991e4ECBaB284e938E8",
-        },
-      },
-    },
   },
   solidity: {
     version: "0.8.21",

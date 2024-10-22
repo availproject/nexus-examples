@@ -4,16 +4,16 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { Deployer } from "@matterlabs/hardhat-zksync";
 
 let app_id =
-  "0x688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
+  "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 let app_id_2 =
-  "0x688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
-let mailBoxAddress = "";
+  "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+let mailBoxAddress = "0x210E7C834741eeb26922867bEe17470AAB0D85C4";
 async function main() {
   console.log(`Running deploy script`);
 
   // Initialize the wallet.
   const wallet = new Wallet(
-    "0x2d64990aa363e3d38ae3417950fd40801d75e3d3bd57b86d17fcc261a6c951c6"
+    "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6"
   );
 
   // Create deployer object.
@@ -27,6 +27,7 @@ async function main() {
     app_id_2,
     mailBoxAddress,
   ]);
+
   console.log(`NFT contract deployed to ${await MyNFTContract.getAddress()}`);
 }
 

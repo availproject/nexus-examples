@@ -1,69 +1,107 @@
 [
   {
-    "type": "constructor",
     "inputs": [
       {
+        "internalType": "contract INexusMailbox",
         "name": "_mailbox",
-        "type": "address",
-        "internalType": "contract INexusMailbox"
+        "type": "address"
       },
-      { "name": "_nftNexusId", "type": "bytes32", "internalType": "bytes32" },
       {
+        "internalType": "bytes32",
+        "name": "_nftNexusId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
         "name": "_nftContractAddress",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       }
     ],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
-    "type": "function",
-    "name": "mailbox",
     "inputs": [],
+    "name": "AlreadyPaidFor",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "PendingPayout",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "getCurrentNonce",
     "outputs": [
       {
+        "internalType": "uint256",
         "name": "",
-        "type": "address",
-        "internalType": "contract INexusMailbox"
+        "type": "uint256"
       }
     ],
-    "stateMutability": "view"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "type": "function",
-    "name": "pay",
+    "inputs": [],
+    "name": "mailbox",
+    "outputs": [
+      {
+        "internalType": "contract INexusMailbox",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
+        "internalType": "address",
         "name": "tokenAddress",
-        "type": "address",
-        "internalType": "address"
-      },
-      { "name": "amount", "type": "uint256", "internalType": "uint256" },
-      { "name": "nftId", "type": "uint256", "internalType": "uint256" },
-      { "name": "nonce", "type": "uint256", "internalType": "uint256" },
-      { "name": "to", "type": "address", "internalType": "address" }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "event",
-    "name": "PendingPayout",
-    "inputs": [
-      {
-        "name": "index",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
+        "type": "address"
       },
       {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "nftId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
         "name": "to",
-        "type": "address",
-        "indexed": false,
-        "internalType": "address"
+        "type": "address"
       }
     ],
-    "anonymous": false
-  },
-  { "type": "error", "name": "AlreadyPaidFor", "inputs": [] }
+    "name": "pay",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
 ]

@@ -2,7 +2,9 @@
   "name": "zknft",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc --outDir ./dist",
     "start": "node dist/index.js"
@@ -20,7 +22,7 @@
     "blake2": "^5.0.0",
     "blakejs": "^1.2.1",
     "ethers": "^6.13.2",
-    "nexus-js": "file:../../../nexus/nexus_js",
+    "nexus-js": "file:../../lib/nexus/nexus_js",
     "zksync-ethers": "^6.1.0"
   }
 }
