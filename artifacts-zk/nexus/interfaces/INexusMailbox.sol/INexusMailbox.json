@@ -9,13 +9,13 @@
         {
           "indexed": true,
           "internalType": "bytes32",
-          "name": "nexusAppIdFrom",
+          "name": "nexusAppIDFrom",
           "type": "bytes32"
         },
         {
           "indexed": false,
           "internalType": "bytes32[]",
-          "name": "nexusAppIdTo",
+          "name": "nexusAppIDTo",
           "type": "bytes32[]"
         },
         {
@@ -57,12 +57,12 @@
           "components": [
             {
               "internalType": "bytes32",
-              "name": "nexusAppIdFrom",
+              "name": "nexusAppIDFrom",
               "type": "bytes32"
             },
             {
               "internalType": "bytes32[]",
-              "name": "nexusAppIdTo",
+              "name": "nexusAppIDTo",
               "type": "bytes32[]"
             },
             {
@@ -105,7 +105,7 @@
       "inputs": [
         {
           "internalType": "bytes32[]",
-          "name": "nexusAppIdFrom",
+          "name": "nexusAppIDFrom",
           "type": "bytes32[]"
         },
         {

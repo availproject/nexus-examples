@@ -304,8 +304,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/lib/nexus/contracts/src/interfaces/INexusProofManager.sol": {
-      "lastModificationDate": 1728645300217,
-      "contentHash": "ee6343e977f0e305e6874857f06de156",
+      "lastModificationDate": 1729570208367,
+      "contentHash": "47760af4ee6183eb21bda9fed59f34db",
       "sourceName": "nexus/interfaces/INexusProofManager.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -361,8 +361,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/lib/nexus/contracts/src/verification/ethereum/Verifier.sol": {
-      "lastModificationDate": 1728645300218,
-      "contentHash": "955613d40d2edb8c521cc6fe507c4f87",
+      "lastModificationDate": 1729570208409,
+      "contentHash": "916b69ece1fde80392988155eac26427",
       "sourceName": "nexus/verification/ethereum/Verifier.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -2482,8 +2482,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/contracts/zknft-mailbox/NFT.sol": {
-      "lastModificationDate": 1729148852617,
-      "contentHash": "0a80755f8f60d73541118eb62ace0b72",
+      "lastModificationDate": 1729574819182,
+      "contentHash": "7074f234b402bd93f6bd123e56ebe431",
       "sourceName": "contracts/zknft-mailbox/NFT.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -2544,8 +2544,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/contracts/zknft-mailbox/types.sol": {
-      "lastModificationDate": 1728645297477,
-      "contentHash": "4e79c7b9380b9a9562793c7f14c90ccb",
+      "lastModificationDate": 1729573963908,
+      "contentHash": "990555e5bf87274f46fddc8511ff6685",
       "sourceName": "contracts/zknft-mailbox/types.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -2656,8 +2656,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/lib/nexus/contracts/src/interfaces/INexusMailbox.sol": {
-      "lastModificationDate": 1729077542523,
-      "contentHash": "88b63338dc04d65f0c23527bdec53653",
+      "lastModificationDate": 1729570208388,
+      "contentHash": "82e27af6f42acf1a3d559abb868573ea",
       "sourceName": "nexus/interfaces/INexusMailbox.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -2713,8 +2713,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/lib/nexus/contracts/src/NexusMailbox.sol": {
-      "lastModificationDate": 1729077542523,
-      "contentHash": "b8f1a37331b272db3f480b06c21315b3",
+      "lastModificationDate": 1729574199262,
+      "contentHash": "ee3151bdb1708ef06ecb15cc538f20df",
       "sourceName": "nexus/NexusMailbox.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -2776,8 +2776,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/lib/nexus/contracts/src/interfaces/INexusReceiver.sol": {
-      "lastModificationDate": 1729064966111,
-      "contentHash": "745e0d5b5c3ac152381e77c8698264a0",
+      "lastModificationDate": 1729572339693,
+      "contentHash": "c728f27f4841f526bd844934b402b7ab",
       "sourceName": "nexus/interfaces/INexusReceiver.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -3124,8 +3124,8 @@
       "artifacts": []
     },
     "/Users/vibhurajeev/avail/nexus-examples/lib/nexus/contracts/src/NexusProofManager.sol": {
-      "lastModificationDate": 1729064902604,
-      "contentHash": "f3df60b6bfa9b3cbd193cbe2e13a7e4b",
+      "lastModificationDate": 1729570208459,
+      "contentHash": "11ad27cdc5d1b92a51778968862b8ec9",
       "sourceName": "nexus/NexusProofManager.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -3240,8 +3240,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/contracts/zknft-mailbox/NftPayment.sol": {
-      "lastModificationDate": 1729160441175,
-      "contentHash": "ec42a48a167024b9a24a96e0ded9aad8",
+      "lastModificationDate": 1729572205317,
+      "contentHash": "d9006e6462982fa1d6be8278556b09ff",
       "sourceName": "contracts/zknft-mailbox/NftPayment.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -3301,8 +3301,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/contracts/zknft/NFT.sol": {
-      "lastModificationDate": 1728645297477,
-      "contentHash": "7c285096e4a6f96007099b0a0da5c80a",
+      "lastModificationDate": 1729661766543,
+      "contentHash": "a72fc682b0505e2747f79df6cb389762",
       "sourceName": "contracts/zknft/NFT.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -3363,8 +3363,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/lib/nexus/contracts/src/verification/zksync/StorageProof.sol": {
-      "lastModificationDate": 1729077542526,
-      "contentHash": "89fa1057de48c6a91471454038a3dd60",
+      "lastModificationDate": 1729604560797,
+      "contentHash": "60b2fb8e3287dcb162107cb1562b30d6",
       "sourceName": "nexus/verification/zksync/StorageProof.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -3539,8 +3539,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/contracts/zknft/NftPayment.sol": {
-      "lastModificationDate": 1728645297478,
-      "contentHash": "49d7c78feacc9757db3a15d5f389ea45",
+      "lastModificationDate": 1729572026894,
+      "contentHash": "9c8004b730eb2a7224653a1ca957580a",
       "sourceName": "contracts/zknft/NftPayment.sol",
       "solcConfig": {
         "version": "0.8.21",

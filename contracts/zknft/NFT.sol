@@ -6,6 +6,18 @@ import {INexusProofManager} from "nexus/interfaces/INexusProofManager.sol";
 import {StorageProofVerifier, StorageProof} from "nexus/verification/zksync/StorageProof.sol";
 import "forge-std/console.sol";
 
+/// @notice Storage proof that proves a storage key-value pair is included in the batch
+struct PaymentProof {
+    uint64 batchNumber;
+    // Account and key-value pair of its storage
+    address account;
+    bytes32 value;
+    // Proof path and leaf index
+    bytes32[] path;
+    uint256 key;
+    uint64 index;
+}
+
 contract MyNFT is ERC721 {
     mapping(uint256 => bytes32) confirmationReceipts;
     mapping(uint256 => bool) usedMessageid;
@@ -47,7 +59,7 @@ contract MyNFT is ERC721 {
     function mintNFT(
         address recipient,
         Message calldata message,
-        StorageProof calldata storageSlotTrieProof
+        PaymentProof calldata storageSlotTrieProof
     ) public returns (uint256) {
         require(
             !usedMessageid[message.messageId],
@@ -77,9 +89,18 @@ contract MyNFT is ERC721 {
     }
 
     function verifyPayment(
-        StorageProof calldata storageSlotTrieProof
+        PaymentProof calldata storageSlotTrieProof
     ) public view {
-        bool valid = storageProof.verify(storageSlotTrieProof);
+        bool valid = storageProof.verify(
+            StorageProof(
+                storageSlotTrieProof.batchNumber,
+                storageSlotTrieProof.account,
+                storageSlotTrieProof.value,
+                storageSlotTrieProof.path,
+                storageSlotTrieProof.index
+            ),
+            storageSlotTrieProof.key
+        );
         require(valid, "invalid storage proof");
     }
 }

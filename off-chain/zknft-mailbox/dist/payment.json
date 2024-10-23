@@ -1,107 +1,329 @@
-[
-    {
-        "inputs": [
-            {
-                "internalType": "contract INexusMailbox",
-                "name": "_mailbox",
-                "type": "address"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "_nftNexusId",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "address",
-                "name": "_nftContractAddress",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
+{
+    "abi": [
+        {
+            "type": "constructor",
+            "inputs": [
+                {
+                    "name": "_mailbox",
+                    "type": "address",
+                    "internalType": "contract INexusMailbox"
+                },
+                {
+                    "name": "_nftNexusId",
+                    "type": "bytes32",
+                    "internalType": "bytes32"
+                },
+                {
+                    "name": "_nftContractAddress",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "getCurrentNonce",
+            "inputs": [
+                {
+                    "name": "account",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "mailbox",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address",
+                    "internalType": "contract INexusMailbox"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "pay",
+            "inputs": [
+                {
+                    "name": "tokenAddress",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "nftId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "to",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "event",
+            "name": "PendingPayout",
+            "inputs": [
+                {
+                    "name": "index",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "to",
+                    "type": "address",
+                    "indexed": false,
+                    "internalType": "address"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "error",
+            "name": "AlreadyPaidFor",
+            "inputs": []
+        }
+    ],
+    "bytecode": {
+        "object": "0x60c060405234801561000f575f80fd5b506040516105c73803806105c783398101604081905261002e9161006f565b5f80546001600160a01b0319166001600160a01b039485161790556080919091521660a0526100af565b6001600160a01b038116811461006c575f80fd5b50565b5f805f60608486031215610081575f80fd5b835161008c81610058565b6020850151604086015191945092506100a481610058565b809150509250925092565b60805160a0516104f76100d05f395f61023101525f6101d001526104f75ff3fe608060405234801561000f575f80fd5b506004361061003f575f3560e01c806309286f11146100435780637919225114610058578063d5438eae14610093575b5f80fd5b61005661005136600461033c565b6100bd565b005b61008061006636600461037f565b6001600160a01b03165f9081526001602052604090205490565b6040519081526020015b60405180910390f35b5f546100a5906001600160a01b031681565b6040516001600160a01b03909116815260200161008a565b6040516323b872dd60e01b81523360048201526001600160a01b038281166024830152604482018590528516906323b872dd906064016020604051808303815f875af115801561010f573d5f803e3d5ffd5b505050506040513d601f19601f82011682018060405250810190610133919061039f565b506040805160a08082018352338083526001600160a01b03858116602080860191825285870189815260608088018c81528d86166080808b019182528b5195860198909852945186169984019990995290519082015295519286019290925290511690830152905f9060c00160408051808303601f19018152600180845283830190925292505f91908160200160208202803683370190505090507f0000000000000000000000000000000000000000000000000000000000000000815f81518110610201576102016103be565b60209081029190910101526040805160018082528183019092525f918160200160208202803683370190505090507f0000000000000000000000000000000000000000000000000000000000000000815f81518110610262576102626103be565b6001600160a01b039283166020918202929092018101919091525f805433825260019283905260409091205492169163cb8d653c91859185916102a591906103d2565b876040518563ffffffff1660e01b81526004016102c59493929190610425565b5f604051808303815f87803b1580156102dc575f80fd5b505af11580156102ee573d5f803e3d5ffd5b5050335f9081526001602081905260408220805491945092506103129084906103d2565b90915550505050505050505050565b80356001600160a01b0381168114610337575f80fd5b919050565b5f805f806080858703121561034f575f80fd5b61035885610321565b9350602085013592506040850135915061037460608601610321565b905092959194509250565b5f6020828403121561038f575f80fd5b61039882610321565b9392505050565b5f602082840312156103af575f80fd5b81518015158114610398575f80fd5b634e487b7160e01b5f52603260045260245ffd5b808201808211156103f157634e487b7160e01b5f52601160045260245ffd5b92915050565b5f81518084528060208401602086015e5f602082860101526020601f19601f83011685010191505092915050565b608080825285519082018190525f9060209060a0840190828901845b8281101561045d57815184529284019290840190600101610441565b505050838103828501528651808252878301918301905f5b8181101561049a5783516001600160a01b031683529284019291840191600101610475565b505086604086015284810360608601526104b481876103f7565b999850505050505050505056fea264697066735822122038f35c163177edf30c1cad507243f2e78e8f25494de16ce12b97f3a7782351c364736f6c63430008190033",
+        "sourceMap": "263:1607:10:-:0;;;535:235;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;661:7;:18;;-1:-1:-1;;;;;;661:18:10;-1:-1:-1;;;;;661:18:10;;;;;;689:24;;;;;723:40;;;263:1607;;14:146:89;-1:-1:-1;;;;;104:31:89;;94:42;;84:70;;150:1;147;140:12;84:70;14:146;:::o;165:499::-;276:6;284;292;345:2;333:9;324:7;320:23;316:32;313:52;;;361:1;358;351:12;313:52;393:9;387:16;412:46;452:5;412:46;:::i;:::-;522:2;507:18;;501:25;571:2;556:18;;550:25;477:5;;-1:-1:-1;501:25:89;-1:-1:-1;584:48:89;550:25;584:48;:::i;:::-;651:7;641:17;;;165:499;;;;;:::o;:::-;263:1607:10;;;;;;;;;;;;;;;;;;",
+        "linkReferences": {}
     },
-    {
-        "inputs": [],
-        "name": "AlreadyPaidFor",
-        "type": "error"
+    "deployedBytecode": {
+        "object": "0x608060405234801561000f575f80fd5b506004361061003f575f3560e01c806309286f11146100435780637919225114610058578063d5438eae14610093575b5f80fd5b61005661005136600461033c565b6100bd565b005b61008061006636600461037f565b6001600160a01b03165f9081526001602052604090205490565b6040519081526020015b60405180910390f35b5f546100a5906001600160a01b031681565b6040516001600160a01b03909116815260200161008a565b6040516323b872dd60e01b81523360048201526001600160a01b038281166024830152604482018590528516906323b872dd906064016020604051808303815f875af115801561010f573d5f803e3d5ffd5b505050506040513d601f19601f82011682018060405250810190610133919061039f565b506040805160a08082018352338083526001600160a01b03858116602080860191825285870189815260608088018c81528d86166080808b019182528b5195860198909852945186169984019990995290519082015295519286019290925290511690830152905f9060c00160408051808303601f19018152600180845283830190925292505f91908160200160208202803683370190505090507f0000000000000000000000000000000000000000000000000000000000000000815f81518110610201576102016103be565b60209081029190910101526040805160018082528183019092525f918160200160208202803683370190505090507f0000000000000000000000000000000000000000000000000000000000000000815f81518110610262576102626103be565b6001600160a01b039283166020918202929092018101919091525f805433825260019283905260409091205492169163cb8d653c91859185916102a591906103d2565b876040518563ffffffff1660e01b81526004016102c59493929190610425565b5f604051808303815f87803b1580156102dc575f80fd5b505af11580156102ee573d5f803e3d5ffd5b5050335f9081526001602081905260408220805491945092506103129084906103d2565b90915550505050505050505050565b80356001600160a01b0381168114610337575f80fd5b919050565b5f805f806080858703121561034f575f80fd5b61035885610321565b9350602085013592506040850135915061037460608601610321565b905092959194509250565b5f6020828403121561038f575f80fd5b61039882610321565b9392505050565b5f602082840312156103af575f80fd5b81518015158114610398575f80fd5b634e487b7160e01b5f52603260045260245ffd5b808201808211156103f157634e487b7160e01b5f52601160045260245ffd5b92915050565b5f81518084528060208401602086015e5f602082860101526020601f19601f83011685010191505092915050565b608080825285519082018190525f9060209060a0840190828901845b8281101561045d57815184529284019290840190600101610441565b505050838103828501528651808252878301918301905f5b8181101561049a5783516001600160a01b031683529284019291840191600101610475565b505086604086015284810360608601526104b481876103f7565b999850505050505050505056fea264697066735822122038f35c163177edf30c1cad507243f2e78e8f25494de16ce12b97f3a7782351c364736f6c63430008190033",
+        "sourceMap": "263:1607:10:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;945:800;;;;;;:::i;:::-;;:::i;:::-;;1751:117;;;;;;:::i;:::-;-1:-1:-1;;;;;1840:21:10;1814:7;1840:21;;;:12;:21;;;;;;;1751:117;;;;931:25:89;;;919:2;904:18;1751:117:10;;;;;;;;296:28;;;;;-1:-1:-1;;;;;296:28:10;;;;;;-1:-1:-1;;;;;1154:32:89;;;1136:51;;1124:2;1109:18;296:28:10;967:226:89;945:800:10;1078:57;;-1:-1:-1;;;1078:57:10;;1112:10;1078:57;;;1438:34:89;-1:-1:-1;;;;;1508:15:89;;;1488:18;;;1481:43;1540:18;;;1533:34;;;1078:33:10;;;;;1373:18:89;;1078:57:10;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;-1:-1:-1;1185:129:10;;;;;;;;;1213:10;1185:129;;;-1:-1:-1;;;;;1185:129:10;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1345:26;;;;;2109:41:89;;;;2192:24;;2188:33;;2166:20;;;2159:63;;;;2260:24;;2238:20;;;2231:54;2323:24;;2301:20;;;2294:54;;;;2390:24;;2386:33;2364:20;;;2357:63;1185:129:10;1146:36;;2043:19:89;;1345:26:10;;;;;;-1:-1:-1;;1345:26:10;;;1424:1;1410:16;;;;;;;;;1345:26;-1:-1:-1;1381:26:10;;1345;1410:16;;;;;;;;;;;;-1:-1:-1;1410:16:10;1381:45;;1451:10;1436:9;1446:1;1436:12;;;;;;;;:::i;:::-;;;;;;;;;;:25;1498:16;;;1512:1;1498:16;;;;;;;;;1471:24;;1498:16;;;;;;;;;;;;-1:-1:-1;1498:16:10;1471:43;;1537:18;1524:7;1532:1;1524:10;;;;;;;;:::i;:::-;-1:-1:-1;;;;;1524:31:10;;;:10;;;;;;;;;;:31;;;;1565:7;;;1655:10;1642:24;;1565:7;1642:24;;;;;;;;;1565:7;;;:19;;1598:9;;1621:7;;1642:28;;:24;:28;:::i;:::-;1684:4;1565:133;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1722:10:10;1709:24;;;;1737:1;1709:24;;;;;;;:29;;1737:1;;-1:-1:-1;1709:24:10;-1:-1:-1;1709:29:10;;1737:1;;1709:29;:::i;:::-;;;;-1:-1:-1;;;;;;;;;;945:800:10:o;14:173:89:-;82:20;;-1:-1:-1;;;;;131:31:89;;121:42;;111:70;;177:1;174;167:12;111:70;14:173;;;:::o;192:397::-;278:6;286;294;302;355:3;343:9;334:7;330:23;326:33;323:53;;;372:1;369;362:12;323:53;395:29;414:9;395:29;:::i;:::-;385:39;;471:2;460:9;456:18;443:32;433:42;;522:2;511:9;507:18;494:32;484:42;;545:38;579:2;568:9;564:18;545:38;:::i;:::-;535:48;;192:397;;;;;;;:::o;594:186::-;653:6;706:2;694:9;685:7;681:23;677:32;674:52;;;722:1;719;712:12;674:52;745:29;764:9;745:29;:::i;:::-;735:39;594:186;-1:-1:-1;;;594:186:89:o;1578:277::-;1645:6;1698:2;1686:9;1677:7;1673:23;1669:32;1666:52;;;1714:1;1711;1704:12;1666:52;1746:9;1740:16;1799:5;1792:13;1785:21;1778:5;1775:32;1765:60;;1821:1;1818;1811:12;2563:127;2624:10;2619:3;2615:20;2612:1;2605:31;2655:4;2652:1;2645:15;2679:4;2676:1;2669:15;2695:222;2760:9;;;2781:10;;;2778:133;;;2833:10;2828:3;2824:20;2821:1;2814:31;2868:4;2865:1;2858:15;2896:4;2893:1;2886:15;2778:133;2695:222;;;;:::o;2922:288::-;2963:3;3001:5;2995:12;3028:6;3023:3;3016:19;3084:6;3077:4;3070:5;3066:16;3059:4;3054:3;3050:14;3044:47;3136:1;3129:4;3120:6;3115:3;3111:16;3107:27;3100:38;3199:4;3192:2;3188:7;3183:2;3175:6;3171:15;3167:29;3162:3;3158:39;3154:50;3147:57;;;2922:288;;;;:::o;3215:1382::-;3557:3;3570:22;;;3641:13;;3542:19;;;3663:22;;;3509:4;;3739;;3716:3;3701:19;;;3766:15;;;3509:4;3809:169;3823:6;3820:1;3817:13;3809:169;;;3884:13;;3872:26;;3918:12;;;;3953:15;;;;3845:1;3838:9;3809:169;;;-1:-1:-1;;;4014:19:89;;;3994:18;;;3987:47;4084:13;;4106:21;;;4182:15;;;;4145:12;;;4217:1;4227:215;4243:8;4238:3;4235:17;4227:215;;;4316:15;;-1:-1:-1;;;;;4312:41:89;4298:56;;4415:17;;;;4376:14;;;;4350:1;4262:11;4227:215;;;4231:3;;4478:6;4473:2;4462:9;4458:18;4451:34;4532:9;4525:5;4521:21;4516:2;4505:9;4501:18;4494:49;4560:31;4585:5;4577:6;4560:31;:::i;:::-;4552:39;3215:1382;-1:-1:-1;;;;;;;;;3215:1382:89:o",
+        "linkReferences": {},
+        "immutableReferences": {
+            "1903": [
+                {
+                    "start": 464,
+                    "length": 32
+                }
+            ],
+            "1905": [
+                {
+                    "start": 561,
+                    "length": 32
+                }
+            ]
+        }
     },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "index",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-            }
-        ],
-        "name": "PendingPayout",
-        "type": "event"
+    "methodIdentifiers": {
+        "getCurrentNonce(address)": "79192251",
+        "mailbox()": "d5438eae",
+        "pay(address,uint256,uint256,address)": "09286f11"
     },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
+    "rawMetadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract INexusMailbox\",\"name\":\"_mailbox\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_nftNexusId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_nftContractAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"AlreadyPaidFor\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"PendingPayout\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"getCurrentNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"mailbox\",\"outputs\":[{\"internalType\":\"contract INexusMailbox\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nftId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"pay\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/zknft-mailbox/NftPayment.sol\":\"NFTPaymentMailbox\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":ds-test/=lib/nexus/contracts/lib/openzeppelin-contracts-upgradeable/lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/nexus/contracts/lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat/=node_modules/hardhat/\",\":nexus/=lib/nexus/contracts/src/\",\":openzeppelin-contracts-upgradeable/=lib/nexus/contracts/lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=node_modules/openzeppelin-contracts/\",\":rlp/=lib/nexus/contracts/src/verification/ethereum/lib/rlp/\",\":trie/=lib/nexus/contracts/src/verification/ethereum/lib/trie/\",\":utils/=lib/nexus/contracts/src/verification/ethereum/lib/utils/\"]},\"sources\":{\"contracts/zknft-mailbox/NftPayment.sol\":{\"keccak256\":\"0x8fe7a6ec2ad1f566478d23d0807b39ed580209dd7961e9aabef73fca3b3c7b4c\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://5b6ab956459f400a285c029847d5179fe4f76cbc2a11de7c444b5bc7ffae01fe\",\"dweb:/ipfs/QmRCHv2feKBXto6QS6btJLbRnxoyTxckxnxHRMdc95RfQ2\"]},\"contracts/zknft-mailbox/types.sol\":{\"keccak256\":\"0xe2f8066a42b980231d635c48d4e145401b2954b332928cf93e34a8d8bcc8acd1\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://298fbf8e1174ff875dcf66b6c2b9b586b8a644d62e5706ee2d2833800356eabe\",\"dweb:/ipfs/QmZ6t3DMkkcSmjh45fMZqGNP5PS9H4n7QHyXXrPsW7xhqs\"]},\"lib/nexus/contracts/src/interfaces/INexusMailbox.sol\":{\"keccak256\":\"0x4e9415273dd4167c63029a0dc4c4470db47f95201095f301eb5027007be5c0af\",\"license\":\"Apache 2.0\",\"urls\":[\"bzz-raw://bcd3f384ec3c03334ce65047e37bf5620013d7b347a4398ba9aaed04e773fd79\",\"dweb:/ipfs/QmcxS446n6EXagAFeypsTg5u9HdGWG2apEHGrXCj1bgvoy\"]},\"node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xc6a8ff0ea489379b61faa647490411b80102578440ab9d84e9a957cc12164e70\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0ea104e577e63faea3b69c415637e99e755dcbf64c5833d7140c35a714d6d90c\",\"dweb:/ipfs/Qmau6x4Ns9XdyynRCNNp3RhLqijJjFm7z5fyZazfYFGYdq\"]}},\"version\":1}",
+    "metadata": {
+        "compiler": {
+            "version": "0.8.25+commit.b61c2a91"
+        },
+        "language": "Solidity",
+        "output": {
+            "abi": [
+                {
+                    "inputs": [
+                        {
+                            "internalType": "contract INexusMailbox",
+                            "name": "_mailbox",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "_nftNexusId",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "_nftContractAddress",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "constructor"
+                },
+                {
+                    "inputs": [],
+                    "type": "error",
+                    "name": "AlreadyPaidFor"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "index",
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "to",
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ],
+                    "type": "event",
+                    "name": "PendingPayout",
+                    "anonymous": false
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "account",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "getCurrentNonce",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "mailbox",
+                    "outputs": [
+                        {
+                            "internalType": "contract INexusMailbox",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "tokenAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "nftId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "to",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "pay"
+                }
+            ],
+            "devdoc": {
+                "kind": "dev",
+                "methods": {},
+                "version": 1
+            },
+            "userdoc": {
+                "kind": "user",
+                "methods": {},
+                "version": 1
             }
-        ],
-        "name": "getCurrentNonce",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
+        },
+        "settings": {
+            "remappings": [
+                "@ensdomains/=node_modules/@ensdomains/",
+                "@matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/",
+                "@openzeppelin/=node_modules/@openzeppelin/",
+                "ds-test/=lib/nexus/contracts/lib/openzeppelin-contracts-upgradeable/lib/forge-std/lib/ds-test/src/",
+                "erc4626-tests/=lib/nexus/contracts/lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+                "eth-gas-reporter/=node_modules/eth-gas-reporter/",
+                "forge-std/=lib/forge-std/src/",
+                "hardhat/=node_modules/hardhat/",
+                "nexus/=lib/nexus/contracts/src/",
+                "openzeppelin-contracts-upgradeable/=lib/nexus/contracts/lib/openzeppelin-contracts-upgradeable/",
+                "openzeppelin-contracts/=node_modules/openzeppelin-contracts/",
+                "rlp/=lib/nexus/contracts/src/verification/ethereum/lib/rlp/",
+                "trie/=lib/nexus/contracts/src/verification/ethereum/lib/trie/",
+                "utils/=lib/nexus/contracts/src/verification/ethereum/lib/utils/"
+            ],
+            "optimizer": {
+                "enabled": true,
+                "runs": 200
+            },
+            "metadata": {
+                "bytecodeHash": "ipfs"
+            },
+            "compilationTarget": {
+                "contracts/zknft-mailbox/NftPayment.sol": "NFTPaymentMailbox"
+            },
+            "evmVersion": "cancun",
+            "libraries": {}
+        },
+        "sources": {
+            "contracts/zknft-mailbox/NftPayment.sol": {
+                "keccak256": "0x8fe7a6ec2ad1f566478d23d0807b39ed580209dd7961e9aabef73fca3b3c7b4c",
+                "urls": [
+                    "bzz-raw://5b6ab956459f400a285c029847d5179fe4f76cbc2a11de7c444b5bc7ffae01fe",
+                    "dweb:/ipfs/QmRCHv2feKBXto6QS6btJLbRnxoyTxckxnxHRMdc95RfQ2"
+                ],
+                "license": "Apache-2.0"
+            },
+            "contracts/zknft-mailbox/types.sol": {
+                "keccak256": "0xe2f8066a42b980231d635c48d4e145401b2954b332928cf93e34a8d8bcc8acd1",
+                "urls": [
+                    "bzz-raw://298fbf8e1174ff875dcf66b6c2b9b586b8a644d62e5706ee2d2833800356eabe",
+                    "dweb:/ipfs/QmZ6t3DMkkcSmjh45fMZqGNP5PS9H4n7QHyXXrPsW7xhqs"
+                ],
+                "license": "Apache-2.0"
+            },
+            "lib/nexus/contracts/src/interfaces/INexusMailbox.sol": {
+                "keccak256": "0x4e9415273dd4167c63029a0dc4c4470db47f95201095f301eb5027007be5c0af",
+                "urls": [
+                    "bzz-raw://bcd3f384ec3c03334ce65047e37bf5620013d7b347a4398ba9aaed04e773fd79",
+                    "dweb:/ipfs/QmcxS446n6EXagAFeypsTg5u9HdGWG2apEHGrXCj1bgvoy"
+                ],
+                "license": "Apache 2.0"
+            },
+            "node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+                "keccak256": "0xc6a8ff0ea489379b61faa647490411b80102578440ab9d84e9a957cc12164e70",
+                "urls": [
+                    "bzz-raw://0ea104e577e63faea3b69c415637e99e755dcbf64c5833d7140c35a714d6d90c",
+                    "dweb:/ipfs/Qmau6x4Ns9XdyynRCNNp3RhLqijJjFm7z5fyZazfYFGYdq"
+                ],
+                "license": "MIT"
             }
-        ],
-        "stateMutability": "view",
-        "type": "function"
+        },
+        "version": 1
     },
-    {
-        "inputs": [],
-        "name": "mailbox",
-        "outputs": [
-            {
-                "internalType": "contract INexusMailbox",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "tokenAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "nftId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-            }
-        ],
-        "name": "pay",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    }
-]
+    "id": 10
+}
