@@ -1,0 +1,38 @@
+Compiling 3 files with Solc 0.8.21
+Solc 0.8.21 finished in 2.34s
+Compiler run successful!
+
+Compiling 3 files with zksolc and solc 0.8.21
+zksolc and solc 0.8.21 finished in 24.42s
+Compiler run successful!
+Script ran successfully.
+
+== Logs ==
+  NexusProofManager deployed to:  0x5f9Ea35ECfefC2B792E7662AFd000D7151731Cc9
+  0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d
+  Mailbox deployed to:  0xcaA11287bbe2463EE48B32c259df5aF61Bf89871
+  Verifer deployed to :  0x19CC70262bc3337Ebd21750125d725546e1E0982
+
+## Setting up 1 EVM.
+
+==========================
+
+Chain 271
+
+Estimated gas price: 0.200000001 gwei
+
+Estimated total gas used for script: 6934343
+
+Estimated amount required: 0.001386868606934343 ETH
+
+==========================
+
+
+==========================
+
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+
+Transactions saved to: /Users/vibhurajeev/avail/nexus-examples/lib/nexus/contracts/broadcast/Nexus-zksync.sol/271/run-latest.json
+
+Sensitive values saved to: /Users/vibhurajeev/avail/nexus-examples/lib/nexus/contracts/cache/Nexus-zksync.sol/271/run-latest.json
+

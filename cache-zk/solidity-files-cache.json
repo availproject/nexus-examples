@@ -3240,8 +3240,8 @@
       ]
     },
     "/Users/vibhurajeev/avail/nexus-examples/contracts/zknft-mailbox/NftPayment.sol": {
-      "lastModificationDate": 1729572205317,
-      "contentHash": "d9006e6462982fa1d6be8278556b09ff",
+      "lastModificationDate": 1729750479116,
+      "contentHash": "8b7da5ef8878a780e73e9ac9d831a01a",
       "sourceName": "contracts/zknft-mailbox/NftPayment.sol",
       "solcConfig": {
         "version": "0.8.21",

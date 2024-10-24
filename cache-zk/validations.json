@@ -2,6 +2,126 @@
   "version": "3.4",
   "log": [
     {
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.21"
+      },
+      "contracts/zknft-mailbox/NftPayment.sol:NFTPaymentMailbox": {
+        "src": "contracts/zknft-mailbox/NftPayment.sol:8",
+        "version": {
+          "withMetadata": "af263609c9ba742892decac63909f6c5c74d638522d7f7447924d0c2bf261ce9",
+          "withoutMetadata": "af263609c9ba742892decac63909f6c5c74d638522d7f7447924d0c2bf261ce9",
+          "linkedWithoutMetadata": "af263609c9ba742892decac63909f6c5c74d638522d7f7447924d0c2bf261ce9"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address,bytes32,address)",
+          "getStorageLocationForReceipt(bytes32)",
+          "pay(address,uint256,uint256,address)",
+          "getCurrentNonce(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NFTPaymentMailbox",
+            "src": "contracts/zknft-mailbox/NftPayment.sol:19"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "nftNexusId",
+            "src": "contracts/zknft-mailbox/NftPayment.sol:10"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "nftContractAddress",
+            "src": "contracts/zknft-mailbox/NftPayment.sol:11"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "mailbox",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(INexusMailbox)345",
+              "contract": "NFTPaymentMailbox",
+              "src": "contracts/zknft-mailbox/NftPayment.sol:9"
+            },
+            {
+              "label": "accountNonce",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "NFTPaymentMailbox",
+              "src": "contracts/zknft-mailbox/NftPayment.sol:14"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_contract(INexusMailbox)345": {
+              "label": "contract INexusMailbox",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.21"
+      },
+      "nexus/interfaces/INexusMailbox.sol:INexusMailbox": {
+        "src": "nexus/interfaces/INexusMailbox.sol:13",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "receiveMessage(uint256,(bytes32,bytes32[],bytes,address,address[],uint256),bytes)",
+          "sendMessage(bytes32[],address[],uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.21"
+      }
+    },
+    {
       "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:IERC1155Errors": {
         "src": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol:113",
         "inherit": [],

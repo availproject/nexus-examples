@@ -1,1 +1,1 @@
-{"abi":[{"type":"function","name":"storedBatchHash","inputs":[{"name":"","type":"uint256","internalType":"uint256"}],"outputs":[{"name":"","type":"bytes32","internalType":"bytes32"}],"stateMutability":"view"}],"storageLayout":{"storage":[],"types":{}},"userdoc":{},"devdoc":{},"id":57}
+{"abi":[{"type":"function","name":"storedBatchHash","inputs":[{"name":"","type":"uint256","internalType":"uint256"}],"outputs":[{"name":"","type":"bytes32","internalType":"bytes32"}],"stateMutability":"view"}],"storageLayout":{"storage":[],"types":{}},"userdoc":{},"devdoc":{},"id":55}

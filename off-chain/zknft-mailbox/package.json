@@ -22,6 +22,7 @@
     "blake2": "^5.0.0",
     "blakejs": "^1.2.1",
     "ethers": "^6.13.2",
+    "ethers-decode-error": "^2.1.3",
     "nexus-js": "file:../../lib/nexus/nexus_js",
     "zksync-ethers": "^6.1.0"
   }
