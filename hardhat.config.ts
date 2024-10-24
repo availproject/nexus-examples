@@ -41,7 +41,7 @@ const config: HardhatUserConfig = {
     },
     zksync: {
       chainId: 271,
-      url: "http://127.0.0.1:3052",
+      url: "http://127.0.0.1:3050",
       ethNetwork: "sepolia",
       accounts: [
         "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6",
@@ -50,7 +50,7 @@ const config: HardhatUserConfig = {
     },
     zksync2: {
       chainId: 272,
-      url: "http://127.0.0.1:3150",
+      url: "http://127.0.0.1:4050",
       ethNetwork: "sepolia",
       accounts: [
         "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6",
