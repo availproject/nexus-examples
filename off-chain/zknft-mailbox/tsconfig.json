@@ -34,7 +34,8 @@
   },
   "include": [
     "./index.ts",
-    "./*.json"
+    "./*.json",
+    "./abi/*.json"
   ], // Include all files in the src directory
   "exclude": [
     "node_modules",

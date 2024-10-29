@@ -1,0 +1,34 @@
+No files changed, compilation skipped
+
+No files changed, compilation skipped
+Script ran successfully.
+
+== Logs ==
+  NexusProofManager deployed to:  0xc1C13de125E0D2A8D04EFa3BDc904A99409376d8
+  0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d
+  Mailbox deployed to:  0x10d90b1D54d8313aBFf915e77Ed37F9637708806
+  Verifer deployed to :  0xB2C7286EBd7EFb837c02955772D29F879BD1d94B
+
+## Setting up 1 EVM.
+
+==========================
+
+Chain 272
+
+Estimated gas price: 0.200000001 gwei
+
+Estimated total gas used for script: 3716152
+
+Estimated amount required: 0.000743230403716152 ETH
+
+==========================
+
+
+==========================
+
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+
+Transactions saved to: /Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/broadcast/Nexus-zksync.sol/272/run-latest.json
+
+Sensitive values saved to: /Volumes/Personal/Avail/storgeproof-nexus-poc/lib/nexus/contracts/cache/Nexus-zksync.sol/272/run-latest.json
+

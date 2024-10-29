@@ -41,6 +41,12 @@
           "internalType": "uint256",
           "name": "nonce",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "receiptHash",
+          "type": "bytes32"
         }
       ],
       "name": "MailboxEvent",

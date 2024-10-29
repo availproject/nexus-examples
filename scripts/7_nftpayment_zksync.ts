@@ -7,8 +7,8 @@ let app_id =
   "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 let app_id_2 =
   "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
-let nftContractAddress = "0xfcC66069D2046dF3cA36Ae56B3E64eC5CDd48eD4";
-let mailBoxAddress = "0x5B64Faa481CBacdE68F1668fE51802e1b420f9f6";
+let nftContractAddress = "0xed96D8c63c173dE735376d7bbC614295c07Dc195";
+let mailBoxAddress = "0x229357479712C1B364C8574c05E7c0a1CD85CAEd";
 
 async function main() {
   console.log(`Running deploy script`);
