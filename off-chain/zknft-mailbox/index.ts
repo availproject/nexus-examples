@@ -79,7 +79,6 @@ let app_id =
 let app_id_2 =
   "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
 
-//69b0257ca5f3ca861e5d56243f95cb3cc15ece5491deb561fff4c39546291296
 async function main() {
   // 1. Deploy contracts: Mailbox + Nexus state manager  - done
   // 2. Deploy nft contracts on different chains - done
@@ -95,10 +94,7 @@ async function main() {
     nexusRPCUrl,
     app_id
   );
-  // const mailbox = new nexus.MailBoxClient({
-  //   `${app_id}` : nexus.
-  // })
-  //  const zksyncVerifier = new nexus.ZKSyncVerifier();
+
   let providerPayment = new L2Provider(zksync_payment_url);
   let providerNFT = new L2Provider(zksync_nft_url);
   if (!providerPayment) {
@@ -114,15 +110,6 @@ async function main() {
     signerNFT
   );
 
-  // const nexusMailboxContract = new ethers.Contract(
-  //   "0x19b80d3A8fd2685902dF07499F6f82Abed9F2Ee9",
-  //   mailboxAbi.abi,
-  //   providerNFT,
-  // )
-
-  // console.log("mapping: ", await nexusMailboxContract.verifierWrappers(app_id_2))
-
-  // return;
 
   const paymentContract = new ethers.Contract(
     paymentContractAddress,
@@ -165,8 +152,6 @@ async function main() {
 
     const accountDetails: AccountApiResponse = await waitForUpdateOnNexus(paymentNexusClient, paymentBlockNumber);
     console.log("Nexus state already updated! ✅ \n");
-    //console.log("Before calling get chain state");
-    //console.log("current chain state", await proofManagerClient.getChainState(`0x${app_id_2}`, paymentBlockNumber));
     console.log("Trying to update nexus block: ", accountDetails.response.nexus_header.number);
     await proofManagerClient.updateNexusBlock(
       accountDetails.response.nexus_header.number,
