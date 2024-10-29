@@ -160,9 +160,9 @@ contract ZKNFTTest is Test {
         PaymentProof memory proof = PaymentProof(
             123,
             0x6bc15F6C8abD245812C7eC650D4586b9B52Ae546,
-            0xfaaf1897615a4d5824a81780f33dd422a304cae5e7b14f0f9215d1a3deeea9e2,
-            dynamicPath,
             0x7fc8e033e28402e82ae3c4a4e6d7d02ab3941505362bdb58c429a2ffc9870802,
+            dynamicPath,
+            0xfaaf1897615a4d5824a81780f33dd422a304cae5e7b14f0f9215d1a3deeea9e2,
             581
         );
         nftContract.mintNFT(msg.sender, message, proof);

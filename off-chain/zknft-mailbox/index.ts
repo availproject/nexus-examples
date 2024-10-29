@@ -73,7 +73,7 @@ let stateManagerNFTChainAddr = deployedAddresses.proofManagerAddress1;
 let paymentContractAddress = deployedAddresses.nftPaymentContractAddress;
 let paymentTokenAddr = deployedAddresses.tokenContractAddress;
 let nftContractAddress = deployedAddresses.nftContractAddress;
-let tokenId = 6;
+let tokenId = 21;
 let app_id =
   "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 let app_id_2 =
@@ -255,7 +255,6 @@ async function main() {
     const expectedMessage: MailboxMessage = {
       nexusAppIDFrom: app_id_2,
       nexusAppIDTo: [app_id],
-      from: paymentContractAddress,
       data: abiCoder.encode(["address", "address", "uint256", "uint256", "address"], [
         paymentReceipt.from,
         paymentReceipt.to,
@@ -263,41 +262,33 @@ async function main() {
         paymentReceipt.amount,
         paymentReceipt.tokenAddress,
       ]),
+      from: paymentContractAddress,
       to: [nftContractAddress],
       nonce: lockNFTResult.nonce.toString(),
     };
 
-    const encodedReceipt = abiCoder.encode(
-      [
-        "bytes32",
-        "bytes32[]",
-        "bytes",
-        "address",
-        "address[]",
-        "uint256"],
-      [
-        expectedMessage.nexusAppIDFrom,
-        expectedMessage.nexusAppIDTo,
-        expectedMessage.data,
-        expectedMessage.from,
-        expectedMessage.to,
-        expectedMessage.nonce,
-      ],
+    const encodedReceipt = ethers.AbiCoder.defaultAbiCoder().encode(
+      ["tuple(bytes32 nexusAppIDFrom, bytes32[] nexusAppIDTo, bytes data, address from, address[] to, uint256 nonce)"],
+      [{
+          nexusAppIDFrom: expectedMessage.nexusAppIDFrom,
+          nexusAppIDTo: expectedMessage.nexusAppIDTo,
+          data: expectedMessage.data,
+          from: expectedMessage.from,
+          to: expectedMessage.to,
+          nonce: expectedMessage.nonce
+      }]
+  );
 
-    )
-
-    console.log("Encoded data: ", expectedMessage.data, "\n")
 
     const receiptHash = keccak256(encodedReceipt);
-
-    console.log(receiptHash, emmittedReceiptHash)
+   
     if (receiptHash !== emmittedReceiptHash) {
       throw new Error("Calculated receipt hash is incorrect");
     }
 
     const mailboxContract = new ethers.Contract(deployedAddresses.mailBoxAddress2, mailboxAbi.abi, providerPayment);
 
-    const mapping = await mailboxContract.messages(receiptHash);
+    const mapping = await mailboxContract.messages(emmittedReceiptHash);
 
     console.log("Mapping exists", mapping);
 
@@ -310,9 +301,11 @@ async function main() {
       });
 
     console.log("proof details: ", proof, "\n");
+
     const errorDecoder = ErrorDecoder.create([nftAbi, mailboxAbi.abi, storageProofAbi.abi, verifierWrapperAbi.abi, nexusMailboxAbi.abi, zksyncNexusManagerAbi.abi])
     let receipt: TransactionReceipt | null = null;
     try {
+      console.log("Storage proof encoding: ", zksyncAdapter.encodeMessageProof(proof))
       const transferTx = await nftContract.transferNFT(
         accountDetails.response.account.height,
         expectedMessage,
@@ -320,32 +313,14 @@ async function main() {
       )
 
       receipt = await transferTx.wait();
+      console.log("NFT Transfer successfull", receipt)
     } catch (err) {
+      console.log(err)
       const { reason } = await errorDecoder.decode(err)
       // Prints "ERC20: transfer to the zero address"
       console.log('Revert reason:', reason)
     }
 
-    // const receipt = await zksyncAdapter.receiveMessage(
-    //   accountDetails.response.account.height,
-    //   expectedMessage,
-    //   {
-    //     storageKey: zksyncAdapter.calculateStorageKey(receiptHash, 0)
-    //   }
-    // )
-
-    // console.log(receipt);
-    // // Event signature for Confirmation event
-    // const confirmationEventTopic = ethers.id("Confirmation(uint256,address)");
-
-    // // Loop through logs to check if the Confirmation event is emitted
-    // const confirmationLogs = (receipt?.logs as ReadonlyArray<Log>).filter(log => log.topics[0] === confirmationEventTopic);
-
-    // if (confirmationLogs.length > 0) {
-    //   console.log("Confirmation event was emitted.");
-    // } else {
-    //   console.log("No Confirmation event in this transaction.");
-    // }
   }
 
   // async function scenario2() {
@@ -438,8 +413,8 @@ async function main() {
         console.log("Receipt hash:", decodedLog.receiptHash);
 
         receiptHash = decodedLog.receiptHash;
+        break;
       } catch (err) {
-        console.error("error parsing logs:",err)
         continue;
       }
     }
