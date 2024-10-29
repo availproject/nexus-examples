@@ -170,10 +170,7 @@ async function main() {
       accountDetails.response.account
     )
 
-    console.log("Updated chain state",  accountDetails.response.nexus_header.number,
-      accountDetails.response.proof,
-      app_id,
-      accountDetails.response.account);
+    console.log("Updated chain state");
 
     const zksyncAdapter = new ZKSyncVerifier({
       [app_id]: {
@@ -248,12 +245,6 @@ async function main() {
       throw new Error("Calculated receipt hash is incorrect");
     }
 
-    const mailboxContract = new ethers.Contract(deployedAddresses.mailBoxAddress2, mailboxAbi.abi, providerPayment);
-
-    const mapping = await mailboxContract.messages(emmittedReceiptHash);
-
-    console.log("Mapping exists", mapping);
-
     const storageSlot: bigint = await paymentContract.getStorageLocationForReceipt(receiptHash);
 
     const proof = await zksyncAdapter.getReceiveMessageProof(accountDetails.response.account.height,
@@ -267,7 +258,7 @@ async function main() {
     const errorDecoder = ErrorDecoder.create([nftAbi, mailboxAbi.abi, storageProofAbi.abi, verifierWrapperAbi.abi, nexusMailboxAbi.abi, zksyncNexusManagerAbi.abi])
     let receipt: TransactionReceipt | null = null;
     try {
-      console.log("Storage proof encoding: ", zksyncAdapter.encodeMessageProof(proof))
+
       const transferTx = await nftContract.transferNFT(
         accountDetails.response.account.height,
         expectedMessage,
@@ -279,7 +270,6 @@ async function main() {
     } catch (err) {
       console.log(err)
       const { reason } = await errorDecoder.decode(err)
-      // Prints "ERC20: transfer to the zero address"
       console.log('Revert reason:', reason)
     }
 
