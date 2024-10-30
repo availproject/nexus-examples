@@ -37,3 +37,7 @@ off-chain/zknft-mailbox/node_modules
 contracts/deployments-zk
 
 out
+
+deployment.log
+forge_output*.txt
+tmp*.json
