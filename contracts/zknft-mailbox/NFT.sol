@@ -11,7 +11,7 @@ contract MyNFTMailbox is ERC721 {
     bytes32 immutable selfNexusId;
     bytes32 immutable paymentNexusId;
     address paymentContractAddress;
-    uint256 constant TIMEOUT_BLOCKS = 10;
+    uint256 constant TIMEOUT_BLOCKS = 2;
 
     mapping(uint256 => LockedNFT) lockedNFTs;
 
@@ -32,6 +32,9 @@ contract MyNFTMailbox is ERC721 {
         paymentNexusId = _paymentNexusId;
     }
 
+    function getLockedNFT(uint256 tokenId) public returns (LockedNFT memory) {
+        return lockedNFTs[tokenId];
+    }
     // TODO: make only owner
     function setNftPaymentContractAddress(
         address _paymentContractAddress
@@ -139,7 +142,7 @@ contract MyNFTMailbox is ERC721 {
         if (lock.from != msg.sender) {
             revert InvalidSender();
         }
-        if (ownerOf(lock.nftId) == address(this)) {
+        if (ownerOf(lock.nftId) != address(this)) {
             revert TransferAlreadyCompleted();
         }
         bytes32[] memory nexusIdTo = new bytes32[](1);
@@ -177,7 +180,7 @@ contract MyNFTMailbox is ERC721 {
 
         // implies the verification failed
         if (!success) {
-            transferFrom(address(this), lock.from, lock.nftId);
+            _transfer(address(this), lock.from, lock.nftId);
             delete lockedNFTs[tokenID];
         }
     }

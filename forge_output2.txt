@@ -4,10 +4,10 @@ No files changed, compilation skipped
 Script ran successfully.
 
 == Logs ==
-  NexusProofManager deployed to:  0x26Da16958B29e8Cc2A959F97fF1a5a4e80A2e816
+  NexusProofManager deployed to:  0x3f01828523ddF58A653eC1B63FbBf0873C32F2f6
   0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e
-  Mailbox deployed to:  0xE077b0395CAD19e78c168B5b1daD24C9cf34Bb3b
-  Verifer deployed to :  0xEdBf9Ca104cD5eBDaE511F7afC9ee0724ce86E5F
+  Mailbox deployed to:  0x593917637C405eF0A3bc1bD39946DF7CA84270F8
+  Verifer deployed to :  0xBea80d391dD5Be60fCCeFB683B1c9D104BE0E5D8
 
 ## Setting up 1 EVM.
 
