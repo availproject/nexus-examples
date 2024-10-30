@@ -23,7 +23,7 @@ let stateManagerNFTChainAddr = deployedAddresses.proofManagerAddress1;
 let paymentContractAddress = deployedAddresses.nftPaymentContractAddress;
 let paymentTokenAddr = deployedAddresses.tokenContractAddress;
 let nftContractAddress = deployedAddresses.nftContractAddress;
-let tokenId = 7;
+let tokenId = 9;
 let app_id = "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 let app_id_2 = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
 async function main() {
@@ -61,6 +61,7 @@ async function main() {
     async function scenario1() {
         // 3. Lock nft on one chain and pay on another chain
         // 4. Receive on NFT using inclusiong proof.
+        console.log(" ⌛ Lock nft on one chain and pay on another chain. Receive on NFT using inclusiong proof.");
         const lockNFTResult = await lockNFT();
         console.log("💯 Lock NFT Result", lockNFTResult);
         const [paymentBlockNumber, emmittedReceiptHash] = await payForNFT();
@@ -159,6 +160,7 @@ async function main() {
     async function scenario2() {
         // 5. Lock nft on one chain
         // 6. Withdraw nft using exclusion proof after timeout
+        console.log("⌛  Lock nft on one chain. Withdraw nft using exclusion proof after timeout");
         tokenId += 1;
         let lockNFTResult = await lockNFT();
         const accountDetails = await waitForUpdateOnNexus(paymentNexusClient, 0);
@@ -241,7 +243,7 @@ async function main() {
         }
     }
     async function lockNFT() {
-        console.log("Locking NFT id", tokenId);
+        console.log(" Locking NFT id", tokenId);
         const nextNonce = BigInt(await paymentContract.getCurrentNonce(await signerPayment.getAddress())) + BigInt(1);
         const tx = await nftContract.lockNFT(tokenId, ethers.parseEther("1"), nextNonce, await paymentToken.getAddress(), await signerNFT.getAddress(), await signerPayment.getAddress(), await signerPayment.getAddress());
         // Wait for the transaction to be mined

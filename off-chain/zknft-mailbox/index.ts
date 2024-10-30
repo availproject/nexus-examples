@@ -73,7 +73,7 @@ let stateManagerNFTChainAddr = deployedAddresses.proofManagerAddress1;
 let paymentContractAddress = deployedAddresses.nftPaymentContractAddress;
 let paymentTokenAddr = deployedAddresses.tokenContractAddress;
 let nftContractAddress = deployedAddresses.nftContractAddress;
-let tokenId = 7 ;
+let tokenId = 9 ;
 let app_id =
   "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 let app_id_2 =
