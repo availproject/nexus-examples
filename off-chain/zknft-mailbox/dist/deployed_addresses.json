@@ -1,0 +1,9 @@
+{
+    "mailBoxAddress1": "0xB6CcB1164De6EDF9e1Da9c797ad12Feb46723e8e",
+    "proofManagerAddress1": "0x7DB2b91a87800e8935a48a4CfA7B2616c347E893",
+    "mailBoxAddress2": "0x593917637C405eF0A3bc1bD39946DF7CA84270F8",
+    "proofManagerAddress2": "0x3f01828523ddF58A653eC1B63FbBf0873C32F2f6",
+    "nftContractAddress": "0x98A24B52760f0aBDdF45c31F9E1EdCd0D60cAb5D",
+    "nftPaymentContractAddress": "0x3240Af8985A8f52c8621AB5f50D7b5269Bf94bd6",
+    "tokenContractAddress": "0xA4004A399d1A5EfAc7aED6225B88eE72f0fB4DA1"
+}

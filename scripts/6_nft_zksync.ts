@@ -4,55 +4,20 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { Deployer } from "@matterlabs/hardhat-zksync";
 
 let app_id =
-  "0x688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
+  "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 let app_id_2 =
-  "0x688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
-
+  "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+let mailBoxAddress = "0x210E7C834741eeb26922867bEe17470AAB0D85C4";
 async function main() {
   console.log(`Running deploy script`);
 
   // Initialize the wallet.
   const wallet = new Wallet(
-    "0x2d64990aa363e3d38ae3417950fd40801d75e3d3bd57b86d17fcc261a6c951c6"
+    "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6"
   );
 
   // Create deployer object.
   const deployer = new Deployer(hre, wallet);
-
-  // Deploy JellyfishMerkleTreeVerifier contract
-  const jmtArtifact = await deployer.loadArtifact(
-    "JellyfishMerkleTreeVerifier"
-  );
-  const jmt = await deployer.deploy(jmtArtifact);
-
-  // Deploy NexusProofManager contract with the linked library
-  const nexusArtifact = await deployer.loadArtifact("NexusProofManager");
-  const nexusManager = await deployer.deploy(nexusArtifact);
-  console.log(
-    `NexusProofManager deployed to ${await nexusManager.getAddress()}`
-  );
-
-  const mailboxArtifact = await deployer.loadArtifact("NexusMailbox");
-  const mailbox = await deployer.deploy(mailboxArtifact);
-  await mailbox.initialize(app_id);
-  console.log("Mailbox deployed to ", await mailbox.getAddress());
-
-  const ZKSyncDiamond = await deployer.loadArtifact("ZKSyncDiamond");
-  const zksyncdiamond = await deployer.deploy(ZKSyncDiamond, [
-    await nexusManager.getAddress(),
-    app_id,
-  ]);
-
-  const SparseMerkleTree = await deployer.loadArtifact("SparseMerkleTree");
-  const sparseMerkleTree = await deployer.deploy(SparseMerkleTree);
-
-  const VerifierWrapper = await deployer.loadArtifact("VerifierWrapper");
-  const verifierWrapper = await deployer.deploy(VerifierWrapper, [
-    await zksyncdiamond.getAddress(),
-    await sparseMerkleTree.getAddress(),
-  ]);
-
-  await mailbox.addOrUpdateWrapper(app_id, await verifierWrapper.getAddress());
 
   // Deploy NFTPayment contract
   const MyNFTArtifact = await deployer.loadArtifact("MyNFTMailbox");
@@ -60,8 +25,9 @@ async function main() {
   const MyNFTContract = await deployer.deploy(MyNFTArtifact, [
     app_id,
     app_id_2,
-    await mailbox.getAddress(),
+    mailBoxAddress,
   ]);
+
   console.log(`NFT contract deployed to ${await MyNFTContract.getAddress()}`);
 }
 

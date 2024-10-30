@@ -4,65 +4,45 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { Deployer } from "@matterlabs/hardhat-zksync";
 
 let app_id =
-  "0x688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
+  "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 let app_id_2 =
-  "0x688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
-let nftContractAddress = "";
+  "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+let nftContractAddress = "0xed96D8c63c173dE735376d7bbC614295c07Dc195";
+let mailBoxAddress = "0x229357479712C1B364C8574c05E7c0a1CD85CAEd";
+
 async function main() {
   console.log(`Running deploy script`);
 
   // Initialize the wallet.
   const wallet = new Wallet(
-    "0x2d64990aa363e3d38ae3417950fd40801d75e3d3bd57b86d17fcc261a6c951c6"
+    "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6"
   );
+  console.log(wallet.getAddress(), wallet.provider);
 
   // Create deployer object.
   const deployer = new Deployer(hre, wallet);
 
-  // Deploy JellyfishMerkleTreeVerifier contract
-  const jmtArtifact = await deployer.loadArtifact(
-    "JellyfishMerkleTreeVerifier"
-  );
-  const jmt = await deployer.deploy(jmtArtifact);
-
-  // Deploy NexusProofManager contract with the linked library
-  const nexusArtifact = await deployer.loadArtifact("NexusProofManager");
-  const nexusManager = await deployer.deploy(nexusArtifact);
-  console.log(
-    `NexusProofManager deployed to ${await nexusManager.getAddress()}`
-  );
-
-  const mailboxArtifact = await deployer.loadArtifact("NexusMailbox");
-  const mailbox = await deployer.deploy(mailboxArtifact);
-  await mailbox.initialize(app_id);
-  console.log("Mailbox deployed to ", await mailbox.getAddress());
-
-  const ZKSyncDiamond = await deployer.loadArtifact("ZKSyncDiamond");
-  const zksyncdiamond = await deployer.deploy(ZKSyncDiamond, [
-    await nexusManager.getAddress(),
-    app_id_2,
-  ]);
-
-  const SparseMerkleTree = await deployer.loadArtifact("SparseMerkleTree");
-  const sparseMerkleTree = await deployer.deploy(SparseMerkleTree);
-
-  const VerifierWrapper = await deployer.loadArtifact("VerifierWrapper");
-  const verifierWrapper = await deployer.deploy(VerifierWrapper, [
-    await zksyncdiamond.getAddress(),
-    await sparseMerkleTree.getAddress(),
-  ]);
-
-  await mailbox.addOrUpdateWrapper(app_id, await verifierWrapper.getAddress());
-
   // Deploy NFTPayment contract
   const MyNFTArtifact = await deployer.loadArtifact("NFTPaymentMailbox");
-
+  console.log("Loaded NFTPayment artifact");
   const MyNFTContract = await deployer.deploy(MyNFTArtifact, [
-    await mailbox.getAddress(),
+    mailBoxAddress,
     app_id,
     nftContractAddress,
   ]);
   console.log(`NFT contract deployed to ${await MyNFTContract.getAddress()}`);
+
+  // Deploy Token contract
+  const TokenArtifact = await deployer.loadArtifact("Token");
+  console.log("Loaded Token artifact");
+
+  // Initial supply for the token (in smallest units, like 1000 tokens * 10^18 for 18 decimals)
+  const initialSupply = ethers.parseUnits("1000", 18).toString();  // Adjust the supply as needed
+
+  const TokenContract = await deployer.deploy(TokenArtifact, [initialSupply]);
+  console.log(`Token contract deployed to ${await TokenContract.getAddress()}`);
+
+  console.log(`Token deployed with initial supply sent to ${await wallet.getAddress()}`);
 }
 
 main()

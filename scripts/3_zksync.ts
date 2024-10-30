@@ -5,6 +5,7 @@ import { Deployer } from "@matterlabs/hardhat-zksync";
 
 let app_id =
   "0x688e94a51ee508a95e761294afb7a6004b432c15d9890c80ddf23bde8caa4c26";
+let nexusStateManagerAddress = "";
 
 async function main() {
   console.log(`Running deploy script`);
@@ -16,19 +17,6 @@ async function main() {
 
   // Create deployer object.
   const deployer = new Deployer(hre, wallet);
-
-  // Deploy JellyfishMerkleTreeVerifier contract
-  const jmtArtifact = await deployer.loadArtifact(
-    "JellyfishMerkleTreeVerifier"
-  );
-  const jmt = await deployer.deploy(jmtArtifact);
-
-  // Deploy NexusProofManager contract with the linked library
-  const nexusArtifact = await deployer.loadArtifact("NexusProofManager");
-  const nexusManager = await deployer.deploy(nexusArtifact);
-  console.log(
-    `NexusProofManager deployed to ${await nexusManager.getAddress()}`
-  );
 
   // Deploy AvailToken contract
   const availTokenArtifact = await deployer.loadArtifact("ERC20Token");
@@ -42,19 +30,13 @@ async function main() {
   const paymentArtifact = await deployer.loadArtifact("NFTPayment");
   console.log(deployer.ethWallet.address);
   const paymentContract = await deployer.deploy(paymentArtifact, [
-    await nexusManager.getAddress(),
+    nexusStateManagerAddress,
     deployer.ethWallet.address,
     ethers.ZeroAddress,
   ]);
   console.log(
     `Payment contract deployed to ${await paymentContract.getAddress()}`
   );
-}
-
-function stringToBytes32(str: string): string {
-  const hex = Buffer.from(str, "utf8").toString("hex");
-  const paddedHex = hex.padEnd(64, "0");
-  return `0x${paddedHex}`;
 }
 
 main()

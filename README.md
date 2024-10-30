@@ -27,8 +27,8 @@ Follow the guide below to setup and run the demo on your machines.
   zk_inception ecosystem init
   ```
 
-- Update the config `general.yaml` in `chains/era/configs` with in `configs/era_general.yaml`.
-- Update `general.yaml` in `chains/era2/configs/` with config in `configs/era2_general.yaml`.
+- Replace any `./db/../` paths in general.yaml in `chains/era/configs` with in `./chains/era/db/../`.
+- Replace any `./db/../` paths in general.yaml in `chains/era2/configs` with in `./chains/era2/db/../`..
 
 - Now run:
 

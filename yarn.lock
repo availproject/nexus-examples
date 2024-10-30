@@ -1147,7 +1147,7 @@
   resolved "https://registry.npmjs.org/@openzeppelin/contracts/-/contracts-4.9.6.tgz"
   integrity sha512-xSmezSupL+y9VkHZJGDoCBpmnB2ogM13ccaYDWqJTfS3dbuHkgjuwDFUmaFauBCboQMGB/S5UqUl2y54X99BmA==
 
-"@openzeppelin/contracts@5.0.2":
+"@openzeppelin/contracts@^5.0.2", "@openzeppelin/contracts@5.0.2":
   version "5.0.2"
   resolved "https://registry.npmjs.org/@openzeppelin/contracts/-/contracts-5.0.2.tgz"
   integrity sha512-ytPc6eLGcHHnapAZ9S+5qsdomhjo6QBHTDRRBFfTxXIpsicMhVPouPgmUPebZZZGX7vt9USA+Z+0M0dSVtSUEA==
@@ -7048,6 +7048,16 @@ neo-async@^2.6.2:
 
 next-tick@~1.0.0:
   version "1.0.0"
+
+"nexus-js@file:../nexus/nexus_js":
+  version "0.0.1"
+  resolved "file:../nexus/nexus_js"
+  dependencies:
+    "@typechain/ethers-v6" "^0.5.1"
+    axios "^1.7.7"
+    ethers "^6.13.3"
+    winston "^3.14.2"
+    zksync-ethers "^6.13.0"
 
 nice-try@^1.0.4:
   version "1.0.5"

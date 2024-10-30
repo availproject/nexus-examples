@@ -14,12 +14,13 @@ contract NFTPayment is Payment, EthereumVerifier {
     address immutable TARGET_CONTRACT_ADDRESS;
     uint256 claimCounter = 0;
 
-    bytes32 private constant EMPTY_TRIE_ROOT_HASH = 0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
+    bytes32 private constant EMPTY_TRIE_ROOT_HASH =
+        0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
 
     mapping(address => uint256) payoutPrice;
-    PendingPayment[] pendingPayouts;
+    PaymentReceipt[] pendingPayouts;
 
-    struct PendingPayment {
+    struct PaymentReceipt {
         address to;
         uint256 amount;
         address tokenAddress;
@@ -28,32 +29,61 @@ contract NFTPayment is Payment, EthereumVerifier {
 
     event PendingPayout(uint256 index, address to);
 
-    constructor(INexusProofManager nexusManager, address fixedPayoutAddress, address targetContractAddress)
-        EthereumVerifier(nexusManager)
-    {
+    constructor(
+        INexusProofManager nexusManager,
+        address fixedPayoutAddress,
+        address targetContractAddress
+    ) EthereumVerifier(nexusManager) {
         nexus = nexusManager;
         FIXED_PAYOUT_ADDRESS = fixedPayoutAddress;
         TARGET_CONTRACT_ADDRESS = targetContractAddress;
     }
 
-    function paymentWithoutFallback(bytes1 messageType, uint256 chainId, uint256 amount, address payoutToken) public {
+    function paymentWithoutFallback(
+        bytes1 messageType,
+        uint256 chainId,
+        uint256 amount,
+        address payoutToken
+    ) public {
         uint256 price = payoutPrice[payoutToken];
         require(price > 0, "Invalid token");
         require(amount > price, "Invalid amount");
         uint256 units = amount / price;
-        IERC20(payoutToken).transferFrom(msg.sender, FIXED_PAYOUT_ADDRESS, price * units);
-        bytes memory data = abi.encode(FIXED_PAYOUT_ADDRESS, price * units, units);
+        IERC20(payoutToken).transferFrom(
+            msg.sender,
+            FIXED_PAYOUT_ADDRESS,
+            price * units
+        );
+        bytes memory data = abi.encode(
+            FIXED_PAYOUT_ADDRESS,
+            price * units,
+            units
+        );
         uint256 messageId = claimCounter++;
-        Message memory message =
-            Message(messageType, bytes32(uint256(uint160(msg.sender))), data, claimCounter, chainId);
+        Message memory message = Message(
+            messageType,
+            bytes32(uint256(uint160(msg.sender))),
+            data,
+            claimCounter,
+            chainId
+        );
 
         _store(messageId, keccak256(abi.encode(message)));
-        emit PreImage(messageType, bytes32(uint256(uint160(msg.sender))), data, messageId, chainId);
+        emit PreImage(
+            messageType,
+            bytes32(uint256(uint160(msg.sender))),
+            data,
+            messageId,
+            chainId
+        );
     }
 
     function claimPayment(uint256 index) public {
-        PendingPayment memory receipt = pendingPayouts[index];
-        require(receipt.timestamp + CLAIM_TIME > block.timestamp, "Not allowed yet to claim");
+        PaymentReceipt memory receipt = pendingPayouts[index];
+        require(
+            receipt.timestamp + CLAIM_TIME > block.timestamp,
+            "Not allowed yet to claim"
+        );
         IERC20(receipt.tokenAddress).transfer(receipt.to, receipt.amount);
         delete pendingPayouts[index];
     }
@@ -65,7 +95,11 @@ contract NFTPayment is Payment, EthereumVerifier {
         bytes calldata storageSlotTrieProof
     ) public {
         bytes32 state = nexus.getChainState(0, paymentChainBlockNumber);
-        (,,, bytes32 storageRoot) = verifyAccount(state, accountTrieProof, TARGET_CONTRACT_ADDRESS);
+        (, , , bytes32 storageRoot) = verifyAccount(
+            state,
+            accountTrieProof,
+            TARGET_CONTRACT_ADDRESS
+        );
         require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
         verifyStorage(storageRoot, slot, storageSlotTrieProof);
     }

@@ -5,6 +5,11 @@ node_modules
 /cache
 /artifacts
 
+# ZKSync Hardhat plugin  files
+/cache_forge
+/carch-zk
+/artifacts-zk
+
 # TypeChain files
 /typechain
 /typechain-types
@@ -26,3 +31,18 @@ off-chain/.env
 **/contracts_config.json
 
 off-chain/bridge/target
+off-chain/zknft/node_modules
+off-chain/zknft-mailbox/node_modules
+
+contracts/deployments-zk
+
+out
+
+deployment.log
+forge_output*.txt
+tmp*.json
+zkout
+
+typechain-types
+artifacts
+artifacts-zk

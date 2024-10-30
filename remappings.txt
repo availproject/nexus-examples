@@ -1,11 +1,14 @@
 @ensdomains/=node_modules/@ensdomains/
 @matterlabs/=node_modules/@matterlabs/hardhat-zksync/node_modules/@matterlabs/
 @openzeppelin/=node_modules/@openzeppelin/
-ds-test/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/
-erc4626-tests/=lib/nexus.git/contracts/lib/openzeppelin-contracts/lib/erc4626-tests/
+ds-test/=lib/nexus/contracts/lib/openzeppelin-contracts-upgradeable/lib/forge-std/lib/ds-test/src/
+erc4626-tests/=lib/nexus/contracts/lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/
 eth-gas-reporter/=node_modules/eth-gas-reporter/
 forge-std/=lib/forge-std/src/
 hardhat/=node_modules/hardhat/
 nexus/=lib/nexus/contracts/src/
-openzeppelin-contracts-upgradeable/=lib/nexus.git/contracts/lib/openzeppelin-contracts-upgradeable/
+openzeppelin-contracts-upgradeable/=lib/nexus/contracts/lib/openzeppelin-contracts-upgradeable/
 openzeppelin-contracts/=node_modules/openzeppelin-contracts/
+rlp/=lib/nexus/contracts/src/verification/ethereum/lib/rlp/
+trie/=lib/nexus/contracts/src/verification/ethereum/lib/trie/
+utils/=lib/nexus/contracts/src/verification/ethereum/lib/utils/
