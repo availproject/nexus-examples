@@ -33,3 +33,5 @@ off-chain/.env
 off-chain/bridge/target
 off-chain/zknft/node_modules
 off-chain/zknft-mailbox/node_modules
+
+contracts/deployments-zk
