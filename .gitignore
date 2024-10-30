@@ -44,3 +44,5 @@ tmp*.json
 zkout
 
 typechain-types
+artifacts
+artifacts-zk
