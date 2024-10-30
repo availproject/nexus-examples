@@ -41,3 +41,4 @@ out
 deployment.log
 forge_output*.txt
 tmp*.json
+zkout
