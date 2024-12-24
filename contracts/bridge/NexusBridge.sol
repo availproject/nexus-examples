@@ -4,8 +4,7 @@ pragma solidity ^0.8.20;
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {ReentrancyGuardUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import {PausableUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
-import {AccessControlDefaultAdminRulesUpgradeable} from
-    "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol";
+import {AccessControlDefaultAdminRulesUpgradeable} from "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
@@ -50,10 +49,13 @@ contract NexusBridge is
     uint256 private constant MAX_DATA_LENGTH = 102_400;
     // Derived from abi.encodePacked("ETH")
     // slither-disable-next-line too-many-digits
-    bytes32 private constant ETH_ASSET_ID = 0x4554480000000000000000000000000000000000000000000000000000000000;
+    bytes32 private constant ETH_ASSET_ID =
+        0x4554480000000000000000000000000000000000000000000000000000000000;
     bytes32 private constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
-    bytes32 private constant EMPTY_TRIE_ROOT_HASH = 0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
-    bytes32 private constant EMPTY_CODE_HASH = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
+    bytes32 private constant EMPTY_TRIE_ROOT_HASH =
+        0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
+    bytes32 private constant EMPTY_CODE_HASH =
+        0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
 
     modifier onlyTokenTransfer(bytes1 messageType) {
         if (messageType != TOKEN_TX_PREFIX) {
@@ -119,16 +121,19 @@ contract NexusBridge is
      * @param   assetIds  Asset IDs to update
      * @param   tokenAddresses  Token addresses to update
      */
-    function updateTokens(bytes32[] calldata assetIds, address[] calldata tokenAddresses)
-        external
-        onlyRole(DEFAULT_ADMIN_ROLE)
-    {
+    function updateTokens(
+        bytes32[] calldata assetIds,
+        address[] calldata tokenAddresses
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         uint256 length = assetIds.length;
         if (length != tokenAddresses.length) {
             revert ArrayLengthMismatch();
         }
-        for (uint256 i = 0; i < length;) {
-            require(nexusTokens[assetIds[i]] == address(0), "asset id used by nexus tokens");
+        for (uint256 i = 0; i < length; ) {
+            require(
+                nexusTokens[assetIds[i]] == address(0),
+                "asset id used by nexus tokens"
+            );
             tokens[assetIds[i]] = tokenAddresses[i];
             unchecked {
                 ++i;
@@ -142,16 +147,19 @@ contract NexusBridge is
      * @param   assetIds  Asset IDs to update
      * @param   tokenAddresses  Token addresses to update
      */
-    function updateNexusTokens(bytes32[] calldata assetIds, address[] calldata tokenAddresses)
-        external
-        onlyRole(DEFAULT_ADMIN_ROLE)
-    {
+    function updateNexusTokens(
+        bytes32[] calldata assetIds,
+        address[] calldata tokenAddresses
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         uint256 length = assetIds.length;
         if (length != tokenAddresses.length) {
             revert ArrayLengthMismatch();
         }
-        for (uint256 i = 0; i < length;) {
-            require(tokens[assetIds[i]] == address(0), "asset id used by standard tokens");
+        for (uint256 i = 0; i < length; ) {
+            require(
+                tokens[assetIds[i]] == address(0),
+                "asset id used by standard tokens"
+            );
             nexusTokens[assetIds[i]] = tokenAddresses[i];
             unchecked {
                 ++i;
@@ -164,7 +172,9 @@ contract NexusBridge is
      * @dev     Only callable by governance
      * @param   newFeePerByte  New fee per byte value
      */
-    function updateFeePerByte(uint256 newFeePerByte) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    function updateFeePerByte(
+        uint256 newFeePerByte
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         feePerByte = newFeePerByte;
     }
 
@@ -173,7 +183,9 @@ contract NexusBridge is
      * @dev     Only callable by governance
      * @param   newFeeRecipient  New fee recipient address
      */
-    function updateFeeRecipient(address newFeeRecipient) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    function updateFeeRecipient(
+        address newFeeRecipient
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         // slither-disable-next-line missing-zero-check
         feeRecipient = newFeeRecipient;
     }
@@ -186,7 +198,7 @@ contract NexusBridge is
         uint256 fee = fees;
         delete fees;
         // slither-disable-next-line low-level-calls
-        (bool success,) = feeRecipient.call{value: fee}("");
+        (bool success, ) = feeRecipient.call{value: fee}("");
         if (!success) {
             revert WithdrawFailed();
         }
@@ -198,11 +210,10 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveMessage(MessageReceieve calldata message, bytes calldata input)
-        external
-        whenNotPaused
-        nonReentrant
-    {
+    function receiveMessage(
+        MessageReceieve calldata message,
+        bytes calldata input
+    ) external whenNotPaused nonReentrant {
         if (message.messageType != MESSAGE_TX_PREFIX) {
             revert InvalidMessage();
         }
@@ -222,13 +233,19 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveETH(MessageReceieve calldata message, bytes calldata input)
+    function receiveETH(
+        MessageReceieve calldata message,
+        bytes calldata input
+    )
         external
         whenNotPaused
         onlyTokenTransfer(message.messageType)
         nonReentrant
     {
-        (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
+        (bytes32 assetId, uint256 value) = abi.decode(
+            message.data,
+            (bytes32, uint256)
+        );
 
         _checkInclusionAgainstStateRoot(message, input);
 
@@ -244,7 +261,7 @@ contract NexusBridge is
         }
 
         // slither-disable-next-line arbitrary-send-eth,missing-zero-check,low-level-calls
-        (bool success,) = dest.call{value: value}("");
+        (bool success, ) = dest.call{value: value}("");
         if (!success) {
             revert UnlockFailed();
         }
@@ -256,13 +273,19 @@ contract NexusBridge is
      * @param   message  Message that is used to reconstruct the bridge leaf
      * @param   input  Merkle tree proof of inclusion for the bridge leaf
      */
-    function receiveERC20(MessageReceieve calldata message, bytes calldata input)
+    function receiveERC20(
+        MessageReceieve calldata message,
+        bytes calldata input
+    )
         external
         whenNotPaused
         onlyTokenTransfer(message.messageType)
         nonReentrant
     {
-        (bytes32 assetId, uint256 value) = abi.decode(message.data, (bytes32, uint256));
+        (bytes32 assetId, uint256 value) = abi.decode(
+            message.data,
+            (bytes32, uint256)
+        );
         address token = tokens[assetId];
         if (token != address(0)) {
             _checkInclusionAgainstStateRoot(message, input);
@@ -296,7 +319,10 @@ contract NexusBridge is
      * @param   recipient  Recipient of the message on Avail
      * @param   data  Data to send
      */
-    function sendMessage(bytes32 recipient, bytes calldata data) external payable whenNotPaused {
+    function sendMessage(
+        bytes32 recipient,
+        bytes calldata data
+    ) external payable whenNotPaused {
         uint256 length = data.length;
         if (length == 0 || length > MAX_DATA_LENGTH) {
             revert InvalidDataLength();
@@ -310,7 +336,13 @@ contract NexusBridge is
             id = messageId++;
         }
         fees += msg.value;
-        Message memory message = Message(MESSAGE_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, data, uint64(id));
+        Message memory message = Message(
+            MESSAGE_TX_PREFIX,
+            bytes32(bytes20(msg.sender)),
+            recipient,
+            data,
+            uint64(id)
+        );
         // store message hash to be retrieved later by our light client
         isSent[id] = keccak256(abi.encode(message));
 
@@ -322,13 +354,19 @@ contract NexusBridge is
      * @dev     This function is used for ETH transfers from Ethereum to Avail
      * @param   recipient  Recipient of the ETH on Avail
      */
-    function sendETH(bytes32 recipient) external payable whenNotPaused checkDestAmt(recipient, msg.value) {
+    function sendETH(
+        bytes32 recipient
+    ) external payable whenNotPaused checkDestAmt(recipient, msg.value) {
         uint256 id;
         unchecked {
             id = messageId++;
         }
         Message memory message = Message(
-            TOKEN_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, abi.encode(ETH_ASSET_ID, msg.value), uint64(id)
+            TOKEN_TX_PREFIX,
+            bytes32(bytes20(msg.sender)),
+            recipient,
+            abi.encode(ETH_ASSET_ID, msg.value),
+            uint64(id)
         );
         // store message hash to be retrieved later by our light client
         isSent[id] = keccak256(abi.encode(message));
@@ -343,11 +381,11 @@ contract NexusBridge is
      * @param   recipient  Recipient of the asset on Avail
      * @param   amount  Amount of ERC20 tokens to bridge
      */
-    function sendERC20(bytes32 assetId, bytes32 recipient, uint256 amount)
-        external
-        whenNotPaused
-        checkDestAmt(recipient, amount)
-    {
+    function sendERC20(
+        bytes32 assetId,
+        bytes32 recipient,
+        uint256 amount
+    ) external whenNotPaused checkDestAmt(recipient, amount) {
         address token = tokens[assetId];
         if (token != address(0)) {
             uint256 id;
@@ -355,7 +393,11 @@ contract NexusBridge is
                 id = messageId++;
             }
             Message memory message = Message(
-                TOKEN_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, abi.encode(assetId, amount), uint64(id)
+                TOKEN_TX_PREFIX,
+                bytes32(bytes20(msg.sender)),
+                recipient,
+                abi.encode(assetId, amount),
+                uint64(id)
             );
             // store message hash to be retrieved later by our light client
             isSent[id] = keccak256(abi.encode(message));
@@ -373,7 +415,11 @@ contract NexusBridge is
                 id = messageId++;
             }
             Message memory message = Message(
-                TOKEN_TX_PREFIX, bytes32(bytes20(msg.sender)), recipient, abi.encode(assetId, amount), uint64(id)
+                TOKEN_TX_PREFIX,
+                bytes32(bytes20(msg.sender)),
+                recipient,
+                abi.encode(assetId, amount),
+                uint64(id)
             );
             // store message hash to be retrieved later by our light client
             isSent[id] = keccak256(abi.encode(message));
@@ -396,11 +442,22 @@ contract NexusBridge is
         return length * feePerByte;
     }
 
-    function _checkInclusionAgainstStateRoot(MessageReceieve calldata message, bytes calldata proof) private {
+    function _checkInclusionAgainstStateRoot(
+        MessageReceieve calldata message,
+        bytes calldata proof
+    ) private {
         bytes32 state = nexus.getChainState(0, chainId);
-        (,,, bytes32 storageRoot) = verifier.verifyAccount(state, proof, address(uint160(uint256(message.to))));
+        (, , , bytes32 storageRoot) = verifier.verifyAccount(
+            state,
+            proof,
+            address(uint160(uint256(message.to)))
+        );
         require(storageRoot != EMPTY_TRIE_ROOT_HASH, "invalid entry");
-        bytes32 value = verifier.verifyStorage(storageRoot, message.storageSlot, message.storageProof);
+        bytes32 value = verifier.verifyStorage(
+            storageRoot,
+            message.storageSlot,
+            message.storageProof
+        );
         require(value == message.slotValue, "Invalid slot value");
     }
 }

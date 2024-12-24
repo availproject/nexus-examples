@@ -47,3 +47,6 @@ typechain-types
 artifacts
 artifacts-zk
 cache-zk
+zkout*
+artifacts-*
+cache-*
