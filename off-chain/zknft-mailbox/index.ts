@@ -1,21 +1,16 @@
-import { ethers, Log, TransactionReceipt, Provider, keccak256, lock } from "ethers";
+import { ethers, Log, TransactionReceipt, Provider, keccak256, lock, AbiCoder, ParamType } from "ethers";
 import { Provider as L2Provider, types } from "zksync-ethers";
+import { NexusClient, MailBoxClient, ProofManagerClient, ZKSyncVerifier, AccountApiResponse, Networks, MailboxMessageStruct } from "nexus-js";
+import { ErrorDecoder } from "ethers-decode-error";
+import axios from "axios";
 import erc20Abi from "./abi/MyERC20Token.json" with { type: "json" };
 import nexusStateManagerAbi from "./abi/nexusStateManager.json" with { type: "json" };
-import axios from "axios";
 import paymentAbi from "./abi/NFTPaymentMailbox.json" with { type: "json" };
 import nftAbi from "./abi/MyNFTMailbox.json" with { type: "json" };
-import mailboxAbi from "./abi/nexus_mailbox.json"  with { type: "json" };
+import mailboxAbi from "./abi/nexus_mailbox.json" with { type: "json" };
 import storageProofAbi from "./abi/StorageProof.json" with { type: "json" };
-import verifierWrapperAbi from "./abi/VerifierWrapper.json"  with { type: "json" };
-import zksyncNexusManagerAbi from "./abi/ZKSyncNexusManagerRouter.json"  with { type: "json" };
-import { NexusClient, MailBoxClient, ProofManagerClient, ZKSyncVerifier } from "nexus-js";
-import { AccountApiResponse } from "nexus-js";
-import { Networks } from "nexus-js";
-import { MailboxMessageStruct } from "nexus-js";
-import { AbiCoder } from "ethers";
-import { ParamType } from "ethers";
-import { ErrorDecoder } from "ethers-decode-error";
+import verifierWrapperAbi from "./abi/VerifierWrapper.json" with { type: "json" };
+import zksyncNexusManagerAbi from "./abi/ZKSyncNexusManagerRouter.json" with { type: "json" };
 import deployedAddresses from "./deployed_addresses.json" with { type: "json" };
 
 type NexusState = {

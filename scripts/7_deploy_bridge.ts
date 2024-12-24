@@ -42,7 +42,6 @@ async function main() {
   console.log("Deploying NexusBridge contract...");
   const bridgeArtifact = await deployer.loadArtifact("NexusBridge");
   const bridgeContract = await deployer.deploy(bridgeArtifact, [
-    100, // Fee basis points
     publicAddress, // Fee collector
     availTokenAddress,
     publicAddress, // Owner

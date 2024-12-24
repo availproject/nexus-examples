@@ -45,27 +45,21 @@ interface INexusBridge {
     error WithdrawFailed();
 
     function setPaused(bool status) external;
-    function updateTokens(
-        bytes32[] calldata assetIds,
-        address[] calldata tokenAddresses
-    ) external;
-    function updateFeePerByte(uint256 newFeePerByte) external;
+
     function updateFeeRecipient(address newFeeRecipient) external;
     function withdrawFees() external;
 
-    function receiveERC20(
-        Message calldata message,
-        bytes calldata input
-    ) external;
-    function sendMessage(
-        bytes32 recipient,
-        bytes calldata data
-    ) external payable;
+    // function receiveERC20(
+    //     Message calldata message,
+    //     bytes calldata input
+    // ) external;
 
-    function sendETH(bytes32 recipient) external payable;
     function sendERC20(
         bytes32 assetId,
         bytes32 recipient,
-        uint256 amount
+        uint256 amount,
+        bytes32[] calldata destination,
+        uint256 nonce,
+        address[] calldata destinationMailboxAddress
     ) external;
 }

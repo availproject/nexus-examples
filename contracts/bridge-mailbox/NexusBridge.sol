@@ -23,8 +23,7 @@ contract NexusBridge is
     PausableUpgradeable,
     AccessControlDefaultAdminRulesUpgradeable,
     INexusBridge,
-    INexusReceiver,
-    INexusMailbox
+    INexusReceiver
 {
     using Merkle for bytes32[];
     using SafeERC20 for IERC20;
@@ -42,26 +41,9 @@ contract NexusBridge is
 
     address public feeRecipient;
     uint256 public fees; // total fees accumulated by bridge
-    uint256 public feePerByte; // in wei
     uint256 public messageId; // next nonce
 
-    uint256 private constant MAX_DATA_LENGTH = 102_400;
-    // Derived from abi.encodePacked("ETH")
-    // slither-disable-next-line too-many-digits
-    bytes32 private constant ETH_ASSET_ID =
-        0x4554480000000000000000000000000000000000000000000000000000000000;
     bytes32 private constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
-    bytes32 private constant EMPTY_TRIE_ROOT_HASH =
-        0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421;
-    bytes32 private constant EMPTY_CODE_HASH =
-        0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
-
-    modifier onlyTokenTransfer(bytes1 messageType) {
-        if (messageType != TOKEN_TX_PREFIX) {
-            revert InvalidFungibleTokenTransfer();
-        }
-        _;
-    }
 
     modifier checkDestAmt(bytes32 dest, uint256 amount) {
         if (dest == 0x0 || amount == 0 || amount > type(uint128).max) {
@@ -72,21 +54,18 @@ contract NexusBridge is
 
     /**
      * @notice  Initializes the AvailBridge contract
-     * @param   newFeePerByte  New fee per byte value
      * @param   newFeeRecipient  New fee recipient address
      * @param   newAvail  Address of the AVAIL token contract
      * @param   governance  Address of the governance multisig
      * @param   pauser  Address of the pauser multisig
      */
     function initialize(
-        uint256 newFeePerByte,
         address newFeeRecipient,
         IAvail newAvail,
         address governance,
         address pauser,
         INexusMailbox _nexusMailbox
     ) external initializer {
-        feePerByte = newFeePerByte;
         // slither-disable-next-line missing-zero-check
         feeRecipient = newFeeRecipient;
 
@@ -112,32 +91,6 @@ contract NexusBridge is
     }
 
     /**
-     * @notice  Function to update asset ID -> token address mapping
-     * @dev     Only callable by governance
-     * @param   assetIds  Asset IDs to update
-     * @param   tokenAddresses  Token addresses to update
-     */
-    function updateTokens(
-        bytes32[] calldata assetIds,
-        address[] calldata tokenAddresses
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        uint256 length = assetIds.length;
-        if (length != tokenAddresses.length) {
-            revert ArrayLengthMismatch();
-        }
-        for (uint256 i = 0; i < length; ) {
-            require(
-                nexusTokens[assetIds[i]] == address(0),
-                "asset id used by nexus tokens"
-            );
-            tokens[assetIds[i]] = tokenAddresses[i];
-            unchecked {
-                ++i;
-            }
-        }
-    }
-
-    /**
      * @notice  Function to update asset ID -> token address mapping for nexus tokens
      * @dev     Only callable by governance
      * @param   assetIds  Asset IDs to update
@@ -152,26 +105,11 @@ contract NexusBridge is
             revert ArrayLengthMismatch();
         }
         for (uint256 i = 0; i < length; ) {
-            require(
-                tokens[assetIds[i]] == address(0),
-                "asset id used by standard tokens"
-            );
             nexusTokens[assetIds[i]] = tokenAddresses[i];
             unchecked {
                 ++i;
             }
         }
-    }
-
-    /**
-     * @notice  Function to update the fee per byte value
-     * @dev     Only callable by governance
-     * @param   newFeePerByte  New fee per byte value
-     */
-    function updateFeePerByte(
-        uint256 newFeePerByte
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        feePerByte = newFeePerByte;
     }
 
     /**
@@ -199,15 +137,16 @@ contract NexusBridge is
             revert WithdrawFailed();
         }
     }
-    function _recieveERC20(bytes memory data, bytes memory proof) {
-        (bytes32 assetId, uint256 value) = abi.decode(data, (bytes32, uint256));
+    function _receiveERC20(Message memory message) internal {
+        (bytes32 assetId, uint256 value) = abi.decode(
+            message.data,
+            (bytes32, uint256)
+        );
 
-        token = nexusTokens[assetId];
+        address token = nexusTokens[assetId];
         if (token != address(0)) {
             // revert to message.to later
-            address dest = address(uint160(uint256(message.from)));
-
-            emit MessageReceived(message.from, dest, message.messageId);
+            address dest = address(uint160(uint256(message.to)));
 
             IAvail(token).mint(dest, value);
             return;
@@ -226,68 +165,55 @@ contract NexusBridge is
         bytes32 assetId,
         bytes32 recipient,
         uint256 amount,
-        bytes32[] destination,
+        bytes32[] calldata destination,
         uint256 nonce,
-        address destinationMailboxAddress
+        address[] calldata destinationMailboxAddress
     ) external whenNotPaused checkDestAmt(recipient, amount) {
-        token = nexusTokens[assetId];
-        if (token != address(0)) {
-            uint256 id;
-            unchecked {
-                id = messageId++;
-            }
-            Message memory message = Message(
-                bytes32(bytes20(msg.sender)),
-                recipient,
-                abi.encode(assetId, amount),
-                uint64(id)
-            );
-            // store message hash to be retrieved later by our light client
-            isSent[id] = keccak256(abi.encode(message));
+        address token = nexusTokens[assetId];
+        if (token == address(0)) revert InvalidAssetId();
 
-            mailbox.sendMessage(
-                destination,
-                destinationMailboxAddress,
-                nonce,
-                data
-            );
-
-            emit MessageSent(msg.sender, recipient, id);
-
-            IAvail(token).burn(msg.sender, amount);
-            return;
+        uint256 id;
+        unchecked {
+            id = messageId++;
         }
 
-        revert InvalidAssetId();
+        Message memory message = Message(
+            bytes32(bytes20(msg.sender)),
+            recipient,
+            abi.encode(assetId, amount),
+            uint64(id)
+        );
+
+        // store message hash to be retrieved later by our light client
+        isSent[id] = keccak256(abi.encode(message));
+
+        bytes memory data = abi.encode(message);
+        mailbox.sendMessage(
+            destination,
+            destinationMailboxAddress,
+            nonce,
+            data
+        );
+
+        emit MessageSent(msg.sender, recipient, id);
+        IAvail(token).burn(msg.sender, amount);
     }
 
     function onNexusMessage(
         bytes32 nexusAppIDFrom,
         address sender,
         bytes memory data,
-        uint256 nonce,
-        bytes memory proof
-    ) public {
+        uint256 nonce
+    ) public override {
         require(
             msg.sender == address(mailbox),
             "Only valid messages from nexus mailbox are acceptable"
         );
-        // Check if the nexusAppIDFrom matches the expected paymentNexusId
-        if (nexusAppIDFrom != paymentNexusId) {
-            revert InvalidChain();
-        }
+        //TODO  fix
+        // require(nexusAppIDFrom == address(0), "Invalid App ID");
 
         Message memory message = abi.decode(data, (Message));
 
-        _recieveERC20(message.data, proof);
-    }
-
-    /**
-     * @notice  Returns the minimum fee for a given message length
-     * @param   length  Length of the message (in bytes)
-     * @return  uint256  The minimum fee
-     */
-    function getFee(uint256 length) public view returns (uint256) {
-        return length * feePerByte;
+        _receiveERC20(message);
     }
 }
