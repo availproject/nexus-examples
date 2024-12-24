@@ -45,8 +45,6 @@ contract NexusBridge is
     uint256 public feePerByte; // in wei
     uint256 public messageId; // next nonce
 
-    bytes1 private constant TOKEN_TX_PREFIX = 0x02;
-
     uint256 private constant MAX_DATA_LENGTH = 102_400;
     // Derived from abi.encodePacked("ETH")
     // slither-disable-next-line too-many-digits
@@ -239,7 +237,6 @@ contract NexusBridge is
                 id = messageId++;
             }
             Message memory message = Message(
-                TOKEN_TX_PREFIX,
                 bytes32(bytes20(msg.sender)),
                 recipient,
                 abi.encode(assetId, amount),
