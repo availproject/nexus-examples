@@ -1,16 +1,28 @@
 import { ethers, } from "ethers";
 import { Provider as L2Provider } from "zksync-ethers";
-import { NexusClient, ProofManagerClient, } from "nexus-js";
+import { NexusClient, ProofManagerClient, ZKSyncVerifier, } from "nexus-js";
+import { Networks } from "nexus-js";
 import BridgeABI from "./abi/bridge.json" with { type: "json" };
 import ERC20Abi from "./abi/MyERC20Token.json" with { type: "json" };
+import mailboxAbi from "./abi/mailbox.json" with { type: "json" };
 import { sleep } from "zksync-ethers/build/utils.js";
+// ZKSYNC 1
+// NexusProofManager deployed to:  0x6f96e1f78Ce4dC1cF742bA14A9eE8fE0f4A538A2
+// 0x8ff97419363ffd7000167f130ef7168fbea05faf9251824ca5043f113cc6a7c7
+// Mailbox deployed to:  0x08121657687264afDe690a2f5D833fDeD0C270Ce
+// Verifer deployed to :  0xB308CA4eCA3d77cdCdD0886bd35859d9F10Cc202
+// ZKSYNC 2
+// NexusProofManager deployed to:  0x6838b31404d6A00B24097B9eD97b1f4739f8a4A8
+// Mailbox deployed to:  0xd0b12bacba3D73A0e4a959Ff469FcEc6C5eB24A7
+// Verifer deployed to :  0xc84c82A60121Dc14C81D04e969B0eD9554232F98
 const NexusBridgeZKSYNC1 = "0x1abB25bf5403178A31753c416B29c3b94D715b0C";
 const ERC20TokenZKSYNC1 = "0xB736FaB431d420824Ef64b17325932169A5FF099";
 const NexusBridgeZKSYNC2 = "0xb915aC078613c7996c205aC0937c2b703ca8FB91";
 const ERC20TokenZKSYNC2 = "0xebD2C81De496A601F48ff84E2D5ae5a718Baf41E";
 const mailboxAddressZKSYNC1 = "0x08121657687264afDe690a2f5D833fDeD0C270Ce";
 const mailboxAddressZKSYNC2 = "0xfcC66069D2046dF3cA36Ae56B3E64eC5CDd48eD4";
-const proofManagerAddressZKSYNC2 = "0x6f96e1f78Ce4dC1cF742bA14A9eE8fE0f4A538A2";
+const proofManagerAddressZKSYNC2 = "0x6838b31404d6A00B24097B9eD97b1f4739f8a4A8";
+const proofManagerAddressZKSYNC1 = "0x6f96e1f78Ce4dC1cF742bA14A9eE8fE0f4A538A2";
 const privateKey = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 const zksync1URL = "http://zksync1.nexus.avail.tools";
 const zksync2URL = "http://zksync2.nexus.avail.tools";
@@ -80,71 +92,58 @@ async function main() {
     await sleep(2000);
     await proofManagerClient.updateChainState(accountDetails.response.nexus_header.number, accountDetails.response.proof, appId1, accountDetails.response.account);
     console.log("✅  Updated Chain State");
-    // const zksyncAdapter = new ZKSyncVerifier({
-    //   [appId1]: {
-    //     rpcUrl: zksync1URL,
-    //     mailboxContract: mailboxAddressZKSYNC1,
-    //     stateManagerContract: stateManagerNFTChainAddr,
-    //     appID: appId1,
-    //     chainId: "270",
-    //     type: Networks.ZKSync,
-    //     privateKey
-    //   },
-    //   [appId2]: {
-    //     rpcUrl: zksync2URL,
-    //     mailboxContract: mailboxAddressZKSYNC2,
-    //     stateManagerContract: deployedAddresses.proofManagerAddress2,
-    //     appID: appId2,
-    //     chainId: "271",
-    //     type: Networks.ZKSync,
-    //     privateKey
-    //   }
-    // }, {
-    //   rpcUrl: zksync_nft_url,
-    //   mailboxContract: deployedAddresses.mailBoxAddress1,
-    //   stateManagerContract: stateManagerNFTChainAddr,
-    //   appID: app_id,
-    //   chainId: "270",
-    //   type: Networks.ZKSync,
-    //   privateKey: privateKeyZkSync
-    // }, mailboxAbi.abi)
-    //   const paymentReceipt: PaymentReceipt = {
-    //     from: await signerPayment.getAddress(),
-    //     to: await signerPayment.getAddress(),
-    //     nftId: tokenId.toString(),
-    //     amount: ethers.parseEther("1").toString(),
-    //     tokenAddress: paymentTokenAddr,
-    //   }
-    //   let abiCoder = new AbiCoder();
-    //   const expectedMessage: MailboxMessage = {
-    //     nexusAppIDFrom: app_id_2,
-    //     nexusAppIDTo: [app_id],
-    //     data: abiCoder.encode(["address", "address", "uint256", "uint256", "address"], [
-    //       paymentReceipt.from,
-    //       paymentReceipt.to,
-    //       paymentReceipt.nftId,
-    //       paymentReceipt.amount,
-    //       paymentReceipt.tokenAddress,
-    //     ]),
-    //     from: paymentContractAddress,
-    //     to: [nftContractAddress],
-    //     nonce: lockNFTResult.nonce.toString(),
-    //   };
-    //   const encodedReceipt = ethers.AbiCoder.defaultAbiCoder().encode(
-    //     ["tuple(bytes32 nexusAppIDFrom, bytes32[] nexusAppIDTo, bytes data, address from, address[] to, uint256 nonce)"],
-    //     [{
-    //         nexusAppIDFrom: expectedMessage.nexusAppIDFrom,
-    //         nexusAppIDTo: expectedMessage.nexusAppIDTo,
-    //         data: expectedMessage.data,
-    //         from: expectedMessage.from,
-    //         to: expectedMessage.to,
-    //         nonce: expectedMessage.nonce
-    //     }]
-    // );
-    //    receiptHash = keccak256(encodedReceipt);
-    //   if (receiptHash !== emmittedReceiptHash) {
-    //     throw new Error("Calculated receipt hash is incorrect");
-    //   }
+    const zksyncAdapter = new ZKSyncVerifier({
+        [appId1]: {
+            rpcUrl: zksync1URL,
+            mailboxContract: mailboxAddressZKSYNC1,
+            stateManagerContract: proofManagerAddressZKSYNC1,
+            appID: appId1,
+            chainId: "270",
+            type: Networks.ZKSync,
+            privateKey
+        },
+        [appId2]: {
+            rpcUrl: zksync2URL,
+            mailboxContract: mailboxAddressZKSYNC2,
+            stateManagerContract: proofManagerAddressZKSYNC2,
+            appID: appId2,
+            chainId: "271",
+            type: Networks.ZKSync,
+            privateKey
+        }
+    }, {
+        rpcUrl: zksync2URL,
+        mailboxContract: mailboxAddressZKSYNC2,
+        stateManagerContract: proofManagerAddressZKSYNC2,
+        appID: appId2,
+        chainId: "271",
+        type: Networks.ZKSync,
+        privateKey
+    }, mailboxAbi.abi);
+    const mailboxContract = new ethers.Contract(mailboxAddressZKSYNC1, mailboxAbi.abi, signerZKSYNC1);
+    const mapping = await mailboxContract.messages(receiptHash);
+    console.log("✅  Mapping exists", mapping);
+    // const storageSlot: bigint = await paymentContract.getStorageLocationForReceipt(receiptHash);
+    // const proof = await zksyncAdapter.getReceiveMessageProof(accountDetails.response.account.height,
+    //   mapping,
+    //   {
+    //     storageKey: storageSlot.toString()
+    //   });
+    // const errorDecoder = ErrorDecoder.create([BridgeABI.abi, mailboxAbi.abi, storageProofAbi.abi, verifierWrapperAbi.abi, mailboxAbi.abi, zksyncNexusManagerAbi.abi])
+    // let receipt: TransactionReceipt | null = null;
+    // try {
+    //   const transferTx = await nftContract.transferNFT(
+    //     accountDetails.response.account.height,
+    //     expectedMessage,
+    //     zksyncAdapter.encodeMessageProof(proof),
+    //   )
+    //   receipt = await transferTx.wait();
+    //   console.log("✅  NFT Transfer successfull")
+    // } catch (err) {
+    //   console.log(err)
+    //   const { reason } = await errorDecoder.decode(err)
+    //   console.log('Revert reason:', reason)
+    // }
 }
 main();
 async function waitForUpdateOnNexus(nexusClient, blockHeight) {
