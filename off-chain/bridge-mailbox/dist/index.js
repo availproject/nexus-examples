@@ -2,28 +2,29 @@ import { ethers, } from "ethers";
 import { Provider as L2Provider } from "zksync-ethers";
 import { NexusClient, ProofManagerClient, ZKSyncVerifier, } from "nexus-js";
 import { Networks } from "nexus-js";
+import { ErrorDecoder } from "ethers-decode-error";
 import BridgeABI from "./abi/bridge.json" with { type: "json" };
 import ERC20Abi from "./abi/MyERC20Token.json" with { type: "json" };
 import mailboxAbi from "./abi/mailbox.json" with { type: "json" };
 import { sleep } from "zksync-ethers/build/utils.js";
 // ZKSYNC 1
-// NexusProofManager deployed to:  0x42079b9121f6eac3559106CB198Be2d448692Ffa
-// 0x46501879b8ca8525e8c2fd519e2fbfcfa2ebea26501294aa02cbfcfb12e94354
-// Mailbox deployed to:  0x6d06D11E90265c2607E7a8681A63f137Cf1aaC57
-// Verifer deployed to :  0xE6c2da0d05d5617cbb9EFF2793FB365c30C4fb56
+// NexusProofManager deployed to:  0xC41ff55Bf1E8f99A3c00d6a280871042CFb2c8e4
+// 0x8ff97419363ffd7000167f130ef7168fbea05faf9251824ca5043f113cc6a7c7
+// Mailbox deployed to:  0x105097919b1B2a61c26C97F759E5F3e80EecC5d2
+// Verifer deployed to :  0x8bD8E7840D0a9E32dc434887C451B5FC1d77E66b
 // ZKSYNC 2
-// NexusProofManager deployed to:  0x47CDf90abeada40825b3054D78cE025deb8ba129
+// NexusProofManager deployed to:  0x08121657687264afDe690a2f5D833fDeD0C270Ce
 // 0x46501879b8ca8525e8c2fd519e2fbfcfa2ebea26501294aa02cbfcfb12e94354
-// Mailbox deployed to:  0xCB3B144d0D453Aa70bD5daa85d3242f9CCb01908
-// Verifer deployed to :  0xC6f528dF3790e15f4e7d3C2e7DD52a47F5817255
-const NexusBridgeZKSYNC1 = "0xB6CcB1164De6EDF9e1Da9c797ad12Feb46723e8e";
-const ERC20TokenZKSYNC1 = "0x7DB2b91a87800e8935a48a4CfA7B2616c347E893";
-const NexusBridgeZKSYNC2 = "0xb915aC078613c7996c205aC0937c2b703ca8FB91";
-const ERC20TokenZKSYNC2 = "0xebD2C81De496A601F48ff84E2D5ae5a718Baf41E";
-const mailboxAddressZKSYNC1 = "0x6d06D11E90265c2607E7a8681A63f137Cf1aaC57";
-const mailboxAddressZKSYNC2 = "0xCB3B144d0D453Aa70bD5daa85d3242f9CCb01908";
-const proofManagerAddressZKSYNC2 = "0x47CDf90abeada40825b3054D78cE025deb8ba129";
-const proofManagerAddressZKSYNC1 = "0x42079b9121f6eac3559106CB198Be2d448692Ffa";
+// Mailbox deployed to:  0xeDd5f9154B8654Dc48E8a695AB1FDA31dC41a7c5
+// Verifer deployed to :  0xB736FaB431d420824Ef64b17325932169A5FF099
+const NexusBridgeZKSYNC1 = "0xdf1dE3fEB82bD67233E64447ffdfd48f7057a735";
+const ERC20TokenZKSYNC1 = "0xFCd24fF6033383c937AB820FBbDb70E8DE184407";
+const NexusBridgeZKSYNC2 = "0x95eF39972bE0Edb8C337961Fd1EfA5eb9d368008";
+const ERC20TokenZKSYNC2 = "0x6d06D11E90265c2607E7a8681A63f137Cf1aaC57";
+const mailboxAddressZKSYNC1 = "0x105097919b1B2a61c26C97F759E5F3e80EecC5d2";
+const mailboxAddressZKSYNC2 = "0xeDd5f9154B8654Dc48E8a695AB1FDA31dC41a7c5";
+const proofManagerAddressZKSYNC2 = "0x08121657687264afDe690a2f5D833fDeD0C270Ce";
+const proofManagerAddressZKSYNC1 = "0xC41ff55Bf1E8f99A3c00d6a280871042CFb2c8e4";
 const privateKey = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 const zksync1URL = "http://zksync1.nexus.avail.tools";
 const zksync2URL = "http://zksync2.nexus.avail.tools";
@@ -90,7 +91,7 @@ async function main() {
     await proofManagerClient.updateChainState(accountDetails.response.nexus_header.number, accountDetails.response.proof, appId1, accountDetails.response.account);
     console.log("✅  Updated Chain State");
     const zksyncAdapter = new ZKSyncVerifier({
-        ["0x46501879b8ca8525e8c2fd519e2fbfcfa2ebea26501294aa02cbfcfb12e94354"]: {
+        ["0x8ff97419363ffd7000167f130ef7168fbea05faf9251824ca5043f113cc6a7c7"]: {
             rpcUrl: zksync1URL,
             mailboxContract: mailboxAddressZKSYNC1,
             stateManagerContract: proofManagerAddressZKSYNC1,
@@ -117,31 +118,40 @@ async function main() {
         type: Networks.ZKSync,
         privateKey
     }, mailboxAbi.abi);
-    const mailboxContract = new ethers.Contract(mailboxAddressZKSYNC1, mailboxAbi.abi, signerZKSYNC1);
+    let mailboxContract = new ethers.Contract(mailboxAddressZKSYNC1, mailboxAbi.abi, signerZKSYNC1);
     const mapping = await mailboxContract.messages(receiptHash);
     console.log("✅  Mapping exists", mapping);
-    const messageDetails = await mailboxContract.sentMessageDetails(receiptHash);
+    const messageDetails = await mailboxContract.getSendMessageDetails(receiptHash);
     console.log("✅  Message Details", messageDetails);
     const storageSlot = getStorageLocationForReceipt(receiptHash);
     const proof = await zksyncAdapter.getReceiveMessageProof(accountDetails.response.account.height, messageDetails, {
         storageKey: storageSlot.toString()
     });
     console.log("✅  Proof exists", proof);
-    // const errorDecoder = ErrorDecoder.create([BridgeABI.abi, mailboxAbi.abi, storageProofAbi.abi, verifierWrapperAbi.abi, mailboxAbi.abi, zksyncNexusManagerAbi.abi])
-    // let receipt: TransactionReceipt | null = null;
-    // try {
-    //   const transferTx = await nftContract.transferNFT(
-    //     accountDetails.response.account.height,
-    //     expectedMessage,
-    //     zksyncAdapter.encodeMessageProof(proof),
-    //   )
-    //   receipt = await transferTx.wait();
-    //   console.log("✅  NFT Transfer successfull")
-    // } catch (err) {
-    //   console.log(err)
-    //   const { reason } = await errorDecoder.decode(err)
-    //   console.log('Revert reason:', reason)
-    // }
+    const errorDecoder = ErrorDecoder.create([BridgeABI.abi, mailboxAbi.abi, mailboxAbi.abi]);
+    let receipt = null;
+    try {
+        const proofEncoded = zksyncAdapter.encodeMessageProof(proof);
+        mailboxContract = new ethers.Contract(mailboxAddressZKSYNC2, mailboxAbi.abi, signerZKSYNC2);
+        await mailboxContract.addOrUpdateWrapper(messageDetails.nexusAppIDFrom, "0xB736FaB431d420824Ef64b17325932169A5FF099");
+        const messageDecoded = {
+            nexusAppIDFrom: messageDetails.nexusAppIDFrom,
+            nexusAppIDTo: [],
+            data: messageDetails.data,
+            from: messageDetails.from,
+            to: [],
+            nonce: messageDetails.nonce
+        };
+        console.log(messageDecoded);
+        const transferTx = await mailboxContract.receiveMessage(accountDetails.response.account.height, messageDecoded, proofEncoded);
+        receipt = await transferTx.wait();
+        console.log("✅  ERC20 Transfer successfull");
+    }
+    catch (err) {
+        console.log(err);
+        const { reason } = await errorDecoder.decode(err);
+        console.log('Revert reason:', reason);
+    }
 }
 main();
 async function waitForUpdateOnNexus(nexusClient, blockHeight) {
