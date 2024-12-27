@@ -14,18 +14,18 @@ import { Networks } from "nexus-js";
 import { AbiCoder } from "ethers";
 import { ErrorDecoder } from "ethers-decode-error";
 import deployedAddresses from "./deployed_addresses.json" with { type: "json" };
-let nexusRPCUrl = "http://127.0.0.1:7000";
-let zksync_nft_url = "http://127.0.0.1:3150";
-let zksync_payment_url = "http://127.0.0.1:3050";
+let nexusRPCUrl = "http://dev.nexus.avail.tools";
+let zksync_nft_url = "http://zksync2.nexus.avail.tools";
+let zksync_payment_url = "http://zksync1.nexus.avail.tools";
 let privateKeyZkSync = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 let privateKeyZkSync2 = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 let stateManagerNFTChainAddr = deployedAddresses.proofManagerAddress1;
 let paymentContractAddress = deployedAddresses.nftPaymentContractAddress;
 let paymentTokenAddr = deployedAddresses.tokenContractAddress;
 let nftContractAddress = deployedAddresses.nftContractAddress;
-let tokenId = 9;
-let app_id = "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
-let app_id_2 = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+let tokenId = 3;
+let app_id = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+let app_id_2 = "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d";
 async function main() {
     // 1. Deploy contracts: Mailbox + Nexus state manager  - done
     // 2. Deploy nft contracts on different chains - done
@@ -51,10 +51,17 @@ async function main() {
     const receipt = await tx.wait();
     // this shouldn't be hardcoded, rather should be managed by sc. Doing it here since need time to write code
     // to get nft id from events if done via sc.
-    await nftContract.mint(tokenId);
-    console.log("✅ minted NFT with token ID", tokenId);
-    await nftContract.mint(tokenId + 1);
-    console.log("✅ minted NFT with token ID", tokenId + 1);
+    // await nftContract.mint(tokenId);
+    // console.log("✅ minted NFT with token ID", tokenId);
+    // await sleep(1000);
+    // await nftContract.mint(tokenId + 1);
+    // console.log("✅ minted NFT with token ID", tokenId + 1);
+    for (let i = tokenId; i < 20; i++) {
+        nftContract.mint(i);
+        await sleep(1000);
+        console.log("✅ minted NFT with token ID", i);
+    }
+    return;
     await sleep(5000);
     await scenario1();
     await scenario2();
@@ -125,6 +132,7 @@ async function main() {
             to: [nftContractAddress],
             nonce: lockNFTResult.nonce.toString(),
         };
+        console.log("expected message", expectedMessage);
         const encodedReceipt = ethers.AbiCoder.defaultAbiCoder().encode(["tuple(bytes32 nexusAppIDFrom, bytes32[] nexusAppIDTo, bytes data, address from, address[] to, uint256 nonce)"], [{
                 nexusAppIDFrom: expectedMessage.nexusAppIDFrom,
                 nexusAppIDTo: expectedMessage.nexusAppIDTo,
@@ -135,6 +143,7 @@ async function main() {
             }]);
         const receiptHash = keccak256(encodedReceipt);
         if (receiptHash !== emmittedReceiptHash) {
+            console.log("Calculated receipt hash", receiptHash, "emmittedReceiptHash", emmittedReceiptHash);
             throw new Error("Calculated receipt hash is incorrect");
         }
         const mailboxContract = new ethers.Contract(deployedAddresses.mailBoxAddress2, mailboxAbi.abi, providerPayment);
@@ -283,6 +292,7 @@ async function main() {
                 ];
                 const eventInterface = new ethers.Interface(abi);
                 const decodedLog = eventInterface.decodeEventLog("MailboxEvent", log.data, log.topics);
+                console.log("emitted event", decodedLog);
                 receiptHash = decodedLog.receiptHash;
                 break;
             }

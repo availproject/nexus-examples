@@ -6,11 +6,14 @@ import { sha512 } from '@noble/hashes/sha512';
 import nftContractAbi from "./nft.json";
 import paymentAbi from "./payment.json";
 import nexusAbi from "./nexusStateManager.json";
-import { Contract, JsonRpcProvider, Wallet } from 'ethers';
+import { Contract, ethers, JsonRpcProvider, TransactionReceipt, Wallet } from 'ethers';
 import { Provider, types } from 'zksync-ethers';
-import { nexusAppID, nexusRPCUrl, nftMintProviderURL, paymentContractAddress, privateKeyZkSync2, stateManagerNFTChainAddr, storageNFTChainAddress } from './config';
+import { nexusAppID, nexusRPCUrl, nftMintProviderURL, paymentContractAddress, privateKeyZkSync2, stateManagerNFTChainAddr, storageNFTChainAddress, paymentZKSyncProviderURL, privateKeyZkSync, nftContractAddress } from './config';
 import { StorageProofProvider } from './storageManager';
 import axios from 'axios';
+import { getPaymentOptions, PaymentOption } from './paymentOptions';
+export { getPaymentOptions };
+
 
 
 function sleep(val?: number) {
@@ -26,6 +29,33 @@ export function getProvider(): Provider {
 
 export function getBuyerWallet(provider?: Provider): Wallet {
   return new Wallet(privateKeyZkSync2, provider)
+}
+
+export function getSellerWallet(): Wallet {
+  return new Wallet(privateKeyZkSync, getProvider())
+}
+
+export async function lockNFT(paymentDetails: PaymentOption, tokenId: number, payerAddress: string): Promise<any> {
+  let provider: Provider = getProvider();
+  let signerNFT: Wallet = getBuyerWallet(provider);
+  let paymentContract = new Contract(paymentContractAddress, paymentAbi, new Provider(paymentDetails.paymentProvider));
+  let nftContract = new Contract(nftContractAddress, nftContractAbi, signerNFT);
+  console.log(" Locking NFT id", tokenId);
+  const nextNonce = BigInt(await (paymentContract as any).getCurrentNonce(payerAddress)) + BigInt(1);
+
+  const tx = await (nftContract as any).lockNFT(
+    tokenId,
+    ethers.parseEther("1"),
+    nextNonce,
+    paymentDetails.tokenAddress,
+    await signerNFT.getAddress(),
+    payerAddress,
+    //TODO: Give option to recieve NFT on different address than payment
+    payerAddress,
+  );
+
+  // Wait for the transaction to be mined
+  const receipt: TransactionReceipt = await tx.wait();
 }
 
 export async function mintNFT(
@@ -187,3 +217,7 @@ export async function getMenu(type: MenuType): Promise<Menu[]> {
   }
 }
 
+export function getPaymentChainProvider(): Provider {
+  let provider = new Provider(paymentZKSyncProviderURL);
+  return provider;
+}

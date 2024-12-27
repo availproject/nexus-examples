@@ -2,7 +2,7 @@ import * as scale from "subshape";
 import { Shape } from "subshape";
 
 export type NFT = {
-  id: string,
+  id: number,
   owner: string,
   metadata: NftMetadata,
   price: number,
@@ -159,10 +159,11 @@ export interface BuyNftQuery {
 
 export enum TransferStatus {
   NotInitiated = 0,
-  WaitingForPayment = 1,
-  PaymentDone = 2,
-  TransferInProgress = 3,
-  NFTTransferred = 4,
+  WaitingForLock = 1,
+  WaitingForPayment = 2,
+  PaymentDone = 3,
+  TransferInProgress = 4,
+  NFTTransferred = 5,
 }
 
 export interface CheckPaymentReply {

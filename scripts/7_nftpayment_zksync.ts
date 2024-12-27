@@ -4,9 +4,9 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { Deployer } from "@matterlabs/hardhat-zksync";
 
 let app_id =
-  "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
-let app_id_2 =
   "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+let app_id_2 =
+  "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d";
 let nftContractAddress = "0xed96D8c63c173dE735376d7bbC614295c07Dc195";
 let mailBoxAddress = "0x229357479712C1B364C8574c05E7c0a1CD85CAEd";
 

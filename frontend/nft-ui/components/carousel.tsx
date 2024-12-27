@@ -2,52 +2,23 @@
 import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
 import { NFT } from 'lib/zknft/types';
+import { getListedNFTs } from 'lib/zknft/listedNFTs';
+import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-export async function Carousel() {
-  // Collections that start with `hidden-*` are hidden from the search page.
-  const products: NFT[] = [
-    {
-      id: "0",
-      owner: "abc",
-      price: 10,
-      metadata: {
-        name: "NFT 1",
-        url: "/img/nft-1.jpg",
-        description: "mock NFT",
-      },
-      alt: "Photo by https://unsplash.com/@and_machines",
-    },
-    {
-      id: "0",
-      owner: "abc",
-      price: 30,
-      metadata: {
-        name: "NFT 2",
-        url: "/img/nft-2.jpg",
-        description: "mock NFT",
-      },
-      alt: "Photo by https://unsplash.com/@hazelz"
-    },
-    {
-      id: "0",
-      owner: "abc",
-      price: 400,
-      metadata: {
-        name: "NFT 3",
-        url: "/img/nft-3.jpg",
-        description: "mock NFT",
-      },
-      alt: "Photo by https://unsplash.com/@sonance"
-    }
-  ];
+interface CarouselProps {
+  products: NFT[];
+}
 
+export function Carousel({ products }: CarouselProps) {
   if (!products?.length) return null;
 
   // Purposefully duplicating products to make the carousel loop and not run out of products on wide screens.
   const carouselProducts = [...products, ...products, ...products];
 
   return (
-    <div className=" w-full overflow-x-auto pb-6 pt-1">
+    <div className="w-full overflow-x-auto pb-6 pt-1">
       <ul className="flex animate-carousel gap-4">
         {carouselProducts.map((product, i) => (
           <div

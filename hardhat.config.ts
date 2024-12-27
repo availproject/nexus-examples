@@ -56,9 +56,9 @@ task("7_nftpayment_zksync", "Deploys NFT payment contract on zkSync")
     const { mailbox, nft } = taskArgs;
 
     const app_id =
-      "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
-    const app_id_2 =
       "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+    const app_id_2 =
+      "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d";
 
     const wallet = new Wallet(process.env.PRIVATE_KEY || "");
 
@@ -136,7 +136,7 @@ const config: HardhatUserConfig = {
       zksync: false,
     },
     zksync2: {
-      url: "http://127.0.0.1:3150",
+      url: "http://zksync2.nexus.avail.tools",
       ethNetwork: "sepolia",
       accounts: [
         "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6",
@@ -144,7 +144,7 @@ const config: HardhatUserConfig = {
       zksync: true,
     },
     zksync: {
-      url: "http://127.0.0.1:3050",
+      url: "http://zksync1.nexus.avail.tools",
       ethNetwork: "sepolia",
       accounts: [
         "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6",
