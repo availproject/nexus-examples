@@ -1,0 +1,231 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0xd1573537CeCDe0D94FdEDcF59a325d3FB3fF951C",
+      "txHash": "0x9f9440efdd0ea6d849d17ada77bcf61d93c2e67908c5656714de4d190aab88d1",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x70e466e1DCDC21a82a7cdF2792491a45Ebd82261",
+      "txHash": "0xe14460707c256bdb487c4ce21e22e28fd796a742c4ac0135550c72fb8cb52f38",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "690dd9cf81dea1f80b965545c75196b6edf51cd54457cb41a2d522f4483a8fe7": {
+      "address": "0x3FC2d01F71eD3dF168BA429b118fB747A33db103",
+      "txHash": "0xf76fef09393fecdd91cd7fa8e52430cff1219113ee21ec430dd0058e29d3f1d1",
+      "layout": {
+        "solcVersion": "0.8.21",
+        "storage": [
+          {
+            "label": "isSent",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_mapping(t_uint256,t_bytes32)",
+            "contract": "NexusLockMintBridge",
+            "src": "contracts/bridge-mailbox/NexusBridge.sol:32"
+          },
+          {
+            "label": "isBridged",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_mapping(t_bytes32,t_bool)",
+            "contract": "NexusLockMintBridge",
+            "src": "contracts/bridge-mailbox/NexusBridge.sol:34"
+          },
+          {
+            "label": "nexusTokens",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_mapping(t_bytes32,t_address)",
+            "contract": "NexusLockMintBridge",
+            "src": "contracts/bridge-mailbox/NexusBridge.sol:36"
+          },
+          {
+            "label": "avail",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_contract(IAvail)6029",
+            "contract": "NexusLockMintBridge",
+            "src": "contracts/bridge-mailbox/NexusBridge.sol:38"
+          },
+          {
+            "label": "mailbox",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_contract(INexusMailbox)6261",
+            "contract": "NexusLockMintBridge",
+            "src": "contracts/bridge-mailbox/NexusBridge.sol:40"
+          },
+          {
+            "label": "feeRecipient",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_address",
+            "contract": "NexusLockMintBridge",
+            "src": "contracts/bridge-mailbox/NexusBridge.sol:42"
+          },
+          {
+            "label": "fees",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint256",
+            "contract": "NexusLockMintBridge",
+            "src": "contracts/bridge-mailbox/NexusBridge.sol:43"
+          },
+          {
+            "label": "messageId",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_uint256",
+            "contract": "NexusLockMintBridge",
+            "src": "contracts/bridge-mailbox/NexusBridge.sol:44"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IAvail)6029": {
+            "label": "contract IAvail",
+            "numberOfBytes": "20"
+          },
+          "t_contract(INexusMailbox)6261": {
+            "label": "contract INexusMailbox",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_bytes32,t_address)": {
+            "label": "mapping(bytes32 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_bool)": {
+            "label": "mapping(bytes32 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_bytes32)": {
+            "label": "mapping(uint256 => bytes32)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint48": {
+            "label": "uint48"
+          },
+          "t_mapping(t_bytes32,t_struct(RoleData)25_storage)": {
+            "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)"
+          },
+          "t_struct(RoleData)25_storage": {
+            "label": "struct AccessControlUpgradeable.RoleData",
+            "members": [
+              {
+                "label": "hasRole",
+                "type": "t_mapping(t_address,t_bool)"
+              },
+              {
+                "label": "adminRole",
+                "type": "t_bytes32"
+              }
+            ]
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_uint64": {
+            "label": "uint64"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.AccessControlDefaultAdminRules": [
+            {
+              "contract": "AccessControlDefaultAdminRulesUpgradeable",
+              "label": "_pendingDefaultAdmin",
+              "type": "t_address",
+              "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:45"
+            },
+            {
+              "contract": "AccessControlDefaultAdminRulesUpgradeable",
+              "label": "_pendingDefaultAdminSchedule",
+              "type": "t_uint48",
+              "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:46"
+            },
+            {
+              "contract": "AccessControlDefaultAdminRulesUpgradeable",
+              "label": "_currentDelay",
+              "type": "t_uint48",
+              "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:48"
+            },
+            {
+              "contract": "AccessControlDefaultAdminRulesUpgradeable",
+              "label": "_currentDefaultAdmin",
+              "type": "t_address",
+              "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:49"
+            },
+            {
+              "contract": "AccessControlDefaultAdminRulesUpgradeable",
+              "label": "_pendingDelay",
+              "type": "t_uint48",
+              "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:52"
+            },
+            {
+              "contract": "AccessControlDefaultAdminRulesUpgradeable",
+              "label": "_pendingDelaySchedule",
+              "type": "t_uint48",
+              "src": "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlDefaultAdminRulesUpgradeable.sol:53"
+            }
+          ],
+          "erc7201:openzeppelin.storage.AccessControl": [
+            {
+              "contract": "AccessControlUpgradeable",
+              "label": "_roles",
+              "type": "t_mapping(t_bytes32,t_struct(RoleData)25_storage)",
+              "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:61"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Pausable": [
+            {
+              "contract": "PausableUpgradeable",
+              "label": "_paused",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:21"
+            }
+          ],
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:40"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -8,23 +8,24 @@ import ERC20Abi from "./abi/MyERC20Token.json" with { type: "json" };
 import mailboxAbi from "./abi/mailbox.json" with { type: "json" };
 import { sleep } from "zksync-ethers/build/utils.js";
 // ZKSYNC 1
-// NexusProofManager deployed to:  0xC41ff55Bf1E8f99A3c00d6a280871042CFb2c8e4
-// 0x8ff97419363ffd7000167f130ef7168fbea05faf9251824ca5043f113cc6a7c7
-// Mailbox deployed to:  0x105097919b1B2a61c26C97F759E5F3e80EecC5d2
-// Verifer deployed to :  0x8bD8E7840D0a9E32dc434887C451B5FC1d77E66b
+// NexusProofManager deployed to:  0x9a0DE010C34887d1c6B6b8CeE22d786D1327Ea14
+// 0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e
+// Mailbox deployed to:  0xe85dC0D32215FdDA3DE6CA2165397b4b516A5Cc1
+// Verifer deployed to :  0xC66650102BBE4F9b835E54D0671A3F2fBd9AB5cE
 // ZKSYNC 2
-// NexusProofManager deployed to:  0x08121657687264afDe690a2f5D833fDeD0C270Ce
-// 0x46501879b8ca8525e8c2fd519e2fbfcfa2ebea26501294aa02cbfcfb12e94354
-// Mailbox deployed to:  0xeDd5f9154B8654Dc48E8a695AB1FDA31dC41a7c5
-// Verifer deployed to :  0xB736FaB431d420824Ef64b17325932169A5FF099
-const NexusBridgeZKSYNC1 = "0xdf1dE3fEB82bD67233E64447ffdfd48f7057a735";
-const ERC20TokenZKSYNC1 = "0xFCd24fF6033383c937AB820FBbDb70E8DE184407";
-const NexusBridgeZKSYNC2 = "0x95eF39972bE0Edb8C337961Fd1EfA5eb9d368008";
-const ERC20TokenZKSYNC2 = "0x6d06D11E90265c2607E7a8681A63f137Cf1aaC57";
-const mailboxAddressZKSYNC1 = "0x105097919b1B2a61c26C97F759E5F3e80EecC5d2";
-const mailboxAddressZKSYNC2 = "0xeDd5f9154B8654Dc48E8a695AB1FDA31dC41a7c5";
-const proofManagerAddressZKSYNC2 = "0x08121657687264afDe690a2f5D833fDeD0C270Ce";
-const proofManagerAddressZKSYNC1 = "0xC41ff55Bf1E8f99A3c00d6a280871042CFb2c8e4";
+// NexusProofManager deployed to:  0x9f4f5F7046AB90ff3bF432Ff9Bd97532312D887b
+// 0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d
+// Mailbox deployed to:  0xE6c2da0d05d5617cbb9EFF2793FB365c30C4fb56
+// Verifer deployed to :  0xC41ff55Bf1E8f99A3c00d6a280871042CFb2c8e4
+const NexusBridgeZKSYNC1 = "0x6359BDFe00d1a89D8E6cF80Ab3c9dc52E43BA23c";
+const ERC20TokenZKSYNC1 = "0x4679B93caaD3abC7722B54e31e681CF5895E6a07";
+const NexusBridgeZKSYNC2 = "0xA5160f2e9Ed3Fa9740d1f26b38A946545Ac21De4";
+const zksyncVerifierAddress2 = "0xC41ff55Bf1E8f99A3c00d6a280871042CFb2c8e4";
+const ERC20TokenZKSYNC2 = "0x105097919b1B2a61c26C97F759E5F3e80EecC5d2";
+const mailboxAddressZKSYNC1 = "0xe85dC0D32215FdDA3DE6CA2165397b4b516A5Cc1";
+const mailboxAddressZKSYNC2 = "0xE6c2da0d05d5617cbb9EFF2793FB365c30C4fb56";
+const proofManagerAddressZKSYNC2 = "0x9f4f5F7046AB90ff3bF432Ff9Bd97532312D887b";
+const proofManagerAddressZKSYNC1 = "0x9a0DE010C34887d1c6B6b8CeE22d786D1327Ea14";
 const privateKey = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 const zksync1URL = "http://zksync1.nexus.avail.tools";
 const zksync2URL = "http://zksync2.nexus.avail.tools";
@@ -91,7 +92,7 @@ async function main() {
     await proofManagerClient.updateChainState(accountDetails.response.nexus_header.number, accountDetails.response.proof, appId1, accountDetails.response.account);
     console.log("✅  Updated Chain State");
     const zksyncAdapter = new ZKSyncVerifier({
-        ["0x8ff97419363ffd7000167f130ef7168fbea05faf9251824ca5043f113cc6a7c7"]: {
+        [appId1]: {
             rpcUrl: zksync1URL,
             mailboxContract: mailboxAddressZKSYNC1,
             stateManagerContract: proofManagerAddressZKSYNC1,
@@ -133,13 +134,13 @@ async function main() {
     try {
         const proofEncoded = zksyncAdapter.encodeMessageProof(proof);
         mailboxContract = new ethers.Contract(mailboxAddressZKSYNC2, mailboxAbi.abi, signerZKSYNC2);
-        await mailboxContract.addOrUpdateWrapper(messageDetails.nexusAppIDFrom, "0xB736FaB431d420824Ef64b17325932169A5FF099");
+        await mailboxContract.addOrUpdateWrapper(messageDetails.nexusAppIDFrom, zksyncVerifierAddress2);
         const messageDecoded = {
             nexusAppIDFrom: messageDetails.nexusAppIDFrom,
-            nexusAppIDTo: [],
+            nexusAppIDTo: [...messageDetails.nexusAppIDTo],
             data: messageDetails.data,
             from: messageDetails.from,
-            to: [],
+            to: [...messageDetails.to],
             nonce: messageDetails.nonce
         };
         console.log(messageDecoded);

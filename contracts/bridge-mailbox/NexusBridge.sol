@@ -17,7 +17,7 @@ import {INexusProofManager} from "nexus/interfaces/INexusProofManager.sol";
 import {INexusMailbox} from "nexus/interfaces/INexusMailbox.sol";
 import {INexusReceiver} from "nexus/interfaces/INexusReceiver.sol";
 
-contract NexusBridge is
+contract NexusLockMintBridge is
     Initializable,
     ReentrancyGuardUpgradeable,
     PausableUpgradeable,
@@ -209,8 +209,6 @@ contract NexusBridge is
             msg.sender == address(mailbox),
             "Only valid messages from nexus mailbox are acceptable"
         );
-        //TODO  fix
-        // require(nexusAppIDFrom == address(0), "Invalid App ID");
 
         Message memory message = abi.decode(data, (Message));
 

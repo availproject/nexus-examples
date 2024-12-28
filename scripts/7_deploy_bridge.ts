@@ -1,6 +1,7 @@
 import { utils, Wallet } from "zksync-ethers";
 import * as ethers from "ethers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { Upgrades } from "@openzeppelin/hardhat-upgrades";
 import { Deployer } from "@matterlabs/hardhat-zksync";
 import * as dotenv from "dotenv";
 
@@ -40,14 +41,15 @@ async function main() {
 
   // Deploy Bridge Contract
   console.log("Deploying NexusBridge contract...");
-  const bridgeArtifact = await deployer.loadArtifact("NexusBridge");
-  const bridgeContract = await deployer.deploy(bridgeArtifact, [
+  const bridgeArtifact = await deployer.loadArtifact("NexusLockMintBridge");
+  const bridgeContract = await deployer.deploy(bridgeArtifact);
+  await bridgeContract.initialize(
     publicAddress, // Fee collector
-    availTokenAddress,
-    publicAddress, // Owner
-    publicAddress, // Admin
-    MAILBOX_ADDRESS,
-  ]);
+    availTokenAddress, // token
+    publicAddress, // governance
+    publicAddress, // pauser
+    MAILBOX_ADDRESS
+  );
 
   const bridgeAddress = await bridgeContract.getAddress();
   console.log(`NexusBridge contract deployed to: ${bridgeAddress}`);
