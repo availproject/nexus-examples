@@ -15,8 +15,8 @@ import {
   ZKSyncVerifier,
 } from "nexus-js";
 import { AccountApiResponse } from "nexus-js";
-import { Networks } from "nexus-js";
-import { MailboxMessageStruct } from "nexus-js";
+import { Networks, } from "nexus-js";
+import { MailboxMessageStruct as MailboxMessage, getStorageLocationForReceipt } from "nexus-js";
 
 import { AbiCoder } from "ethers";
 import { ParamType } from "ethers";
@@ -27,42 +27,6 @@ import ERC20Abi from "./abi/MyERC20Token.json" with { type: "json" };
 import mailboxAbi from "./abi/mailbox.json" with { type: "json" };
 import { sleep } from "zksync-ethers/build/utils.js";
 
-type NexusState = {
-  stateRoot: string;
-  blockHash: string;
-};
-
-type NexusInfo = {
-  info: NexusState;
-  chainStateNumber: number;
-  response: {
-    account: {
-      statement: string;
-      state_root: string;
-      start_nexus_hash: string;
-      last_proof_height: number;
-      height: number;
-    };
-    proof: string[];
-    value_hash: string;
-    nexus_header: {
-      parent_hash: string;
-      prev_state_root: string;
-      state_root: string;
-      avail_header_hash: string;
-      number: number;
-    };
-  };
-};
-
-interface MailboxMessage {
-  nexusAppIDFrom: string; // bytes32 -> string
-  nexusAppIDTo: string[]; // bytes32[] -> string[]
-  data: string; // bytes -> string
-  from: string; // address -> string
-  to: string[]; // address[] -> string[]
-  nonce: bigint | string; // uint256 -> number or string for large numbers
-}
 
 // ZKSYNC 1
 // NexusProofManager deployed to:  0x9a0DE010C34887d1c6B6b8CeE22d786D1327Ea14
@@ -87,8 +51,8 @@ const proofManagerAddressZKSYNC2 = "0x9f4f5F7046AB90ff3bF432Ff9Bd97532312D887b"
 const proofManagerAddressZKSYNC1 = "0x9a0DE010C34887d1c6B6b8CeE22d786D1327Ea14"
 const privateKey =
   "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
-const zksync1URL = "http://zksync1.nexus.avail.tools";
-const zksync2URL = "http://zksync2.nexus.avail.tools";
+const zksync1URL = "https://zksync1.nexus.avail.tools";
+const zksync2URL = "https://zksync2.nexus.avail.tools";
 const nexusRPCUrl = "http://dev.nexus.avail.tools";
 const nonce = 3;
 const appId1 = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
@@ -218,16 +182,7 @@ async function main() {
       type: Networks.ZKSync,
       privateKey
     }
-  }, {
-    rpcUrl: zksync2URL,
-    mailboxContract: mailboxAddressZKSYNC2,
-    stateManagerContract: proofManagerAddressZKSYNC2,
-    appID: appId2,
-    chainId: "271",
-    type: Networks.ZKSync,
-    privateKey
-  }, mailboxAbi.abi)
-
+  }, 1);
 
   let mailboxContract = new ethers.Contract(mailboxAddressZKSYNC1, mailboxAbi.abi, signerZKSYNC1);
   const mapping = await mailboxContract.messages(receiptHash);
@@ -296,14 +251,3 @@ async function waitForUpdateOnNexus(nexusClient: NexusClient, blockHeight: numbe
 }
 
 
-
-function getStorageLocationForReceipt(receiptHash: string): string {
-  const MESSAGES_MAPPING_SLOT = 0;
-  
-  const encoded = ethers.AbiCoder.defaultAbiCoder().encode(
-      ['bytes32', 'uint256'],
-      [receiptHash, MESSAGES_MAPPING_SLOT]
-  );
-  
-  return ethers.keccak256(encoded);
-}

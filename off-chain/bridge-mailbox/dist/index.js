@@ -1,7 +1,8 @@
 import { ethers, } from "ethers";
 import { Provider as L2Provider } from "zksync-ethers";
 import { NexusClient, ProofManagerClient, ZKSyncVerifier, } from "nexus-js";
-import { Networks } from "nexus-js";
+import { Networks, } from "nexus-js";
+import { getStorageLocationForReceipt } from "nexus-js";
 import { ErrorDecoder } from "ethers-decode-error";
 import BridgeABI from "./abi/bridge.json" with { type: "json" };
 import ERC20Abi from "./abi/MyERC20Token.json" with { type: "json" };
@@ -27,8 +28,8 @@ const mailboxAddressZKSYNC2 = "0xE6c2da0d05d5617cbb9EFF2793FB365c30C4fb56";
 const proofManagerAddressZKSYNC2 = "0x9f4f5F7046AB90ff3bF432Ff9Bd97532312D887b";
 const proofManagerAddressZKSYNC1 = "0x9a0DE010C34887d1c6B6b8CeE22d786D1327Ea14";
 const privateKey = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
-const zksync1URL = "http://zksync1.nexus.avail.tools";
-const zksync2URL = "http://zksync2.nexus.avail.tools";
+const zksync1URL = "https://zksync1.nexus.avail.tools";
+const zksync2URL = "https://zksync2.nexus.avail.tools";
 const nexusRPCUrl = "http://dev.nexus.avail.tools";
 const nonce = 3;
 const appId1 = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
@@ -110,15 +111,7 @@ async function main() {
             type: Networks.ZKSync,
             privateKey
         }
-    }, {
-        rpcUrl: zksync2URL,
-        mailboxContract: mailboxAddressZKSYNC2,
-        stateManagerContract: proofManagerAddressZKSYNC2,
-        appID: appId2,
-        chainId: "271",
-        type: Networks.ZKSync,
-        privateKey
-    }, mailboxAbi.abi);
+    }, 1);
     let mailboxContract = new ethers.Contract(mailboxAddressZKSYNC1, mailboxAbi.abi, signerZKSYNC1);
     const mapping = await mailboxContract.messages(receiptHash);
     console.log("✅  Mapping exists", mapping);
@@ -163,10 +156,5 @@ async function waitForUpdateOnNexus(nexusClient, blockHeight) {
         throw new Error("Account not yet initiated");
     }
     return response;
-}
-function getStorageLocationForReceipt(receiptHash) {
-    const MESSAGES_MAPPING_SLOT = 0;
-    const encoded = ethers.AbiCoder.defaultAbiCoder().encode(['bytes32', 'uint256'], [receiptHash, MESSAGES_MAPPING_SLOT]);
-    return ethers.keccak256(encoded);
 }
 //# sourceMappingURL=index.js.map
