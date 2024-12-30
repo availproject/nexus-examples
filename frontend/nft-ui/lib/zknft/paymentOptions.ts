@@ -1,5 +1,5 @@
 import { Provider } from 'zksync-ethers';
-import { paymentContractAddress, paymentTokenAddr, paymentURL as paymentURLFromConfig, paymentZKSyncProviderURL } from './config';
+import { nexusAppIDPayment, paymentContractAddress, paymentTokenAddr, paymentURL as paymentURLFromConfig, paymentZKSyncProviderURL } from './config';
 import { ethers } from 'ethers';
 import erc20Abi from './erc20.json';
 // Interface for Payment Option
@@ -13,6 +13,7 @@ export interface PaymentOption {
   paymentURL: string;
   paymentContractAddress: string;
   paymentProvider: string;
+  nexusAppID: string;
 }
 
 // Function to fetch payment token details
@@ -48,6 +49,7 @@ export async function getPaymentOptions(): Promise<PaymentOption[]> {
       paymentURL,
       paymentContractAddress: paymentContractAddress,
       paymentProvider: paymentZKSyncProviderURL,
+      nexusAppID: nexusAppIDPayment
     }];
   } catch (error) {
     console.error('Failed to fetch payment token details:', error);
@@ -63,6 +65,7 @@ export async function getPaymentOptions(): Promise<PaymentOption[]> {
       paymentURL: paymentURLFromConfig,
       paymentContractAddress: paymentContractAddress,
       paymentProvider: paymentZKSyncProviderURL,
+      nexusAppID: nexusAppIDPayment
     }];
   }
 }

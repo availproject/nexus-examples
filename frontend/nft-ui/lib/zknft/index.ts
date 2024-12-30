@@ -1,20 +1,46 @@
 import { NFT, Menu, MenuType, Message, RpcProof, NexusInfo, TransferStatus } from './types';
-import { hexToAddress, } from "./utils";
+import { hexToAddress } from "./utils";
 import * as ed from '@noble/ed25519';
 import { bytesToHex, hexToNumberString } from "web3-utils";
 import { sha512 } from '@noble/hashes/sha512';
 import nftContractAbi from "./nft.json";
 import paymentAbi from "./payment.json";
 import nexusAbi from "./nexusStateManager.json";
-import { Contract, ethers, JsonRpcProvider, TransactionReceipt, Wallet } from 'ethers';
+import { AbiCoder, Contract, ethers, JsonRpcProvider, keccak256, TransactionReceipt, Wallet } from 'ethers';
 import { Provider, types } from 'zksync-ethers';
-import { nexusAppID, nexusRPCUrl, nftMintProviderURL, paymentContractAddress, privateKeyZkSync2, stateManagerNFTChainAddr, storageNFTChainAddress, paymentZKSyncProviderURL, privateKeyZkSync, nftContractAddress } from './config';
+import { nexusAppID, nexusRPCUrl, nftMintProviderURL, paymentContractAddress, privateKeyZkSync2, stateManagerNFTChainAddr, storageNFTChainAddress, paymentZKSyncProviderURL, privateKeyZkSync, nftContractAddress, nexusAppIDPayment, nftChainMailboxAddress, paymentChainMailboxAddress } from './config';
 import { StorageProofProvider } from './storageManager';
 import axios from 'axios';
 import { getPaymentOptions, PaymentOption } from './paymentOptions';
-export { getPaymentOptions };
+import mailboxAbi from "./mailbox.json"
 
-
+type NexusState = {
+  stateRoot: string;
+};
+type AccountState = {
+  statement: string;
+  state_root: string;
+  start_nexus_hash: string;
+  last_proof_height: number;
+  height: number;
+};
+export type AccountApiResponse = {
+  info: NexusState;
+  chainStateNumber: number;
+  response: {
+    account: AccountState;
+    proof: string[];
+    value_hash: string;
+    nexus_header: {
+      parent_hash: string;
+      prev_state_root: string;
+      state_root: string;
+      avail_header_hash: string;
+      number: number;
+    };
+    value_hash_hex: string;
+  };
+};
 
 function sleep(val?: number) {
   const duration = val !== undefined ? val : 30 * 1000;
@@ -35,9 +61,34 @@ export function getSellerWallet(): Wallet {
   return new Wallet(privateKeyZkSync, getProvider())
 }
 
+export async function getAccountState(selectedPaymentOption: PaymentOption) {
+  console.log('Fetching account state...', selectedPaymentOption);
+  const response = await fetch('/api/nexus', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      action: 'getAccountState',
+      params: {
+        provider: nexusRPCUrl,
+        appId: selectedPaymentOption.nexusAppID,
+      },
+    }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error('Failed to get account state:', data);
+    throw new Error(data.error || 'Failed to get account state');
+  }
+
+  return data;
+}
+
 export async function lockNFT(paymentDetails: PaymentOption, tokenId: number, payerAddress: string): Promise<any> {
-  let provider: Provider = getProvider();
-  let signerNFT: Wallet = getBuyerWallet(provider);
+  let signerNFT: Wallet = getSellerWallet();
   let paymentContract = new Contract(paymentContractAddress, paymentAbi, new Provider(paymentDetails.paymentProvider));
   let nftContract = new Contract(nftContractAddress, nftContractAbi, signerNFT);
   console.log(" Locking NFT id", tokenId);
@@ -45,7 +96,8 @@ export async function lockNFT(paymentDetails: PaymentOption, tokenId: number, pa
 
   const tx = await (nftContract as any).lockNFT(
     tokenId,
-    ethers.parseEther("1"),
+    //TODO: Change to configurable value
+    ethers.parseEther("10"),
     nextNonce,
     paymentDetails.tokenAddress,
     await signerNFT.getAddress(),
@@ -58,117 +110,143 @@ export async function lockNFT(paymentDetails: PaymentOption, tokenId: number, pa
   const receipt: TransactionReceipt = await tx.wait();
 }
 
-export async function mintNFT(
-  nexus: NexusInfo,
+export async function transferNFT(
+  nexus: AccountApiResponse,
   proof: RpcProof,
   message: Message,
-  batchNumber: number
+  writeContractAsync: any,
+  publicClient: any,
 ): Promise<any | undefined> {
   try {
-    const LATEST_CHAIN_STATE = 0;
-
-    let provider: Provider = getProvider();
-    let signer: Wallet = getBuyerWallet(provider);
-    const nftContract = new Contract(
-      storageNFTChainAddress,
-      nftContractAbi,
-      signer
-    );
-
-    const stateManagerNFTChain = new Contract(
-      stateManagerNFTChainAddr,
-      nexusAbi,
-      signer
-    );
-
-    console.debug("Updating nexus state on nft chain");
-    //@ts-ignore
-    await stateManagerNFTChain.updateNexusBlock(nexus.chainStateNumber, nexus.info);
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-    //@ts-ignore
-    await stateManagerNFTChain.updateChainState(
-      nexus.chainStateNumber,
-      nexus.response.proof,
-      "0x" + nexusAppID,
-      {
-        statementDigest: "0x" + nexus.response.account.statement,
-        stateRoot: "0x" + nexus.response.account.state_root,
-        startNexusHash: "0x" + nexus.response.account.start_nexus_hash,
-        lastProofHeight: nexus.response.account.last_proof_height,
-        height: nexus.response.account.height,
-      }
-    );
-
-    //@ts-ignore
-    const stateInfo = await stateManagerNFTChain.getChainState(LATEST_CHAIN_STATE, "0x" + nexusAppID);
-    console.debug("State Info: ", stateInfo);
-    console.debug("Successfully completed state manager updates");
-
-    await sleep(2000);
-
-    const nonce = await provider.getTransactionCount(signer.address, "latest");
-    //@ts-ignore
-    let tx = await nftContract.mintNFT(
-      signer.address,
-      message,
-      {
-        ...proof,
-        batchNumber,
+    // Update nexus state through API
+    await fetch('/api/nexus', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      { nonce }
-    );
+      body: JSON.stringify({
+        action: 'updateNexusState',
+        params: {
+          nexusHeader: nexus.response.nexus_header,
+          account: nexus.response,
+        },
+      }),
+    });
+    //http://localhost:3000/?buyNFT=true&tokenID=15&paymentDone=true&receiptHash=0x155c7a11676f98ad2925618047d7528e0ecc2193a10ec36d24919db7e6f82c38&paymentBlockNumber=653&paymentReceipt=%7B%22nexusAppIDFrom%22:%220x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d%22,%22nexusAppIDTo%22:%5B%220x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e%22%5D,%22data%22:%220x000000000000000000000000b175236e0bdcaed34d1c29f4c22824070029a49a000000000000000000000000618263ce921f7dd5f4f40c29f6c524aaf97b9bbd000000000000000000000000000000000000000000000000000000000000000f0000000000000000000000000000000000000000000000008ac7230489e800000000000000000000000000003126ea852fe05177b94e94009aebf72a83401b46%22,%22from%22:%220x118d10E9Cf00472EA7BF006838Ea554c64CccAA8%22,%22to%22:%5B%220x3126ea852Fe05177b94e94009aEbF72A83401b46%22%5D,%22nonce%22:%229%22%7D
 
-    let receipt = await tx.wait();
-    console.debug("Mint NFT triggered successfully");
+    console.log('Transferring NFT with params:', {
+      height: nexus.response.account.height,
+      message,
+      proof
+    });
 
+    // Get encoded proof from API
+    console.log('Encoding proof...');
+    const proofResponse = await fetch('/api/nexus', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        action: 'encodeMessageProof',
+        params: {
+          proof,
+        },
+      }),
+    });
+
+    if (!proofResponse.ok) {
+      throw new Error('Failed to encode proof');
+    }
+
+    const { encodedProof } = await proofResponse.json();
+
+    // Execute contract call
+    console.log('Executing NFT transfer with formatted params:', {
+      height: BigInt(nexus.response.account.height),
+      message,
+      encodedProof,
+    });
+
+    const txHash = await writeContractAsync({
+      address: nftContractAddress as `0x${string}`,
+      abi: nftContractAbi,
+      functionName: "transferNFT",
+      args: [
+        BigInt(nexus.response.account.height),
+        message,
+        encodedProof
+      ],
+      account: writeContractAsync.account,
+      chainId: 272, // Set a reasonable gas limit
+      gasLimit: 1000000
+    });
+
+    console.log('Transaction hash:', txHash);
+
+    // Wait for transaction receipt
+    console.log('Waiting for transaction receipt...');
+    const receipt = await writeContractAsync.waitForTransactionReceipt({
+      hash: txHash,
+      chainId: 272,
+    });
+
+    console.log('NFT transfer complete:', receipt);
     return receipt;
+
   } catch (error) {
-    console.error("Transaction failed:", error);
+    console.error('Transfer NFT error:', error);
+    throw error;
   }
 }
-
 
 export async function getStorageProof(
   batchNumber: number,
-  id: number
+  message: Message,
+  paymentDetails: PaymentOption,
 ): Promise<RpcProof | undefined> {
-  //NFT Chain provider
-  let provider: Provider = Provider.getDefaultProvider(types.Network.Localhost);
-  const paymentContract = new Contract(
+  let paymentContract = new Contract(
     paymentContractAddress,
     paymentAbi,
-    provider
-  );
-  let storageProofProvider = new StorageProofProvider(
-    provider,
+    new Provider(paymentDetails.paymentProvider)
   );
 
-  //@ts-ignore
-  let storageLocation = await paymentContract.getStorageLocationForKey(id);
+  const encodedReceipt = ethers.AbiCoder.defaultAbiCoder().encode(
+    ["tuple(bytes32 nexusAppIDFrom, bytes32[] nexusAppIDTo, bytes data, address from, address[] to, uint256 nonce)"],
+    [{
+      nexusAppIDFrom: message.nexusAppIDFrom,
+      nexusAppIDTo: message.nexusAppIDTo,
+      data: message.data,
+      from: message.from,
+      to: message.to,
+      nonce: message.nonce
+    }]
+  );
 
-  try {
-    let proof = await storageProofProvider.getProof(
-      await paymentContract.getAddress(),
-      storageLocation,
-      batchNumber
-    );
+  const receiptHash = keccak256(encodedReceipt);
+  const storageSlot: bigint = await (paymentContract as any).getStorageLocationForReceipt(receiptHash);
+  console.log("Storage slot", storageSlot);
+  const response = await fetch('/api/nexus', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      action: 'getStorageProof',
+      params: {
+        batchNumber,
+        message,
+        storageKey: storageSlot.toString(),
+      },
+    }),
+  });
 
-    return proof;
-  } catch (e) {
-    console.debug(e);
+  if (!response.ok) {
+    throw new Error('Failed to get storage proof');
   }
+
+  return response.json();
 }
-
-// export async function checkPayment(message: Message, recipient: string): Promise<TransferStatus> {
-//   let provider: Provider = getProvider();
-//   const nftContract = new Contract(
-//     storageNFTChainAddress,
-//     nftContractAbi,
-//     provider
-//   );
-
-//   nftContract.ownerOf(message.messageId)
-// }
 
 export async function fetchUpdatesFromNexus(): Promise<NexusInfo | undefined> {
   try {

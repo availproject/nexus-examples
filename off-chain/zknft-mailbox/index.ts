@@ -134,17 +134,17 @@ async function main() {
 
   // this shouldn't be hardcoded, rather should be managed by sc. Doing it here since need time to write code
   // to get nft id from events if done via sc.
-  // await nftContract.mint(tokenId);
-  // console.log("✅ minted NFT with token ID", tokenId);
-  // await sleep(1000);
-  // await nftContract.mint(tokenId + 1);
-  // console.log("✅ minted NFT with token ID", tokenId + 1);
+  await nftContract.mint(tokenId);
+  console.log("✅ minted NFT with token ID", tokenId);
+  await sleep(1000);
+  await nftContract.mint(tokenId + 1);
+  console.log("✅ minted NFT with token ID", tokenId + 1);
 
-  for (let i = tokenId; i < 20; i++) {
-    nftContract.mint(i);
-    await sleep(1000);
-    console.log("✅ minted NFT with token ID", i);
-  }
+  // for (let i = tokenId; i < 20; i++) {
+  //   nftContract.mint(i);
+  //   await sleep(1000);
+  //   console.log("✅ minted NFT with token ID", i);
+  // }
 
   return;
   await sleep(5000);

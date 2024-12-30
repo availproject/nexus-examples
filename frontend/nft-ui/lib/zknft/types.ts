@@ -219,11 +219,12 @@ export type StorageProof = RpcProof & {
 };
 
 export type Message = {
-  messageType: string;
-  from: string;
-  data: string;
-  messageId: number;
-  chainId: number;
+  nexusAppIDFrom: string; // bytes32 -> string
+  nexusAppIDTo: string[]; // bytes32[] -> string[]
+  data: string; // bytes -> string
+  from: string; // address -> string
+  to: string[]; // address[] -> string[]
+  nonce: bigint | string;
 };
 
 export type NexusState = {

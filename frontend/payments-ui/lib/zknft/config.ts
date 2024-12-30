@@ -7,9 +7,9 @@ export const paymentTokenAddr = contractsConfig.tokenContractAddress ? contracts
 export const paymentContractAddress = contractsConfig.nftPaymentContractAddress ? contractsConfig.nftPaymentContractAddress :
   "0x9C8475A3f11720F016639779BEf4BD5eA214EF63";
 export const nftContractAddress = contractsConfig.nftContractAddress ? contractsConfig.nftContractAddress : "0x3F015117432f4E2e970D3B6b918F3B92D17eFC88";
-export const paymentZKSyncProviderURL = "http://zksync1.nexus.avail.tools";
-export const nftMintProviderURL = "http://zksync2.nexus.avail.tools";
-export const nexusRPCUrl = "http://dev.nexus.avail.tools";
+export const paymentZKSyncProviderURL = "https://zksync1.nexus.avail.tools";
+export const nftMintProviderURL = "https://zksync2.nexus.avail.tools";
+export const nexusRPCUrl = "https://dev.nexus.avail.tools";
 export const nexusAppID =
   "3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
 export const privateKeyZkSync =

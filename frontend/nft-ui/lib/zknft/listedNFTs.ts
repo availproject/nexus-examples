@@ -11,6 +11,7 @@ export interface ListedNFT {
 }
 
 export async function getListedNFTs(): Promise<NFT[]> {
+  console.log('\n\nFetching listed NFTs...', nftMintProviderURL);
   const provider = new Provider(nftMintProviderURL);
   const sellerWallet = getSellerWallet();
   const nftContract = new Contract(nftContractAddress, nftContractAbi, provider);

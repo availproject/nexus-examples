@@ -7,7 +7,9 @@ import React, {
 } from 'react';
 import ModalWrapper from './ModalWrapper';
 import { Message, NexusInfo, NFT, RpcProof, TransferStatus } from 'lib/zknft/types';
-import { fetchUpdatesFromNexus, getPaymentOptions, getStorageProof, lockNFT, mintNFT } from 'lib/zknft';
+import type { AccountApiResponse } from 'lib/zknft/index';
+import { fetchUpdatesFromNexus, getAccountState, getSellerWallet, getStorageProof, lockNFT, transferNFT } from 'lib/zknft';
+import { getPaymentOptions } from 'lib/zknft/paymentOptions';
 import { bytesToHex } from "web3-utils";
 import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useUrl } from 'nextjs-current-url';
@@ -20,11 +22,13 @@ import {
   faExchangeAlt,
   faSignOutAlt
 } from "@fortawesome/free-solid-svg-icons";
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { useAccount, useConnect, useDisconnect, usePublicClient, useWalletClient, useWriteContract, useSwitchChain } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import { paymentTokenAddr } from 'lib/zknft/config';
 import { getPaymentChainProvider } from 'lib/zknft';
-import { PaymentOption } from 'lib/zknft/paymentOptions';
+import type { PaymentOption } from 'lib/zknft/paymentOptions';
+
+const REQUIRED_CHAIN_ID = 272; // NFT chain ID
 
 interface BuyNftModalProps {
   open: boolean;
@@ -94,18 +98,22 @@ function StatusMessage({ status }: { status: TransferStatus }) {
 
 export default function BuyNftModal({
   open,
-  nftID
+  nftID,
 }: BuyNftModalProps) {
   //const [buyer, setBuyer] = useState('');
   const [nftStatus, setNftStatus] = useState<TransferStatus | null>(null);
-  const [paymentReceiptWithProof, setPaymentReceiptWithProof] = useState<[NexusInfo, RpcProof] | null>(null)
+  const [paymentReceiptWithProof, setPaymentReceiptWithProof] = useState<[AccountApiResponse, RpcProof] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [paymentOptions, setPaymentOptions] = useState<PaymentOption[]>([]);
+
+  const { writeContractAsync } = useWriteContract();
+  const publicClient = usePublicClient();
   //const [paymentAttemptDone, setPaymentAttemptDone] = useState(false);
   const router = useRouter();
 
   // Wallet connection
-  const { address, isConnected } = useAccount();
+  const { address: connectedAddress, isConnected, chainId } = useAccount();
+  const { switchChainAsync } = useSwitchChain();
   const { connect } = useConnect();
   const { disconnect } = useDisconnect();
 
@@ -113,19 +121,6 @@ export default function BuyNftModal({
   const [payingFromAddress, setPayingFromAddress] = useState<string>('');
   const [selectedPaymentOption, setSelectedPaymentOption] = useState<PaymentOption | null>(null);
   const [paymentTokenSymbol, setPaymentTokenSymbol] = useState<string>('');
-
-  // Debug selected payment option
-  useEffect(() => {
-    console.log('Selected Payment Option:', selectedPaymentOption);
-  }, [selectedPaymentOption]);
-
-  // Fetch payment options
-  useEffect(() => {
-    getPaymentOptions().then((options) => {
-      console.log('Available Payment Options:', options);
-      setPaymentOptions(options);
-    });
-  }, []);
 
   const isPaymentSelected = selectedPaymentOption !== null;
 
@@ -142,8 +137,8 @@ export default function BuyNftModal({
   };
 
   const useConnectedWalletAddress = () => {
-    if (isConnected && address) {
-      setPayingFromAddress(address);
+    if (isConnected && connectedAddress) {
+      setPayingFromAddress(connectedAddress);
     }
   };
 
@@ -153,37 +148,103 @@ export default function BuyNftModal({
   };
   const params = useSearchParams();
   const paymentAddress: string | null = params.get("selectedPaymentAddress") as string || null;
+  const paymentBlockNumber: string | null = params.get("paymentBlockNumber") as string || null;
+  const receiptHash: string | null = params.get("receiptHash") as string || null;
   const message: string | null = params.get("paymentReceipt");
-  const currentUrl = paymentAddress && paymentAddress !== '' ? `http://localhost:3000/?buyNFT=true&selectedPaymentAddress=${paymentAddress}'` : `http://localhost:3000/?buyNFT=true`;
+  const currentUrl = paymentAddress && paymentAddress !== '' ? `http://localhost:3000/?buyNFT=true&tokenID=${nftID}&selectedPaymentAddress=${paymentAddress}'` : `http://localhost:3000/?buyNFT=true&tokenID=${nftID}`;
+
+  // Debug selected payment option
+  useEffect(() => {
+    console.log('Selected Payment Option:', selectedPaymentOption);
+  }, [selectedPaymentOption]);
+
+  // Fetch payment options
+  useEffect(() => {
+    getPaymentOptions().then((options) => {
+      console.log('Available Payment Options:', options);
+      setPaymentOptions(options);
+    });
+    console.log("receiptHash", receiptHash);
+    if (receiptHash) {
+      setNftStatus(TransferStatus.WaitingForPayment);
+    } else {
+      setNftStatus(TransferStatus.NotInitiated);
+    }
+  }, []);
+
+  const switchToNFTChain = async () => {
+    console.log('Current chain ID:', chainId);
+    if (chainId !== REQUIRED_CHAIN_ID) {
+      try {
+        console.log('Switching to NFT chain...');
+        if (!switchChainAsync) {
+          throw new Error('Chain switching not available');
+        }
+        await switchChainAsync({
+          chainId: REQUIRED_CHAIN_ID,
+        });
+        console.log('Successfully switched to NFT chain');
+        return true;
+      } catch (error) {
+        console.error('Failed to switch network:', error);
+        alert('Please switch to NFT chain network manually');
+        return false;
+      }
+    }
+    return true;
+  };
 
   const handleSend = async () => {
-    if (paymentAddress && paymentReceiptWithProof && message) {
-      setIsLoading(true);
-      let decodedMessage: Message = JSON.parse(message);
-      const nexusStatus = paymentReceiptWithProof[0];
-      const proof = paymentReceiptWithProof[1];
+    console.log("handleSend", paymentAddress, paymentReceiptWithProof, message);
+    if (!payingFromAddress) {
+      useConnectedWalletAddress();
+    }
 
-      // Call mintNFT and set status to the last step upon success
-      mintNFT(nexusStatus as NexusInfo, proof, decodedMessage, (nexusStatus as NexusInfo).chainStateNumber).then((response) => {
-        if (response) {
-          console.debug("NFT Mint receipt: ", response);
-          setNftStatus(TransferStatus.NFTTransferred);
-        } else {
-          setPaymentReceiptWithProof(null);
-          setNftStatus(TransferStatus.WaitingForPayment);
+    if (payingFromAddress && paymentReceiptWithProof && message) {
+      setIsLoading(true);
+      try {
+        // First ensure we're on the right chain
+        const switched = await switchToNFTChain();
+        if (!switched) {
+          setIsLoading(false);
+          return;
         }
 
+        let decodedMessage: Message = JSON.parse(message);
+        const nexusStatus = paymentReceiptWithProof[0];
+        const proof = paymentReceiptWithProof[1];
 
-        setIsLoading(false);
-      }).catch((error) => {
+        console.log('Minting NFT with:', {
+          nexusStatus,
+          decodedMessage,
+          proof
+        });
 
-        setIsLoading(false);
+        const receipt = await transferNFT(
+          nexusStatus,
+          proof,
+          decodedMessage,
+          writeContractAsync,
+          publicClient
+        );
+
+        console.log('NFT minted successfully:', receipt);
+        setNftStatus(TransferStatus.NFTTransferred);
+      } catch (error) {
         console.error("Minting NFT failed:", error);
         alert("NFT Minting failed, refresh page and retry.");
-        setNftStatus(TransferStatus.NotInitiated); // Handle any errors during minting
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      console.log('Missing required parameters:', {
+        payingFromAddress,
+        paymentReceiptWithProof: !!paymentReceiptWithProof,
+        message: !!message
       });
     }
   }
+
   const initiateTransfer = () => {
     setNftStatus(TransferStatus.WaitingForLock);
     lockNFT(selectedPaymentOption as PaymentOption, nftID, payingFromAddress).then(() => {
@@ -202,58 +263,79 @@ export default function BuyNftModal({
   }
 
   const checkPaymentAndSet = () => {
-    if (message) {
+    if (message && paymentBlockNumber && receiptHash) {
+      let paymentOption = selectedPaymentOption;
+      if (!paymentOption) {
+        getPaymentOptions().then((options) => {
+          console.log('Available Payment Options:', options);
+          if (options && options.length > 0) {
+            setSelectedPaymentOption(options[0] as PaymentOption);
+            paymentOption = options[0] as PaymentOption;
+          } else {
+            console.error('No payment options available');
+            return;
+          }
+        }).catch(error => {
+          console.error('Failed to get payment options:', error);
+          return;
+        });
+      }
+
       setIsLoading(true);
-      let decodedMessage: Message = JSON.parse(message);
-      let nexusStatus: NexusInfo | undefined = undefined;
-      //TODO: Query the L1 batch number where message was emitted, and only proceed below, if
-      //updated batch number on nexus is greater or equal. 
-      fetchUpdatesFromNexus().then((nexusStatus) => {
-        // Check if paymentReceipt is set
-        if (decodedMessage && nexusStatus) {
-          // Query proof using paymentReceipt
-          const proof = getStorageProof(nexusStatus?.chainStateNumber, decodedMessage.messageId).then(
-            proof => {
+      let decodedMessage: Message;
+      try {
+        decodedMessage = JSON.parse(message);
+        console.log('Decoded message:', decodedMessage);
+      } catch (error) {
+        console.error('Failed to parse message:', error);
+        setIsLoading(false);
+        return;
+      }
+
+      if (!paymentOption) {
+        console.error('No payment option available');
+        setIsLoading(false);
+        return;
+      }
+
+      getAccountState(paymentOption as PaymentOption)
+        .then((nexusStatus) => {
+          console.log('Got nexus status:', nexusStatus);
+          if (decodedMessage && nexusStatus) {
+            return getStorageProof(
+              nexusStatus.chainStateNumber,
+              decodedMessage,
+              paymentOption as PaymentOption
+            ).then(proof => {
+              console.log('Got storage proof:', proof);
               if (proof) {
-                // If proof is available, set status to PaymentDone
-                setPaymentReceiptWithProof([nexusStatus as NexusInfo, proof]);
+                setPaymentReceiptWithProof([nexusStatus, proof]);
                 setNftStatus(TransferStatus.PaymentDone);
               } else {
-                // If proof is empty, set status to Waiting
                 setNftStatus(TransferStatus.WaitingForPayment);
               }
-
-
-              setIsLoading(false);
-            }).catch(error => {
-
-              setIsLoading(false);
-              alert(error);
-
-              setNftStatus(TransferStatus.NotInitiated);
             });
-        } else {
-
-
+          }
+        })
+        .catch((error) => {
+          console.error('Failed to process payment:', error);
+        })
+        .finally(() => {
           setIsLoading(false);
-          // If paymentReceipt is not set, set to WaitingForPayment
-          setNftStatus(TransferStatus.WaitingForPayment);
-        }
-      }).catch((error) => {
-        console.error("Failed to fetch updates from Nexus:", error);
-
-        setIsLoading(false);
-        setNftStatus(TransferStatus.NotInitiated); // Handle fetch errors
-      });
+        });
     } else {
-      setNftStatus(TransferStatus.NotInitiated);
+      console.log('Missing required parameters:', {
+        message: !!message,
+        paymentBlockNumber: !!paymentBlockNumber,
+        receiptHash: !!receiptHash
+      });
     }
-  }
+  };
   useEffect(() => {
     // getBuyerAddress().then(address => {
     //   setBuyer(address)
     // })
-
+    console.log("message", message)
     checkPaymentAndSet();
   }, [message]);
 
@@ -336,13 +418,13 @@ export default function BuyNftModal({
               <div className="flex items-center gap-3 p-3 bg-gray-800 rounded-lg border border-gray-700">
                 <FontAwesomeIcon icon={faUser} className="text-gray-400" />
                 <span className="font-mono text-sm text-gray-300 truncate">
-                  {address?.substring(0, 6)}...{address?.substring(address.length - 4)}
+                  {connectedAddress?.substring(0, 6)}...{connectedAddress?.substring(connectedAddress.length - 4)}
                 </span>
                 <div className="ml-auto flex gap-2">
                   <button
                     onClick={() => {
-                      if (address) {
-                        navigator.clipboard.writeText(address);
+                      if (connectedAddress) {
+                        navigator.clipboard.writeText(connectedAddress);
                       }
                     }}
                     className="text-gray-400 hover:text-white transition-colors"
@@ -431,7 +513,10 @@ export default function BuyNftModal({
               {nftStatus === TransferStatus.WaitingForPayment && (
                 <div className="flex flex-col gap-3">
                   <button
-                    onClick={() => router.push(`http://localhost:3001/?amount=${100}&origin='${encodeURIComponent(currentUrl + "&paymentDone=true")}'`)}
+                    onClick={async () => {
+                      console.log("currentUrl", currentUrl);
+                      router.push(`http://localhost:3001/?amount=${10}&nftID=${nftID}&to=${await getSellerWallet().getAddress()}&origin='${encodeURIComponent(currentUrl + "&paymentDone=true")}'`)
+                    }}
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg shadow transition-colors"
                   >
                     Make Payment

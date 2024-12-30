@@ -2,18 +2,18 @@
   {
     "inputs": [
       {
-        "internalType": "contract INexusProofManager",
-        "name": "nexusManager",
+        "internalType": "contract INexusMailbox",
+        "name": "_mailbox",
         "type": "address"
       },
       {
-        "internalType": "address",
-        "name": "fixedPayoutAddress",
-        "type": "address"
+        "internalType": "bytes32",
+        "name": "_nftNexusId",
+        "type": "bytes32"
       },
       {
         "internalType": "address",
-        "name": "targetContractAddress",
+        "name": "_nftContractAddress",
         "type": "address"
       }
     ],
@@ -21,23 +21,9 @@
     "type": "constructor"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "key",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "hash_value",
-        "type": "bytes32"
-      }
-    ],
-    "name": "NewEntry",
-    "type": "event"
+    "inputs": [],
+    "name": "AlreadyPaidFor",
+    "type": "error"
   },
   {
     "anonymous": false,
@@ -59,45 +45,8 @@
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "bytes1",
-        "name": "messageType",
-        "type": "bytes1"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "from",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "messageId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "chainId",
-        "type": "uint256"
-      }
-    ],
-    "name": "PreImage",
-    "type": "event"
-  },
-  {
     "inputs": [],
-    "name": "NAMES_MAPPING_SLOT",
+    "name": "MESSAGES_MAPPING_SLOT",
     "outputs": [
       {
         "internalType": "uint256",
@@ -111,25 +60,31 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "getCurrentNonce",
+    "outputs": [
+      {
         "internalType": "uint256",
-        "name": "index",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "claimPayment",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_key",
-        "type": "uint256"
+        "internalType": "bytes32",
+        "name": "_receiptHash",
+        "type": "bytes32"
       }
     ],
-    "name": "getStorageLocationForKey",
+    "name": "getStorageLocationForReceipt",
     "outputs": [
       {
         "internalType": "bytes32",
@@ -141,30 +96,11 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "key",
-        "type": "uint256"
-      }
-    ],
-    "name": "getValueFromId",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
-    "name": "nexus",
+    "name": "mailbox",
     "outputs": [
       {
-        "internalType": "contract INexusProofManager",
+        "internalType": "contract INexusMailbox",
         "name": "",
         "type": "address"
       }
@@ -175,14 +111,9 @@
   {
     "inputs": [
       {
-        "internalType": "bytes1",
-        "name": "messageType",
-        "type": "bytes1"
-      },
-      {
-        "internalType": "uint256",
-        "name": "chainId",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "tokenAddress",
+        "type": "address"
       },
       {
         "internalType": "uint256",
@@ -190,92 +121,17 @@
         "type": "uint256"
       },
       {
-        "internalType": "address",
-        "name": "payoutToken",
-        "type": "address"
-      }
-    ],
-    "name": "paymentWithFallback",
-    "outputs": [
-      {
         "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes1",
-        "name": "messageType",
-        "type": "bytes1"
-      },
-      {
-        "internalType": "uint256",
-        "name": "chainId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
+        "name": "nftId",
         "type": "uint256"
       },
       {
         "internalType": "address",
-        "name": "payoutToken",
+        "name": "to",
         "type": "address"
       }
     ],
-    "name": "paymentWithoutFallback",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "updatePrice",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "paymentChainBlockNumber",
-        "type": "bytes32"
-      },
-      {
-        "internalType": "bytes",
-        "name": "accountTrieProof",
-        "type": "bytes"
-      },
-      {
-        "internalType": "bytes32",
-        "name": "slot",
-        "type": "bytes32"
-      },
-      {
-        "internalType": "bytes",
-        "name": "storageSlotTrieProof",
-        "type": "bytes"
-      }
-    ],
-    "name": "verifyPayment",
+    "name": "pay",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

@@ -9,7 +9,7 @@ import Loading from './loading';
 
 async function MainContent() {
   const nfts: NFT[] = await getListedNFTs();
-  
+  console.log("loading");
   return (
     <main className="mx-auto max-w-[1960px] p-4">
       <ThreeItemGrid featuredNFTs={nfts} />
@@ -32,9 +32,9 @@ export default async function HomePage({
       <Suspense fallback={<Loading />}>
         <MainContent />
         {selectedBuy !== null && tokenID && (
-          <BuyNftModal 
-            open={true} 
-            nftID={parseInt(tokenID)} 
+          <BuyNftModal
+            open={true}
+            nftID={parseInt(tokenID)}
           />
         )}
       </Suspense>

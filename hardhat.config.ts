@@ -80,7 +80,7 @@ task("7_nftpayment_zksync", "Deploys NFT payment contract on zkSync")
 
     // Deploy Token contract
     const TokenArtifact = await deployer.loadArtifact("Token");
-    const initialSupply = ethers.parseEther("1000").toString();
+    const initialSupply = ethers.parseEther("10000000000").toString();
     const TokenContract = await deployer.deploy(TokenArtifact, [initialSupply]);
 
     const tokenContractAddress = await TokenContract.getAddress();
