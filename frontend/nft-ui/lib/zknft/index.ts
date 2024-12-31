@@ -1,15 +1,10 @@
 import { NFT, Menu, MenuType, Message, RpcProof, NexusInfo, TransferStatus } from './types';
-import { hexToAddress } from "./utils";
-import * as ed from '@noble/ed25519';
-import { bytesToHex, hexToNumberString } from "web3-utils";
-import { sha512 } from '@noble/hashes/sha512';
+
 import nftContractAbi from "./nft.json";
 import paymentAbi from "./payment.json";
-import nexusAbi from "./nexusStateManager.json";
 import { AbiCoder, Contract, ethers, JsonRpcProvider, keccak256, TransactionReceipt, Wallet } from 'ethers';
 import { Provider, types } from 'zksync-ethers';
 import { nexusAppID, nexusRPCUrl, nftMintProviderURL, paymentContractAddress, privateKeyZkSync2, stateManagerNFTChainAddr, storageNFTChainAddress, paymentZKSyncProviderURL, privateKeyZkSync, nftContractAddress, nexusAppIDPayment, nftChainMailboxAddress, paymentChainMailboxAddress } from './config';
-import { StorageProofProvider } from './storageManager';
 import axios from 'axios';
 import { getPaymentOptions, PaymentOption } from './paymentOptions';
 import mailboxAbi from "./mailbox.json"
@@ -60,7 +55,7 @@ export function getBuyerWallet(provider?: Provider): Wallet {
 export async function ownerOf(tokenId: number): Promise<string> {
   const provider = new Provider(nftMintProviderURL);
   const nftContract = new Contract(nftContractAddress, nftContractAbi, provider);
-  return await nftContract.ownerOf(tokenId);
+  return await (nftContract as any).ownerOf(tokenId);
 }
 
 export function getSellerWallet(): Wallet {
@@ -177,7 +172,6 @@ export async function transferNFT(
         },
       }),
     });
-    //http://localhost:3000/?buyNFT=true&tokenID=15&paymentDone=true&receiptHash=0x155c7a11676f98ad2925618047d7528e0ecc2193a10ec36d24919db7e6f82c38&paymentBlockNumber=653&paymentReceipt=%7B%22nexusAppIDFrom%22:%220x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d%22,%22nexusAppIDTo%22:%5B%220x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e%22%5D,%22data%22:%220x000000000000000000000000b175236e0bdcaed34d1c29f4c22824070029a49a000000000000000000000000618263ce921f7dd5f4f40c29f6c524aaf97b9bbd000000000000000000000000000000000000000000000000000000000000000f0000000000000000000000000000000000000000000000008ac7230489e800000000000000000000000000003126ea852fe05177b94e94009aebf72a83401b46%22,%22from%22:%220x118d10E9Cf00472EA7BF006838Ea554c64CccAA8%22,%22to%22:%5B%220x3126ea852Fe05177b94e94009aEbF72A83401b46%22%5D,%22nonce%22:%229%22%7D
 
     console.log('Transferring NFT with params:', {
       height: nexus.response.account.height,
@@ -217,7 +211,7 @@ export async function transferNFT(
     });
 
     // Send transaction directly through ethers contract
-    const tx = await contract.transferNFT(
+    const tx = await (contract as any).transferNFT(
       BigInt(nexus.response.account.height),
       message,
       encodedProof,

@@ -24,7 +24,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAccount, useConnect, useDisconnect, usePublicClient, useWalletClient, useWriteContract, useSwitchChain } from 'wagmi';
 import { injected } from 'wagmi/connectors';
-import { nftContractAddress, nftMintProviderURL, paymentTokenAddr } from 'lib/zknft/config';
+import { paymentURL, nftURL } from 'lib/zknft/config';
 import { getPaymentChainProvider } from 'lib/zknft';
 import type { PaymentOption } from 'lib/zknft/paymentOptions';
 import { Contract, Provider } from 'zksync-ethers';
@@ -152,7 +152,9 @@ export default function BuyNftModal({
   const paymentBlockNumber: string | null = params.get("paymentBlockNumber") as string || null;
   const receiptHash: string | null = params.get("receiptHash") as string || null;
   const message: string | null = params.get("paymentReceipt");
-  const currentUrl = paymentAddress && paymentAddress !== '' ? `http://localhost:3000/?buyNFT=true&tokenID=${nftID}&selectedPaymentAddress=${paymentAddress}'` : `http://localhost:3000/?buyNFT=true&tokenID=${nftID}`;
+  const currentUrl = paymentAddress && paymentAddress !== '' ?
+    `${nftURL}/?buyNFT=true&tokenID=${nftID}&selectedPaymentAddress=${paymentAddress}'` :
+    `${nftURL}/?buyNFT=true&tokenID=${nftID}`;
 
   // Debug selected payment option
   useEffect(() => {
@@ -528,7 +530,7 @@ export default function BuyNftModal({
                   <button
                     onClick={async () => {
                       console.log("currentUrl", currentUrl);
-                      router.push(`http://localhost:3001/?amount=${10}&nftID=${nftID}&to=${await getSellerWallet().getAddress()}&origin='${encodeURIComponent(currentUrl + "&paymentDone=true")}'`)
+                      router.push(`${paymentURL}/?amount=${10}&nftID=${nftID}&to=${await getSellerWallet().getAddress()}&origin='${encodeURIComponent(currentUrl + "&paymentDone=true")}'`)
                     }}
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg shadow transition-colors"
                   >

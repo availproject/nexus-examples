@@ -25,4 +25,5 @@ export const privateKeyZkSync =
   "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 export const privateKeyZkSync2 =
   "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
-export const paymentURL = "http://localhost:3001";
+export const paymentURL = process.env.NEXT_PUBLIC_PAYMENT_URL || "http://localhost:3001";
+export const nftURL = process.env.NEXT_PUBLIC_NFT_URL || "http://localhost:3000";

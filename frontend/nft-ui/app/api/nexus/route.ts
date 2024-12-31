@@ -47,7 +47,7 @@ export async function POST(request: Request) {
         } catch (error) {
           console.error('Error getting account state:', error);
           return NextResponse.json(
-            { error: 'Failed to get account state', details: error.message },
+            { error: 'Failed to get account state', details: (error as unknown as Error).message },
             { status: 500 }
           );
         }
@@ -105,7 +105,7 @@ export async function POST(request: Request) {
         } catch (error) {
           console.error('Error getting storage proof:', error);
           return NextResponse.json(
-            { error: 'Failed to get storage proof', details: error.message },
+            { error: 'Failed to get storage proof', details: (error as unknown as Error).message },
             { status: 500 }
           );
         }
@@ -157,7 +157,7 @@ export async function POST(request: Request) {
         } catch (error) {
           console.error('Error encoding message proof:', error);
           return NextResponse.json(
-            { error: 'Failed to encode message proof', details: error.message },
+            { error: 'Failed to encode message proof', details: (error as unknown as Error).message },
             { status: 500 }
           );
         }
@@ -201,7 +201,7 @@ export async function POST(request: Request) {
         } catch (error) {
           console.error('Error updating nexus state:', error);
           return NextResponse.json(
-            { error: 'Failed to update nexus state', details: error.message },
+            { error: 'Failed to update nexus state', details: (error as unknown as Error).message },
             { status: 500 }
           );
         }
@@ -216,7 +216,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('API Error:', error);
     return NextResponse.json(
-      { error: 'Internal Server Error', details: error.message },
+      { error: 'Internal Server Error', details: (error as unknown as Error).message },
       { status: 500 }
     );
   }
