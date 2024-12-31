@@ -23,7 +23,7 @@ let stateManagerNFTChainAddr = deployedAddresses.proofManagerAddress1;
 let paymentContractAddress = deployedAddresses.nftPaymentContractAddress;
 let paymentTokenAddr = deployedAddresses.tokenContractAddress;
 let nftContractAddress = deployedAddresses.nftContractAddress;
-let tokenId = 1;
+let tokenId = 3;
 let app_id = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
 let app_id_2 = "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d";
 async function main() {
@@ -49,21 +49,22 @@ async function main() {
     const proofManagerClient = new ProofManagerClient(stateManagerNFTChainAddr, zksync_nft_url, privateKeyZkSync);
     const tx = await nftContract.setNftPaymentContractAddress(paymentContractAddress);
     const receipt = await tx.wait();
-    console.log(await nftContract.ownerOf(tokenId));
-    console.log(await nftContract.ownerOf(tokenId + 1));
-    return;
+    // console.log(await nftContract.ownerOf(tokenId));
+    // console.log(await nftContract.ownerOf(tokenId + 1));
+    //return;
     // this shouldn't be hardcoded, rather should be managed by sc. Doing it here since need time to write code
     // to get nft id from events if done via sc.
-    await nftContract.mint(tokenId);
-    console.log("✅ minted NFT with token ID", tokenId);
-    await sleep(1000);
-    await nftContract.mint(tokenId + 1);
+    // await nftContract.mint(tokenId);
+    // console.log("✅ minted NFT with token ID", tokenId);
+    // await sleep(1000);
+    // await nftContract.mint(tokenId + 1);
     console.log("✅ minted NFT with token ID", tokenId + 1);
-    // for (let i = tokenId; i < 50; i++) {
-    //   nftContract.mint(i);
-    //   await sleep(1000);
-    //   console.log("✅ minted NFT with token ID", i);
-    // }
+    for (let i = tokenId; i < 50; i++) {
+        nftContract.mint(i);
+        await sleep(1000);
+        console.log("✅ minted NFT with token ID", i);
+    }
+    return;
     await sleep(5000);
     await scenario1();
     // await scenario2();

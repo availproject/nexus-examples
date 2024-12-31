@@ -79,7 +79,7 @@ export async function getAccountState(selectedPaymentOption: PaymentOption) {
       params: {
         provider: nexusRPCUrl,
         //TODO: Change below to select from payment options.
-        appId: nexusAppID,
+        appId: nexusAppIDPayment,
       },
     }),
   });
@@ -222,7 +222,7 @@ export async function transferNFT(
       message,
       encodedProof,
       {
-        chainId: 272
+        chainId: 271
       }
     );
 

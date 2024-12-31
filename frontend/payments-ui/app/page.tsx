@@ -16,7 +16,7 @@ import { useSearchParams } from 'next/navigation';
 import { ethers } from 'ethers';
 import { config, zkSyncChain } from '../components/providers/WagmiProvider';
 
-const REQUIRED_CHAIN_ID = 271;
+const REQUIRED_CHAIN_ID = 272;
 
 export default function Home() {
   const searchParams = useSearchParams();

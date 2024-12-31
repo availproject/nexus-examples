@@ -29,7 +29,7 @@ import { getPaymentChainProvider } from 'lib/zknft';
 import type { PaymentOption } from 'lib/zknft/paymentOptions';
 import { Contract, Provider } from 'zksync-ethers';
 
-const REQUIRED_CHAIN_ID = 272; // NFT chain ID
+const REQUIRED_CHAIN_ID = 271; // NFT chain ID
 
 interface BuyNftModalProps {
   open: boolean;

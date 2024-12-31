@@ -5,7 +5,7 @@ import { injected } from 'wagmi/connectors';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const customZkSyncChain = {
-  id: 272,
+  id: 271,
   name: 'zkSync Nexus Devnet 1',
   network: 'zksync-nexus-devnet',
   nativeCurrency: {
@@ -15,10 +15,10 @@ const customZkSyncChain = {
   },
   rpcUrls: {
     default: {
-      http: ['https://zksync2.nexus.avail.tools'],
+      http: ['https://zksync1.nexus.avail.tools'],
     },
     public: {
-      http: ['https://zksync2.nexus.avail.tools'],
+      http: ['https://zksync1.nexus.avail.tools'],
     },
   },
   testnet: true,

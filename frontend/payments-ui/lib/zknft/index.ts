@@ -1,4 +1,4 @@
-import { nftContractAddress, nftMintProviderURL, paymentContractAddress, paymentTokenAddr, paymentZKSyncProviderURL, privateKeyZkSync } from './config';
+import { nftContractAddress, nftMintProviderURL, paymentChainId, paymentContractAddress, paymentTokenAddr, paymentZKSyncProviderURL, privateKeyZkSync } from './config';
 import { Contract, ethers, Wallet } from 'ethers';
 import { Provider, types } from 'zksync-ethers';
 import erc20Abi from "./erc20.json";
@@ -63,14 +63,14 @@ export async function transfer(
       abi: erc20Abi,
       functionName: "approve",
       args: [paymentContractAddress, amountToPay],
-      chainId: 271,
+      chainId: paymentChainId,
     });
 
     // Wait for approval receipt
     console.log("Waiting for approval receipt...");
     const approveTxReceipt = await publicClient.waitForTransactionReceipt({
       hash: approveTxHash,
-      chainId: 271,
+      chainId: paymentChainId,
     });
     console.log("Token approved for payment contract.", approveTxReceipt);
 
@@ -82,14 +82,14 @@ export async function transfer(
       abi: paymentAbi,
       functionName: "pay",
       args: [paymentTokenAddr, amountToPay, tokenID, toAddress],
-      chainId: 271,
+      chainId: paymentChainId,
     });
 
     // Wait for payment receipt
     console.log("Waiting for payment receipt...");
     const payTxReceipt = await publicClient.waitForTransactionReceipt({
       hash: payTxHash,
-      chainId: 271,
+      chainId: paymentChainId,
     });
     console.log("Payment done");
 

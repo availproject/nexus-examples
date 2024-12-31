@@ -20,9 +20,9 @@ task("6_nft_zksync", "Deploys NFT contract on zkSync")
     const { mailbox } = taskArgs;
     const mailBoxAddress = mailbox;
     const app_id =
-      "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
-    const app_id_2 =
       "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+    const app_id_2 =
+      "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d";
 
     const wallet = new Wallet(process.env.PRIVATE_KEY || "");
 

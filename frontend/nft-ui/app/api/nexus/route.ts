@@ -72,7 +72,7 @@ export async function POST(request: Request) {
               mailboxContract: nftChainMailboxAddress,
               stateManagerContract: stateManagerNFTChainAddr,
               appID: nexusAppID,
-              chainId: "270",
+              chainId: "271",
               type: Networks.ZKSync,
               privateKey: privateKeyZkSync
             },
@@ -80,8 +80,8 @@ export async function POST(request: Request) {
               rpcUrl: paymentZKSyncProviderURL,
               mailboxContract: paymentChainMailboxAddress,
               stateManagerContract: stateManagerPaymentChainAddr,
-              appID: nexusAppID,
-              chainId: "271",
+              appID: nexusAppIDPayment,
+              chainId: "272",
               type: Networks.ZKSync,
               privateKey: privateKeyZkSync2
             }
@@ -90,7 +90,7 @@ export async function POST(request: Request) {
             mailboxContract: nftChainMailboxAddress,
             stateManagerContract: stateManagerNFTChainAddr,
             appID: nexusAppID,
-            chainId: "272",
+            chainId: "271",
             type: Networks.ZKSync,
             privateKey: privateKeyZkSync,
           }, mailboxAbi.abi);
