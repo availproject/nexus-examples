@@ -20,7 +20,7 @@ export async function getListedNFTs(): Promise<NFT[]> {
 
   try {
     // Query NFTs from 1 to 20
-    for (let tokenId = 2; tokenId <= 20; tokenId++) {
+    for (let tokenId = 2; tokenId <= 50; tokenId++) {
       try {
         console.log('Querying NFT ID: ', tokenId, nftMintProviderURL, nftContractAddress);
         const owner = await (nftContract as any).ownerOf(tokenId);

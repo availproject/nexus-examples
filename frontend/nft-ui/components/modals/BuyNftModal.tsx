@@ -8,7 +8,7 @@ import React, {
 import ModalWrapper from './ModalWrapper';
 import { Message, NexusInfo, NFT, RpcProof, TransferStatus } from 'lib/zknft/types';
 import type { AccountApiResponse } from 'lib/zknft/index';
-import { fetchUpdatesFromNexus, getAccountState, getSellerWallet, getStorageProof, lockNFT, transferNFT } from 'lib/zknft';
+import { fetchUpdatesFromNexus, getAccountState, getSellerWallet, getStorageProof, lockNFT, ownerOf, transferNFT } from 'lib/zknft';
 import { getPaymentOptions } from 'lib/zknft/paymentOptions';
 import { bytesToHex } from "web3-utils";
 import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -24,9 +24,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAccount, useConnect, useDisconnect, usePublicClient, useWalletClient, useWriteContract, useSwitchChain } from 'wagmi';
 import { injected } from 'wagmi/connectors';
-import { paymentTokenAddr } from 'lib/zknft/config';
+import { nftContractAddress, nftMintProviderURL, paymentTokenAddr } from 'lib/zknft/config';
 import { getPaymentChainProvider } from 'lib/zknft';
 import type { PaymentOption } from 'lib/zknft/paymentOptions';
+import { Contract, Provider } from 'zksync-ethers';
 
 const REQUIRED_CHAIN_ID = 272; // NFT chain ID
 
@@ -170,6 +171,17 @@ export default function BuyNftModal({
     } else {
       setNftStatus(TransferStatus.NotInitiated);
     }
+    if (nftID && connectedAddress) {
+      console.log('Checking NFT ownership...');
+      ownerOf(nftID).then((owner: string) => {
+        console.log('NFT owner:', owner);
+        if (owner.toLowerCase() === connectedAddress.toLowerCase()) {
+          setNftStatus(TransferStatus.NFTTransferred);
+        }
+      }).catch((err: any) => {
+        console.log('Error checking NFT ownership:', err);
+      });
+    }
   }, []);
 
   const switchToNFTChain = async () => {
@@ -303,12 +315,13 @@ export default function BuyNftModal({
           console.log('Got nexus status:', nexusStatus);
           if (decodedMessage && nexusStatus) {
             return getStorageProof(
-              nexusStatus.chainStateNumber,
+              nexusStatus.response.account.height,
               decodedMessage,
-              paymentOption as PaymentOption
+              paymentOption as PaymentOption,
+              receiptHash
             ).then(proof => {
               console.log('Got storage proof:', proof);
-              if (proof) {
+              if (proof && proof.value != "0x0000000000000000000000000000000000000000000000000000000000000000") {
                 setPaymentReceiptWithProof([nexusStatus, proof]);
                 setNftStatus(TransferStatus.PaymentDone);
               } else {
@@ -374,7 +387,7 @@ export default function BuyNftModal({
     else if (nftStatus === TransferStatus.NFTTransferred) return (<>
       <h1 className="text-3xl text-white">Success!</h1>
       <p className="font-display mt-4 text-white/80 text-sm font-medium">
-        The NFT has now been minted to your account.
+        The NFT has now been transferred to your account.
       </p>
     </>)
     else return (<>

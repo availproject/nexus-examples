@@ -1,19 +1,19 @@
 import contractsConfig from "./contracts_config.json"
 
 export const stateManagerNFTChainAddr =
-  contractsConfig.proofManagerAddress2 ? contractsConfig.proofManagerAddress1 : "0xd0FD2c20e2f2Ee5F3D7A03abB5F8557BA73e888A";
+  contractsConfig.proofManagerAddress1 ? contractsConfig.proofManagerAddress1 : "";
 export const stateManagerPaymentChainAddr =
-  contractsConfig.proofManagerAddress1 ? contractsConfig.proofManagerAddress2 : "0xd0FD2c20e2f2Ee5F3D7A03abB5F8557BA73e888A";
+  contractsConfig.proofManagerAddress2 ? contractsConfig.proofManagerAddress2 : "";
 export const storageNFTChainAddress =
-  contractsConfig.nftContractAddress ? contractsConfig.nftContractAddress : "0x6db09Fd22Fab0CCDa6c443aFc861c9515F7632bf";
-export const paymentTokenAddr = contractsConfig.tokenContractAddress ? contractsConfig.tokenContractAddress : "0x3F015117432f4E2e970D3B6b918F3B92D17eFC88";
+  contractsConfig.nftContractAddress ? contractsConfig.nftContractAddress : "";
+export const paymentTokenAddr = contractsConfig.tokenContractAddress ? contractsConfig.tokenContractAddress : "";
 export const paymentContractAddress = contractsConfig.nftPaymentContractAddress ? contractsConfig.nftPaymentContractAddress :
-  "0x9C8475A3f11720F016639779BEf4BD5eA214EF63";
-export const nftContractAddress = contractsConfig.nftContractAddress ? contractsConfig.nftContractAddress : "0x3F015117432f4E2e970D3B6b918F3B92D17eFC88";
+  "";
+export const nftContractAddress = contractsConfig.nftContractAddress ? contractsConfig.nftContractAddress : "";
 export const nftChainMailboxAddress =
-  contractsConfig.mailBoxAddress1 ? contractsConfig.mailBoxAddress1 : "0x7C08869E8EBf91f43B8293E707D4e6918d95a06c";
+  contractsConfig.mailBoxAddress1 ? contractsConfig.mailBoxAddress1 : "";
 export const paymentChainMailboxAddress =
-  contractsConfig.mailBoxAddress2 ? contractsConfig.mailBoxAddress2 : "0x7C08869E8EBf91f43B8293E707D4e6918d95a06c";
+  contractsConfig.mailBoxAddress2 ? contractsConfig.mailBoxAddress2 : "";
 export const paymentZKSyncProviderURL = "https://zksync1.nexus.avail.tools";
 export const nftMintProviderURL = "https://zksync2.nexus.avail.tools";
 export const nexusRPCUrl = "https://dev.nexus.avail.tools";

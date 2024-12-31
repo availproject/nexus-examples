@@ -9,7 +9,8 @@ import {
   paymentChainMailboxAddress,
   stateManagerNFTChainAddr,
   privateKeyZkSync,
-  privateKeyZkSync2
+  privateKeyZkSync2,
+  stateManagerPaymentChainAddr
 } from '../../../lib/zknft/config';
 import mailboxAbi from '../../../lib/zknft/mailbox.json';
 
@@ -71,15 +72,15 @@ export async function POST(request: Request) {
               mailboxContract: nftChainMailboxAddress,
               stateManagerContract: stateManagerNFTChainAddr,
               appID: nexusAppID,
-              chainId: "272",
+              chainId: "270",
               type: Networks.ZKSync,
               privateKey: privateKeyZkSync
             },
             [nexusAppIDPayment]: {
               rpcUrl: paymentZKSyncProviderURL,
               mailboxContract: paymentChainMailboxAddress,
-              stateManagerContract: stateManagerNFTChainAddr,
-              appID: nexusAppIDPayment,
+              stateManagerContract: stateManagerPaymentChainAddr,
+              appID: nexusAppID,
               chainId: "271",
               type: Networks.ZKSync,
               privateKey: privateKeyZkSync2
@@ -93,6 +94,7 @@ export async function POST(request: Request) {
             type: Networks.ZKSync,
             privateKey: privateKeyZkSync,
           }, mailboxAbi.abi);
+
 
           const proof = await zksyncAdapter.getReceiveMessageProof(
             batchNumber,

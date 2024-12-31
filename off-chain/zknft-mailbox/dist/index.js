@@ -14,16 +14,16 @@ import { Networks } from "nexus-js";
 import { AbiCoder } from "ethers";
 import { ErrorDecoder } from "ethers-decode-error";
 import deployedAddresses from "./deployed_addresses.json" with { type: "json" };
-let nexusRPCUrl = "http://dev.nexus.avail.tools";
-let zksync_nft_url = "http://zksync2.nexus.avail.tools";
-let zksync_payment_url = "http://zksync1.nexus.avail.tools";
+let nexusRPCUrl = "https://dev.nexus.avail.tools";
+let zksync_nft_url = "https://zksync1.nexus.avail.tools";
+let zksync_payment_url = "https://zksync2.nexus.avail.tools";
 let privateKeyZkSync = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 let privateKeyZkSync2 = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 let stateManagerNFTChainAddr = deployedAddresses.proofManagerAddress1;
 let paymentContractAddress = deployedAddresses.nftPaymentContractAddress;
 let paymentTokenAddr = deployedAddresses.tokenContractAddress;
 let nftContractAddress = deployedAddresses.nftContractAddress;
-let tokenId = 3;
+let tokenId = 1;
 let app_id = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
 let app_id_2 = "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d";
 async function main() {
@@ -33,8 +33,8 @@ async function main() {
     // 4. Receive on NFT using inclusiong proof.
     // 5. Lock nft on one chain
     // 6. Withdraw nft using exclusion proof after timeout
-    const nftNexusClient = new NexusClient(nexusRPCUrl, app_id_2);
-    const paymentNexusClient = new NexusClient(nexusRPCUrl, app_id);
+    const nftNexusClient = new NexusClient(nexusRPCUrl, app_id);
+    const paymentNexusClient = new NexusClient(nexusRPCUrl, app_id_2);
     let providerPayment = new L2Provider(zksync_payment_url);
     let providerNFT = new L2Provider(zksync_nft_url);
     if (!providerPayment) {
@@ -49,22 +49,24 @@ async function main() {
     const proofManagerClient = new ProofManagerClient(stateManagerNFTChainAddr, zksync_nft_url, privateKeyZkSync);
     const tx = await nftContract.setNftPaymentContractAddress(paymentContractAddress);
     const receipt = await tx.wait();
+    console.log(await nftContract.ownerOf(tokenId));
+    console.log(await nftContract.ownerOf(tokenId + 1));
+    return;
     // this shouldn't be hardcoded, rather should be managed by sc. Doing it here since need time to write code
     // to get nft id from events if done via sc.
-    // await nftContract.mint(tokenId);
-    // console.log("✅ minted NFT with token ID", tokenId);
-    // await sleep(1000);
-    // await nftContract.mint(tokenId + 1);
-    // console.log("✅ minted NFT with token ID", tokenId + 1);
-    for (let i = tokenId; i < 20; i++) {
-        nftContract.mint(i);
-        await sleep(1000);
-        console.log("✅ minted NFT with token ID", i);
-    }
-    return;
+    await nftContract.mint(tokenId);
+    console.log("✅ minted NFT with token ID", tokenId);
+    await sleep(1000);
+    await nftContract.mint(tokenId + 1);
+    console.log("✅ minted NFT with token ID", tokenId + 1);
+    // for (let i = tokenId; i < 50; i++) {
+    //   nftContract.mint(i);
+    //   await sleep(1000);
+    //   console.log("✅ minted NFT with token ID", i);
+    // }
     await sleep(5000);
     await scenario1();
-    await scenario2();
+    // await scenario2();
     async function scenario1() {
         // 3. Lock nft on one chain and pay on another chain
         // 4. Receive on NFT using inclusiong proof.
@@ -80,7 +82,7 @@ async function main() {
         "");
         console.log("✅  Updated Nexus Block");
         await sleep(2000);
-        await proofManagerClient.updateChainState(accountDetails.response.nexus_header.number, accountDetails.response.proof, app_id, accountDetails.response.account);
+        await proofManagerClient.updateChainState(accountDetails.response.nexus_header.number, accountDetails.response.proof, app_id_2, accountDetails.response.account);
         console.log("✅  Updated Chain State");
         const zksyncAdapter = new ZKSyncVerifier({
             [app_id]: {
@@ -88,7 +90,7 @@ async function main() {
                 mailboxContract: deployedAddresses.mailBoxAddress1,
                 stateManagerContract: stateManagerNFTChainAddr,
                 appID: app_id,
-                chainId: "270",
+                chainId: "271",
                 type: Networks.ZKSync,
                 privateKey: privateKeyZkSync
             },
@@ -96,8 +98,8 @@ async function main() {
                 rpcUrl: zksync_payment_url,
                 mailboxContract: deployedAddresses.mailBoxAddress2,
                 stateManagerContract: deployedAddresses.proofManagerAddress2,
-                appID: app_id,
-                chainId: "271",
+                appID: app_id_2,
+                chainId: "272",
                 type: Networks.ZKSync,
                 privateKey: privateKeyZkSync2
             }
@@ -106,7 +108,7 @@ async function main() {
             mailboxContract: deployedAddresses.mailBoxAddress1,
             stateManagerContract: stateManagerNFTChainAddr,
             appID: app_id,
-            chainId: "270",
+            chainId: "271",
             type: Networks.ZKSync,
             privateKey: privateKeyZkSync
         }, mailboxAbi.abi);
@@ -153,12 +155,47 @@ async function main() {
         const proof = await zksyncAdapter.getReceiveMessageProof(accountDetails.response.account.height, expectedMessage, {
             storageKey: storageSlot.toString()
         });
+        console.log("Proof", proof);
         const errorDecoder = ErrorDecoder.create([nftAbi, mailboxAbi.abi, storageProofAbi.abi, verifierWrapperAbi.abi, nexusMailboxAbi.abi, zksyncNexusManagerAbi.abi]);
         let receipt = null;
         try {
             const transferTx = await nftContract.transferNFT(accountDetails.response.account.height, expectedMessage, zksyncAdapter.encodeMessageProof(proof));
             receipt = await transferTx.wait();
-            console.log("✅  NFT Transfer successfull");
+            console.log("✅  NFT Transfer successful", receipt?.logs);
+            // Decode events
+            for (const log of receipt?.logs || []) {
+                try {
+                    // Try decoding Confirmation event
+                    const confirmationAbi = [
+                        "event Confirmation(uint256 tokenId, address receiver)"
+                    ];
+                    const confirmationInterface = new ethers.Interface(confirmationAbi);
+                    const decodedConfirmation = confirmationInterface.decodeEventLog("Confirmation", log.data, log.topics);
+                    console.log("Confirmation Event:", {
+                        tokenId: decodedConfirmation.tokenId,
+                        receiver: decodedConfirmation.receiver
+                    });
+                }
+                catch (err) {
+                    try {
+                        // Try decoding Transfer event
+                        const transferAbi = [
+                            "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)"
+                        ];
+                        const transferInterface = new ethers.Interface(transferAbi);
+                        const decodedTransfer = transferInterface.decodeEventLog("Transfer", log.data, log.topics);
+                        console.log("Transfer Event:", {
+                            from: decodedTransfer.from,
+                            to: decodedTransfer.to,
+                            tokenId: decodedTransfer.tokenId
+                        });
+                    }
+                    catch (err) {
+                        // Not a Transfer event
+                        continue;
+                    }
+                }
+            }
         }
         catch (err) {
             console.log(err);

@@ -1,4 +1,4 @@
-import { paymentContractAddress, paymentTokenAddr, paymentZKSyncProviderURL, privateKeyZkSync } from './config';
+import { nftContractAddress, nftMintProviderURL, paymentContractAddress, paymentTokenAddr, paymentZKSyncProviderURL, privateKeyZkSync } from './config';
 import { Contract, ethers, Wallet } from 'ethers';
 import { Provider, types } from 'zksync-ethers';
 import erc20Abi from "./erc20.json";
@@ -104,15 +104,15 @@ export async function transfer(
         const eventInterface = new ethers.Interface(abi);
         const decodedLog = eventInterface.decodeEventLog("MailboxEvent", log.data, log.topics);
         message = {
-          nexusAppIDFrom: decodedLog[0],
-          nexusAppIDTo: decodedLog[1],
-          data: decodedLog[2],
-          from: decodedLog[3],
-          to: decodedLog[4],
-          nonce: decodedLog[5].toString(),
+          nexusAppIDFrom: decodedLog.nexusAppIDFrom,
+          nexusAppIDTo: decodedLog.nexusAppIDTo,
+          data: decodedLog.data,
+          from: decodedLog.from,
+          to: decodedLog.to,
+          nonce: decodedLog.nonce.toString(),
         };
         console.log("emitted event", decodedLog);
-        receiptHash = decodedLog[6];
+        receiptHash = decodedLog.receiptHash;
         break;
       } catch (err) {
         continue;

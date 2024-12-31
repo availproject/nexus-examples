@@ -15,7 +15,7 @@ contract MyNFTMailbox is ERC721 {
 
     mapping(uint256 => LockedNFT) lockedNFTs;
 
-    event Confirmation(uint256 tokenId, address to);
+    event Confirmation(uint256 tokenId, address receiver);
 
     error InvalidSender();
     error TransferAlreadyCompleted();
@@ -127,7 +127,7 @@ contract MyNFTMailbox is ERC721 {
         _transfer(address(this), lockedNft.nftReceiver, lockedNft.nftId);
 
         // Emit confirmation event
-        emit Confirmation(lockedNft.nftId, lockedNft.paymentReceiver);
+        emit Confirmation(lockedNft.nftId, lockedNft.nftReceiver);
 
         // Remove the entry from lockedNFTs to clear the record
         delete lockedNFTs[paymentReceipt.nftId];

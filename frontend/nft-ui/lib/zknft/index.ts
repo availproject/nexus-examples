@@ -57,6 +57,12 @@ export function getBuyerWallet(provider?: Provider): Wallet {
   return new Wallet(privateKeyZkSync2, provider)
 }
 
+export async function ownerOf(tokenId: number): Promise<string> {
+  const provider = new Provider(nftMintProviderURL);
+  const nftContract = new Contract(nftContractAddress, nftContractAbi, provider);
+  return await nftContract.ownerOf(tokenId);
+}
+
 export function getSellerWallet(): Wallet {
   return new Wallet(privateKeyZkSync, getProvider())
 }
@@ -72,7 +78,8 @@ export async function getAccountState(selectedPaymentOption: PaymentOption) {
       action: 'getAccountState',
       params: {
         provider: nexusRPCUrl,
-        appId: selectedPaymentOption.nexusAppID,
+        //TODO: Change below to select from payment options.
+        appId: nexusAppID,
       },
     }),
   });
@@ -93,7 +100,7 @@ export async function lockNFT(paymentDetails: PaymentOption, tokenId: number, pa
   let nftContract = new Contract(nftContractAddress, nftContractAbi, signerNFT);
   console.log(" Locking NFT id", tokenId);
   const nextNonce = BigInt(await (paymentContract as any).getCurrentNonce(payerAddress)) + BigInt(1);
-
+  console.log("Next nonce", payerAddress);
   const tx = await (nftContract as any).lockNFT(
     tokenId,
     //TODO: Change to configurable value
@@ -107,7 +114,45 @@ export async function lockNFT(paymentDetails: PaymentOption, tokenId: number, pa
   );
 
   // Wait for the transaction to be mined
+  await tx.wait();
+  // ata
+  // : 
+  // "0x000000000000000000000000b175236e0bdcaed34d1c29f4c22824070029a49a000000000000000000000000618263ce921f7dd5f4f40c29f6c524aaf97b9bbd00000000000000000000000000000000000000000000000000000000000000110000000000000000000000000000000000000000000000008ac7230489e800000000000000000000000000003126ea852fe05177b94e94009aebf72a83401b46"
+  // from
+  // : 
+  // "0xB175236E0bdcaED34D1c29f4c22824070029a49A"
+  // nexusAppIDFrom
+  // : 
+  // "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d"
+  // nexusAppIDTo
+  // : 
+  // ['0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d']
+  // nonce
+  // : 
+  // 11n
+  // to
+  // : 
+  // ['0x618263CE921F7dd5F4f40C29f6c524Aaf97b9bbd']
+  // [[Prototype]]
+  // : 
+  Object
+  // Log expected message format for comparison
+  const expectedMessage: Message = {
+    nexusAppIDFrom: paymentDetails.nexusAppID,
+    nexusAppIDTo: [paymentDetails.nexusAppID],
+    from: payerAddress,
+    to: [await signerNFT.getAddress()],
+    nonce: nextNonce,
+    data: ethers.AbiCoder.defaultAbiCoder().encode(
+      ['address', 'address', 'uint256', 'uint256', 'address'],
+      [payerAddress, await signerNFT.getAddress(), tokenId, ethers.parseEther("10"), paymentDetails.tokenAddress]
+    )
+  };
+  console.log('Expected message format:', expectedMessage);
+
   const receipt: TransactionReceipt = await tx.wait();
+  console.log('Expected message format:', expectedMessage);
+
 }
 
 export async function transferNFT(
@@ -161,35 +206,31 @@ export async function transferNFT(
 
     const { encodedProof } = await proofResponse.json();
 
-    // Execute contract call
+    // Create ethers contract instance with signer
+    const provider = getSellerWallet();
+    const contract = new ethers.Contract(nftContractAddress, nftContractAbi, provider);
+
     console.log('Executing NFT transfer with formatted params:', {
       height: BigInt(nexus.response.account.height),
       message,
       encodedProof,
     });
 
-    const txHash = await writeContractAsync({
-      address: nftContractAddress as `0x${string}`,
-      abi: nftContractAbi,
-      functionName: "transferNFT",
-      args: [
-        BigInt(nexus.response.account.height),
-        message,
-        encodedProof
-      ],
-      account: writeContractAsync.account,
-      chainId: 272, // Set a reasonable gas limit
-      gasLimit: 1000000
-    });
+    // Send transaction directly through ethers contract
+    const tx = await contract.transferNFT(
+      BigInt(nexus.response.account.height),
+      message,
+      encodedProof,
+      {
+        chainId: 272
+      }
+    );
 
-    console.log('Transaction hash:', txHash);
+    console.log('Transaction hash:', tx.hash);
 
     // Wait for transaction receipt
     console.log('Waiting for transaction receipt...');
-    const receipt = await writeContractAsync.waitForTransactionReceipt({
-      hash: txHash,
-      chainId: 272,
-    });
+    const receipt = await tx.wait();
 
     console.log('NFT transfer complete:', receipt);
     return receipt;
@@ -204,13 +245,16 @@ export async function getStorageProof(
   batchNumber: number,
   message: Message,
   paymentDetails: PaymentOption,
+  receiptHash: string,
 ): Promise<RpcProof | undefined> {
   let paymentContract = new Contract(
     paymentContractAddress,
     paymentAbi,
     new Provider(paymentDetails.paymentProvider)
   );
-
+  const mailboxContract = new Contract(paymentChainMailboxAddress, mailboxAbi.abi, new Provider(paymentZKSyncProviderURL));
+  const mapping = await (mailboxContract as any).messages(receiptHash);
+  console.log("✅  Mapping exists", mapping);
   const encodedReceipt = ethers.AbiCoder.defaultAbiCoder().encode(
     ["tuple(bytes32 nexusAppIDFrom, bytes32[] nexusAppIDTo, bytes data, address from, address[] to, uint256 nonce)"],
     [{
@@ -223,9 +267,13 @@ export async function getStorageProof(
     }]
   );
 
-  const receiptHash = keccak256(encodedReceipt);
+  const calculatedReceiptHash = keccak256(encodedReceipt);
+
+  console.log("Calculated receipt hash", calculatedReceiptHash);
+  console.log("Expected receipt hash", receiptHash);
+
   const storageSlot: bigint = await (paymentContract as any).getStorageLocationForReceipt(receiptHash);
-  console.log("Storage slot", storageSlot);
+  console.log("Storage slot", storageSlot, batchNumber);
   const response = await fetch('/api/nexus', {
     method: 'POST',
     headers: {
