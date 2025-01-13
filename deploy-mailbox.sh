@@ -3,9 +3,9 @@
 # Function to switch appId and appId2 in deploy-config.json
 switch_app_ids() {
     if [ "$CHAIN" -eq 1 ]; then
-        jq '.zksync.appId = "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d" | .zksync.appId2 = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e"' lib/nexus/contracts/deploy-config.json >tmp.$$.json && mv tmp.$$.json lib/nexus/contracts/deploy-config.json
+        jq '.zksync.appId = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e" | .zksync.appId2 = "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d"' lib/nexus/contracts/deploy-config.json >tmp.$$.json && mv tmp.$$.json lib/nexus/contracts/deploy-config.json
     elif [ "$CHAIN" -eq 2 ]; then
-        jq '.zksync.appId = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e" | .zksync.appId2 = "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d"' lib/nexus/contracts/deploy-config.json >tmp.$$.json && mv tmp.$$.json lib/nexus/contracts/deploy-config.json
+        jq '.zksync.appId = "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d" | .zksync.appId2 = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e"' lib/nexus/contracts/deploy-config.json >tmp.$$.json && mv tmp.$$.json lib/nexus/contracts/deploy-config.json
     fi
 }
 
@@ -39,7 +39,7 @@ original_dir=$(pwd)
 # Deploy with Forge for Chain 1
 CHAIN=1
 switch_app_ids # Set appId for Chain 1
-run_forge "http://127.0.0.1:3150" "forge_output1.txt"
+run_forge "https://zksync1.nexus.avail.tools" "forge_output1.txt"
 
 # Capture the addresses from the first deployment
 mailBoxAddress1=$(grep -o 'Mailbox deployed to: 0x[a-fA-F0-9]\{40\}' forge_output1.txt | awk '{print $4}' | xargs)
@@ -73,7 +73,7 @@ fi
 # Deploy with Forge for Chain 2 (swapping appId and appId2)
 CHAIN=2
 switch_app_ids # Swap appId for Chain 2
-run_forge "http://127.0.0.1:3050" "forge_output2.txt"
+run_forge "https://zksync2.nexus.avail.tools" "forge_output2.txt"
 
 # Capture the addresses from the second deployment
 # Capture the addresses from the first deployment
@@ -103,7 +103,7 @@ if [ -z "$proofManagerAddress2" ]; then
 fi
 
 # Deploy the first NFT contract (6_nft_zksync)
-output=$(npx hardhat 6_nft_zksync --network zksync2 --mailbox "$mailBoxAddress1")
+output=$(npx hardhat 6_nft_zksync --network zksync --mailbox "$mailBoxAddress1")
 
 # Check if the first NFT contract address was successfully retrieved
 if [ -z "$output" ]; then
@@ -116,7 +116,7 @@ nftContractAddress=$(echo "$output" | jq -r '.nftContractAddress')
 echo "Captured NFT Contract Address 1: $nftContractAddress"
 
 # Run the 7_nftpayment_zksync task and capture JSON output
-output=$(npx hardhat 7_nftpayment_zksync --network zksync --mailbox "$mailBoxAddress2" --nft "$nftContractAddress")
+output=$(npx hardhat 7_nftpayment_zksync --network zksync2 --mailbox "$mailBoxAddress2" --nft "$nftContractAddress")
 
 # Check if the output is empty
 if [ -z "$output" ]; then

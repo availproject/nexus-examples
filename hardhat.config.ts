@@ -145,7 +145,7 @@ const config: HardhatUserConfig = {
       zksync: false,
     },
     zksync2: {
-      url: "http://zksync2.nexus.avail.tools",
+      url: "https://zksync2.nexus.avail.tools",
       ethNetwork: "sepolia",
       accounts: [
         "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6",
@@ -153,7 +153,7 @@ const config: HardhatUserConfig = {
       zksync: true,
     },
     zksync: {
-      url: "http://zksync1.nexus.avail.tools",
+      url: "https://zksync1.nexus.avail.tools",
       ethNetwork: "sepolia",
       accounts: [
         "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6",
