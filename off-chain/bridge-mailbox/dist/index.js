@@ -139,6 +139,18 @@ async function main() {
         console.log("📨 Decoded Message:", messageDecoded);
         const transferTx = await mailboxContract.receiveMessage(accountDetails.response.account.height, messageDecoded, proofEncoded);
         receipt = await transferTx.wait();
+        if (receipt && receipt.logs) {
+            receipt.logs.forEach(log => {
+                // Check if this is a Transfer event (topic0 is the event signature)
+                if (log.topics[0] === '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef') {
+                    console.log('Transfer Event:', {
+                        from: '0x' + log.topics[1].substring(26),
+                        to: '0x' + log.topics[2].substring(26),
+                        amount: log.data
+                    });
+                }
+            });
+        }
         console.log("✅ ERC20 Transfer successful");
         console.log("🎉 Process completed successfully!");
     }

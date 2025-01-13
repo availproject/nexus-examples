@@ -35,6 +35,7 @@ off-chain/zknft/node_modules
 off-chain/zknft-mailbox/node_modules
 
 contracts/deployments-zk
+deployments-zk
 
 out
 
