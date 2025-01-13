@@ -1,31 +1,30 @@
 import { ethers, keccak256 } from "ethers";
 import { Provider as L2Provider } from "zksync-ethers";
-import nexusMailboxAbi from "./nexus_mailbox.json" with { type: "json" };
 import erc20Abi from "./abi/MyERC20Token.json" with { type: "json" };
-import nexusStateManagerAbi from "./nexusStateManager.json" with { type: "json" };
+import nexusStateManagerAbi from "./abi/nexusStateManager.json" with { type: "json" };
 import paymentAbi from "./abi/NFTPaymentMailbox.json" with { type: "json" };
 import nftAbi from "./abi/MyNFTMailbox.json" with { type: "json" };
-import mailboxAbi from "./nexus_mailbox.json" with { type: "json" };
-import storageProofAbi from "./StorageProof.json" with { type: "json" };
-import verifierWrapperAbi from "./VerifierWrapper.json" with { type: "json" };
-import zksyncNexusManagerAbi from "./ZKSyncNexusManagerRouter.json" with { type: "json" };
+import mailboxAbi from "./abi/nexus_mailbox.json" with { type: "json" };
+import storageProofAbi from "./abi/StorageProof.json" with { type: "json" };
+import verifierWrapperAbi from "./abi/VerifierWrapper.json" with { type: "json" };
+import zksyncNexusManagerAbi from "./abi/ZKSyncNexusManagerRouter.json" with { type: "json" };
 import { NexusClient, ProofManagerClient, ZKSyncVerifier } from "nexus-js";
 import { Networks } from "nexus-js";
 import { AbiCoder } from "ethers";
 import { ErrorDecoder } from "ethers-decode-error";
 import deployedAddresses from "./deployed_addresses.json" with { type: "json" };
-let nexusRPCUrl = "http://127.0.0.1:7000";
-let zksync_nft_url = "http://127.0.0.1:3150";
-let zksync_payment_url = "http://127.0.0.1:3050";
+let nexusRPCUrl = "https://dev.nexus.avail.tools";
+let zksync_nft_url = "https://zksync1.nexus.avail.tools";
+let zksync_payment_url = "https://zksync2.nexus.avail.tools";
 let privateKeyZkSync = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 let privateKeyZkSync2 = "0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6";
 let stateManagerNFTChainAddr = deployedAddresses.proofManagerAddress1;
 let paymentContractAddress = deployedAddresses.nftPaymentContractAddress;
 let paymentTokenAddr = deployedAddresses.tokenContractAddress;
 let nftContractAddress = deployedAddresses.nftContractAddress;
-let tokenId = 9;
-let app_id = "0x3655ca59b7d566ae06297c200f98d04da2e8e89812d627bc29297c25db60362d";
-let app_id_2 = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+let tokenId = 133;
+let app_id = "0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e";
+let app_id_2 = "0x31b8a7e9f916616a8ed5eb471a36e018195c319600cbd3bbe726d1c96f03568d";
 async function main() {
     // 1. Deploy contracts: Mailbox + Nexus state manager  - done
     // 2. Deploy nft contracts on different chains - done
@@ -33,8 +32,8 @@ async function main() {
     // 4. Receive on NFT using inclusiong proof.
     // 5. Lock nft on one chain
     // 6. Withdraw nft using exclusion proof after timeout
-    const nftNexusClient = new NexusClient(nexusRPCUrl, app_id_2);
-    const paymentNexusClient = new NexusClient(nexusRPCUrl, app_id);
+    const nftNexusClient = new NexusClient(nexusRPCUrl, app_id);
+    const paymentNexusClient = new NexusClient(nexusRPCUrl, app_id_2);
     let providerPayment = new L2Provider(zksync_payment_url);
     let providerNFT = new L2Provider(zksync_nft_url);
     if (!providerPayment) {
@@ -49,15 +48,23 @@ async function main() {
     const proofManagerClient = new ProofManagerClient(stateManagerNFTChainAddr, zksync_nft_url, privateKeyZkSync);
     const tx = await nftContract.setNftPaymentContractAddress(paymentContractAddress);
     const receipt = await tx.wait();
+    // console.log(await nftContract.ownerOf(tokenId));
+    // console.log(await nftContract.ownerOf(tokenId + 1));
     // this shouldn't be hardcoded, rather should be managed by sc. Doing it here since need time to write code
     // to get nft id from events if done via sc.
     await nftContract.mint(tokenId);
     console.log("✅ minted NFT with token ID", tokenId);
+    await sleep(1000);
     await nftContract.mint(tokenId + 1);
     console.log("✅ minted NFT with token ID", tokenId + 1);
+    // for (let i = tokenId; i < 50; i++) {
+    //   nftContract.mint(i);
+    //   await sleep(1000);
+    //   console.log("✅ minted NFT with token ID", i);
+    // }
     await sleep(5000);
     await scenario1();
-    await scenario2();
+    // await scenario2();
     async function scenario1() {
         // 3. Lock nft on one chain and pay on another chain
         // 4. Receive on NFT using inclusiong proof.
@@ -73,7 +80,7 @@ async function main() {
         "");
         console.log("✅  Updated Nexus Block");
         await sleep(2000);
-        await proofManagerClient.updateChainState(accountDetails.response.nexus_header.number, accountDetails.response.proof, app_id, accountDetails.response.account);
+        await proofManagerClient.updateChainState(accountDetails.response.nexus_header.number, accountDetails.response.proof, app_id_2, accountDetails.response.account);
         console.log("✅  Updated Chain State");
         const zksyncAdapter = new ZKSyncVerifier({
             [app_id]: {
@@ -81,7 +88,7 @@ async function main() {
                 mailboxContract: deployedAddresses.mailBoxAddress1,
                 stateManagerContract: stateManagerNFTChainAddr,
                 appID: app_id,
-                chainId: "270",
+                chainId: "271",
                 type: Networks.ZKSync,
                 privateKey: privateKeyZkSync
             },
@@ -89,20 +96,12 @@ async function main() {
                 rpcUrl: zksync_payment_url,
                 mailboxContract: deployedAddresses.mailBoxAddress2,
                 stateManagerContract: deployedAddresses.proofManagerAddress2,
-                appID: app_id,
-                chainId: "271",
+                appID: app_id_2,
+                chainId: "272",
                 type: Networks.ZKSync,
                 privateKey: privateKeyZkSync2
             }
-        }, {
-            rpcUrl: zksync_nft_url,
-            mailboxContract: deployedAddresses.mailBoxAddress1,
-            stateManagerContract: stateManagerNFTChainAddr,
-            appID: app_id,
-            chainId: "270",
-            type: Networks.ZKSync,
-            privateKey: privateKeyZkSync
-        }, mailboxAbi.abi);
+        }, app_id);
         const paymentReceipt = {
             from: await signerPayment.getAddress(),
             to: await signerPayment.getAddress(),
@@ -125,6 +124,7 @@ async function main() {
             to: [nftContractAddress],
             nonce: lockNFTResult.nonce.toString(),
         };
+        console.log("expected message", expectedMessage);
         const encodedReceipt = ethers.AbiCoder.defaultAbiCoder().encode(["tuple(bytes32 nexusAppIDFrom, bytes32[] nexusAppIDTo, bytes data, address from, address[] to, uint256 nonce)"], [{
                 nexusAppIDFrom: expectedMessage.nexusAppIDFrom,
                 nexusAppIDTo: expectedMessage.nexusAppIDTo,
@@ -135,6 +135,7 @@ async function main() {
             }]);
         const receiptHash = keccak256(encodedReceipt);
         if (receiptHash !== emmittedReceiptHash) {
+            console.log("Calculated receipt hash", receiptHash, "emmittedReceiptHash", emmittedReceiptHash);
             throw new Error("Calculated receipt hash is incorrect");
         }
         const mailboxContract = new ethers.Contract(deployedAddresses.mailBoxAddress2, mailboxAbi.abi, providerPayment);
@@ -144,12 +145,47 @@ async function main() {
         const proof = await zksyncAdapter.getReceiveMessageProof(accountDetails.response.account.height, expectedMessage, {
             storageKey: storageSlot.toString()
         });
-        const errorDecoder = ErrorDecoder.create([nftAbi, mailboxAbi.abi, storageProofAbi.abi, verifierWrapperAbi.abi, nexusMailboxAbi.abi, zksyncNexusManagerAbi.abi]);
+        console.log("Proof", proof);
+        const errorDecoder = ErrorDecoder.create([nftAbi, mailboxAbi.abi, storageProofAbi.abi, verifierWrapperAbi.abi, mailboxAbi.abi, zksyncNexusManagerAbi.abi]);
         let receipt = null;
         try {
             const transferTx = await nftContract.transferNFT(accountDetails.response.account.height, expectedMessage, zksyncAdapter.encodeMessageProof(proof));
             receipt = await transferTx.wait();
-            console.log("✅  NFT Transfer successfull");
+            console.log("✅  NFT Transfer successful", receipt?.logs);
+            // Decode events
+            for (const log of receipt?.logs || []) {
+                try {
+                    // Try decoding Confirmation event
+                    const confirmationAbi = [
+                        "event Confirmation(uint256 tokenId, address receiver)"
+                    ];
+                    const confirmationInterface = new ethers.Interface(confirmationAbi);
+                    const decodedConfirmation = confirmationInterface.decodeEventLog("Confirmation", log.data, log.topics);
+                    console.log("Confirmation Event:", {
+                        tokenId: decodedConfirmation.tokenId,
+                        receiver: decodedConfirmation.receiver
+                    });
+                }
+                catch (err) {
+                    try {
+                        // Try decoding Transfer event
+                        const transferAbi = [
+                            "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)"
+                        ];
+                        const transferInterface = new ethers.Interface(transferAbi);
+                        const decodedTransfer = transferInterface.decodeEventLog("Transfer", log.data, log.topics);
+                        console.log("Transfer Event:", {
+                            from: decodedTransfer.from,
+                            to: decodedTransfer.to,
+                            tokenId: decodedTransfer.tokenId
+                        });
+                    }
+                    catch (err) {
+                        // Not a Transfer event
+                        continue;
+                    }
+                }
+            }
         }
         catch (err) {
             console.log(err);
@@ -192,15 +228,7 @@ async function main() {
                 type: Networks.ZKSync,
                 privateKey: privateKeyZkSync2
             }
-        }, {
-            rpcUrl: zksync_nft_url,
-            mailboxContract: deployedAddresses.mailBoxAddress1,
-            stateManagerContract: stateManagerNFTChainAddr,
-            appID: app_id,
-            chainId: "270",
-            type: Networks.ZKSync,
-            privateKey: privateKeyZkSync
-        }, mailboxAbi.abi);
+        }, app_id);
         let abiCoder = new AbiCoder();
         const expectedMessage = {
             nexusAppIDFrom: app_id_2,
@@ -229,7 +257,7 @@ async function main() {
         const proof = await zksyncAdapter.getReceiveMessageProof(accountDetails.response.account.height, expectedMessage, {
             storageKey: storageSlot.toString()
         });
-        const errorDecoder = ErrorDecoder.create([nftAbi, mailboxAbi.abi, storageProofAbi.abi, verifierWrapperAbi.abi, nexusMailboxAbi.abi, zksyncNexusManagerAbi.abi]);
+        const errorDecoder = ErrorDecoder.create([nftAbi, mailboxAbi.abi, storageProofAbi.abi, verifierWrapperAbi.abi, mailboxAbi.abi, zksyncNexusManagerAbi.abi]);
         let receipt = null;
         try {
             const withdrawTx = await nftContract.withdrawNFT(tokenId, zksyncAdapter.encodeMessageProof(proof));
@@ -283,6 +311,7 @@ async function main() {
                 ];
                 const eventInterface = new ethers.Interface(abi);
                 const decodedLog = eventInterface.decodeEventLog("MailboxEvent", log.data, log.topics);
+                console.log("emitted event", decodedLog);
                 receiptHash = decodedLog.receiptHash;
                 break;
             }

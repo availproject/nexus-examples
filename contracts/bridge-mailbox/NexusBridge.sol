@@ -205,6 +205,7 @@ contract NexusLockMintBridge is
         bytes memory data,
         uint256 nonce
     ) public override {
+        revert("Unreachable");
         require(
             msg.sender == address(mailbox),
             "Only valid messages from nexus mailbox are acceptable"
