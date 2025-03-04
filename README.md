@@ -1,6 +1,6 @@
 ## Overview
 
-This repo contains demos that demonstrates some applications that can be created using Avail's nexus. You can read more about it [here](https://blog.availproject.org/the-avail-vision-accelerating-the-unification-of-web3/#avail-nexus).
+This repo contains demos that demonstrates some applications that can be created using Avail's nexus. You can read more about it [here](https://blog.availproject.org/avail-nexus-upgrade-enabling-crosschain-liquidity-at-scale/).
 
 Currently the ZKNFT demo can be run on your machines to interact with nexus and understand the architecture.
 
