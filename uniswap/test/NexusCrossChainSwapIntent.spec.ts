@@ -4,7 +4,7 @@ import { TestERC20 } from '../typechain/TestERC20'
 import { UniswapV3Factory } from '../typechain/UniswapV3Factory'
 import { MockTimeUniswapV3Pool } from '../typechain/MockTimeUniswapV3Pool'
 import { TestUniswapV3SwapPay } from '../typechain/TestUniswapV3SwapPay'
-import { MockNexusLockAndMint, NexusLockAndMint } from '../typechain/MockNexusLockAndMint'
+import { MockNexusLockAndMint } from '../typechain/MockNexusLockAndMint'
 import checkObservationEquals from './shared/checkObservationEquals'
 import { expect } from './shared/expect'
 
@@ -40,6 +40,7 @@ const createFixtureLoader = waffle.createFixtureLoader
 
 type ThenArg<T> = T extends PromiseLike<infer U> ? U : T
 
+// NOTE: This test is works only with ethers v5 and not v6 ( default with deploy script ).
 describe('UniswapV3Pool', () => {
   let wallet: Wallet, other: Wallet
   let user: Wallet
@@ -57,12 +58,6 @@ describe('UniswapV3Pool', () => {
   let escrow: CrossChainIntentEscrow
   let swapTarget: TestUniswapV3Callee
   let mintContract: MockNexusLockAndMint
-  let swapToLowerPrice: SwapToPriceFunction
-  let swapToHigherPrice: SwapToPriceFunction
-  let swapExact0For1: SwapFunction
-  let swap0ForExact1: SwapFunction
-  let swapExact1For0: SwapFunction
-  let swap1ForExact0: SwapFunction
 
   let feeAmount: number
   let tickSpacing: number
@@ -115,7 +110,7 @@ describe('UniswapV3Pool', () => {
     nexusMailboxSource = await NexusMailboxSource.deploy()
 
     const MintContract = await ethers.getContractFactory('MockNexusLockAndMint')
-    mintContract = (await MintContract.deploy()) as NexusLockAndMint
+    mintContract = (await MintContract.deploy()) as MockNexusLockAndMint
 
     const SwapIntends = await ethers.getContractFactory('SwapIntends')
     swapIntends = (await SwapIntends.deploy(nexusMailboxSource.address, mintContract.address)) as SwapIntends

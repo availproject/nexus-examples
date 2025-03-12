@@ -12,8 +12,6 @@ import './LowGasSafeMath.sol';
 import './SafeCast.sol';
 import './SwapMath.sol';
 
-import 'hardhat/console.sol';
-
 library Nexus {
     using LowGasSafeMath for uint256;
     using SafeCast for uint256;
@@ -23,8 +21,6 @@ library Nexus {
         address pool;
         address token0;
         address token1;
-        uint256 balance0;
-        uint256 balance1;
         int256 amount0;
         int256 amount1;
         bool zeroForOne;
@@ -43,12 +39,22 @@ library Nexus {
         if (pool.zeroForOne) {
             if (pool.amount1 < 0) {
                 if (swapOrder.mandate.nexusTargetID == nexusID) {
-                    TransferHelper.safeTransfer(pool.token1, swapOrder.mandate.receiver, uint256(-pool.amount1));
+                    uint256 balance = escrow.tokenBalance(pool.token1);
+                    if (balance < uint256(-pool.amount1)) {
+                        escrow.unlock(pool.token1, balance, swapOrder.mandate.receiver);
+                        TransferHelper.safeTransfer(
+                            pool.token1,
+                            swapOrder.mandate.receiver,
+                            uint256(-pool.amount1) - balance
+                        );
+                    } else {
+                        escrow.unlock(pool.token1, uint256(-pool.amount1), swapOrder.mandate.receiver);
+                    }
                 } else {
                     escrow.lock(pool.token1, address(this), uint256(-pool.amount1));
                 }
             }
-            uint256 balance0Before = pool.balance0;
+            uint256 balance0Before = IERC20Minimal(pool.token0).balanceOf(address(this));
 
             IUniswapV3SwapCallback(msg.sender).uniswapV3SwapCallback(
                 pool.amount0,
@@ -63,12 +69,22 @@ library Nexus {
         } else {
             if (pool.amount0 < 0) {
                 if (swapOrder.mandate.nexusTargetID == nexusID) {
-                    TransferHelper.safeTransfer(pool.token0, swapOrder.mandate.receiver, uint256(-pool.amount0));
+                    uint256 balance = escrow.tokenBalance(pool.token0);
+                    if (balance < uint256(-pool.amount0)) {
+                        escrow.unlock(pool.token0, balance, swapOrder.mandate.receiver);
+                        TransferHelper.safeTransfer(
+                            pool.token0,
+                            swapOrder.mandate.receiver,
+                            uint256(-pool.amount0) - balance
+                        );
+                    } else {
+                        escrow.unlock(pool.token0, uint256(-pool.amount0), swapOrder.mandate.receiver);
+                    }
                 } else {
                     escrow.lock(pool.token0, address(this), uint256(-pool.amount0));
                 }
             }
-            uint256 balance1Before = pool.balance1;
+            uint256 balance1Before = IERC20Minimal(pool.token1).balanceOf(address(this));
             IUniswapV3SwapCallback(msg.sender).uniswapV3SwapCallback(
                 pool.amount0,
                 pool.amount1,
@@ -83,23 +99,21 @@ library Nexus {
         _sendMailboxMessage(mailbox, swapOrder, memo);
     }
 
-    function get_memo(SwapOrder memory swapOrder, Pool memory pool)
-        private
-        pure
-        returns (OnchainCrossChainOrder memory)
-    {
-        ResolvedSwapOrder memory resolvedSwapOrder =
-            ResolvedSwapOrder({
-                token: bytes32(uint256(uint160(swapOrder.mandate.token1))),
-                amount0: pool.amount0,
-                amount1: pool.amount1,
-                recipient: bytes32(uint256(uint160(swapOrder.mandate.receiver))),
-                chainId: swapOrder.compact.nexusSourceID,
-                destinationChainId: swapOrder.mandate.nexusTargetID,
-                destinationSettler: bytes32(uint256(uint160(address(0)))),
-                orderID: swapOrder.orderID,
-                zeroForOne: pool.zeroForOne
-            });
+    function get_memo(
+        SwapOrder memory swapOrder,
+        Pool memory pool
+    ) private pure returns (OnchainCrossChainOrder memory) {
+        ResolvedSwapOrder memory resolvedSwapOrder = ResolvedSwapOrder({
+            token: bytes32(uint256(uint160(swapOrder.mandate.token1))),
+            amount0: pool.amount0,
+            amount1: pool.amount1,
+            recipient: bytes32(uint256(uint160(swapOrder.mandate.receiver))),
+            chainId: swapOrder.compact.nexusSourceID,
+            destinationChainId: swapOrder.mandate.nexusTargetID,
+            destinationSettler: bytes32(uint256(uint160(address(0)))),
+            orderID: swapOrder.orderID,
+            zeroForOne: pool.zeroForOne
+        });
 
         return
             OnchainCrossChainOrder({
@@ -116,7 +130,7 @@ library Nexus {
     ) private {
         bytes32[] memory appIds = new bytes32[](1);
         address[] memory receivers = new address[](1);
-        appIds[0] = swapOrder.mandate.nexusTargetID;
+        appIds[0] = swapOrder.compact.nexusSourceID;
         receivers[0] = swapOrder.processor;
         mailbox.sendMessage(appIds, receivers, swapOrder.compact.nonce, abi.encode(memo));
     }

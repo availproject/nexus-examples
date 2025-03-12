@@ -38,6 +38,8 @@ contract SwapIntends is INexusReceiver, IUniswapV3SwapCallback {
     mapping(bytes32 => SwapOrder) public swapOrders;
     mapping(bytes32 => Petition) public petitions;
     mapping(bytes32 => ResolvedCrossChainOrder) public resolvedSwapOrders;
+
+    mapping(bytes32 => mapping(address => address)) destinationToSourceMapping;
     INexusMailbox mailbox;
     IUniswapMintable mintContract;
 
@@ -46,6 +48,16 @@ contract SwapIntends is INexusReceiver, IUniswapV3SwapCallback {
         mintContract = _mintContract;
     }
 
+    function getDestinationToSourceMapping(
+        bytes32 nexusAppID,
+        address destinationToken
+    ) external view returns (address) {
+        return destinationToSourceMapping[nexusAppID][destinationToken];
+    }
+
+    function setDestinationToSourceMapping(bytes32 nexusAppID, address sourceToken, address destinationToken) external {
+        destinationToSourceMapping[nexusAppID][destinationToken] = sourceToken;
+    }
     // TODO: add minting logic
     function petition(
         Compact calldata compact,
@@ -75,7 +87,11 @@ contract SwapIntends is INexusReceiver, IUniswapV3SwapCallback {
         uint256 stake = storedPetition.compact.stake;
         address tokenAddress = storedPetition.compact.token0;
 
-        IERC20(tokenAddress).transferFrom(msg.sender, address(this), stake);
+        IERC20(destinationToSourceMapping[storedPetition.mandate.nexusTargetID][tokenAddress]).transferFrom(
+            msg.sender,
+            address(this),
+            stake
+        );
 
         // 1. The solver accepts the swap order.
         SwapOrder memory order = SwapOrder({
@@ -137,28 +153,22 @@ contract SwapIntends is INexusReceiver, IUniswapV3SwapCallback {
 
         if (order.zeroForOne) {
             mintContract.mint(
-                storedOrderInfo.mandate.token1,
+                destinationToSourceMapping[storedOrderInfo.mandate.nexusTargetID][storedOrderInfo.mandate.token1],
                 address(uint160(uint256(order.recipient))),
                 uint256(-order.amount1)
             );
 
-            IERC20(storedOrderInfo.compact.token0).transferFrom(
-                storedOrderInfo.compact.sponsor,
-                storedOrderInfo.arbiter,
-                uint256(order.amount0)
-            );
+            IERC20(destinationToSourceMapping[storedOrderInfo.mandate.nexusTargetID][storedOrderInfo.compact.token0])
+                .transferFrom(storedOrderInfo.compact.sponsor, storedOrderInfo.arbiter, uint256(order.amount0));
         } else {
             mintContract.mint(
-                storedOrderInfo.compact.token0,
+                destinationToSourceMapping[storedOrderInfo.mandate.nexusTargetID][storedOrderInfo.compact.token0],
                 address(uint160(uint256(order.recipient))),
                 uint256(-order.amount0)
             );
 
-            IERC20(storedOrderInfo.mandate.token1).transferFrom(
-                storedOrderInfo.compact.sponsor,
-                storedOrderInfo.arbiter,
-                uint256(order.amount1)
-            );
+            IERC20(destinationToSourceMapping[storedOrderInfo.mandate.nexusTargetID][storedOrderInfo.mandate.token1])
+                .transferFrom(storedOrderInfo.compact.sponsor, storedOrderInfo.arbiter, uint256(order.amount1));
         }
 
         // TODO: Too many storage writes. Optimize this.

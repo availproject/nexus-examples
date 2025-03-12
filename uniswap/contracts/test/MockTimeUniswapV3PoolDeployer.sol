@@ -26,9 +26,17 @@ contract MockTimeUniswapV3PoolDeployer is IUniswapV3PoolDeployer {
         int24 tickSpacing
     ) external returns (address pool) {
         parameters = Parameters({factory: factory, token0: token0, token1: token1, fee: fee, tickSpacing: tickSpacing});
-        pool = address(
-            new MockTimeUniswapV3Pool{salt: keccak256(abi.encodePacked(token0, token1, fee, tickSpacing))}()
-        );
+        try new MockTimeUniswapV3Pool{salt: keccak256(abi.encodePacked(token0, token1, fee, tickSpacing))}() returns (
+            MockTimeUniswapV3Pool newPool
+        ) {
+            pool = address(newPool);
+            newPool.initialize();
+        } catch Error(string memory reason) {
+            revert(reason);
+        } catch (bytes memory lowLevelData) {
+            revert(string(lowLevelData));
+        }
+
         emit PoolDeployed(pool);
         delete parameters;
     }

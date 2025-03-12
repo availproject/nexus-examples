@@ -29,4 +29,8 @@ contract CrossChainIntentEscrow is ICrossChainIntentEscrow {
     ) external override {
         IERC20Minimal(token).transfer(to, amount);
     }
+
+    function tokenBalance(address token) external view override returns (uint256) {
+        return IERC20Minimal(token).balanceOf(address(this));
+    }
 }
