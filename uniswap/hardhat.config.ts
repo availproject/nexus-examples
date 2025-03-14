@@ -79,7 +79,7 @@ export default {
       },
         libraries: {
               "contracts/libraries/Nexus.sol": {
-                "Nexus": "0x22D5437C1e2E27E1797Ec80aef3360b4c5165160"
+                "Nexus": "0xB41ED542D977A017569Dab63B698406DED5A1299"
               }
             }
     },

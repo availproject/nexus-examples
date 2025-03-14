@@ -40,10 +40,10 @@ const config = {
     token0: '0x3234b9350d2917189041C08ea6Cf6b4252497C17',
     token1: '0xDfE348A499A63F3AA6172681A961d1B7F97a33d7',
     mockNexusLockAndMint: '0x65cb25401f6aEDb5881a630aFCdE7a45d86D6001',
-    swapIntends: '0x4B1a72c1ED8fA63258d9479425aD91F32F01C4fb',
+    swapIntends: '0xA65523549F782fC6B7FCe49d039D514fFFC2E9C2',
     appId: '0x1f5ff885ceb5bf1350c4449316b7d703034c1278ab25bcc923d5347645a0117e',
     nexusProofManager: '0x3a67d837e77e36B01F58E449c200A5E90dFf3635',
-    mailboxContract: '0xD45157ab64fFC0Ab04AeC7E406dE0C09EaeC117d',
+    mailboxContract: '0xa3a651000B2Fd9b1cC4e90525Ec92468EFA90C3D',
   },
   destination: {
     chainID: 272,
@@ -52,7 +52,7 @@ const config = {
     token1: '0x93c064Cb0dd5321C26511d828CeDE2506a828Bb9',
     mailboxContract: '0x96A52A4dAcf9Cf7c07C6af08Ecf892ec009ea5aa',
     mockNexusLockAndMint: '0x263E32f9cF5C1ef040C78d6b3B1512E9D04D0578',
-    pool: '0xB702Ec49a6D611787ec1Fb1d151eac316990328a',
+    pool: '0x9765286a4B2302a36604e56e0d44562674Ef7B0e',
     crossChainIntentEscrow: '0x29461F701a36a6942c12f37756668d154262F6F2',
     uniswapV3PoolDeployer: '0x596aBA7bE76FDE6C51Ca428cAb7Fa4Ad25DAf8cC',
     uniswapV3Callee: '0x55247ddffdFe84d2184B610F52175B4B8077434e',
@@ -63,6 +63,7 @@ const config = {
   },
   nexusRPCUrl: 'http://dev.nexus.avail.tools',
   privateKey: '0x5090c024edb3bdf4ce2ebc2da96bedee925d9d77d729687e5e2d56382cf0a5a6',
+  solverPrivateKey: '0xeffa2257255ca3a7b31a57b25c9300cc53f85ba4d22a62294581dc3de97e923d',
 }
 
 import { abi as token0Abi } from '../artifacts/contracts/test/TestERC20.sol/TestERC20.json'
@@ -102,8 +103,9 @@ async function main() {
   const walletSource = new Wallet(config.privateKey, providerSource)
   const walletDestination = new Wallet(config.privateKey, providerDestination)
 
-  const solverSource = new Wallet(config.privateKey, providerSource)
-  const solverDestination = new Wallet(config.privateKey, providerDestination)
+  const solverSource = new Wallet(config.solverPrivateKey, providerSource)
+  const solverDestination = new Wallet(config.solverPrivateKey, providerDestination)
+
   const token0Source = new Contract(config.source.token0, token0Abi, walletSource)
   const token1Source = new Contract(config.source.token1, token1Abi, walletSource)
 
@@ -176,6 +178,38 @@ async function main() {
   // @ts-ignore
   await token0Source.connect(walletSource).approve(await swapIntends.getAddress(), AMOUNT)
 
+  console.log('\n')
+  console.log('*****************************')
+  console.log('* Balance Info')
+  console.log('*****************************')
+  console.log('\n')
+
+  // Get user balances
+  let userSourceToken0Balance = await token0Source.balanceOf(walletSource.address)
+  let userSourceToken1Balance = await token1Source.balanceOf(walletSource.address)
+
+  console.log('User balances:')
+  console.log(`Source Chain - Token0: ${userSourceToken0Balance}`)
+  console.log(`Source Chain - Token1: ${userSourceToken1Balance}`)
+
+  // Get solver balances
+  let solverSourceToken0Balance = await token0Source.balanceOf(solverSource.address)
+  let solverSourceToken1Balance = await token1Source.balanceOf(solverSource.address)
+  let solverDestToken0Balance = await token0Destination.balanceOf(solverDestination.address)
+  let solverDestToken1Balance = await token1Destination.balanceOf(solverDestination.address)
+
+  console.log('\nSolver balances:')
+  console.log(`Source Chain - Token0: ${solverSourceToken0Balance}`)
+  console.log(`Source Chain - Token1: ${solverSourceToken1Balance}`)
+  console.log(`Destination Chain - Token0: ${solverDestToken0Balance}`)
+  console.log(`Destination Chain - Token1: ${solverDestToken1Balance}`)
+
+  console.log('\n')
+  console.log('*****************************')
+  console.log('* On Source Chain')
+  console.log('*****************************')
+  console.log('\n')
+
   console.log('🔄 Creating swap intent')
   // @ts-ignore
   const swapIntent = swapIntends.connect(walletSource).petition(compact, mandate, AMOUNT)
@@ -210,6 +244,7 @@ async function main() {
     processor: await swapIntends.getAddress(),
   }
 
+  console.log('swapOrder', swapOrder)
   console.log('🤝 Accepting swap order')
 
   await swapIntends.setDestinationToSourceMapping(
@@ -270,7 +305,33 @@ async function main() {
 
   console.log('\n')
   console.log('*****************************')
-  console.log('* On Source Chain')
+  console.log('* Balance Info')
+  console.log('*****************************')
+  console.log('\n')
+
+  // Get user balances
+  userSourceToken0Balance = await token0Source.balanceOf(walletSource.address)
+  userSourceToken1Balance = await token1Source.balanceOf(walletSource.address)
+
+  console.log('User balances:')
+  console.log(`Source Chain - Token0: ${userSourceToken0Balance}`)
+  console.log(`Source Chain - Token1: ${userSourceToken1Balance}`)
+
+  // Get solver balances
+  solverSourceToken0Balance = await token0Source.balanceOf(solverSource.address)
+  solverSourceToken1Balance = await token1Source.balanceOf(solverSource.address)
+  solverDestToken0Balance = await token0Destination.balanceOf(solverDestination.address)
+  solverDestToken1Balance = await token1Destination.balanceOf(solverDestination.address)
+
+  console.log('\nSolver balances:')
+  console.log(`Source Chain - Token0: ${solverSourceToken0Balance}`)
+  console.log(`Source Chain - Token1: ${solverSourceToken1Balance}`)
+  console.log(`Destination Chain - Token0: ${solverDestToken0Balance}`)
+  console.log(`Destination Chain - Token1: ${solverDestToken1Balance}`)
+
+  console.log('\n')
+  console.log('*****************************')
+  console.log('* On Liquidity Chain')
   console.log('*****************************')
   console.log('\n')
 
@@ -287,7 +348,12 @@ async function main() {
     config.privateKey
   )
 
+  console.log('\n')
+  console.log('*******************************************')
   console.log('⏳ Waiting for ZKSYNC to generate proof...')
+  console.log('*******************************************')
+  console.log('\n')
+
   const accountDetails: AccountApiResponse = await waitForUpdateOnNexus(nexusClient, 0)
   console.log('📊 Account details: ', accountDetails)
   await proofManagerClient.updateNexusBlock(
@@ -298,6 +364,12 @@ async function main() {
     //TODO: To be replaced with actual proof depending on prover mode.
     ''
   )
+
+  console.log('\n')
+  console.log('*****************************')
+  console.log('* On Source Chain')
+  console.log('*****************************')
+  console.log('\n')
 
   console.log('✅ Updated Nexus Block')
   await sleep(2000)
@@ -361,12 +433,41 @@ async function main() {
     nonce: mapping.nonce,
   }
 
+  console.log('messageDecoded', messageDecoded)
+
   await sourceMailboxContract
     .connect(solverSource)
     // @ts-ignore
     .receiveMessage(accountDetails.response.account.height, messageDecoded, encodedProof)
 
+  await sleep(5000)
+  console.log('\n')
+  console.log('*****************************')
+  console.log('* Balance Info')
+  console.log('*****************************')
+  console.log('\n')
+
+  // Get user balances
+  userSourceToken0Balance = await token0Source.balanceOf(walletSource.address)
+  userSourceToken1Balance = await token1Source.balanceOf(walletSource.address)
+
   console.log('✅ Message received')
+
+  console.log('User balances:')
+  console.log(`Source Chain - Token0: ${userSourceToken0Balance}`)
+  console.log(`Source Chain - Token1: ${userSourceToken1Balance}`)
+
+  // Get solver balances
+  solverSourceToken0Balance = await token0Source.balanceOf(solverSource.address)
+  solverSourceToken1Balance = await token1Source.balanceOf(solverSource.address)
+  solverDestToken0Balance = await token0Destination.balanceOf(solverDestination.address)
+  solverDestToken1Balance = await token1Destination.balanceOf(solverDestination.address)
+
+  console.log('\nSolver balances:')
+  console.log(`Source Chain - Token0: ${solverSourceToken0Balance}`)
+  console.log(`Source Chain - Token1: ${solverSourceToken1Balance}`)
+  console.log(`Destination Chain - Token0: ${solverDestToken0Balance}`)
+  console.log(`Destination Chain - Token1: ${solverDestToken1Balance}`)
 }
 
 export function encodePriceSqrt(reserve1: BigNumberish, reserve0: BigNumberish): bn {

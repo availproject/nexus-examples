@@ -4,14 +4,26 @@
     "name": "addOrUpdateWrapper",
     "inputs": [
       {
-        "name": "wrapperChainId",
+        "name": "nexusAppIDFrom",
         "type": "bytes32",
         "internalType": "bytes32"
       },
       {
-        "name": "wrapper",
-        "type": "address",
-        "internalType": "contract INexusVerifierWrapper"
+        "name": "verifierInfo",
+        "type": "tuple",
+        "internalType": "struct VerifierInfo",
+        "components": [
+          {
+            "name": "verifier",
+            "type": "address",
+            "internalType": "contract INexusVerifierWrapper"
+          },
+          {
+            "name": "mailboxAddress",
+            "type": "address",
+            "internalType": "address"
+          }
+        ]
       }
     ],
     "outputs": [],
@@ -41,6 +53,60 @@
           { "name": "from", "type": "address", "internalType": "address" },
           { "name": "to", "type": "address[]", "internalType": "address[]" },
           { "name": "nonce", "type": "uint256", "internalType": "uint256" }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getVerifiedMessage",
+    "inputs": [{ "name": "receiptHash", "type": "bytes32", "internalType": "bytes32" }],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct MailboxMessage",
+        "components": [
+          {
+            "name": "nexusAppIDFrom",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "nexusAppIDTo",
+            "type": "bytes32[]",
+            "internalType": "bytes32[]"
+          },
+          { "name": "data", "type": "bytes", "internalType": "bytes" },
+          { "name": "from", "type": "address", "internalType": "address" },
+          { "name": "to", "type": "address[]", "internalType": "address[]" },
+          { "name": "nonce", "type": "uint256", "internalType": "uint256" }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getVerifierWrapper",
+    "inputs": [{ "name": "nexusAppID", "type": "bytes32", "internalType": "bytes32" }],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct VerifierInfo",
+        "components": [
+          {
+            "name": "verifier",
+            "type": "address",
+            "internalType": "contract INexusVerifierWrapper"
+          },
+          {
+            "name": "mailboxAddress",
+            "type": "address",
+            "internalType": "address"
+          }
         ]
       }
     ],
@@ -141,7 +207,7 @@
   },
   {
     "type": "function",
-    "name": "verifiedReceipts",
+    "name": "verifiedMessages",
     "inputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
     "outputs": [
       {
@@ -161,9 +227,14 @@
     "inputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
     "outputs": [
       {
-        "name": "",
+        "name": "verifier",
         "type": "address",
         "internalType": "contract INexusVerifierWrapper"
+      },
+      {
+        "name": "mailboxAddress",
+        "type": "address",
+        "internalType": "address"
       }
     ],
     "stateMutability": "view"
